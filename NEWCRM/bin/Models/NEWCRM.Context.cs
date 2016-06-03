@@ -78,7 +78,6 @@ namespace NEWCRM.Models
         public DbSet<Role> Roles { get; set; }
         public DbSet<SubDistrict> SubDistricts { get; set; }
         public DbSet<SubDistrict_Locale> SubDistrict_Locale { get; set; }
-        public DbSet<sysdiagram> sysdiagrams { get; set; }
         public DbSet<Title> Titles { get; set; }
         public DbSet<Titles_Locale> Titles_Locale { get; set; }
         public DbSet<User_Group> User_Group { get; set; }
