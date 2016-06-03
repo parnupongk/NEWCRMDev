@@ -1,0 +1,31 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section Scripts {
+    <script>
+        $("#phoneno").focus();
+    </script>
+}
+<div class="section-body">
+    <div class="row">       
+        <div class="col-lg-6">
+            <form class="form form-validate" novalidate="novalidate" action="@Url.Action("doMakeCall","Inbound")" autocomplete="off">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="form-group">
+                            <input type="text" class="form-control input-lg" id="phoneno" name="phoneno" data-rule-number="true" data-rule-minlength="9" required>
+                            <label for="phoneno"><i class="fa fa-phone fa-lg"></i>&nbsp;Phone No.</label>
+                        </div>
+                        <!--end .form-group -->
+                    </div>
+                    <div class="card-actionbar">
+                        <div class="card-actionbar-row">
+                            <button type="submit" class="btn btn-flat btn-primary ink-reaction">Next</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,208 @@
+﻿@using MvcPaging
+@model NEWCRM.Models.ContactViewModel
+@{    
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section Scripts {
+    <script>
+        $(function () {
+
+           $("#p_name").focus();
+
+
+           @if (Model.search != null)
+           {                         
+                <text>$('#p_name').val('@Model.search.p_name');</text>
+                <text>$('#p_cate').val('@Model.search.p_cate');</text>
+                <text>$('#p_order').val('@Model.search.p_order');</text>
+                <text>$('#p_page').val('@Model.search.page');</text>
+                <text>$('#frm-search').submit();</text>                
+               /*<text>$("#cc").find('#ccid_@Model.search.p_cate').addClass("active");</text>*/
+           }
+            @*else
+            {
+                <text>$("#cc").find('#ccid_0').addClass("active");</text>
+            }*@
+
+
+            $("#frm-search").submit(function (event) {
+                //alert("Handler for .submit() called.");
+                $('#p_page').val('1');
+                event.preventDefault();
+            });
+
+            $('#p_name').typeahead({
+                ajax: {
+                    global: false,
+                    url: "@Url.Action("AutoComplete", "Contact")",
+                    timeout: 500,
+                    triggerLength: 2,
+                    method: "get",
+                    preDispatch: function (query) {
+                        return {
+                            search: query
+                        }
+                    },
+                    preProcess: function (data) {
+                        if (data.success === false) {
+                            // Hide the list, there was some error
+                            return false;
+                        }
+                        return data;
+                    }
+                }
+            });
+
+            //var notifications = $.connection.baseHub;
+
+            ////debugger;
+            //// Create a function that the hub can call to broadcast messages.
+            //notifications.client.summaryChannel = function () {
+            //    getChannelSummary()
+            //};
+            //// Start the connection.
+            //$.connection.hub.start().done(function () {
+            //    //alert("connection started")
+            //    getChannelSummary();
+            //}).fail(function (e) {
+            //    alert(e);
+            //});
+
+        });
+
+        function getChannelSummary() {
+            var tbl = $('#messagesTable');
+            $.ajax({
+                url: '@Url.Action("ChannelSummaryList", "Contact")',
+                contentType: 'application/html ; charset:utf-8',
+                type: 'GET',
+                dataType: 'html'
+            }).success(function (result) {
+                tbl.empty().append(result);
+            }).error(function () {
+
+            });
+        }
+
+        function beginPaging(args) {
+            // Animate
+            $('#grid-list').fadeOut(300);
+        }
+
+        function successPaging() {
+            // Animate
+            $('html, body').animate({ scrollTop: 0 }, 500);
+            $('#grid-list').fadeIn(300);
+            //$('a').tooltip();
+        }
+
+        function failurePaging() {
+            alert("Could not retrieve list.");
+        }
+
+        function setOrder(v) {
+            //alert(n);
+            $('#p_name').val($('#view_name').val());
+            $('#p_cate').val($('#view_cate').val());
+            $('#p_order').val(v);
+            $('#frm-search').submit();
+        }
+
+        function setCategory(v) {
+            //alert(typeof $('#view_name').val());
+            if (typeof $('#view_name').val() !== "undefined") {
+                $('#p_name').val($('#view_name').val());
+                $('#p_cate').val(v);
+                $('#p_order').val('name');
+                $('#frm-search').submit();
+            }
+        }
+
+        function setActive(obj) {
+            $('#cc').find('li').removeClass('active');
+            $(obj).parent().addClass('active');
+        }
+
+    </script>
+}
+@*<div class="section-header">
+    <ol class="breadcrumb">
+        <li class="active">Contacts</li>
+    </ol>
+</div>*@
+<div class="section-body">
+    <div class="card">
+        <!-- BEGIN SEARCH HEADER -->
+        <div class="card-head style-primary">
+            <div class="tools pull-left">
+                @using (Ajax.BeginForm("Search", "Contact",
+                            new AjaxOptions { UpdateTargetId = "grid-list", HttpMethod = "get", LoadingElementId = "loading", OnBegin = "beginPaging", OnSuccess = "successPaging", OnFailure = "failurePaging" },
+                            new { id = "frm-search", @class = "navbar-search expanded", autocomplete = "off", style = "width:380px" }))
+                {
+                    <div class="form-group" style="overflow: visible">
+                        <input id="p_name" type="text" class="form-control" name="p_name" placeholder="Enter Name, Surname, Phone number" />
+                    </div>
+                    <input type="hidden" id="p_cate" name="p_cate" value="0" />
+                    <input type="hidden" id="p_order" name="p_order" value="name" />
+                    <input type="hidden" id="p_page" name="page" value="1" />
+                    <button id="btn_submit" type="button" class="btn btn-icon-toggle ink-reaction" data-toggle="tooltip" data-placement="top" data-original-title="Search contacts"><i class="fa fa-search"></i></button>
+                }
+            </div>
+            <div class="tools">
+                <a class="btn ink-reaction btn-floating-action btn-default" href="@Url.Action("AddNew", "Contact")" data-toggle="tooltip" data-placement="top" data-original-title="Add new contact"><i class="fa fa-user-plus"></i></a>
+            </div>
+        </div>
+        <!--end .card-head -->
+        <!-- END SEARCH HEADER -->
+        <!-- BEGIN SEARCH RESULTS -->
+        <div class="card-body">
+            <div class="row">
+                <!-- BEGIN SEARCH NAV -->
+                <div class="col-sm-4 col-md-3 col-lg-3">
+                    <ul id="messagesTable" class="nav nav-pills nav-stacked">
+                    @{
+                        Html.RenderAction("ChannelSummaryList", "Contact");
+                    }
+                    </ul>
+                    <br /> 
+                    <ul id="cc" class="nav nav-pills nav-stacked">
+                        <li class="hidden-xs"><small>LAST VIEWED</small></li>
+                        @foreach (var item in Model.list_lastview)
+                        {
+                            <li class="hidden-xs" style="overflow: hidden">
+                                <a href="@Url.Action("Detail", "Contact")/@item.ctaID">
+                                    @if (!string.IsNullOrEmpty(item.ctaAvatar))
+                                    {
+                                        <img class="img-circle img-responsive pull-left width-1" src="~/Images/avatars/@item.ctaAvatar" alt="" />
+                                    }
+                                    else
+                                    { 
+                                        <img class="img-circle img-responsive pull-left width-1" src="~/Images/contact_.png" alt="" />
+                                    }
+                                    <span class="text-medium">@item.ctaFullName</span><br />
+                                    <span class="opacity-50">
+                                        <span class="glyphicon glyphicon-phone-alt text-sm"></span>&nbsp;@item.phnMain
+                                            @if (!string.IsNullOrEmpty(item.phnOther)) { 
+                                                <span>, @item.phnOther</span>
+                                            }
+                                    </span>
+                                </a>
+                            </li>
+                        }
+                    </ul>                                     
+                </div>
+                <!--end .col -->
+                <div class="col-sm-7 col-md-8 col-lg-9" style="height: 8px">
+                    <div id="loading" class="mdl-progress mdl-js-progress mdl-progress__indeterminate"></div>
+                </div>
+                <!-- END SEARCH NAV -->
+                <div id="grid-list" class="col-sm-7 col-md-8 col-lg-9">
+                    @if (Model.search == null)
+                    {
+                        Html.RenderAction("LastContact", "Contact");
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

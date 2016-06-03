@@ -1,0 +1,225 @@
+﻿@{
+    ViewBag.Title = "CaseDetail";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@using NEWCRM.Models
+@model CaseModels
+
+<style type="text/css">
+    .modal-body
+    {
+        max-height: 800px;
+    }
+</style>
+
+@section Scripts {
+    <script src="~/Content/js/libs/jquery/jquery-1.11.2.min.js"></script>
+    <script src="~/Content/js/libs/bootstrap/bootstrap.min.js"></script>
+    <script src="~/Content/js/libs/bootstrap-dialog/src/js/bootstrap-dialog.js"></script>
+    <script src="~/Content/js/libs/jquery-ui/jquery-ui.min.js"></script>
+    <script src="~/Content/js/libs/summernote/summernote.min.js"></script>
+    <script src="~/Content/js/libs/inputmask/jquery.inputmask.bundle.min.js"></script>
+    <script src="~/Content/js/libs/bootstrap-tagsinput/bootstrap-tagsinput.min.js"></script>
+    <script src="~/Content/js/core/source/App.js"></script>
+    <script src="~/Content/js/core/source/AppVendor.js"></script>
+    <script src="~/Content/js/core/demo/Demo.js"></script>
+    <script src="~/Content/js/core/demo/DemoFormComponents.js"></script>
+    <script src="~/Content/js/core/demo/DemoFormEditors.js"></script>  
+    <script src="~/Content/js/libs/dropzone/dropzone.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            CaseInfo();
+            //listFiles();
+
+            @*Dropzone.autoDiscover = false;
+            $("#dropzone-case").dropzone({
+                url: "@Url.Action("uploadFiles", "Case")",
+                addRemoveLinks: false,
+                success: function (file, response) {
+                    window.location.reload();
+                    //listFiles();
+                },
+                error: function (file, response) {
+                    file.previewElement.classList.add("dz-error");
+                }
+            });*@
+        });
+
+        function DetailTimeline() {
+            var url = '@Url.Action("DetailTimeline", "Case")/@Model.CaseDetails.CASID';
+            $("#timeline").load(url);
+        }
+
+        function CaseInfo() {
+            var url = '@Url.Action("CaseInfo", "Case")/@Model.CaseDetails.CASID';
+            $.post(url, function (data) {
+                $("#caseinfo").html(data);
+            });
+        }
+
+        function listFiles()
+        {
+            var url = '@Url.Action("listFiles", "Case")/@Model.CaseDetails.CASID';
+            $.post(url, function (data) {
+                if (data !== '') {
+                    $("#listFiles").html(data);
+                } else {
+                    $("#listFiles").hide();
+                }
+            });
+        }
+
+        function removeFile(id)
+        {
+            if (confirm("Please confirm to delete this file")) {
+                var url = "@Url.Action("removeFile","Case")/" + id;
+                $.post(url, function () {
+                    window.location.reload();
+                });
+            }
+        }
+
+        function setFav(b) {
+            var url = '@Url.Action("setFavourite", "Case")';
+            var id = '@Model.CaseDetails.CASID';
+            $.post(url, { id: id, value: b }, function (data) {
+                if (b === true) {
+                    $("#showFav").show();
+                } else {
+                    $("#showFav").hide();
+                }
+                $("#setFav").html(data);
+            });
+        }        
+    </script>    
+}
+
+<br />
+<div class="section-body">
+    <div class="row">
+        <div class="col-lg-8">
+            <div id="caseinfo" class="card card-underline">
+                <div class="text-warning height-1 text-center">
+                    <h2>Please Wating...</h2>
+                </div>
+            </div>            
+            @*<div id="caseattachfile" class="card card-underline">
+                <form action="@Url.Action("uploadFiles", "Case")" class="dropzone" id="dropzone-case" style="min-height: 0; padding: 5px;">
+                    <div class="dz-message">
+                        <span class="text-xl text-default-light"><i class="md md-attach-file"></i>&nbsp;Drop files here or click to upload.</span>
+                    </div>
+                    <input type="hidden" name="casID" value="@Model.CaseDetails.CASID" />
+                </form>
+            </div>
+            <div id="listFiles" class="card scroll" style="height: 188px"></div>*@
+        </div>
+        <div class="col-lg-4">
+            <div class="card card-underline style-default-dark">
+                <div class="card-head">
+                    <header class="opacity-75"><small>Contact Info</small></header>
+                    @if (Model.CaseDetails.ctaID.HasValue)
+                    {
+                        <div class="tools">
+                            <a href="@Url.Action("Detail", "Contact")/@Model.CaseDetails.ctaID" class="btn btn-icon-toggle ink-reaction" data-toggle="tooltip" data-placement="top" data-original-title="Contact Detail"><i class="md md-assignment-ind"></i></a>
+                        </div>
+                    }
+                    <!--end .tools -->
+                </div>
+                <!--end .card-head -->
+                <div class="card-body no-padding">
+                    <ul class="list">
+                        <li class="tile">
+                            <a class="tile-content ink-reaction">
+                                <div class="tile-icon">
+                                    <i class="fa fa-child fa-fw"></i>
+                                </div>
+                                <div class="tile-text">
+                                    @(string.IsNullOrWhiteSpace(Model.CaseDetails.CTAFULLNAME) ? "-" : Model.CaseDetails.CTAFULLNAME)
+                                    <small>@(string.IsNullOrWhiteSpace(Model.CaseDetails.CONTACTCODE) ? string.Empty : Model.CaseDetails.CONTACTCODE)</small>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="divider-inset"></li>
+                        <li class="tile">
+                            <a class="tile-content ink-reaction">
+                                <div class="tile-icon">
+                                    <i class="fa fa-phone"></i>
+                                </div>
+                                <div class="tile-text">
+                                    @(string.IsNullOrWhiteSpace(Model.CaseDetails.PHONES) ? "-" : Model.CaseDetails.PHONES)
+                                </div>
+                            </a>
+                        </li>
+                        @if (!string.IsNullOrEmpty(Model.CaseDetails.CTAEMAIL))
+                        {
+                            <li class="divider-inset"></li>
+                            <li class="tile">
+                                <a class="tile-content ink-reaction">
+                                    <div class="tile-icon">
+                                        <i class="fa fa-envelope fa-fw"></i>
+                                    </div>
+                                    <div class="tile-text">
+                                        @Model.CaseDetails.CTAEMAIL
+                                    </div>
+                                </a>
+                            </li>
+                        }
+                        @if (!string.IsNullOrEmpty(Model.CaseDetails.CTAFACEBOOK))
+                        {
+                            <li class="divider-inset"></li>
+                            <li class="tile">
+                                <a class="tile-content ink-reaction">
+                                    <div class="tile-icon">
+                                        <i class="fa fa-facebook-official fa-fw"></i>
+                                    </div>
+                                    <div class="tile-text">
+                                        @Model.CaseDetails.CTAFACEBOOK
+                                    </div>
+                                </a>
+                            </li>
+                        }
+                        @if (!string.IsNullOrEmpty(Model.CaseDetails.CTATWITTER))
+                        {
+                            <li class="divider-inset"></li>
+                            <li class="tile">
+                                <a class="tile-content ink-reaction">
+                                    <div class="tile-icon">
+                                        <i class="fa fa-twitter fa-fw"></i>
+                                    </div>
+                                    <div class="tile-text">
+                                        @Model.CaseDetails.CTATWITTER
+                                    </div>
+                                </a>
+                            </li>
+                        }
+                        @if (!string.IsNullOrEmpty(Model.CaseDetails.ADDRESS))
+                        {
+                            <li class="divider-inset"></li>
+                            <li class="tile">
+                                <a class="tile-content ink-reaction">
+                                    <div class="tile-icon">
+                                        <i class="fa fa-home fa-fw"></i>
+                                    </div>
+                                    <div class="tile-text">
+                                        @Model.CaseDetails.ADDRESS
+                                    </div>
+                                </a>
+                            </li>
+                        }
+                    </ul>
+                </div>
+                <!--end .card-body -->
+            </div>
+            <!--end .card -->
+            <div class="card card-underline">
+                <div class="card-head style-info">
+                    <header class=""><small>Case Timeline</small></header>
+                </div>
+                <div id="timeline" class="card-body scroll style-default-bright" style="height: 300px; padding-top: 0; padding-left: 10px;">
+                    @{ Html.RenderAction("DetailTimeline", "Case", new { id = Model.CaseDetails.CASID }); }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

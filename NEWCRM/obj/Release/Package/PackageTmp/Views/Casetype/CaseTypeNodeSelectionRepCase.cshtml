@@ -1,0 +1,22 @@
+﻿@model NEWCRM.Models.CasetypeViewModel
+@if (Model.list_node.Count() > 0)
+{
+    var selected = string.Empty;
+
+    <!--label for="@ViewData["node_id"]" class="col-sm-3 control-label">@ViewData["node_label"]</!--label-->
+    <div class="row">
+        <select id="@string.Format("casIDLevel{0}",ViewData["ct_level"])" name="@string.Format("casIDLevel{0}",ViewData["ct_level"])" class="form-control ctnode ctlv_@ViewData["ct_level"]" onchange="nextctnode(this)" >
+            <option></option>
+            @foreach (var item in Model.list_node)
+            {
+                selected = string.Empty;
+                if (Model.selectedID.HasValue && Model.selectedID == item.catID)
+                {
+                    selected = "selected";
+                }
+                <option @selected value="@item.catID" data-dialogue="@item.catDialogue" data-sla="@item.catSLA" data-slaid="@item.slaID">@item.catName</option>
+            }
+        </select>
+        <input type="hidden" id="@string.Format("casLevel{0}",ViewData["ct_level"])" name="@string.Format("casLevel{0}",ViewData["ct_level"])" />
+    </div>
+}

@@ -1,0 +1,231 @@
+﻿@model NEWCRM.Models.UserViewModel
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section Scripts {
+    <script src="~/Content/js/libs/dropzone/dropzone.js"></script>
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+
+            Dropzone.autoDiscover = false;
+            $("#dropzone-avatar").dropzone({
+                url: "@Url.Action("uploadAvatar", "User")",
+                addRemoveLinks: false,
+                success: function (file, response) {
+                    window.location.reload();
+                },
+                error: function (file, response) {
+                    file.previewElement.classList.add("dz-error");
+                }
+            });
+
+            $(".tl_signin").hide();
+            $(".tl_ib").hide();
+            $(".tl_cta").hide();
+
+        });
+
+        function TimelineFilter(obj) {
+            var css = ".tl_" + $(obj).val();
+            if ($(obj).is(":checked")) {
+                $(css).fadeIn(300);
+            } else {
+                $(css).fadeOut(300);
+            }
+        }
+
+        function successChangePassword() {
+            openSuccessDialog("Change new password success");
+            $('#frm-changepwd').find('input[type=password]').val('');
+            $('#dv_cp').hide();
+        }
+
+        function failureChangePassword(data) {
+            openErrorDialog(data.responseText);
+        }
+    </script>
+}
+<!-- BEGIN PROFILE HEADER -->
+<section class="full-bleed">
+    <div class="section-body" style="padding: 10px 0 10px 0;">
+        @*<div class="img-backdrop" style="background-image: url('/Images/img16.jpg')"></div>*@
+        <div class="row">
+            <div class="col-lg-2">
+                <form action="@Url.Action("uploadAvatar", "Contact")" class="dropzone" id="dropzone-avatar" style="min-height: 0; padding: 5px;">
+                    <div class="dz-message" style="margin: 0">
+                        <div class="pull-right">
+                            @if (!string.IsNullOrEmpty(@Model.item_profile.usrAvatar))
+                            { 
+                                <img id="avatar" class="img-circle size-3" src="~/Images/users/@Model.item_profile.usrAvatar" alt="" />
+                            }
+                            else
+                            {
+                                <img class="img-circle border-white border-xl img-responsive auto-width" src="~/Images/contact_.png" />
+                            }
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="col-lg-4" style="padding-top: 40px">               
+                <h3 class="no-margin">@Model.item_profile.usrFirstName @Model.item_profile.usrLastName<br />
+                    <small>@Model.item_profile.grpName</small></h3>
+            </div>
+            <!--end .col -->
+            <div class="col-lg-6" style="padding-top: 20px">
+                <div class="list-comments text-center pull-right" style="width: 100px">
+                    <div class="comment-avatar" style="background-color: #FFF; padding-top: 6px; float: none; margin-top: 0">                        
+                        <strong class="text-xl">@Model.item_profile.TotalContacts</strong>
+                    </div>
+                    <div>
+                        <span class="text-medium opacity-75"><i class="fa fa-user-plus fa-fw"></i> Contacts</span>
+                    </div>
+                </div>                    
+                 <div class="list-comments text-center pull-right" style="width: 100px">
+                    <div class="comment-avatar" style="background-color: #FFF; padding-top: 6px; float: none; margin-top: 0">
+                        <strong class="text-xl">@Model.item_profile.TotalPending</strong>
+                    </div>
+                    <div>
+                        <span class="text-medium opacity-75"><i class="fa fa-frown-o fa-fw" style="font-size:1.2em"></i>Opened</span>
+                    </div>
+                </div>
+                 <div class="list-comments text-center pull-right" style="width: 100px">
+                    <div class="comment-avatar" style="background-color: #FFF; padding-top: 6px; float: none; margin-top: 0">
+                        <strong class="text-xl">@Model.item_profile.TotalClosed</strong>
+                    </div>
+                    <div>
+                        <span class="text-medium opacity-75"><i class="fa fa-smile-o fa-fw" style="font-size:1.2em"></i>Closed</span>
+                    </div>
+                </div>
+                <div class="list-comments text-center pull-right" style="width: 100px">
+                    <div class="comment-avatar" style="background-color: #FFF; padding-top: 6px; float: none; margin-top: 0">
+                        <strong class="text-xl">@Model.item_profile.TotalCases</strong>
+                    </div>
+                    <div><span class="text-medium opacity-75">All Cases</span></div>
+                </div>
+            </div>
+            <!--end .col -->
+        </div>
+    </div>
+    <!--end .section-body -->
+    <hr class="no-margin" />
+</section>
+<!-- END PROFILE HEADER  -->
+<div class="section-body no-margin" style="padding-top: 20px">
+    <div class="row">
+        <div class="col-md-1" style="width:60px">&nbsp;</div>
+        <div class="col-md-8">
+            <span class="text-info"><h2>My Timeline</h2></span>
+            <div class="text-center">
+                <label class="checkbox-inline checkbox-styled checkbox-warning">
+                    <input type="checkbox" value="cas" onclick="TimelineFilter(this)" checked><span>Created Cases</span>
+                </label>
+                <label class="checkbox-inline checkbox-styled checkbox-success">
+                    <input type="checkbox" value="ib" onclick="TimelineFilter(this)"><span>Inbound</span>
+                </label>               
+                <label class="checkbox-inline checkbox-styled checkbox-danger">
+                    <input type="checkbox" value="cta" onclick="TimelineFilter(this)"><span>Created Contact</span>
+                </label>
+                <label class="checkbox-inline checkbox-styled checkbox-primary">
+                    <input type="checkbox" value="signin" onclick="TimelineFilter(this)"><span>Login</span>
+                </label>
+            </div>
+            <!-- BEGIN TIMELINE -->
+            <div class="card-body scroll" id="timeline" style="height: 415px">
+                @{
+                    Html.RenderAction("getTimeline", "User");
+                }               
+            </div>
+            <!--end TIMELINE -->
+        </div>
+        <!--end .col -->
+        <!-- END MESSAGE ACTIVITY -->
+
+        <!-- BEGIN PROFILE MENUBAR -->
+        <div class="col-md-3">
+            @*  <div class="card card-underline style-default-dark">
+                <div class="card-head">
+                    <header class="opacity-75"><small>Friends</small></header>
+                </div>
+                <!--end .card-head -->
+                <div class="card-body no-padding">
+                    <ul class="list">
+                        <li class="tile">
+                            <a class="tile-content ink-reaction">
+                                <div class="tile-icon" style="min-width: 45px;">
+                                    <div class="timeline-circ circ-xl style-warning" style="left: 30px; top: 15px"><i class="md md-speaker-notes" style="margin-top: 0"></i></div>
+                                </div>
+                                <div class="tile-text"><span class="text-sm">EAK EAKAMPAI</span><small>Created : C-00000202</small></div>
+                            </a>
+                        </li>
+                        <li class="tile">
+                            <a class="tile-content ink-reaction">
+                                <div class="tile-icon" style="min-width: 45px;">
+                                    <div class="timeline-circ circ-xl style-primary-dark" style="left: 30px; top: 15px"><i class="md md-phone-in-talk" style="margin-top: 0"></i></div>
+                                </div>
+                                <div class="tile-text"><span class="text-sm">PALIN BOONMAWONG</span><small>Inbound : 0840012234</small></div>
+                            </a>
+                        </li>
+                        <li class="tile">
+                            <a class="tile-content ink-reaction">
+                                <div class="tile-icon" style="min-width: 45px;">
+                                    <div class="timeline-circ circ-xl style-danger" style="left: 30px; top: 15px"><i class="md md-person-add" style="margin-top: 0"></i></div>
+                                </div>
+                                <div class="tile-text"><span class="text-sm">PONGSIRI HONGSA</span><small>Created : นายสมคิด ติดใจ</small></div>
+                            </a>
+                        </li>
+                        <li class="tile">
+                            <a class="tile-content ink-reaction">
+                                <div class="tile-icon" style="min-width: 45px;">
+                                    <div class="timeline-circ circ-xl style-primary" style="left: 30px; top: 15px"><i class="md md-vpn-key" style="margin-top: 0"></i></div>
+                                </div>
+                                <div class="tile-text"><span class="text-sm">NAPHATPAKORN THAIGERD</span><small>Already Login</small></div>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <!--end .card-body -->
+            </div>*@
+            <!--end .card -->
+            <div class="card card-underline">
+                <div class="card-head style-default-dark">
+                    <header class="opacity-75"><small>Change Password</small></header>
+                    <div class="tools">
+                        <a class="btn btn-icon-toggle ink-reaction btn-collapse"><i class="md md-edit"></i></a>
+                    </div>
+                    <!--end .tools -->
+                </div>
+                <!--end .card-head -->
+                <div id="dv_cp" class="card-body" style="display: none">
+                    @using (Ajax.BeginForm("changePassword", "User",
+                                        new AjaxOptions { HttpMethod = "post", OnSuccess = "successChangePassword", OnFailure = "failureChangePassword" },
+                                        new { id = "frm-changepwd", @class = "form form-validate", novalidate = "novalidate", autocomplete = "off" }))
+                    {
+                        <div class="form-group floating-label">
+                            <input type="password" class="form-control" id="password_old" name="password_old" required data-rule-minlength="4">
+                            <label for="oldpass">Old</label>
+                        </div>
+                        <div class="form-group floating-label">
+                            <input type="password" class="form-control" id="password_new" name="password_new" required data-rule-minlength="4">
+                            <label for="newpass">New</label>
+                        </div>
+                        <div class="form-group floating-label">
+                            <input type="password" class="form-control" id="password_confirm" name="password_confirm" required data-rule-minlength="4">
+                            <label for="confirm">Confirm</label>
+                        </div>
+                        <div class="input-group-btn">
+                            <button type="submit" class="btn btn-warning">Changed</button>
+                        </div>
+                    }
+                </div>
+                <!--end .card-body -->
+            </div>
+            <!--end .card -->
+        </div>
+        <!--end .col -->
+        <!-- END PROFILE MENUBAR -->
+
+    </div>
+    <!--end .row -->
+</div>
+<!--end .section-body -->

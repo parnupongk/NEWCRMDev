@@ -1,0 +1,232 @@
+﻿@{   
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section Style {
+    <link href="~/Content/theme-oto/libs/fullcalendar/fullcalendar.css" rel="stylesheet" />
+    <style>
+        textarea
+        {
+            resize: none;
+        }
+    </style>
+}
+
+@section Scripts {
+<script>
+    $(document).ready(function () {
+        $('#event-date').datepicker({ autoclose: true, todayHighlight: true, format: "dd/mm/yyyy" });            
+
+        $("#new-task").click(function () {
+            $('#formModal').modal('show');
+            resetForm();
+        });
+
+        $("#btnTaskSave").click(function () {
+            $('#frm-task').submit();
+        });
+
+        successSaveNewTask();
+
+    });
+
+    function resetForm() {
+        $('#btnTaskRemove').hide();
+        $('#frm-task').find("input[type=text],[type=hidden],textarea").val("");
+        $('#cldFormDate').val('@DateTime.Now.ToString("dd/MM/yyyy")');
+        $('#frm-task input[name=cldColor]:first').attr('checked', true);
+        $('#cldMessage').focus();
+    }
+
+    function beginSaveNewTask()
+    {
+        var cldate = jQuery.trim($('#cldFormDate').val());
+        var cldTimestart = $('#cldTimestart').val();
+        var cldTimeend = $('#cldTimeend').val();
+        var cldMessage = jQuery.trim($('#cldMessage').val());
+
+        var regexp = /([01][0-9]|[02][0-3]):[0-5][0-9]/;
+        var bTimestart = regexp.test(cldTimestart);
+        var bTimeend = regexp.test(cldTimeend);
+
+        if (cldate == '') {
+            openErrorDialog("Please enter date");
+            $('#cldFormDate').focus();
+            return false;
+        } else if (cldTimestart == '' || !bTimestart) {
+            openErrorDialog("Please enter begin time or incorrect format");
+            $('#cldTimestart').focus();
+            return false;       
+        } else if (cldTimeend == '' || !bTimeend) {
+            openErrorDialog("Please enter end time or incorrect format");
+            $('#cldTimeend').focus();
+            return false;
+        } else if (cldMessage == '') {
+            openErrorDialog("Please enter message");
+            $('#cldMessage').focus();
+            return false;
+        } else {        
+            return true;
+        }
+    }
+
+    function successSaveNewTask()
+    {
+        $('#dvCalendar').fadeOut();
+        $('#formModal').modal('hide'); 
+        var url = '@Url.Action("getCalendar","Calendar")';
+        $.post(url, function (data) {
+            $('#dvCalendar').html(data).fadeIn();
+        });        
+    }
+
+    function failureSaveNewTask(data)
+    {
+        openErrorDialog(data.responseText);
+    }
+
+    function getById(id)
+    {
+        var url = '@Url.Action("getTask","Calendar")/' + id;
+        $.post(url, function (data) {
+            //alert(data.date);
+            editTask(data);
+        },'json');
+    }
+
+    function editTask(data)
+    {
+        $('#frm-task #cldID').val(data.id);
+        $('#frm-task #cldMessage').val(data.message);
+        $('#frm-task #cldFormDate').val(data.date);
+        $('#frm-task #cldTimestart').val(data.timestart);
+        $('#frm-task #cldTimeend').val(data.timeend);
+        $("#frm-task input[name=cldColor][value=" + data.color + "]").prop('checked', true);
+        $('#btnTaskRemove').show();
+        // opened modal
+        $('#formModal').modal('show');
+    }
+
+    function removeTask()
+    {
+        var id = $('#frm-task #cldID').val();
+        if (id != '')
+        {
+            if (confirm('Please confirm for remove this task')) {
+                var url = '@Url.Action("Remove", "Calendar")/' + id;
+                $.post(url, function () {
+                    successSaveNewTask();
+                });                
+            }
+        }
+    }
+</script>
+}
+<div class="section-header">
+    <ol class="breadcrumb">
+        <li class="active">
+            <a id="new-task" class="btn btn-flat" href="javascript:;"><i class="fa fa-plus fa-fw"></i>&nbsp;NEW TASK</a>
+        </li>
+    </ol>
+</div>
+<div class="section-body">
+    <div class="row">
+        <!-- BEGIN CALENDAR -->
+        <div class="col-lg-12">
+            <div id="dvCalendar" class="card">
+              @*  @{
+                    Html.RenderAction("getCalendar", "Calendar");
+                }*@
+            </div>
+            <!--end .card -->
+        </div>
+        <!--end .col -->
+        <!-- END CALENDAR -->
+    </div>
+</div>
+<div class="modal fade" id="formModal" tabindex="-1" role="dialog" aria-labelledby="simpleModalLabel" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="card style-primary">
+                <div class="card-head">
+                    <div class="tools">
+                        <div class="btn-group">
+                            <a class="btn btn-icon-toggle" data-dismiss="modal"><i class="md md-close"></i></a>
+                        </div>
+                    </div>
+                    <header><i class="fa fa-calendar"></i>&nbsp;&nbsp;New Task</header>
+                </div>
+            </div>
+            <div class="modal-body">
+                @using (Ajax.BeginForm("TaskSave", "Calendar",
+                        new AjaxOptions { HttpMethod = "post", OnBegin = "return beginSaveNewTask()", OnSuccess = "successSaveNewTask", OnFailure = "failureSaveNewTask" },
+                        new { id = "frm-task", @class = "form", novalidate = "novalidate", autocomplete = "off" }))
+                {
+                    <input type="hidden" id="cldID" name="cldID" />
+                    <div class="row">
+                        <div class="col-lg-8">
+                            <div class="form-group">
+                                <textarea id="cldMessage" name="cldMessage" class="form-control" rows="6"></textarea>
+                                <label for="cldMessage">Message</label>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="form-group control-width-normal">
+                                <div class="input-group date" id="event-date">
+                                    <div class="input-group-content">
+                                        <input id="cldFormDate" type="text" class="form-control" name="cldFormDate" value="">
+                                        <label>Date</label>
+                                    </div>
+                                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <input type="text" id="cldTimestart" name="cldTimestart" class="form-control time-mask">
+                                <label>Begin</label>
+                                <p class="help-block">Time: 24h</p>
+                            </div>
+                            <div class="form-group">
+                                <input type="text" id="cldTimeend" name="cldTimeend" class="form-control time-mask">
+                                <label>End</label>
+                                <p class="help-block">Time: 24h</p>
+                            </div>
+                        </div>
+                    </div>                   
+                    <div class="row">
+                        <div class="col-lg-8">
+                            <div class="form-group">
+                                <label>Color</label>
+                                <div style="padding-top: 10px;">
+                                    <label class="radio-inline radio-styled radio-default-dark">
+                                        <input type="radio" name="cldColor" value="event-default" checked><span class="text-default-light text-lg" style="line-height: 1.2"><i class="md md-label"></i></span>
+                                    </label>
+                                    <label class="radio-inline radio-styled radio-success">
+                                        <input type="radio" name="cldColor" value="event-success"><span class="text-success text-lg" style="line-height: 1.2"><i class="md md-label"></i></span>
+                                    </label>
+                                    <label class="radio-inline radio-styled radio-warning">
+                                        <input type="radio" name="cldColor" value="event-warning"><span class="text-warning text-lg" style="line-height: 1.2"><i class="md md-label"></i></span>
+                                    </label>
+                                    <label class="radio-inline radio-styled radio-danger">
+                                        <input type="radio" name="cldColor" value="event-danger"><span class="text-danger text-lg" style="line-height: 1.2"><i class="md md-label"></i></span>
+                                    </label>
+                                    <label class="radio-inline radio-styled radio-info">
+                                        <input type="radio" name="cldColor" value="event-info"><span class="text-info text-lg" style="line-height: 1.2"><i class="md md-label"></i></span>
+                                    </label>
+                                </div>
+                                <!--end .col -->
+                            </div>
+                            <!--end .form-group -->
+                        </div>                        
+                    </div>
+                }
+            </div>
+            <div class="modal-footer" style="border: 0">                
+                <button id="btnTaskSave" type="button" class="btn btn-primary"><i class="fa fa-check-square-o fa-fw"></i>&nbsp;SAVE</button>&nbsp;
+                <button id="btnTaskRemove" type="button" class="btn btn-danger" onclick="removeTask()"><i class="fa fa-trash-o fa-fw"></i>&nbsp;REMOVE</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->

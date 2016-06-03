@@ -1,0 +1,117 @@
+﻿@using NEWCRM.Models;
+@{   
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section Scripts {
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            getContactByPhone();
+
+            $('#search').typeahead({
+                ajax: {
+                    url: "@Url.Action("AutoComplete", "Contact")",
+                    timeout: 500,
+                    triggerLength: 2,
+                    method: "get",
+                    preDispatch: function (query) {
+                        return {
+                            search: query
+                        }
+                    },
+                    preProcess: function (data) {
+                        //alert(data);
+                        //showLoadingMask(false);
+                        if (data.success === false) {
+                            // Hide the list, there was some error
+                            return false;
+                        }
+                        // We good!
+                        return data;
+                    }
+                }
+            });
+
+            $("#InboundScreenPop").modal({
+                backdrop: 'static'
+            });
+        });
+
+        function getContactByPhone() {
+            var url = '@Url.Action("getContactByPhone", "Inbound")';
+            $.post(url, function (data) {
+                $("#contactlist").html(data);
+            });
+        }
+
+        function beginPaging(args) {
+            // Animate
+            $('#contactlist').hide();   //.fadeOut('normal');
+        }
+
+        function successPaging() {
+            // Animate
+            $('#contactlist').fadeIn('normal');
+        }
+
+        function failurePaging(data) {
+            alert(data.responseText);
+        }
+
+        function EndCall() {
+            var url = '@Url.Action("ClearSession", "Inbound")';
+            $.post(url);
+        }
+    </script>
+}
+<!-- BEGIN SIMPLE MODAL MARKUP -->
+<div class="modal fade" id="InboundScreenPop" tabindex="-1" role="dialog" aria-labelledby="simpleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="card card-bordered style-primary" style="margin-bottom: 0;">
+                <div class="card-head">
+                    <div class="tools" style="margin-top: 10px">
+                        <div class="btn-group">
+                            <a class="btn ink-reaction btn-floating-action style-danger" onclick="EndCall()" data-dismiss="modal" data-toggle="tooltip" data-placement="top" data-original-title="End Call"><i class="md md-call-end"></i></a>
+                        </div>
+                    </div>
+                    <header style="padding-left: 5px">
+                        <h2><span class="text-xxl"><i class="fa fa-phone-square fa-fw"></i>@NEWCRM.Common.AppUtils.Session.Activity.actChannelData</span></h2>
+                    </header>
+                </div>
+            </div>
+            <div class="modal-body">
+                <div class="no-padding" style="margin-bottom: 10px;">
+                    @*<header><i class="fa fa-user fa-fw"></i>&nbsp;C</header>*@
+                    @*<div class="tools">*@
+                    <div class="btn-group">
+                        @using (Ajax.BeginForm("getContactBySearch", "Inbound",
+                                        new AjaxOptions { UpdateTargetId = "contactlist", HttpMethod = "post", OnBegin = "beginPaging", OnSuccess = "successPaging", OnFailure = "failurePaging" },
+                                        new { id = "frm-inbound", @class = "navbar-search", autocomplete = "off", style = "width:350px" }))
+                        {
+                            <div class="form-group" style="overflow: visible">
+                                <input id="search" type="text" class="form-control" name="search" placeholder="Enter Name, Surname" style="width: 320px">
+                            </div>
+                            <button type="submit" class="btn btn-icon-toggle ink-reaction" data-toggle="tooltip" data-placement="top" data-original-title="Search contacts"><i class="fa fa-search"></i></button>
+                        }
+                    </div>
+                    @*</div>*@
+                </div>
+                <!--end .card-head -->
+                <div id="contactlist" class="card no-padding" style="height: 233px; overflow: auto; overflow-y: scroll; margin-bottom: 10px;"></div>
+                <!--end .card-body -->
+
+                <!--end .card -->
+                <div>
+                    <a href="@Url.Action("NewCase", "Case")">
+                        <button type="button" class="btn ink-reaction btn-flat" data-toggle="tooltip" data-placement="top" data-original-title="Add new case with no contact"><i class="md md-add-circle"></i> New Case</button>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
+<!-- END SIMPLE MODAL MARKUP -->

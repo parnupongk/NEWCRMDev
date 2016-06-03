@@ -1,0 +1,627 @@
+﻿@model NEWCRM.Models.CaseViewModelLocalization
+@{   
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section Style {
+    <style>
+        div.nc_nct
+        {
+            border: 2px solid #a1a1a1;
+            padding: 10px 40px;
+            background: #dddddd;
+            border-radius: 25px;
+            border-style: dashed;
+            height: 100px;
+            margin: 20px;
+        }
+
+        div.nc_nca
+        {
+            border: 2px solid #a1a1a1;
+            padding: 10px 40px;
+            background: #dddddd;
+            border-radius: 25px;
+            border-style: solid;
+            height: 100px;
+            margin: 20px;
+        }
+    </style>
+}
+
+@section Scripts {
+    <script src="~/Content/js/libs/inputmask/jquery.inputmask.bundle.min.js"></script>
+    <script src="~/Content/js/libs/bootstrap-tagsinput/bootstrap-tagsinput.min.js"></script>
+    <script src="~/Content/js/core/demo/DemoFormComponents.js"></script>
+    <script src="~/Scripts/NewCase.js"></script>
+    <script type="text/javascript">
+
+
+        $(document).ready(function () {
+            $("#ctdiv_7").hide();
+            $("#casIDLevel1").focus();
+            $("#cdt").hide();
+            $("#dv-callback").hide();
+            $("#ctdiv_6").hide();
+            $("#ctcaseparent").hide();
+
+            //--load Status
+            $("#cssID").val('1');
+
+            $("#casURLAccount").autocomplete({
+                source: function (request, response) {
+                    $.ajax({
+                        url: "/Case/CaseURLAccAuto",
+                        type: "POST",
+                        dataType: "json",
+                        data: { Prefix: request.term, casIDLevel3: $("#casIDLevel3").val() },
+                        success: function (data) {
+                            response($.map(data, function (item) {
+                                return { value:item.casID, label: item.casLevel6 };
+                            }))
+
+                        }
+                    })
+                },
+                focus: function (event, ui) {
+                    event.preventDefault();
+                    $("#casURLAccount").val(ui.item.label);
+                },
+                select: function (event, i) {
+                    event.preventDefault();
+                    console.log(i.item.value);
+                    $("#casParentID").val(i.item.value);
+                    $("#casURLAccount").val(i.item.label);
+                    $("#ctdiv_7").show();
+
+                    var url = '@Url.Action("getCaseByCasID", "Case")/' + i.item.value;
+                    $.post(url, function (data) {
+                        $("#ctcaseparent").show();
+                        $("#ctcaseparent").html('<div class="col-sm-3">&nbsp;</div><div class="col-sm-9 text-warning text-medium">Loading...</div>').slideDown(200);
+                        $("#ctcaseparent").html(data);
+                    });
+
+                    return false;
+                }
+            });
+
+            $("#casURLAccount").keyup(function (e) {
+                if($(this).val() =="")
+                {
+                    $("#ctcaseparent").hide();
+                    $("#ctdiv_7").hide();
+                    $("#casParentID").val("");
+                }
+            });
+
+            $("input[name='cssID']").click(function () {
+                if ($(this).val() === '4') {
+                    $("#dv-callback").slideDown(300);
+                } else {
+                    $("#dv-callback").slideUp(300);
+                }
+            });
+
+            $("#btnsavenewcase").click(function ()
+            {
+                $(this).attr("disabled", "disabled");
+                if ($("#frm-newcase").valid()) {                    
+                    $("#frm-newcase").submit();                    
+                } else {
+                    $("#casNote").focus();
+                    $(this).removeAttr("disabled");
+                }
+            });          
+        });
+
+        function channel_toggle(obj, id) {
+            //alert($(obj).html());
+            var new_channel = $(obj).html();
+            $('#spchannel').hide().html(new_channel).fadeIn(500);
+            var url = '@Url.Action("ChangedChannel", "Case")';
+            $.post(url, { chnID: id });
+        }
+
+        function beginSaveNewCase(args) {
+            // Animate           
+            $('#newcase-list').hide();
+        }
+
+        function successSaveNewCase() {
+            // Animate
+            $('#newcase-list').fadeIn();
+            $("#frm-newcase").get(0).reset();
+            $("#casSLA").val('');
+            //$("#priID").val('2');
+            $("#cssID").val('2');
+            $("#ctdiv_2").hide();
+            $("#ctdiv_6").hide();
+            $("#ctdiv_opt").hide();
+            $("#dv-callback").hide();
+            openSuccessDialog('Save new case success');            
+            getNewCaseList();
+            $("#btnsavenewcase").removeAttr("disabled");
+        }
+
+        function getNewCaseList()
+        {
+            var url = '@Url.Action("NewCaseList","Case")';
+            $("#newcase-list").load(url);
+        }
+
+        function failureSaveNewCase(data) {
+            //alert(data.responseText);
+            openWarningDialog(data.responseText);
+            $("#btnsavenewcase").removeAttr("disabled");
+        }
+
+        function newcase_removebyid(id) {
+            if (confirm("Please confirm to remove?")) {
+                var url = "@Url.Action("NewCaseRemoveById", "Case")";
+                $.post(url, { id: id }, function (data) {
+                    $('#newcase-list').hide().html(data).fadeIn();
+                });
+            }
+        }
+
+        function newcase_favbyid(id) {
+            var url = "@Url.Action("NewCaseFavorite", "Case")";
+            $.post(url, { id: id }, function (data) {
+                $('#newcase-list').hide().html(data).fadeIn();
+            });
+        }
+
+        function beginEndCall() {
+            // do nothing
+        }
+
+        function successEndCall(id) {
+            if (id != '') {
+                window.location = '@Url.Action("Detail", "Contact")/' + id;
+            } else {
+                window.location = '@Url.Action("getProfile", "User")';
+            }
+        }
+
+        function failureEndCall(data) {
+            //alert(data.responseText);
+            openErrorDialog(data.responseText);
+        }
+
+        function cdtoggle() {
+            $("#cd").toggle(300);
+        }
+
+        function nextctnode(ref) {
+            var message = $(ref).find(':selected').attr('data-dialogue');
+            var sla = $(ref).find(':selected').attr('data-sla');
+            var slaid = $(ref).find(':selected').attr('data-slaid');
+            var current_divnode = $(ref).parents().eq(1).attr("id");
+            var current_lv = current_divnode.split("_")[1];
+            var next_lv = parseInt(current_lv) + 1;
+
+            //alert(current_lv);
+
+            if ($(ref).val() === "") {
+                // Show - Hide another div
+                if (current_lv == 1) {
+                    $("#ctdiv_2").empty().hide();
+                    $("#ctdiv_3").empty().hide();
+                    $("#ctdiv_4").empty().hide();
+                    $("#ctdiv_5").empty().hide();
+                }
+                if (current_lv == 2) {
+                    $("#ctdiv_3").empty().hide();
+                    $("#ctdiv_4").empty().hide();
+                    $("#ctdiv_5").empty().hide();
+                }
+                if (current_lv == 3) {
+                    $("#ctdiv_4").empty().hide();
+                    $("#ctdiv_5").empty().hide();
+                }
+                if (current_lv == 4) {
+                    $("#ctdiv_5").empty().hide();
+                }
+                $("#ctdiv_opt").hide();
+                $("#casSLA").val('');                
+            } else {
+                if (current_lv == 1) {
+                    $("#ctdiv_2").empty().hide();
+                    $("#ctdiv_3").empty().hide();
+                    $("#ctdiv_4").empty().hide();
+                    $("#ctdiv_5").empty().hide();
+                    $("#ctdiv_6").hide();
+                    $("#ctdiv_opt").hide();
+                    $("#casSLA").val('');
+                }
+                if (current_lv == 2) {
+                    $("#ctdiv_3").empty().hide();
+                    $("#ctdiv_4").empty().hide();
+                    $("#ctdiv_5").empty().hide();
+                    $("#ctdiv_opt").hide();
+                }
+                if (current_lv == 3) {
+                    $("#ctdiv_4").empty().hide();
+                    $("#ctdiv_5").empty().hide();
+                    $("#ctdiv_opt").hide();
+                }
+                if (current_lv == 4) {
+                    $("#ctdiv_5").empty().hide();
+                    $("#ctdiv_opt").hide();
+                }
+
+                // Set casLevel                
+                $("#casLevel" + current_lv).val($(ref).find("option:selected").text());
+                // Show Next Node
+                //if($(ref).find("option:selected").val() === '2') {
+                //alert($("#casLevel" + current_lv).text);
+                //alert(sla);
+                if (sla === '' || typeof sla == 'undefined') {
+                    //alert(lv_current.attr("id"));
+                    $("#ctdiv_" + next_lv).html('<div class="col-sm-3">&nbsp;</div><div class="col-sm-9 text-warning text-medium">Loading...</div>').slideDown(200);
+                    var id = $(ref).val();
+                    //alert(id);
+                    var url = '@Url.Action("getCaseTypeNodeSelection", "Casetype")/' + id;
+                    $.post(url, function (data)
+                    {
+                        $("#ctdiv_" + next_lv).html(data);
+                    });
+                    
+                    if (next_lv > 3)
+                    {
+                        //alert(id);
+                        $("#ctdiv_6").show();
+                        $("#casURLAccount").focus();
+                    }
+                } else {
+
+                    $("#casURLAccount").focus();
+                    //$("#casNote").focus();                    
+                    $("#sla").text(sla);                  
+                    $("#casSLA").val(sla);
+                    $("#slaID").val(slaid);
+                    $("#ctdiv_opt").show();
+                }
+            }
+            
+            if (jQuery.trim(message).length > 0) {
+                openInfoDialog(message);
+            } else {
+                toastr.clear();
+            }
+        }
+
+        function getCommonDetail()
+        {
+            var url = '@Url.Action("CommonDetail", "Contact")';
+            $.post(url, function (data) {
+                $("#cd").html(data).show();
+                $("#cdt").fadeIn(300);
+            });
+        }
+
+        function successNewContact()
+        {                       
+            window.location.reload();
+        }      
+
+        function setTextDate(ref)
+        {
+            //alert('setTextDate');
+            $(ref).attr("data-inputmask", "'alias': 'date'");
+        }
+
+        function openInbound()
+        {
+            getContactByPhone();
+
+            $('#search').typeahead({
+                ajax: {
+                    url: "@Url.Action("AutoComplete", "Contact")",
+                    timeout: 500,
+                    triggerLength: 2,
+                    method: "get",
+                    preDispatch: function (query) {
+                        return {
+                            search: query
+                        }
+                    },
+                    preProcess: function (data) {
+                        //alert(data);
+                        //showLoadingMask(false);
+                        if (data.success === false) {
+                            // Hide the list, there was some error
+                            return false;
+                        }
+                        // We good!
+                        return data;
+                    }
+                }
+            });
+
+            $("#InboundScreenPop").modal({
+                backdrop: 'static'
+            });
+        }
+
+        function getContactByPhone() {
+            var url = '@Url.Action("getContactByPhone", "Inbound")';
+            $.post(url, function (data) {
+                $("#contactlist").html(data);
+            });
+        }
+
+        function beginPaging(args) {
+            // Animate
+            $('#contactlist').hide();   //.fadeOut('normal');
+        }
+
+        function successPaging() {
+            // Animate
+            $('#contactlist').fadeIn('normal');
+        }
+
+        function failurePaging(data) {
+            alert(data.responseText);
+        }
+
+        function EndCall() {
+            var url = '@Url.Action("ClearSession", "Inbound")';
+            $.post(url);
+        }       
+    </script>
+
+    @if (NEWCRM.Common.AppUtils.Session.Activity.ctaID.HasValue)
+    { 
+        <script>getCommonDetail();</script>
+    }
+}
+@*<div class="section-header">
+    <ol class="breadcrumb">
+        <li class="active">@Html.DisplayNameFor(Model => Model.new_case)</li>
+    </ol>
+</div>*@
+<div class="section-body">
+    <div class="card">
+        <!-- BEGIN CONTACT DETAILS HEADER -->
+        <div class="card-head style-primary">
+            <div class="tools pull-left text-xxl" style="padding-left: 5px;">
+                <button type="button" class="btn ink-reaction btn-icon-toggle btn-lg" onclick="openInbound()"><i class="fa fa-crosshairs"></i></button>
+                <header style="padding-left:0"><span class="text-xxl"><i class="fa fa-phone fa-fw"></i>@NEWCRM.Common.AppUtils.Session.Activity.actChannelData</span></header>                
+            </div>
+            <!--end .tools -->
+            <div class="tools">
+                <header><span id="spchannel" class="text-xxl"><i class="fa fa-arrow-circle-down fa-fw"></i>Inbound</span></header>
+                <div class="btn-group">
+                    <div class="btn-group" data-toggle="tooltip" data-placement="top" data-original-title="Change channel">
+                        <a href="#" class="btn btn-icon-toggle dropdown-toggle" data-toggle="dropdown" style="font-size: 20px"><i class="md md-sync"></i></a>
+                        <ul class="dropdown-menu pull-right" role="menu" style="text-align: left;">
+                            @foreach (var chn in Model.list_channels)
+                            {
+                                <li><a href="javascript:void(0);" onclick="channel_toggle(this,'@chn.chnID')" style="font-size:18px"><i class="fa @chn.chnIcon fa-fw"></i>@chn.chnName</a></li>
+                            }
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--end .card-head -->
+        <!-- END CONTACT DETAILS HEADER -->
+
+        <!-- BEGIN CONTACT DETAILS -->
+        <div class="card-tiles">
+            <div class="hbox-md col-md-12">
+                <div class="hbox-column col-md-11">
+                    <div class="row">
+                        <!-- BEGIN CONTACTS MAIN CONTENT -->
+                        <div class="col-sm-7 col-md-8 col-lg-12">
+                            <div class="row">
+                            @{
+                                Html.RenderAction("ContactInfo", "Contact");
+                            }
+                            </div>
+                            @if(NEWCRM.Common.AppUtils.Session.Activity.ctaID.HasValue)
+                            {
+                                using (Ajax.BeginForm("NewCaseSave", "Case",
+                                        new AjaxOptions { HttpMethod = "post", OnBegin = "beginSaveNewCase", OnSuccess = "successSaveNewCase", OnFailure = "failureSaveNewCase" },
+                                        new { id = "frm-newcase", @class = "form-horizontal form-validate", novalidate = "novalidate", autocomplete = "off" }))
+                                {       
+                                    <input type="hidden" id="pvnID" name="pvnID" value="" />
+                                    <div class="row" style="margin-top: 10px">
+                                    <div class="col-lg-10">
+                                        <div id="ctdiv_1" class="form-group">
+                                            @{
+                                                Html.RenderAction("getCaseTypeNodeSelection", "Casetype", new { id = 0 });
+                                            }
+                                        </div>
+                                        <div id="ctdiv_2" class="form-group"></div>                                
+                                        <div id="ctdiv_3" class="form-group"></div>   
+                                        <div id="ctdiv_4" class="form-group"></div> 
+                                        <div id="ctdiv_5" class="form-group"></div>      
+                                        <div id="ctdiv_6" class="form-group" >
+                                            <label for="casenote" class="col-sm-3 control-label">Add URL/Account</label>
+                                            <div class="col-sm-8 margin-bottom-xl">
+                                                <input type="text" class="form-control" id="casURLAccount" name="casURLAccount" required />
+                                            </div>
+                                            <div id="ctdiv_7" class="col-sm-1 margin-bottom-xl">
+                                                <h><span class="label label-warning">Child Cas</span></h>
+                                                    <input type="hidden" class="form-control" id="casParentID" name="casParentID" value="" />
+                                            </div>
+                                            <div id="ctcaseparent" class="col-sm-12 margin-bottom-xl">
+
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="casenote" class="col-sm-3 control-label">Add Note</label>
+                                            <div class="col-sm-9 margin-bottom-xl">
+                                                <textarea id="casNote" name="casNote" class="form-control" rows="6" required data-rule-minlength="1"></textarea>
+                                            </div>
+                                        </div>
+                                        <div id="ctdiv_opt" class="form-group">
+                                            <label class="col-sm-3 control-label">Status</label>
+                                            <div class="col-sm-9 margin-bottom-xl">
+                                                <select id="cssID" name="cssID" class="form-control">
+                                                     
+                                                    @foreach (var item in Model.list_status)
+                                                    { 
+                                                        <option value="@item.cssID">@item.cssName</option>
+                                                    }
+                                                </select>
+                                               @* <label class="radio-inline radio-styled radio-warning">
+                                                    <input type="radio" name="cssID" value="4"><span>Opened</span>
+                                                </label>
+                                                <label class="radio-inline radio-styled">
+                                                    <input type="radio" name="cssID" value="1" checked="checked"><span>Closed</span>
+                                                </label>*@
+                                            </div>
+                                           @* <label for="priID" class="col-sm-3 control-label">Priority</label>
+                                            <div class="col-sm-9 margin-bottom-xl">
+                                                <select id="priID" name="priID" class="form-control">
+                                                    @foreach (var item in Model.list_priority)
+                                                    { 
+                                                        <option value="@item.priID">@item.priName</option>
+                                                    }
+                                                </select>
+                                            </div>*@
+                                            <br />
+                                            <label class="col-sm-3 control-label">Case SLA</label>
+                                            <div class="col-sm-9">
+                                                <p class="text-l">
+                                                    <h4><i class="fa fa-clock-o fa-fw"></i>&nbsp;<span id="sla">-</span>&nbsp;Minutes</h4>
+                                                    <input type="hidden" name="casSLA" id="casSLA" />
+                                                    <input type="hidden" name="slaID" id="slaID" />
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div id="dv-callback" class="form-group">
+                                            @*<hr />
+                                            <div class="card-head">
+                                                <header><i class="md md-phone-forwarded" style="margin-bottom: 0"></i>Call Back</header>
+                                            </div>*@
+                                            <div class="card-body no-padding">
+                                                <label for="cbtitle" class="col-sm-3 control-label"></label>
+                                                <div class="col-sm-9 margin-bottom-xl"><span class="text-xl"><i class="md md-phone-forwarded" style="vertical-align: middle"></i>Call Back</span></div>
+                                                <label for="cbtID" class="col-sm-3 control-label">Type</label>
+                                                <div class="col-sm-9 margin-bottom-xl">
+                                                    <select name="cbtID" class="form-control">
+                                                        <option></option>
+                                                        <option value="1">Call Back</option>
+                                                        <option value="0">Nothing</option>
+                                                        <option value="2">By Himself</option>
+                                                    </select>
+                                                </div>
+                                                <label for="cbcID" class="col-sm-3 control-label">Channel</label>
+                                                <div class="col-sm-9 margin-bottom-xl">
+                                                    <label class="radio-inline radio-styled radio-info">
+                                                        <input type="radio" name="cbcID" value="1"><span>Phone</span>
+                                                    </label>
+                                                    <label class="radio-inline radio-styled radio-info">
+                                                        <input type="radio" name="cbcID" value="2"><span>Fax</span>
+                                                    </label>
+                                                    <label class="radio-inline radio-styled radio-info">
+                                                        <input type="radio" name="cbcID" value="3"><span>Email</span>
+                                                    </label>
+                                                </div>
+                                                <label for="cbinfo" class="col-sm-3 control-label">Phone/Other</label>
+                                                <div class="col-sm-9">
+                                                    <input type="text" class="form-control" name="CallbackInfo" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        @*<div class="form-group">
+                                            <div class="col-sm-2">&nbsp;</div>
+                                            <div class="col-sm-10 margin-bottom-xl">
+                                                <button type="submit" class="btn btn-info btn-block"><span class="pull-left"><i class="md md-save"></i></span>Save new case</button>
+                                            </div>
+                                        </div>*@
+                                    </div>
+                                </div>                                
+                                }                        
+                                <div class="row">
+                                <div class="col-lg-10">
+                                    <div class="col-sm-3">&nbsp;</div>
+                                    <div class="col-sm-9 margin-bottom-xl">
+                                        <button id="btnsavenewcase" type="button" class="btn btn-info btn-block"><span class="pull-left"><i class="md md-save"></i></span>Save new case</button>
+                                    </div>
+                                </div>
+                            </div>
+                                <br />
+                                <div id="newcase-list">
+                                @{
+                                    Html.RenderAction("NewCaseList", "Case");
+                                }
+                            </div>
+                            }
+                        </div>
+                        <!--end .col -->
+                        <!-- END CONTACTS MAIN CONTENT -->
+                    </div>
+                    <!--end .row -->
+                </div>
+                <!--end .hbox-column -->
+
+                <!-- BEGIN CONTACTS COMMON DETAILS -->
+                <div id="cdt" class="hbox-column col-md-1 style-default-light" style="padding: 5px; width: 45px;">
+                    <a href="javascript:;" class="btn ink-reaction btn-icon-toggle" onclick="cdtoggle();" style="font-size: 20px" data-toggle="tooltip" data-placement="top" data-original-title="Contact common detail"><i class="md md-account-circle"></i></a>
+                </div>
+                <div id="cd" class="hbox-column col-md-4 style-default-light" style="padding-top: 5px; display: none"></div>
+                <!--end .hbox-column -->
+                <!-- END CONTACTS COMMON DETAILS -->
+            </div>
+            <!--end .hbox-md -->
+        </div>
+        <!--end .card-tiles -->
+        <!-- END CONTACT DETAILS -->
+    </div>
+</div>
+<!-- BEGIN SIMPLE MODAL MARKUP -->
+<div class="modal fade" id="InboundScreenPop" tabindex="-1" role="dialog" aria-labelledby="simpleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="card card-bordered style-primary" style="margin-bottom: 0;">
+                <div class="card-head">
+                    <div class="tools" style="margin-top: 10px">
+                        <div class="btn-group">
+                            <a class="btn ink-reaction btn-floating-action style-danger" onclick="EndCall()" data-dismiss="modal" data-toggle="tooltip" data-placement="top" data-original-title="End Call"><i class="md md-call-end"></i></a>
+                        </div>
+                    </div>
+                    <header style="padding-left: 5px">
+                        <h2><span class="text-xxl"><i class="fa fa-phone-square fa-fw"></i>@NEWCRM.Common.AppUtils.Session.Activity.actChannelData</span></h2>
+                    </header>
+                </div>
+            </div>
+            <div class="modal-body">
+                <div class="no-padding" style="margin-bottom: 10px;">
+                    @*<header><i class="fa fa-user fa-fw"></i>&nbsp;C</header>*@
+                    @*<div class="tools">*@
+                    <div class="btn-group">
+                        @using (Ajax.BeginForm("getContactBySearch", new { Controller = "Inbound" },
+                                        new AjaxOptions { UpdateTargetId = "contactlist", HttpMethod = "post", OnBegin = "beginPaging", OnSuccess = "successPaging", OnFailure = "failurePaging" },
+                                        new { id = "frm-inbound", @class = "navbar-search", autocomplete = "off", style = "width:350px" }))
+                        {
+                            <div class="form-group" style="overflow: visible">
+                                <input id="search" type="text" class="form-control" name="search" placeholder="Enter Name, Surname" style="width: 320px">
+                            </div>
+                            <button type="submit" class="btn btn-icon-toggle ink-reaction" data-toggle="tooltip" data-placement="top" data-original-title="Search contacts"><i class="fa fa-search"></i></button>
+                        }
+                    </div>
+                    @*</div>*@
+                </div>
+                <!--end .card-head -->
+                <div id="contactlist" class="card no-padding" style="height: 233px; overflow: auto; overflow-y: scroll; margin-bottom: 10px;"></div>
+                <!--end .card-body -->
+
+                <!--end .card -->
+                <div>
+                    <a href="@Url.Action("NewCase", "Case")">
+                        <button type="button" class="btn ink-reaction btn-flat" data-toggle="tooltip" data-placement="top" data-original-title="Add new case with no contact"><i class="md md-add-circle"></i> New Case</button>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
+<!-- END SIMPLE MODAL MARKUP -->

@@ -1,0 +1,24 @@
+﻿@model List<NEWCRM.Models.sp_GetContactViewLog_Result>
+<li class="hidden-xs"><small>LAST VIEWED</small></li>
+@foreach (var item in Model)
+{
+    <li class="hidden-xs" style="overflow: hidden">
+        <a href="@item.ctaID">
+            @if (!string.IsNullOrEmpty(item.ctaAvatar))
+            {
+                <img class="img-toggle img-circle img-responsive pull-left width-1" src="~/Images/avatars/@item.ctaAvatar" />
+            }
+            else
+            { 
+                <img class="img-toggle img-circle img-responsive pull-left width-1" src="~/Images/contact_.png" alt="" />
+            }                                            
+            <span class="text-medium">@item.ctaFullName</span><br />
+            <span class="opacity-50">
+                <span class="glyphicon glyphicon-phone-alt text-sm"></span>&nbsp;@item.phnMain
+                @if (!string.IsNullOrEmpty(item.phnOther)) { 
+                    <span>, @item.phnOther</span>
+                }
+            </span>
+        </a>
+    </li>
+}

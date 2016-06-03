@@ -1,0 +1,610 @@
+﻿@{   
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section Style {
+    <link href="~/Content/js/libs/noty/demo/animate.css" rel="stylesheet" />
+    <link href="~/Content/js/libs/noty/demo/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
+}
+
+@section Scripts {
+    <script src="~/Content/js/libs/flot/jquery.flot.min.js"></script>
+    <script src="~/Content/js/libs/flot/jquery.flot.time.min.js"></script>
+    <script src="~/Content/js/libs/flot/jquery.flot.resize.min.js"></script>
+    <script src="~/Content/js/libs/flot/jquery.flot.orderBars.js"></script>
+    <script src="~/Content/js/libs/flot/jquery.flot.pie.js"></script>
+    <script src="~/Content/js/libs/flot/curvedLines.js"></script>
+    <script src="~/Content/js/libs/jquery-knob/jquery.knob.min.js"></script>
+    <script src="~/Content/js/libs/sparkline/jquery.sparkline.min.js"></script>
+    <script src="~/Content/js/libs/raphael/raphael-min.js"></script>
+    <script src="~/Content/js/libs/morris.js/morris.min.js"></script>
+    <script src="~/Content/js/libs/d3/d3.min.js"></script>
+    <script src="~/Content/js/libs/d3/d3.v3.js"></script>
+    <script src="~/Content/js/libs/rickshaw/rickshaw.min.js"></script>
+    <script src="~/Content/js/libs/canvas1.7.0/jquery.canvasjs.min.js"></script>
+    <script src="~/Content/js/libs/noty/js/noty/packaged/jquery.noty.packaged.min.js"></script>
+    <script src="~/Content/js/libs/noty/demo/notification_html.js"></script>
+    <script src="~/Content/js/core/demo/DemoCharts.js"></script>
+
+    <script type="text/javascript">
+        window.onload = function () {
+            var chart = new CanvasJS.Chart("chartContainer", {
+                title: {
+                    text: ""
+                },
+                animationEnabled: true,
+                theme: "theme1",
+                interactivityEnabled: true,
+                showInLegend: true,
+                legendMarkerColor: "grey",
+                //colorSet: "colorSet2",
+                data: [//array of dataSeries              
+                    { //dataSeries object
+
+                        /*** Change type "column" to "bar", "area", "line" or "pie"***/
+                        type: "column",
+                        dataPoints: [
+                            { label: "Within SLA", y: 18 },
+                            { label: "Over SLA", y: 29 },
+                        ]
+                    }
+                ]
+            });
+
+            chart.render();
+
+            var charta = new CanvasJS.Chart("chartContainers",
+                    {
+                        title: {
+                            text: "",
+                            //verticalAlign: "center",
+                            //horizontalAlign: "right",
+                        },
+                        exportFileName: "Pie Chart",
+                        exportEnabled: false,
+                        animationEnabled: true,
+                        theme: "theme1",
+                        colorSet: "colorSet2",
+                        legend: {
+                            verticalAlign: "center",
+                            horizontalAlign: "right",
+                            fontSize: 15,
+                        },
+                        data: [
+                            {
+                                type: "pie",
+                                showInLegend: true,
+                                toolTipContent: "{legendText}: <strong>{y}%</strong>",
+                                indexLabel: "{label} {y}%",
+                                dataPoints: [
+                                    { y: 35, legendText: "Open", exploded: true, label: " Open" },
+                                    { y: 45, legendText: "Over SLA", label: " Over SLA" },
+                                    { y: 20, legendText: "Close", label: " Close" },
+                                ]
+                            }
+                        ]
+                    });
+            charta.render();
+        }
+
+        function generate(type, text) {
+
+            var n = noty({
+                text: text,
+                type: type,
+                dismissQueue: true,
+                layout: 'topLeft',
+                closeWith: ['click'],
+                theme: 'relax',
+                maxVisible: 10,
+                animation: {
+                    open: 'animated bounceInLeft',
+                    close: 'animated bounceOutLeft',
+                    easing: 'swing',
+                    speed: 500
+                }
+            });
+            console.log('html: ' + n.options.id);
+        }
+
+        function generateAll() {
+            generate('warning', notification_html[0]);
+            generate('error', notification_html[1]);
+            generate('information', notification_html[2]);
+            generate('success', notification_html[3]);
+            //            generate('notification');
+            //            generate('success');
+        }
+
+        $(document).ready(function () {
+            //return;
+            $("#scr_top").hide();
+
+            $(window).scroll(function (event) {
+                var scroll = $(window).scrollTop();
+                //$("#scr_pos").html(scroll);
+
+                if (scroll <= 200) {
+                    $("#scr_todo").fadeIn();
+                } else {
+                    $("#scr_todo").fadeOut();
+                }
+
+                if (scroll >= 1000) {
+                    $("#scr_top").fadeIn();
+                } else {
+                    $("#scr_top").fadeOut();
+                }
+            });
+
+            var catTopPosition = jQuery('#anchr_todolist').offset().top;
+
+            // When #scroll is clicked
+            jQuery('#scr_todo').click(function () {
+                // Scroll down to 'catTopPosition'
+                jQuery('html, body').animate({ scrollTop: (catTopPosition - 80) }, 'slow');
+                // Stop the link from acting like a normal anchor link
+                return false;
+            });
+
+            jQuery('#scr_top').click(function () {
+                // Scroll down to 'catTopPosition'
+                jQuery('html, body').animate({ scrollTop: 0 }, 'slow');
+                // Stop the link from acting like a normal anchor link
+                return false;
+            });
+
+            setInterval(function () {
+                var n = noty({
+                    text: '<div class="activity-item"> <i class="fa fa-tasks text-warning"></i> <div class="activity"> There are <a href="#">6 new tasks</a> waiting for you. Don\'t forget! <span>About 3 hours ago</span> </div> </div>',
+                    type: 'warning',
+                    theme: 'relax',
+                    dismissQueue: true,
+                    layout: "topRight",
+                    timeout: true,
+                    killer: true,
+                    closeButton: false,
+                    //closeWith:['backdrop'],
+                    animation: {
+                        open: 'animated flipInX', //+ window.anim.open,
+                        close: 'animated flipOutX', // + window.anim.close
+                        speed: 500,
+                        easing: 'swing',
+                    },
+                    callback: {
+                        onShow: function () {
+                        },
+                        afterShow: function () {
+
+
+                            setTimeout(function () {
+                                n.close();
+                            }, 2000);
+
+                            // var aa = self.options.timeout;
+
+                        },
+                        onClose: function () {
+                        },
+                        afterClose: function () {
+                        },
+                        onCloseClick: function () {
+                        },
+                    },                   
+                });
+            }, 10000);
+
+            $('#datatable1').DataTable({
+                "dom": 'lCfrtip',
+                "order": [],               
+                "language": {
+                    "lengthMenu": '_MENU_ entries per page',
+                    "search": '<i class="fa fa-search"></i>',
+                    "paginate": {
+                        "previous": '<i class="fa fa-angle-left"></i>',
+                        "next": '<i class="fa fa-angle-right"></i>'
+                    }
+                }
+            });
+
+            $('#datatable1 tbody').on('click', 'tr', function () {
+                $(this).toggleClass('selected');
+            });
+        });
+      
+        function timeAgo(dateString) {
+            var rightNow = new Date();
+            var then = new Date(dateString);           
+
+            var diff = rightNow - then;
+
+            var second = 1000,
+                    minute = second * 60,
+                    hour = minute * 60,
+                    day = hour * 24,
+                    week = day * 7;
+
+            if (isNaN(diff) || diff < 0) {
+                return ""; // return blank string if unknown
+            }
+
+            if (diff < second * 2) {
+                // within 2 seconds
+                return "right now";
+            }
+
+            if (diff < minute) {
+                return Math.floor(diff / second) + " seconds ago";
+            }
+
+            if (diff < minute * 2) {
+                return "about 1 minute ago";
+            }
+
+            if (diff < hour) {
+                return Math.floor(diff / minute) + " minutes ago";
+            }
+
+            if (diff < hour * 2) {
+                return "about 1 hour ago";
+            }
+
+            if (diff < day) {
+                return Math.floor(diff / hour) + " hours ago";
+            }
+            if (diff > day && diff < day * 2) {
+                return "yesterday";
+            }
+
+            if (diff < day * 365) {
+                return Math.floor(diff / day) + " days ago";
+            }
+
+            else {
+                return "over a year ago";
+            }
+        }
+
+</script>
+
+}
+<div class="section-body">
+
+    <div class="row">
+        <!-- BEGIN ALERT - REVENUE -->
+        <div class="col-md-3 col-sm-6">
+            <div class="card">
+                <div class="card-body no-padding">
+                    <div class="alert alert-callout alert-info no-margin">
+                        <h1 class="pull-right text-info">
+                            <i class="md md-my-library-books"></i>
+                        </h1>
+                        <strong class="text-xl">163</strong><br />
+                        <span class="opacity-50">Answer</span>
+                        <div class="stick-bottom-left-right">
+                            <div class="height-2 sparkline-revenue" data-line-color="#bdc1c1"></div>
+                        </div>
+                    </div>
+                </div>
+                <!--end .card-body -->
+            </div>
+            <!--end .card -->
+        </div>
+        <!--end .col -->
+        <!-- END ALERT - REVENUE -->
+        <!-- BEGIN ALERT - VISITS -->
+        <div class="col-md-3 col-sm-6">
+            <div class="card">
+                <div class="card-body no-padding">
+                    <div class="alert alert-callout alert-danger no-margin">
+                        <h1 class="pull-right text-danger">
+                            <i class="md md-warning"></i>
+                        </h1>
+                        <strong class="text-xl">3 นาที 15 วินาที</strong><br />
+                        <span class="opacity-50">AHT</span>
+                        <div class="stick-bottom-right">
+                            <div class="height-1 sparkline-visits" data-bar-color="#e5e6e6"></div>
+                        </div>
+                    </div>
+                </div>
+                <!--end .card-body -->
+            </div>
+            <!--end .card -->
+        </div>
+        <!--end .col -->
+        <!-- END ALERT - VISITS -->
+        <!-- BEGIN ALERT - BOUNCE RATES -->
+        <div class="col-md-3 col-sm-6">
+            <div class="card">
+                <div class="card-body no-padding">
+                    <div class="alert alert-callout alert-warning  no-margin">
+                        <h1 class="pull-right text-success">
+                            <i class="md md-phone-in-talk"></i>
+                        </h1>
+                        <strong class="text-xl">21</strong><br />
+                        <span class="opacity-50">Not Ready Times</span>
+                        <div class="stick-bottom-left-right">
+                            <!--<div class="progress progress-hairline no-margin">
+                                    <div class="progress-bar progress-bar-danger" style="width:43%"></div>
+                                </div>-->
+                        </div>
+                    </div>
+                </div>
+                <!--end .card-body -->
+            </div>
+            <!--end .card -->
+        </div>
+        <!--end .col -->
+        <!-- END ALERT - BOUNCE RATES -->
+        <!-- BEGIN ALERT - TIME ON SITE -->
+        <div class="col-md-3 col-sm-6">
+            <div class="card">
+                <div class="card-body no-padding">
+                    <div class="alert alert-callout alert-danger no-margin">
+                        <h1 class="pull-right text-danger">
+                            <i class="md md-phone-missed"></i>
+                        </h1>
+                        <strong class="text-xl">4</strong><br />
+                        <span class="opacity-50">Cases Initiate</span>
+                    </div>
+                </div>
+                <!--end .card-body -->
+            </div>
+            <!--end .card -->
+        </div>
+        <!--end .col -->
+        <!-- END ALERT - TIME ON SITE -->
+    </div>
+    <!--end .row-->
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="card">
+                <div class="card-body no-padding">
+                    <!--<div class="no-padding height-1">-->
+                    <div class="alert alert-callout alert-info no-margin">
+                        <marquee> <strong class="text-xl ">Announcement</strong></marquee>
+                        <!--</div>-->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- BEGIN MORRIS - GROUPED BAR CHART -->
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-head">
+                    <header>Case Status</header>
+                    <div class="tools">
+                        <a class="btn btn-icon-toggle btn-refresh"><i class="md md-refresh"></i></a>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="no-padding height-8">
+                        <div id="chartContainers" style="height: 300px; width: 100%;"></div>
+                    </div>
+                </div>
+                <!--end .card-body -->
+            </div>
+            <!--end .card -->
+        </div>
+        <!--end .row -->
+
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-head">
+                    <header>
+                        Initiate Cases By Agent
+                                            <a href="javascript:void(0);" class="btn">
+                                                <sup class="badge style-danger" style="top: -13px; left: -17px; font-size: 80%;">47</sup>
+                                            </a>
+                    </header>
+                    <div class="tools">
+                        <a class="btn btn-icon-toggle btn-refresh"><i class="md md-refresh"></i></a>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="no-padding height-8">
+                        <div id="chartContainer" style="height: 300px; width: 100%;"></div>
+                    </div>
+                </div>
+                <!--end .card-body -->
+            </div>
+            <!--end .card -->
+            <!--<em class="text-caption">Grouped bar chart</em>-->
+        </div>
+        <!--end .col -->
+    </div>
+    <!--end .row -->
+    <div class="row">
+        <!-- BEGIN MORRIS - STACKED BAR CHART -->
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-head">
+                    <header>Notes</header>
+                </div>
+                <div class="card-body">
+                    <div class="no-padding height-8" style="overflow: auto">
+                        <div class="col-lg-12 scroll-sm">
+                            <div class="list-group list-email list-gray">
+                                <a href="javascript:;" class="list-group-item" data-toggle="modal" data-target="#textModal">
+                                    <h5>Phone : 1231235555</h5>
+                                    <p class="hidden-xs hidden-sm">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit...</p>
+                                    <div class="stick-top-right small-padding text-default-light text-sm">Today 12:46</div>
+                                </a>
+                                <a href="javascript:;" class="list-group-item" data-toggle="modal" data-target="#textModal">
+                                    <h5>Phone : 021234567</h5>
+                                    <div class="stick-top-right small-padding text-default-light text-sm">Yesterday 08:45</div>
+                                    <p class="hidden-xs hidden-sm">Please check the new headlines of the magazine. They are quite insignificant compared with...</p>
+                                </a>
+                                <a href="javascript:;" class="list-group-item" data-toggle="modal" data-target="#textModal">
+                                    <h5>Phone : 0890010001</h5>
+                                    <div class="stick-top-right small-padding text-default-light text-sm">Jul 12, 2015 16:18</div>
+                                    <p class="hidden-xs hidden-sm">Proin nonummy, lacus eget pulvinar lacinia, pede felis dignissim leo, vitae tristique magna lacus...</p>
+                                </a>
+                            </div>
+                            <!--end .list-group -->
+                        </div>
+                        <!--end .col -->
+                    </div>
+                    <!--end .no-padding -->
+                </div>
+                <!--end .card-body -->
+            </div>
+            <!--end #card -->
+        </div>
+        <!--end .col-md-6 -->
+
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-head">
+                    <header>Task Calendar (Daily)</header>
+                    <div class="tools">
+                        <a class="btn btn-icon-toggle btn-refresh"><i class="md md-refresh"></i></a>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="no-padding height-8">
+                        <!--<div id="morris-donut-graph" class="height-8" data-colors="#0600ff,#2196F3,#9C27B0"></div>-->
+                        <div class="alert alert-success" style="cursor: pointer" onclick="window.location = 'case_calendar.html'">
+                            <a href="#" class="close" data-dismiss="alert" aria-label="close" title="close">×</a>
+                            <strong>31/08/2015 15:30</strong> Meeting with Sup
+                        </div>
+
+                        <div class="alert alert-info" style="cursor: pointer" onclick="window.location = 'case_calendar.html'">
+                            <a href="#" class="close" data-dismiss="alert" aria-label="close" title="close">×</a>
+                            <strong>31/08/2015 16:00</strong> Send e-mail to Customer
+                        </div>
+
+                        <div class="alert alert-danger" style="cursor: pointer" onclick="window.location = 'case_calendar.html'">
+                            <a href="#" class="close" data-dismiss="alert" aria-label="close" title="close">×</a>
+                            <strong>03/09/2015 15:00</strong> Callback K.Giant
+                        </div>
+                    </div>
+                    <!--end .no-padding -->
+                </div>
+                <!--end .card-body -->
+            </div>
+            <!--end #card -->
+        </div>
+        <!--end .col-md-6 -->
+    </div>
+    <!--end .row -->
+    <!-- END MORRIS - STACKED BAR CHART -->
+
+    <div class="row">
+        <!-- BEGIN MORRIS - STACKED BAR CHART -->
+        <div class="col-md-12">
+            <div class="card">
+                <div id="anchr_todolist" class="card-head">
+                    <header>To Do List</header>
+                    <div class="tools">
+                        <a class="btn btn-icon-toggle btn-refresh"><i class="md md-refresh"></i></a>
+                    </div>
+                    <div class="col-md-4 pull-right" style="padding-top: 6px">
+                        <div class="form-group">
+                            <select id="select1" name="select1" class="form-control">
+                                <option value="Work" selected="selected">My Work</option>
+                                <option value="Group">My Group</option>
+                            </select>
+                            <label for="select1" style="top: -15px"></label>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="card-body">
+                    <div class="col-md-8">
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="table-responsive">
+                                <table id="datatable1" class="table table-striped table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>Case Id</th>
+                                            <th>Case Type</th>
+                                            <th>Case Topic</th>
+                                            <th>Case Status</th>
+                                            <th>Create Date</th>
+                                            <!--<th class="sort-numeric">Case Status</th>
+                                                                <th class="sort-alpha">Create Date</th>-->
+                                            <th>Case Duration</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr class="gradeX">
+                                            <td><a href="casedetail.html" class="text-medium">C-0000001</a></td>
+                                            <td>ร้องเรียน</td>
+                                            <td>ร้องเรียนเจ้าหน้าที่</td>
+                                            <td>Open</td>
+                                            <td>25/08/2015 12:30:12</td>
+                                            <td>2 วัน 2 ชม.</td>
+                                        </tr>
+                                        <tr class="gradeC">
+                                            <td><a href="casedetail.html" class="text-medium">C-0000002</a></td>
+                                            <td>สอบถามข้อมูล</td>
+                                            <td>สอบถามข้อมูล</td>
+                                            <td>Open</td>
+                                            <td>24/08/2015 14:30:35</td>
+                                            <td>3 วัน 2 ชม.</td>
+                                        </tr>
+                                        <tr class="gradeA">
+                                            <td><a href="casedetail.html" class="text-medium">C-0000003</a></td>
+                                            <td>แนะนำ/ติชม</td>
+                                            <td>แนะนำ/ติชม</td>
+                                            <td>Open</td>
+                                            <td>26/08/2015 14:30:35</td>
+                                            <td>1 วัน 2 ชม.</td>
+                                        </tr>
+                                        <tr class="gradeA">
+                                            <td><a href="casedetail.html" class="text-medium">C-0000004</a></td>
+                                            <td>ร้องเรียน</td>
+                                            <td>ร้องเรียนเจ้าหน้าที่</td>
+                                            <td>Open</td>
+                                            <td>26/08/2015 14:30:35</td>
+                                            <td>1 วัน 2 ชม.</td>
+                                        </tr>
+                                        <tr class="gradeA">
+                                            <td><a href="casedetail.html" class="text-medium">C-0000005</a></td>
+                                            <td>ร้องเรียน</td>
+                                            <td>ร้องเรียนเจ้าหน้าที่</td>
+                                            <td>Open</td>
+                                            <td>26/08/2015 14:30:35</td>
+                                            <td>1 วัน 2 ชม.</td>
+                                        </tr>
+                                        <tr class="gradeA">
+                                            <td><a href="casedetail.html" class="text-medium">C-0000006</a></td>
+                                            <td>ร้องเรียน</td>
+                                            <td>ร้องเรียนเจ้าหน้าที่</td>
+                                            <td>Open</td>
+                                            <td>26/08/2015 14:30:35</td>
+                                            <td>1 วัน 2 ชม.</td>
+                                        </tr>
+                                        <tr class="gradeA">
+                                            <td><a href="casedetail.html" class="text-medium">C-0000007</a></td>
+                                            <td>สอบถามข้อมูล</td>
+                                            <td>สอบถามข้อมูล</td>
+                                            <td>Open</td>
+                                            <td>24/08/2015 14:30:35</td>
+                                            <td>3 วัน 2 ชม.</td>
+                                        </tr>
+                                        <tr class="gradeA">
+                                            <td><a href="casedetail.html" class="text-medium">C-0000008</a></td>
+                                            <td>ร้องเรียน</td>
+                                            <td>ร้องเรียนเจ้าหน้าที่</td>
+                                            <td>Open</td>
+                                            <td>24/08/2015 14:30:35</td>
+                                            <td>3 วัน 2 ชม.</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

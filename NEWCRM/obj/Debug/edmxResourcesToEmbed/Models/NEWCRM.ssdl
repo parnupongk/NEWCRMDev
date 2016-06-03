@@ -1,0 +1,1252 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="CRMABPModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Activities">
+    <Key>
+      <PropertyRef Name="actID" />
+    </Key>
+    <Property Name="actID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ctaID" Type="int" />
+    <Property Name="chnID" Type="varchar" MaxLength="2" Nullable="false" />
+    <Property Name="atsID" Type="int" Nullable="false" />
+    <Property Name="actChannelData" Type="nvarchar" MaxLength="255" />
+    <Property Name="actIVRMenu" Type="nvarchar" MaxLength="10" />
+    <Property Name="actDuration" Type="int" />
+    <Property Name="actStart" Type="datetime" />
+    <Property Name="actStop" Type="datetime" />
+    <Property Name="actEmo" Type="int" />
+    <Property Name="conID" Type="nvarchar" MaxLength="20" />
+    <Property Name="actCreatedOn" Type="datetime" Nullable="false" />
+    <Property Name="actCreatedBy" Type="int" Nullable="false" />
+    <Property Name="actModifiedOn" Type="datetime" Nullable="false" />
+    <Property Name="actModifiedBy" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ActivityStatus">
+    <Key>
+      <PropertyRef Name="atsID" />
+    </Key>
+    <Property Name="atsID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="atsActive" Type="bit" Nullable="false" />
+    <Property Name="atsModifiedOn" Type="datetime" Nullable="false" />
+    <Property Name="atsModifiedBy" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ActivityStatus_Locale">
+    <Key>
+      <PropertyRef Name="atsID" />
+      <PropertyRef Name="lclID" />
+    </Key>
+    <Property Name="atsID" Type="int" Nullable="false" />
+    <Property Name="lclID" Type="varchar" MaxLength="2" Nullable="false" />
+    <Property Name="atsName" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="atsModifiedOn" Type="datetime" Nullable="false" />
+    <Property Name="atsModifiedBy" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Address">
+    <Key>
+      <PropertyRef Name="adrID" />
+    </Key>
+    <Property Name="adrID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ctaID" Type="int" Nullable="false" />
+    <Property Name="adtID" Type="int" Nullable="false" />
+    <Property Name="adrSummary" Type="nvarchar" MaxLength="2000" />
+    <Property Name="adrHomeNo" Type="nvarchar" MaxLength="255" />
+    <Property Name="adrMoo" Type="nvarchar" MaxLength="255" />
+    <Property Name="adrBuilding" Type="nvarchar" MaxLength="255" />
+    <Property Name="adrRoom" Type="nvarchar" MaxLength="255" />
+    <Property Name="adrMooban" Type="nvarchar" MaxLength="255" />
+    <Property Name="adrSoi" Type="nvarchar" MaxLength="255" />
+    <Property Name="adrRoad" Type="nvarchar" MaxLength="255" />
+    <Property Name="adrSubDistrict" Type="nvarchar" MaxLength="255" />
+    <Property Name="adrDistrict" Type="nvarchar" MaxLength="255" />
+    <Property Name="adrProvince" Type="nvarchar" MaxLength="255" />
+    <Property Name="sdtID" Type="int" />
+    <Property Name="dstID" Type="int" />
+    <Property Name="pvnID" Type="int" />
+    <Property Name="adrZip" Type="varchar" MaxLength="5" />
+    <Property Name="adrNote" Type="ntext" />
+    <Property Name="adrCreatedOn" Type="datetime" Nullable="false" />
+    <Property Name="adrCreatedBy" Type="int" Nullable="false" />
+    <Property Name="adrModifiedOn" Type="datetime" Nullable="false" />
+    <Property Name="adrModifiedBy" Type="int" Nullable="false" />
+    <Property Name="lclID" Type="varchar" MaxLength="2" />
+    <Property Name="adrActive" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Announcement">
+    <Key>
+      <PropertyRef Name="annID" />
+    </Key>
+    <Property Name="annID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="annText" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="annActive" Type="bit" Nullable="false" />
+    <Property Name="annCreatedOn" Type="datetime" Nullable="false" />
+    <Property Name="annCreatedBy" Type="int" Nullable="false" />
+    <Property Name="annModifiedOn" Type="datetime" />
+    <Property Name="annModifiedBy" Type="int" />
+  </EntityType>
+  <EntityType Name="AuthenLog">
+    <Key>
+      <PropertyRef Name="authID" />
+    </Key>
+    <Property Name="authID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="usrID" Type="int" Nullable="false" />
+    <Property Name="authCreatedOn" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Calendar">
+    <Key>
+      <PropertyRef Name="cldID" />
+    </Key>
+    <Property Name="cldID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="cldMessage" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="cldDate" Type="date" Nullable="false" />
+    <Property Name="cldTimestart" Type="time" Precision="7" />
+    <Property Name="cldTimeend" Type="time" Precision="7" />
+    <Property Name="cldColor" Type="nvarchar" MaxLength="20" />
+    <Property Name="cldCreatedOn" Type="datetime" Nullable="false" />
+    <Property Name="cldCreatedBy" Type="int" Nullable="false" />
+    <Property Name="cldModifiedOn" Type="datetime" />
+    <Property Name="cldModifiedBy" Type="int" />
+    <Property Name="cldActive" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Callback">
+    <Key>
+      <PropertyRef Name="clbID" />
+    </Key>
+    <Property Name="clbID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="cbtID" Type="int" Nullable="false" />
+    <Property Name="cbcID" Type="int" Nullable="false" />
+    <Property Name="casID" Type="int" Nullable="false" />
+    <Property Name="clbDatetime" Type="datetime" />
+    <Property Name="clbNumber" Type="nvarchar" MaxLength="100" />
+    <Property Name="clbNote" Type="ntext" />
+    <Property Name="clbCreatedOn" Type="datetime" Nullable="false" />
+    <Property Name="clbCreatedBy" Type="int" Nullable="false" />
+    <Property Name="clbModifiedOn" Type="datetime" Nullable="false" />
+    <Property Name="clbModifiedBy" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="CallbackCause">
+    <Key>
+      <PropertyRef Name="cbcID" />
+    </Key>
+    <Property Name="cbcID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="cbcActive" Type="bit" Nullable="false" />
+    <Property Name="cbcModifiedOn" Type="datetime" Nullable="false" />
+    <Property Name="cbcModifiedBy" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="CallbackCause_Locale">
+    <Key>
+      <PropertyRef Name="cbcID" />
+      <PropertyRef Name="lclID" />
+    </Key>
+    <Property Name="cbcID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="lclID" Type="varchar" MaxLength="2" Nullable="false" />
+    <Property Name="cbcName" Type="nvarchar" MaxLength="500" Nullable="false" />
+    <Property Name="cbcModifiedOn" Type="datetime" Nullable="false" />
+    <Property Name="cbcModifiedBy" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="CallBackChannel">
+    <Key>
+      <PropertyRef Name="cbcID" />
+    </Key>
+    <Property Name="cbcID" Type="int" Nullable="false" />
+    <Property Name="cbcName" Type="nvarchar" MaxLength="250" Nullable="false" />
+  </EntityType>
+  <EntityType Name="CallbackType">
+    <Key>
+      <PropertyRef Name="cbtID" />
+    </Key>
+    <Property Name="cbtID" Type="int" Nullable="false" />
+    <Property Name="cbtActive" Type="bit" Nullable="false" />
+    <Property Name="cbtModifiedOn" Type="datetime" Nullable="false" />
+    <Property Name="cbtModifiedBy" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="CallbackType_Locale">
+    <Key>
+      <PropertyRef Name="cbtID" />
+      <PropertyRef Name="lclID" />
+    </Key>
+    <Property Name="cbtID" Type="int" Nullable="false" />
+    <Property Name="lclID" Type="varchar" MaxLength="2" Nullable="false" />
+    <Property Name="cbtName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="cbtModifiedOn" Type="datetime" Nullable="false" />
+    <Property Name="cbtModifiedBy" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="CaseAttachFiles">
+    <Key>
+      <PropertyRef Name="cafID" />
+    </Key>
+    <Property Name="cafID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="casID" Type="int" Nullable="false" />
+    <Property Name="cafFilename" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="cafFileType" Type="nvarchar" MaxLength="500" />
+    <Property Name="cafCreatedOn" Type="datetime" />
+    <Property Name="cafCreatedBy" Type="int" />
+  </EntityType>
+  <EntityType Name="CaseLogs">
+    <Key>
+      <PropertyRef Name="cslID" />
+    </Key>
+    <Property Name="cslID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="casID" Type="int" Nullable="false" />
+    <Property Name="actID" Type="int" Nullable="false" />
+    <Property Name="cltID" Type="int" Nullable="false" />
+    <Property Name="cslNote" Type="ntext" />
+    <Property Name="cslDesc" Type="nvarchar" MaxLength="2000" />
+    <Property Name="cslCreatedOn" Type="datetime" Nullable="false" />
+    <Property Name="cslCreatedBy" Type="int" Nullable="false" />
+    <Property Name="cslModifiedOn" Type="datetime" Nullable="false" />
+    <Property Name="cslModifiedBy" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="CaseLogType">
+    <Key>
+      <PropertyRef Name="cltID" />
+    </Key>
+    <Property Name="cltID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="cltName" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="cslModifiedOn" Type="datetime" Nullable="false" />
+    <Property Name="cslModifiedBy" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="CaseRemindFlows">
+    <Key>
+      <PropertyRef Name="crfID" />
+    </Key>
+    <Property Name="crfID" Type="int" Nullable="false" />
+    <Property Name="crfFlowName" Type="nvarchar" MaxLength="250" />
+    <Property Name="crfFlowPhone" Type="nvarchar" MaxLength="20" />
+    <Property Name="crfFlowMinute" Type="int" />
+  </EntityType>
+  <EntityType Name="Cases">
+    <Key>
+      <PropertyRef Name="casID" />
+    </Key>
+    <Property Name="casID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="actID" Type="int" Nullable="false" />
+    <Property Name="ctaID" Type="int" Nullable="false" />
+    <Property Name="casIDName" Type="nvarchar" MaxLength="12" />
+    <Property Name="casParentID" Type="int" />
+    <Property Name="casDuration" Type="int" />
+    <Property Name="casDueDate" Type="datetime" />
+    <Property Name="casPrevDueDate" Type="datetime" />
+    <Property Name="casIDLevel1" Type="int" />
+    <Property Name="casIDLevel2" Type="int" />
+    <Property Name="casIDLevel3" Type="int" />
+    <Property Name="casIDLevel4" Type="int" />
+    <Property Name="casIDLevel5" Type="int" />
+    <Property Name="casIDLevel6" Type="int" />
+    <Property Name="casIDLevel7" Type="int" />
+    <Property Name="casIDLevel8" Type="int" />
+    <Property Name="casLevel1" Type="nvarchar" MaxLength="255" />
+    <Property Name="casLevel2" Type="nvarchar" MaxLength="255" />
+    <Property Name="casLevel3" Type="nvarchar" MaxLength="255" />
+    <Property Name="casLevel4" Type="nvarchar" MaxLength="255" />
+    <Property Name="casLevel5" Type="nvarchar" MaxLength="255" />
+    <Property Name="casLevel6" Type="nvarchar" MaxLength="255" />
+    <Property Name="casLevel7" Type="nvarchar" MaxLength="255" />
+    <Property Name="casLevel8" Type="nvarchar" MaxLength="255" />
+    <Property Name="casIDSummary" Type="int" Nullable="false" />
+    <Property Name="casSummary" Type="nvarchar" MaxLength="255" />
+    <Property Name="casNote" Type="ntext" />
+    <Property Name="cbtID" Type="int" />
+    <Property Name="cbcID" Type="int" />
+    <Property Name="CallbackInfo" Type="nvarchar" MaxLength="255" />
+    <Property Name="CallbackDT" Type="datetime" />
+    <Property Name="casSLA" Type="int" />
+    <Property Name="priID" Type="int" Nullable="false" />
+    <Property Name="cssID" Type="int" Nullable="false" />
+    <Property Name="casEmo" Type="int" />
+    <Property Name="casGroupID" Type="int" />
+    <Property Name="casOwnerID" Type="int" />
+    <Property Name="casCreatedOn" Type="datetime" Nullable="false" />
+    <Property Name="casCreatedBy" Type="int" Nullable="false" />
+    <Property Name="casModifiedOn" Type="datetime" Nullable="false" />
+    <Property Name="casModifiedBy" Type="int" Nullable="false" />
+    <Property Name="casFav" Type="bit" Nullable="false" />
+    <Property Name="assignTo" Type="int" />
+    <Property Name="casRemindID" Type="int" />
+    <Property Name="casRemindStatus" Type="char" MaxLength="1" />
+    <Property Name="cascommerceType" Type="nvarchar" MaxLength="100" />
+    <Property Name="casproductCategory" Type="nvarchar" MaxLength="100" />
+    <Property Name="casserviceCategory" Type="nvarchar" MaxLength="100" />
+    <Property Name="casdeliveryType" Type="nvarchar" MaxLength="100" />
+    <Property Name="casvalueRange" Type="nvarchar" MaxLength="100" />
+    <Property Name="casconversationChannel" Type="nvarchar" MaxLength="100" />
+    <Property Name="casreferenceDetail" Type="ntext" />
+    <Property Name="casdetail" Type="ntext" />
+  </EntityType>
+  <EntityType Name="CaseStatus">
+    <Key>
+      <PropertyRef Name="cssID" />
+    </Key>
+    <Property Name="cssID" Type="int" Nullable="false" />
+    <Property Name="cssActive" Type="bit" Nullable="false" />
+    <Property Name="cssModifiedOn" Type="datetime" Nullable="false" />
+    <Property Name="cssModifiedBy" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="CaseStatus_Locale">
+    <Key>
+      <PropertyRef Name="cssID" />
+      <PropertyRef Name="lclID" />
+    </Key>
+    <Property Name="cssID" Type="int" Nullable="false" />
+    <Property Name="lclID" Type="varchar" MaxLength="2" Nullable="false" />
+    <Property Name="cssName" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="cssModifiedOn" Type="datetime" Nullable="false" />
+    <Property Name="cssModifiedBy" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="CaseType">
+    <Key>
+      <PropertyRef Name="catID" />
+    </Key>
+    <Property Name="catID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="slaID" Type="int" />
+    <Property Name="catName" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="catParrentID" Type="int" />
+    <Property Name="catOrder" Type="int" />
+    <Property Name="catSLA" Type="int" />
+    <Property Name="catLevel" Type="int" />
+    <Property Name="catDialogue" Type="nvarchar" MaxLength="2000" />
+    <Property Name="catActive" Type="bit" Nullable="false" />
+    <Property Name="catCreatedOn" Type="datetime" Nullable="false" />
+    <Property Name="catCreatedBy" Type="int" Nullable="false" />
+    <Property Name="catModifiedOn" Type="datetime" Nullable="false" />
+    <Property Name="catModifiedBy" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Channels">
+    <Key>
+      <PropertyRef Name="chnID" />
+    </Key>
+    <Property Name="chnID" Type="varchar" MaxLength="2" Nullable="false" />
+    <Property Name="chnName" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="chnActive" Type="bit" Nullable="false" />
+    <Property Name="chnIcon" Type="nvarchar" MaxLength="50" />
+    <Property Name="chnModifiedOn" Type="datetime" Nullable="false" />
+    <Property Name="chnModifiedBy" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ContactLogs">
+    <Key>
+      <PropertyRef Name="ctlID" />
+    </Key>
+    <Property Name="ctlID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ctaID" Type="int" Nullable="false" />
+    <Property Name="actID" Type="int" />
+    <Property Name="cltID" Type="int" />
+    <Property Name="ctlNote" Type="ntext" Nullable="false" />
+    <Property Name="ctlCreatedOn" Type="datetime" Nullable="false" />
+    <Property Name="ctlCreatedBy" Type="int" Nullable="false" />
+    <Property Name="ctlModifiedOn" Type="datetime" Nullable="false" />
+    <Property Name="ctlModifiedBy" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Contacts">
+    <Key>
+      <PropertyRef Name="ctaID" />
+    </Key>
+    <Property Name="ctaID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ctyID" Type="int" Nullable="false" />
+    <Property Name="ctaFullName" Type="nvarchar" MaxLength="400" />
+    <Property Name="ctaFirstName" Type="nvarchar" MaxLength="200" />
+    <Property Name="ctaLastName" Type="nvarchar" MaxLength="200" />
+    <Property Name="ctaAvatar" Type="nvarchar" MaxLength="2000" />
+    <Property Name="ttlID" Type="int" />
+    <Property Name="ctaDOB" Type="datetime" />
+    <Property Name="gndID" Type="int" />
+    <Property Name="marID" Type="int" />
+    <Property Name="ctaNote" Type="ntext" />
+    <Property Name="ctaRating" Type="smallint" />
+    <Property Name="ctaEmail" Type="nvarchar" MaxLength="100" />
+    <Property Name="ctaWebSite" Type="nvarchar" MaxLength="255" />
+    <Property Name="ctaFacebook" Type="nvarchar" MaxLength="100" />
+    <Property Name="ctaTwitter" Type="nvarchar" MaxLength="100" />
+    <Property Name="ctaDoNotEmail" Type="bit" Nullable="false" />
+    <Property Name="ctaDoNotPhone" Type="bit" Nullable="false" />
+    <Property Name="ctaDoNotFax" Type="bit" Nullable="false" />
+    <Property Name="ctaDoNotPostalMail" Type="bit" Nullable="false" />
+    <Property Name="ctaCareer" Type="ntext" />
+    <Property Name="ctaEmo1" Type="int" />
+    <Property Name="ctaEmo2" Type="int" />
+    <Property Name="ctaEmo3" Type="int" />
+    <Property Name="ctaCreatedOn" Type="datetime" Nullable="false" />
+    <Property Name="ctaCreatedBy" Type="int" Nullable="false" />
+    <Property Name="ctaModifiedOn" Type="datetime" Nullable="false" />
+    <Property Name="ctaModifiedBy" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ContactType">
+    <Key>
+      <PropertyRef Name="ctyID" />
+    </Key>
+    <Property Name="ctyID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ctyActive" Type="bit" Nullable="false" />
+    <Property Name="ctyModifiedOn" Type="datetime" Nullable="false" />
+    <Property Name="ctyModifiedBy" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ContactType_Locale">
+    <Key>
+      <PropertyRef Name="ctyID" />
+      <PropertyRef Name="lclID" />
+    </Key>
+    <Property Name="ctyID" Type="int" Nullable="false" />
+    <Property Name="lclID" Type="varchar" MaxLength="2" Nullable="false" />
+    <Property Name="ctyName" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="ctyModifiedOn" Type="datetime" Nullable="false" />
+    <Property Name="ctyModifiedBy" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ContactViewLog">
+    <Key>
+      <PropertyRef Name="ctvID" />
+    </Key>
+    <Property Name="ctvID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ctaID" Type="int" Nullable="false" />
+    <Property Name="usrID" Type="int" Nullable="false" />
+    <Property Name="ctvCreatedOn" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="District">
+    <Key>
+      <PropertyRef Name="dstID" />
+    </Key>
+    <Property Name="dstID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="pvnID" Type="int" Nullable="false" />
+    <Property Name="dstActive" Type="bit" Nullable="false" />
+    <Property Name="dstModifiedOn" Type="datetime" Nullable="false" />
+    <Property Name="dstModifiedBy" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="District_Locale">
+    <Key>
+      <PropertyRef Name="dstID" />
+      <PropertyRef Name="lclID" />
+    </Key>
+    <Property Name="dstID" Type="int" Nullable="false" />
+    <Property Name="lclID" Type="varchar" MaxLength="2" Nullable="false" />
+    <Property Name="dstName" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="dstModifiedOn" Type="datetime" Nullable="false" />
+    <Property Name="dstModifiedBy" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="DNIS">
+    <Key>
+      <PropertyRef Name="objID" />
+    </Key>
+    <Property Name="objID" Type="int" Nullable="false" />
+    <Property Name="DNIS_Name" Type="varchar" MaxLength="50" />
+    <Property Name="Is_Active" Type="int" />
+  </EntityType>
+  <EntityType Name="Functions">
+    <Key>
+      <PropertyRef Name="fncID" />
+    </Key>
+    <Property Name="fncID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="fncName" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="fncNote" Type="ntext" />
+    <Property Name="fncActive" Type="bit" Nullable="false" />
+    <Property Name="fncCreatedOn" Type="datetime" />
+    <Property Name="fncCreatedBy" Type="int" />
+    <Property Name="fncModifiedOn" Type="datetime" />
+    <Property Name="fncModifiedBy" Type="int" />
+  </EntityType>
+  <EntityType Name="Genders">
+    <Key>
+      <PropertyRef Name="gndID" />
+    </Key>
+    <Property Name="gndID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="gndActive" Type="bit" Nullable="false" />
+    <Property Name="gndModifiedOn" Type="datetime" Nullable="false" />
+    <Property Name="gndModifiedBy" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Genders_Locale">
+    <Key>
+      <PropertyRef Name="gndID" />
+      <PropertyRef Name="lclID" />
+    </Key>
+    <Property Name="gndID" Type="int" Nullable="false" />
+    <Property Name="lclID" Type="varchar" MaxLength="2" Nullable="false" />
+    <Property Name="gndName" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="gndModifiedOn" Type="datetime" Nullable="false" />
+    <Property Name="gndModifiedBy" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Group_Role">
+    <Key>
+      <PropertyRef Name="grpID" />
+      <PropertyRef Name="rolID" />
+    </Key>
+    <Property Name="grpID" Type="int" Nullable="false" />
+    <Property Name="rolID" Type="int" Nullable="false" />
+    <Property Name="gprCreatedOn" Type="datetime" Nullable="false" />
+    <Property Name="gprCreatedBy" Type="int" Nullable="false" />
+    <Property Name="gprModifiedOn" Type="datetime" Nullable="false" />
+    <Property Name="gprModifiedBy" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Groups">
+    <Key>
+      <PropertyRef Name="grpID" />
+    </Key>
+    <Property Name="grpID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="grpName" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="grpActive" Type="bit" Nullable="false" />
+    <Property Name="grpModifiedOn" Type="datetime" Nullable="false" />
+    <Property Name="grpModifiedBy" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Locale">
+    <Key>
+      <PropertyRef Name="lclID" />
+    </Key>
+    <Property Name="lclID" Type="varchar" MaxLength="2" Nullable="false" />
+    <Property Name="lclName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="lclActive" Type="bit" Nullable="false" />
+    <Property Name="lclModifiedOn" Type="datetime" Nullable="false" />
+    <Property Name="lclModifiedBy" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="MailLog">
+    <Key>
+      <PropertyRef Name="mlID" />
+    </Key>
+    <Property Name="mlID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="casID" Type="int" />
+    <Property Name="mailTo" Type="nvarchar(max)" />
+    <Property Name="mailCC" Type="nvarchar(max)" />
+    <Property Name="mailSubject" Type="nvarchar(max)" />
+    <Property Name="mailBody" Type="nvarchar(max)" />
+    <Property Name="mailSending" Type="datetime" Nullable="false" />
+    <Property Name="mailStatus" Type="char" MaxLength="1" Nullable="false" />
+    <Property Name="mailException" Type="nvarchar(max)" />
+    <Property Name="mailType" Type="nvarchar" MaxLength="20" />
+  </EntityType>
+  <EntityType Name="Notification">
+    <Key>
+      <PropertyRef Name="notID" />
+    </Key>
+    <Property Name="notID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="nttID" Type="int" Nullable="false" />
+    <Property Name="refID" Type="int" />
+    <Property Name="Sender" Type="int" />
+    <Property Name="Receiver" Type="int" />
+    <Property Name="notNote" Type="ntext" />
+    <Property Name="notDesc" Type="nvarchar" MaxLength="2000" />
+    <Property Name="notRead" Type="bit" />
+    <Property Name="notActive" Type="bit" />
+    <Property Name="notCreatedOn" Type="datetime" Nullable="false" />
+    <Property Name="notCreatedBy" Type="int" Nullable="false" />
+    <Property Name="notModifiedOn" Type="datetime" Nullable="false" />
+    <Property Name="notModifiedBy" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="NotificationType">
+    <Key>
+      <PropertyRef Name="nttID" />
+    </Key>
+    <Property Name="nttID" Type="int" Nullable="false" />
+    <Property Name="nttName" Type="nvarchar" MaxLength="50" />
+    <Property Name="nttActive" Type="bit" Nullable="false" />
+    <Property Name="nttModifiedOn" Type="datetime" Nullable="false" />
+    <Property Name="nttModifiedBy" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Phones">
+    <Key>
+      <PropertyRef Name="phnID" />
+    </Key>
+    <Property Name="phnID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ctaID" Type="int" Nullable="false" />
+    <Property Name="phtID" Type="int" Nullable="false" />
+    <Property Name="phnNumber" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="phnExt" Type="nvarchar" MaxLength="50" />
+    <Property Name="phnNote" Type="ntext" />
+    <Property Name="phnIsMain" Type="bit" Nullable="false" />
+    <Property Name="phnActive" Type="bit" Nullable="false" />
+    <Property Name="phnCreatedOn" Type="datetime" Nullable="false" />
+    <Property Name="phnCreatedBy" Type="int" Nullable="false" />
+    <Property Name="phnModifiedOn" Type="datetime" Nullable="false" />
+    <Property Name="phnModifiedBy" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="PhoneType">
+    <Key>
+      <PropertyRef Name="phtID" />
+    </Key>
+    <Property Name="phtID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="phtActive" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="phtModifiedOn" Type="datetime" Nullable="false" />
+    <Property Name="phtModifiedBy" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="PhoneType_Locale">
+    <Key>
+      <PropertyRef Name="phtID" />
+      <PropertyRef Name="lclID" />
+    </Key>
+    <Property Name="phtID" Type="int" Nullable="false" />
+    <Property Name="lclID" Type="varchar" MaxLength="2" Nullable="false" />
+    <Property Name="phtName" Type="nvarchar" MaxLength="10" />
+    <Property Name="phtModifiedOn" Type="datetime" Nullable="false" />
+    <Property Name="phtModifiedBy" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Priority">
+    <Key>
+      <PropertyRef Name="priID" />
+    </Key>
+    <Property Name="priID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="priActive" Type="bit" Nullable="false" />
+    <Property Name="priModifiedOn" Type="datetime" Nullable="false" />
+    <Property Name="priModifiedBy" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Priority_Locale">
+    <Key>
+      <PropertyRef Name="priID" />
+      <PropertyRef Name="lclID" />
+    </Key>
+    <Property Name="priID" Type="int" Nullable="false" />
+    <Property Name="lclID" Type="varchar" MaxLength="2" Nullable="false" />
+    <Property Name="priName" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="priModifiedOn" Type="datetime" Nullable="false" />
+    <Property Name="priModifiedBy" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Province">
+    <Key>
+      <PropertyRef Name="pvnID" />
+    </Key>
+    <Property Name="pvnID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="pvnActive" Type="bit" Nullable="false" />
+    <Property Name="pvnModifiedOn" Type="datetime" Nullable="false" />
+    <Property Name="pvnModifiedBy" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Province_Locale">
+    <Key>
+      <PropertyRef Name="pvnID" />
+      <PropertyRef Name="lclID" />
+    </Key>
+    <Property Name="pvnID" Type="int" Nullable="false" />
+    <Property Name="lclID" Type="varchar" MaxLength="2" Nullable="false" />
+    <Property Name="zneID" Type="int" />
+    <Property Name="pvnName" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="pvnModifiedOn" Type="datetime" Nullable="false" />
+    <Property Name="pvnModifiedBy" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Province_Zone">
+    <Key>
+      <PropertyRef Name="zneID" />
+    </Key>
+    <Property Name="zneID" Type="int" Nullable="false" />
+    <Property Name="zneName" Type="nvarchar" MaxLength="100" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Role_Functions">
+    <Key>
+      <PropertyRef Name="rfID" />
+    </Key>
+    <Property Name="rfID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="rolID" Type="int" Nullable="false" />
+    <Property Name="fncID" Type="int" />
+    <Property Name="rfCreatedOn" Type="datetime" Nullable="false" />
+    <Property Name="rfCreatedBy" Type="int" Nullable="false" />
+    <Property Name="rfModifiedOn" Type="datetime" Nullable="false" />
+    <Property Name="rfModifiedBy" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Roles">
+    <Key>
+      <PropertyRef Name="rolID" />
+    </Key>
+    <Property Name="rolID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="rolName" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="rolNote" Type="ntext" />
+    <Property Name="rolCreatedOn" Type="datetime" Nullable="false" />
+    <Property Name="rolCreatedBy" Type="int" Nullable="false" />
+    <Property Name="rolModifiedOn" Type="datetime" Nullable="false" />
+    <Property Name="rolModifiedBy" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="SubDistrict">
+    <Key>
+      <PropertyRef Name="sdtID" />
+    </Key>
+    <Property Name="sdtID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="dstID" Type="int" Nullable="false" />
+    <Property Name="pvnID" Type="int" Nullable="false" />
+    <Property Name="sdtActive" Type="bit" Nullable="false" />
+    <Property Name="sdtModifiedOn" Type="datetime" Nullable="false" />
+    <Property Name="sdtModifiedBy" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="SubDistrict_Locale">
+    <Key>
+      <PropertyRef Name="sdtID" />
+      <PropertyRef Name="lclID" />
+    </Key>
+    <Property Name="sdtID" Type="int" Nullable="false" />
+    <Property Name="lclID" Type="varchar" MaxLength="2" Nullable="false" />
+    <Property Name="sdtName" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="dstID" Type="int" Nullable="false" />
+    <Property Name="pvnID" Type="int" Nullable="false" />
+    <Property Name="sdtModifiedOn" Type="datetime" Nullable="false" />
+    <Property Name="sdtModifiedBy" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TaskScheduleLog">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TaskName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="TaskStart" Type="datetime" />
+    <Property Name="TaskEnd" Type="datetime" />
+    <Property Name="TaskStatus" Type="char" MaxLength="1" />
+    <Property Name="TaskDesc" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="Titles">
+    <Key>
+      <PropertyRef Name="ttlID" />
+    </Key>
+    <Property Name="ttlID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ttlActive" Type="bit" Nullable="false" />
+    <Property Name="ttlModifiedOn" Type="char" MaxLength="10" Nullable="false" />
+    <Property Name="ttlModifiedBy" Type="char" MaxLength="10" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Titles_Locale">
+    <Key>
+      <PropertyRef Name="ttlID" />
+      <PropertyRef Name="lclID" />
+    </Key>
+    <Property Name="ttlID" Type="int" Nullable="false" />
+    <Property Name="lclID" Type="varchar" MaxLength="2" Nullable="false" />
+    <Property Name="ttlName" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="ttlModifiedOn" Type="char" MaxLength="10" Nullable="false" />
+    <Property Name="ttlModifiedBy" Type="char" MaxLength="10" Nullable="false" />
+  </EntityType>
+  <EntityType Name="User_Group">
+    <Key>
+      <PropertyRef Name="grpID" />
+      <PropertyRef Name="usrID" />
+    </Key>
+    <Property Name="grpID" Type="int" Nullable="false" />
+    <Property Name="usrID" Type="int" Nullable="false" />
+    <Property Name="usgCreatedOn" Type="datetime" Nullable="false" />
+    <Property Name="usgCreatedBy" Type="int" Nullable="false" />
+    <Property Name="usgModifiedOn" Type="datetime" Nullable="false" />
+    <Property Name="usgModifiedBy" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="User_Role">
+    <Key>
+      <PropertyRef Name="urolID" />
+    </Key>
+    <Property Name="urolID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="rolID" Type="int" Nullable="false" />
+    <Property Name="usrID" Type="int" Nullable="false" />
+    <Property Name="urCreatedOn" Type="datetime" Nullable="false" />
+    <Property Name="urCreatedBy" Type="int" Nullable="false" />
+    <Property Name="urModifiedOn" Type="datetime" Nullable="false" />
+    <Property Name="urModifiedBy" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Users">
+    <Key>
+      <PropertyRef Name="usrID" />
+    </Key>
+    <Property Name="usrID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ACD" Type="int" />
+    <Property Name="grpID" Type="int" />
+    <Property Name="usrUsername" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="usrPassword" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="usrFirstName" Type="nvarchar" MaxLength="255" />
+    <Property Name="usrLastName" Type="nvarchar" MaxLength="255" />
+    <Property Name="usrDepartment" Type="nvarchar" MaxLength="100" />
+    <Property Name="usrAvatar" Type="nvarchar" MaxLength="2000" />
+    <Property Name="usrIsActive" Type="bit" Nullable="false" />
+    <Property Name="usrCreatedOn" Type="datetime" Nullable="false" />
+    <Property Name="usrCreatedBy" Type="int" Nullable="false" />
+    <Property Name="usrModifiedOn" Type="datetime" Nullable="false" />
+    <Property Name="usrModifiedBy" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="ActivityStatus_ActivityStatus_Locale_FK1">
+    <End Role="ActivityStatus" Type="Self.ActivityStatus" Multiplicity="1" />
+    <End Role="ActivityStatus_Locale" Type="Self.ActivityStatus_Locale" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ActivityStatus">
+        <PropertyRef Name="atsID" />
+      </Principal>
+      <Dependent Role="ActivityStatus_Locale">
+        <PropertyRef Name="atsID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="District_District_Locale_FK1">
+    <End Role="District" Type="Self.District" Multiplicity="1" />
+    <End Role="District_Locale" Type="Self.District_Locale" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="District">
+        <PropertyRef Name="dstID" />
+      </Principal>
+      <Dependent Role="District_Locale">
+        <PropertyRef Name="dstID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="District_SubDistrict_FK1">
+    <End Role="District" Type="Self.District" Multiplicity="1" />
+    <End Role="SubDistrict" Type="Self.SubDistrict" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="District">
+        <PropertyRef Name="dstID" />
+      </Principal>
+      <Dependent Role="SubDistrict">
+        <PropertyRef Name="dstID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Genders_Genders_Locale_FK1">
+    <End Role="Genders" Type="Self.Genders" Multiplicity="1" />
+    <End Role="Genders_Locale" Type="Self.Genders_Locale" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Genders">
+        <PropertyRef Name="gndID" />
+      </Principal>
+      <Dependent Role="Genders_Locale">
+        <PropertyRef Name="gndID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Groups_Group_Role_FK1">
+    <End Role="Groups" Type="Self.Groups" Multiplicity="1" />
+    <End Role="Group_Role" Type="Self.Group_Role" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Groups">
+        <PropertyRef Name="grpID" />
+      </Principal>
+      <Dependent Role="Group_Role">
+        <PropertyRef Name="grpID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Groups_User_Group_FK1">
+    <End Role="Groups" Type="Self.Groups" Multiplicity="1" />
+    <End Role="User_Group" Type="Self.User_Group" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Groups">
+        <PropertyRef Name="grpID" />
+      </Principal>
+      <Dependent Role="User_Group">
+        <PropertyRef Name="grpID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Locale_ActivityStatus_Locale_FK1">
+    <End Role="Locale" Type="Self.Locale" Multiplicity="1" />
+    <End Role="ActivityStatus_Locale" Type="Self.ActivityStatus_Locale" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Locale">
+        <PropertyRef Name="lclID" />
+      </Principal>
+      <Dependent Role="ActivityStatus_Locale">
+        <PropertyRef Name="lclID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Locale_District_Locale_FK1">
+    <End Role="Locale" Type="Self.Locale" Multiplicity="1" />
+    <End Role="District_Locale" Type="Self.District_Locale" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Locale">
+        <PropertyRef Name="lclID" />
+      </Principal>
+      <Dependent Role="District_Locale">
+        <PropertyRef Name="lclID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Locale_Genders_Locale_FK1">
+    <End Role="Locale" Type="Self.Locale" Multiplicity="1" />
+    <End Role="Genders_Locale" Type="Self.Genders_Locale" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Locale">
+        <PropertyRef Name="lclID" />
+      </Principal>
+      <Dependent Role="Genders_Locale">
+        <PropertyRef Name="lclID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Locale_PhoneType_Locale_FK1">
+    <End Role="Locale" Type="Self.Locale" Multiplicity="1" />
+    <End Role="PhoneType_Locale" Type="Self.PhoneType_Locale" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Locale">
+        <PropertyRef Name="lclID" />
+      </Principal>
+      <Dependent Role="PhoneType_Locale">
+        <PropertyRef Name="lclID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Locale_Province_Locale_FK1">
+    <End Role="Locale" Type="Self.Locale" Multiplicity="1" />
+    <End Role="Province_Locale" Type="Self.Province_Locale" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Locale">
+        <PropertyRef Name="lclID" />
+      </Principal>
+      <Dependent Role="Province_Locale">
+        <PropertyRef Name="lclID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Locale_SubDistrict_Locale_FK1">
+    <End Role="Locale" Type="Self.Locale" Multiplicity="1" />
+    <End Role="SubDistrict_Locale" Type="Self.SubDistrict_Locale" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Locale">
+        <PropertyRef Name="lclID" />
+      </Principal>
+      <Dependent Role="SubDistrict_Locale">
+        <PropertyRef Name="lclID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Locale_Titles_Locale_FK1">
+    <End Role="Locale" Type="Self.Locale" Multiplicity="1" />
+    <End Role="Titles_Locale" Type="Self.Titles_Locale" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Locale">
+        <PropertyRef Name="lclID" />
+      </Principal>
+      <Dependent Role="Titles_Locale">
+        <PropertyRef Name="lclID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="PhoneType_PhoneType_Locale_FK1">
+    <End Role="PhoneType" Type="Self.PhoneType" Multiplicity="1" />
+    <End Role="PhoneType_Locale" Type="Self.PhoneType_Locale" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PhoneType">
+        <PropertyRef Name="phtID" />
+      </Principal>
+      <Dependent Role="PhoneType_Locale">
+        <PropertyRef Name="phtID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Province_District_FK1">
+    <End Role="Province" Type="Self.Province" Multiplicity="1" />
+    <End Role="District" Type="Self.District" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Province">
+        <PropertyRef Name="pvnID" />
+      </Principal>
+      <Dependent Role="District">
+        <PropertyRef Name="pvnID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Province_Province_Locale_FK1">
+    <End Role="Province" Type="Self.Province" Multiplicity="1" />
+    <End Role="Province_Locale" Type="Self.Province_Locale" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Province">
+        <PropertyRef Name="pvnID" />
+      </Principal>
+      <Dependent Role="Province_Locale">
+        <PropertyRef Name="pvnID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Roles_Group_Role_FK1">
+    <End Role="Roles" Type="Self.Roles" Multiplicity="1" />
+    <End Role="Group_Role" Type="Self.Group_Role" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Roles">
+        <PropertyRef Name="rolID" />
+      </Principal>
+      <Dependent Role="Group_Role">
+        <PropertyRef Name="rolID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="SubDistrict_SubDistrict_Locale_FK1">
+    <End Role="SubDistrict" Type="Self.SubDistrict" Multiplicity="1" />
+    <End Role="SubDistrict_Locale" Type="Self.SubDistrict_Locale" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SubDistrict">
+        <PropertyRef Name="sdtID" />
+      </Principal>
+      <Dependent Role="SubDistrict_Locale">
+        <PropertyRef Name="sdtID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Titles_Titles_Locale_FK1">
+    <End Role="Titles" Type="Self.Titles" Multiplicity="1" />
+    <End Role="Titles_Locale" Type="Self.Titles_Locale" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Titles">
+        <PropertyRef Name="ttlID" />
+      </Principal>
+      <Dependent Role="Titles_Locale">
+        <PropertyRef Name="ttlID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Function Name="sp_ActivityChannelSummary" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="SP_Contact_Detail_RP" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="STARTDATE" Type="varchar" Mode="In" />
+    <Parameter Name="ENDDATE" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="sp_ContactAutoComplete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="p_Search" Type="nvarchar" Mode="In" />
+    <Parameter Name="p_Row" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_Get_Casepending" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="p_Now" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="sp_Get_Casepending_ByAgent" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="USERID" Type="int" Mode="In" />
+    <Parameter Name="CREATEDATE" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="sp_GetAssetBySerialNo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="p_sn" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="sp_GetCaseDetailById" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="CASEID" Type="decimal" Mode="In" />
+    <Parameter Name="LANG" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="sp_GetCaseDetailTimeline" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="casID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_GetCaseFavourite" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="usrID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_GetCaseFollowUp" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="p_ctaID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_GetCaseList" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="CaseId" Type="nvarchar" Mode="In" />
+    <Parameter Name="StartCreateOn" Type="nvarchar" Mode="In" />
+    <Parameter Name="EndCreateOn" Type="nvarchar" Mode="In" />
+    <Parameter Name="StartModified" Type="nvarchar" Mode="In" />
+    <Parameter Name="EndModified" Type="nvarchar" Mode="In" />
+    <Parameter Name="StartClosed" Type="nvarchar" Mode="In" />
+    <Parameter Name="EndClosed" Type="nvarchar" Mode="In" />
+    <Parameter Name="Open" Type="nvarchar" Mode="In" />
+    <Parameter Name="Closed" Type="nvarchar" Mode="In" />
+    <Parameter Name="Cancel" Type="nvarchar" Mode="In" />
+    <Parameter Name="Pending" Type="nvarchar" Mode="In" />
+    <Parameter Name="OBJID" Type="decimal" Mode="In" />
+    <Parameter Name="USERID" Type="int" Mode="In" />
+    <Parameter Name="GROUPID" Type="int" Mode="In" />
+    <Parameter Name="GROUPUSERID" Type="int" Mode="In" />
+    <Parameter Name="Channel" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="sp_getCaseQuery" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="p_query" Type="nvarchar(max)" Mode="In" />
+  </Function>
+  <Function Name="sp_getCasesOverSLA" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="p_Now" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="sp_getContactCommonDetail" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="p_ctaId" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_getContactLogTimeline" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="p_ctaID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_getContactSearch" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="p_Name" Type="nvarchar" Mode="In" />
+    <Parameter Name="p_Cate" Type="int" Mode="In" />
+    <Parameter Name="p_Order" Type="nvarchar" Mode="In" />
+    <Parameter Name="p_Top" Type="int" Mode="In" />
+    <Parameter Name="p_Created" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_GetContactViewLog" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="p_UsrID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_GetGroupCaseOnlineAcc" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="sp_GetGroupUser" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="sp_GetInboundContact" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="p_Phone" Type="nvarchar" Mode="In" />
+    <Parameter Name="p_Name" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="sp_getLastActivityContact" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="p_usrID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_GetLastCases" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="p_ctaID" Type="int" Mode="In" />
+    <Parameter Name="p_top" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_GetMailContentInfo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="CASEID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_getMailRemind" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="p_Date" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="sp_getNewCaseList" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="p_actID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_GetNotification" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="usrID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_GetNotification_Total" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="usrID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_GetStatus" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Lang" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="sp_getTotalTodolistByChannel" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="usrID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_GetUser" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="sp_getUserProfile" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="p_usrID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_getUserProfileTimeline" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="p_UsrID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="st_CategorySearch" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="CatId" Type="uniqueidentifier" Mode="In" />
+    <Parameter Name="CatParentId" Type="uniqueidentifier" Mode="In" />
+    <Parameter Name="ArtId" Type="uniqueidentifier" Mode="In" />
+  </Function>
+  <Function Name="ST_CATEGORYSEARCH_ROOT" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="st_Get_Dashbord_CaseStatus" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="CREATEDATE" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="st_GET_UserRole_ById" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="USERID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="st_GetUserInGroup_ById" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="USERID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="uspCaseType" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="catLevel" Type="int" Mode="In" />
+  </Function>
+  <Function Name="uspContactDetail" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="STARTDATE" Type="nvarchar" Mode="In" />
+    <Parameter Name="ENDDATE" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="uspGetAgentName" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="AGENTID" Type="bigint" Mode="In" />
+  </Function>
+  <Function Name="uspReportCaseLevel" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="STARTDATE" Type="nvarchar" Mode="In" />
+    <Parameter Name="ENDDATE" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="uspReportCaseSummary" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="STARTDATE" Type="nvarchar" Mode="In" />
+    <Parameter Name="ENDDATE" Type="nvarchar" Mode="In" />
+  </Function>
+  <EntityContainer Name="CRMABPModelStoreContainer">
+    <EntitySet Name="Activities" EntityType="Self.Activities" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ActivityStatus" EntityType="Self.ActivityStatus" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ActivityStatus_Locale" EntityType="Self.ActivityStatus_Locale" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Address" EntityType="Self.Address" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Announcement" EntityType="Self.Announcement" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AuthenLog" EntityType="Self.AuthenLog" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Calendar" EntityType="Self.Calendar" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Callback" EntityType="Self.Callback" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CallbackCause" EntityType="Self.CallbackCause" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CallbackCause_Locale" EntityType="Self.CallbackCause_Locale" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CallBackChannel" EntityType="Self.CallBackChannel" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CallbackType" EntityType="Self.CallbackType" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CallbackType_Locale" EntityType="Self.CallbackType_Locale" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CaseAttachFiles" EntityType="Self.CaseAttachFiles" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CaseLogs" EntityType="Self.CaseLogs" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CaseLogType" EntityType="Self.CaseLogType" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CaseRemindFlows" EntityType="Self.CaseRemindFlows" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Cases" EntityType="Self.Cases" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CaseStatus" EntityType="Self.CaseStatus" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CaseStatus_Locale" EntityType="Self.CaseStatus_Locale" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CaseType" EntityType="Self.CaseType" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Channels" EntityType="Self.Channels" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ContactLogs" EntityType="Self.ContactLogs" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Contacts" EntityType="Self.Contacts" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ContactType" EntityType="Self.ContactType" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ContactType_Locale" EntityType="Self.ContactType_Locale" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ContactViewLog" EntityType="Self.ContactViewLog" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="District" EntityType="Self.District" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="District_Locale" EntityType="Self.District_Locale" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="DNIS" EntityType="Self.DNIS" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Functions" EntityType="Self.Functions" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Genders" EntityType="Self.Genders" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Genders_Locale" EntityType="Self.Genders_Locale" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Group_Role" EntityType="Self.Group_Role" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Groups" EntityType="Self.Groups" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Locale" EntityType="Self.Locale" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="MailLog" EntityType="Self.MailLog" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Notification" EntityType="Self.Notification" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="NotificationType" EntityType="Self.NotificationType" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Phones" EntityType="Self.Phones" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PhoneType" EntityType="Self.PhoneType" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PhoneType_Locale" EntityType="Self.PhoneType_Locale" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Priority" EntityType="Self.Priority" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Priority_Locale" EntityType="Self.Priority_Locale" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Province" EntityType="Self.Province" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Province_Locale" EntityType="Self.Province_Locale" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Province_Zone" EntityType="Self.Province_Zone" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Role_Functions" EntityType="Self.Role_Functions" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SubDistrict" EntityType="Self.SubDistrict" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SubDistrict_Locale" EntityType="Self.SubDistrict_Locale" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TaskScheduleLog" EntityType="Self.TaskScheduleLog" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Titles" EntityType="Self.Titles" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Titles_Locale" EntityType="Self.Titles_Locale" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="User_Group" EntityType="Self.User_Group" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="User_Role" EntityType="Self.User_Role" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="ActivityStatus_ActivityStatus_Locale_FK1" Association="Self.ActivityStatus_ActivityStatus_Locale_FK1">
+      <End Role="ActivityStatus" EntitySet="ActivityStatus" />
+      <End Role="ActivityStatus_Locale" EntitySet="ActivityStatus_Locale" />
+    </AssociationSet>
+    <AssociationSet Name="District_District_Locale_FK1" Association="Self.District_District_Locale_FK1">
+      <End Role="District" EntitySet="District" />
+      <End Role="District_Locale" EntitySet="District_Locale" />
+    </AssociationSet>
+    <AssociationSet Name="District_SubDistrict_FK1" Association="Self.District_SubDistrict_FK1">
+      <End Role="District" EntitySet="District" />
+      <End Role="SubDistrict" EntitySet="SubDistrict" />
+    </AssociationSet>
+    <AssociationSet Name="Genders_Genders_Locale_FK1" Association="Self.Genders_Genders_Locale_FK1">
+      <End Role="Genders" EntitySet="Genders" />
+      <End Role="Genders_Locale" EntitySet="Genders_Locale" />
+    </AssociationSet>
+    <AssociationSet Name="Groups_Group_Role_FK1" Association="Self.Groups_Group_Role_FK1">
+      <End Role="Groups" EntitySet="Groups" />
+      <End Role="Group_Role" EntitySet="Group_Role" />
+    </AssociationSet>
+    <AssociationSet Name="Groups_User_Group_FK1" Association="Self.Groups_User_Group_FK1">
+      <End Role="Groups" EntitySet="Groups" />
+      <End Role="User_Group" EntitySet="User_Group" />
+    </AssociationSet>
+    <AssociationSet Name="Locale_ActivityStatus_Locale_FK1" Association="Self.Locale_ActivityStatus_Locale_FK1">
+      <End Role="Locale" EntitySet="Locale" />
+      <End Role="ActivityStatus_Locale" EntitySet="ActivityStatus_Locale" />
+    </AssociationSet>
+    <AssociationSet Name="Locale_District_Locale_FK1" Association="Self.Locale_District_Locale_FK1">
+      <End Role="Locale" EntitySet="Locale" />
+      <End Role="District_Locale" EntitySet="District_Locale" />
+    </AssociationSet>
+    <AssociationSet Name="Locale_Genders_Locale_FK1" Association="Self.Locale_Genders_Locale_FK1">
+      <End Role="Locale" EntitySet="Locale" />
+      <End Role="Genders_Locale" EntitySet="Genders_Locale" />
+    </AssociationSet>
+    <AssociationSet Name="Locale_PhoneType_Locale_FK1" Association="Self.Locale_PhoneType_Locale_FK1">
+      <End Role="Locale" EntitySet="Locale" />
+      <End Role="PhoneType_Locale" EntitySet="PhoneType_Locale" />
+    </AssociationSet>
+    <AssociationSet Name="Locale_Province_Locale_FK1" Association="Self.Locale_Province_Locale_FK1">
+      <End Role="Locale" EntitySet="Locale" />
+      <End Role="Province_Locale" EntitySet="Province_Locale" />
+    </AssociationSet>
+    <AssociationSet Name="Locale_SubDistrict_Locale_FK1" Association="Self.Locale_SubDistrict_Locale_FK1">
+      <End Role="Locale" EntitySet="Locale" />
+      <End Role="SubDistrict_Locale" EntitySet="SubDistrict_Locale" />
+    </AssociationSet>
+    <AssociationSet Name="Locale_Titles_Locale_FK1" Association="Self.Locale_Titles_Locale_FK1">
+      <End Role="Locale" EntitySet="Locale" />
+      <End Role="Titles_Locale" EntitySet="Titles_Locale" />
+    </AssociationSet>
+    <AssociationSet Name="PhoneType_PhoneType_Locale_FK1" Association="Self.PhoneType_PhoneType_Locale_FK1">
+      <End Role="PhoneType" EntitySet="PhoneType" />
+      <End Role="PhoneType_Locale" EntitySet="PhoneType_Locale" />
+    </AssociationSet>
+    <AssociationSet Name="Province_District_FK1" Association="Self.Province_District_FK1">
+      <End Role="Province" EntitySet="Province" />
+      <End Role="District" EntitySet="District" />
+    </AssociationSet>
+    <AssociationSet Name="Province_Province_Locale_FK1" Association="Self.Province_Province_Locale_FK1">
+      <End Role="Province" EntitySet="Province" />
+      <End Role="Province_Locale" EntitySet="Province_Locale" />
+    </AssociationSet>
+    <AssociationSet Name="Roles_Group_Role_FK1" Association="Self.Roles_Group_Role_FK1">
+      <End Role="Roles" EntitySet="Roles" />
+      <End Role="Group_Role" EntitySet="Group_Role" />
+    </AssociationSet>
+    <AssociationSet Name="SubDistrict_SubDistrict_Locale_FK1" Association="Self.SubDistrict_SubDistrict_Locale_FK1">
+      <End Role="SubDistrict" EntitySet="SubDistrict" />
+      <End Role="SubDistrict_Locale" EntitySet="SubDistrict_Locale" />
+    </AssociationSet>
+    <AssociationSet Name="Titles_Titles_Locale_FK1" Association="Self.Titles_Titles_Locale_FK1">
+      <End Role="Titles" EntitySet="Titles" />
+      <End Role="Titles_Locale" EntitySet="Titles_Locale" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

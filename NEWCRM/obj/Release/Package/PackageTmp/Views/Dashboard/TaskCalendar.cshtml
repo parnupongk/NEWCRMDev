@@ -1,0 +1,9 @@
+﻿@model NEWCRM.Models.CalendarViewModel
+<div class="no-padding">
+    @foreach (var item in Model.list_item) { 
+        <div class="alert @item.cldColor.Replace("event","alert")" style="cursor: pointer; position:relative; margin-bottom: 15px;">     
+            <strong>@item.cldMessage</strong>
+            <div class="text-default-light text-sm">@item.cldDate&nbsp;&nbsp;@item.cldTimestart.ToString().Substring(0,5) - @item.cldTimeend.ToString().Substring(0,5)</div>
+        </div>    
+    }   
+</div>

@@ -1,0 +1,31 @@
+﻿@model CRMAubonpain.Models.CaseFormUIModel
+
+@if (Model != null && Model.list_col != null && Model.formdata != null)
+{
+    <div class="row">
+        <div class="col-md-12">
+
+            @* <div class="card-head">
+                <ul class="nav nav-tabs tabs-text-contrast tabs-warning" data-toggle="tabs">
+                    <li class="casform active"><a href="#@ViewBag.FormName">@ViewBag.Display</a></li>
+                    <li class="followup" style="display:none"><a href="#followup">Cases Follow Up</a></li>
+                </ul>
+            </div>*@
+            <div class="card-body">
+                <div class="row">
+                    <form class="form">
+                        @foreach (var item_col in Model.list_col)
+                        {
+                            <div class="col-lg-@item_col.cfSize">
+                                <div class="form-group">
+                                    <label>@item_col.cfDisplayName</label>
+                                    <p class="form-control-static">@Model.formdata[item_col.cfName]</p>
+                                </div>
+                            </div>
+                        }
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+}

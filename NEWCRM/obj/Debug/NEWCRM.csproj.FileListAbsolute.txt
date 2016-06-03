@@ -1,0 +1,375 @@
+D:\Projects\Origin\NEWCRMDev\NEWCRM\obj\Debug\NEWCRM.csprojResolveAssemblyReference.cache
+D:\Projects\Origin\NEWCRMDev\NEWCRM\obj\Debug\NEWCRM.dll
+D:\Projects\Origin\NEWCRMDev\NEWCRM\obj\Debug\NEWCRM.pdb
+D:\Projects\Origin\NEWCRMDev\NEWCRM\bin\NEWCRM.dll
+D:\Projects\Origin\NEWCRMDev\NEWCRM\bin\NEWCRM.pdb
+D:\Projects\Origin\NEWCRMDev\NEWCRM\bin\Antlr3.Runtime.dll
+D:\Projects\Origin\NEWCRMDev\NEWCRM\bin\EntityFramework.dll
+D:\Projects\Origin\NEWCRMDev\NEWCRM\bin\Microsoft.Web.Infrastructure.dll
+D:\Projects\Origin\NEWCRMDev\NEWCRM\bin\Newtonsoft.Json.dll
+D:\Projects\Origin\NEWCRMDev\NEWCRM\bin\System.Net.Http.Formatting.dll
+D:\Projects\Origin\NEWCRMDev\NEWCRM\bin\System.Web.Http.dll
+D:\Projects\Origin\NEWCRMDev\NEWCRM\bin\System.Web.Http.WebHost.dll
+D:\Projects\Origin\NEWCRMDev\NEWCRM\bin\System.Web.Mvc.dll
+D:\Projects\Origin\NEWCRMDev\NEWCRM\bin\System.Web.Optimization.dll
+D:\Projects\Origin\NEWCRMDev\NEWCRM\bin\System.Web.Providers.dll
+D:\Projects\Origin\NEWCRMDev\NEWCRM\bin\System.Web.Razor.dll
+D:\Projects\Origin\NEWCRMDev\NEWCRM\bin\System.Web.WebPages.Deployment.dll
+D:\Projects\Origin\NEWCRMDev\NEWCRM\bin\System.Web.WebPages.dll
+D:\Projects\Origin\NEWCRMDev\NEWCRM\bin\System.Web.WebPages.Razor.dll
+D:\Projects\Origin\NEWCRMDev\NEWCRM\bin\WebGrease.dll
+D:\Projects\Origin\NEWCRMDev\NEWCRM\bin\EntityFramework.xml
+D:\Projects\Origin\NEWCRMDev\NEWCRM\bin\Newtonsoft.Json.xml
+D:\Projects\Origin\NEWCRMDev\NEWCRM\bin\System.Net.Http.Formatting.xml
+D:\Projects\Origin\NEWCRMDev\NEWCRM\bin\System.Web.Http.xml
+D:\Projects\Origin\NEWCRMDev\NEWCRM\bin\System.Web.Http.WebHost.xml
+D:\Projects\Origin\NEWCRMDev\NEWCRM\bin\System.Web.Mvc.xml
+D:\Projects\Origin\NEWCRMDev\NEWCRM\bin\System.Web.Razor.xml
+D:\Projects\Origin\NEWCRMDev\NEWCRM\bin\System.Web.WebPages.xml
+D:\Projects\Origin\NEWCRMDev\NEWCRM\bin\System.Web.WebPages.Deployment.xml
+D:\Projects\Origin\NEWCRMDev\NEWCRM\bin\System.Web.WebPages.Razor.xml
+D:\Works\OTO\Origin\NEWCRMDev\NEWCRM\bin\NEWCRM.dll
+D:\Works\OTO\Origin\NEWCRMDev\NEWCRM\bin\NEWCRM.pdb
+D:\Works\OTO\Origin\NEWCRMDev\NEWCRM\bin\Antlr3.Runtime.dll
+D:\Works\OTO\Origin\NEWCRMDev\NEWCRM\bin\Microsoft.Web.Infrastructure.dll
+D:\Works\OTO\Origin\NEWCRMDev\NEWCRM\bin\MvcPaging.dll
+D:\Works\OTO\Origin\NEWCRMDev\NEWCRM\bin\Newtonsoft.Json.dll
+D:\Works\OTO\Origin\NEWCRMDev\NEWCRM\bin\System.Net.Http.Formatting.dll
+D:\Works\OTO\Origin\NEWCRMDev\NEWCRM\bin\System.Web.Http.dll
+D:\Works\OTO\Origin\NEWCRMDev\NEWCRM\bin\System.Web.Http.WebHost.dll
+D:\Works\OTO\Origin\NEWCRMDev\NEWCRM\bin\System.Web.Mvc.dll
+D:\Works\OTO\Origin\NEWCRMDev\NEWCRM\bin\System.Web.Optimization.dll
+D:\Works\OTO\Origin\NEWCRMDev\NEWCRM\bin\System.Web.Providers.dll
+D:\Works\OTO\Origin\NEWCRMDev\NEWCRM\bin\System.Web.Razor.dll
+D:\Works\OTO\Origin\NEWCRMDev\NEWCRM\bin\System.Web.WebPages.Deployment.dll
+D:\Works\OTO\Origin\NEWCRMDev\NEWCRM\bin\System.Web.WebPages.dll
+D:\Works\OTO\Origin\NEWCRMDev\NEWCRM\bin\System.Web.WebPages.Razor.dll
+D:\Works\OTO\Origin\NEWCRMDev\NEWCRM\bin\WebGrease.dll
+D:\Works\OTO\Origin\NEWCRMDev\NEWCRM\bin\MvcPaging.xml
+D:\Works\OTO\Origin\NEWCRMDev\NEWCRM\bin\Newtonsoft.Json.xml
+D:\Works\OTO\Origin\NEWCRMDev\NEWCRM\bin\System.Net.Http.Formatting.xml
+D:\Works\OTO\Origin\NEWCRMDev\NEWCRM\bin\System.Web.Http.xml
+D:\Works\OTO\Origin\NEWCRMDev\NEWCRM\bin\System.Web.Http.WebHost.xml
+D:\Works\OTO\Origin\NEWCRMDev\NEWCRM\bin\System.Web.Mvc.xml
+D:\Works\OTO\Origin\NEWCRMDev\NEWCRM\bin\System.Web.Razor.xml
+D:\Works\OTO\Origin\NEWCRMDev\NEWCRM\bin\System.Web.WebPages.xml
+D:\Works\OTO\Origin\NEWCRMDev\NEWCRM\bin\System.Web.WebPages.Deployment.xml
+D:\Works\OTO\Origin\NEWCRMDev\NEWCRM\bin\System.Web.WebPages.Razor.xml
+D:\Works\OTO\Origin\NEWCRMDev\NEWCRM\obj\Debug\NEWCRM.dll
+D:\Works\OTO\Origin\NEWCRMDev\NEWCRM\obj\Debug\NEWCRM.pdb
+D:\OTO Project\Origin\NEWCRMDev\NEWCRM\bin\NEWCRM.dll.config
+D:\OTO Project\Origin\NEWCRMDev\NEWCRM\bin\NEWCRM.dll
+D:\OTO Project\Origin\NEWCRMDev\NEWCRM\bin\NEWCRM.pdb
+D:\OTO Project\Origin\NEWCRMDev\NEWCRM\bin\Antlr3.Runtime.dll
+D:\OTO Project\Origin\NEWCRMDev\NEWCRM\bin\Microsoft.Web.Infrastructure.dll
+D:\OTO Project\Origin\NEWCRMDev\NEWCRM\bin\Newtonsoft.Json.dll
+D:\OTO Project\Origin\NEWCRMDev\NEWCRM\bin\System.Net.Http.Formatting.dll
+D:\OTO Project\Origin\NEWCRMDev\NEWCRM\bin\System.Web.Http.dll
+D:\OTO Project\Origin\NEWCRMDev\NEWCRM\bin\System.Web.Http.WebHost.dll
+D:\OTO Project\Origin\NEWCRMDev\NEWCRM\bin\System.Web.Mvc.dll
+D:\OTO Project\Origin\NEWCRMDev\NEWCRM\bin\System.Web.Optimization.dll
+D:\OTO Project\Origin\NEWCRMDev\NEWCRM\bin\System.Web.Providers.dll
+D:\OTO Project\Origin\NEWCRMDev\NEWCRM\bin\System.Web.Razor.dll
+D:\OTO Project\Origin\NEWCRMDev\NEWCRM\bin\System.Web.WebPages.Deployment.dll
+D:\OTO Project\Origin\NEWCRMDev\NEWCRM\bin\System.Web.WebPages.dll
+D:\OTO Project\Origin\NEWCRMDev\NEWCRM\bin\System.Web.WebPages.Razor.dll
+D:\OTO Project\Origin\NEWCRMDev\NEWCRM\bin\WebGrease.dll
+D:\OTO Project\Origin\NEWCRMDev\NEWCRM\bin\Newtonsoft.Json.xml
+D:\OTO Project\Origin\NEWCRMDev\NEWCRM\bin\System.Net.Http.Formatting.xml
+D:\OTO Project\Origin\NEWCRMDev\NEWCRM\bin\System.Web.Http.xml
+D:\OTO Project\Origin\NEWCRMDev\NEWCRM\bin\System.Web.Http.WebHost.xml
+D:\OTO Project\Origin\NEWCRMDev\NEWCRM\bin\System.Web.Mvc.xml
+D:\OTO Project\Origin\NEWCRMDev\NEWCRM\bin\System.Web.Razor.xml
+D:\OTO Project\Origin\NEWCRMDev\NEWCRM\bin\System.Web.WebPages.xml
+D:\OTO Project\Origin\NEWCRMDev\NEWCRM\bin\System.Web.WebPages.Deployment.xml
+D:\OTO Project\Origin\NEWCRMDev\NEWCRM\bin\System.Web.WebPages.Razor.xml
+D:\OTO Project\Origin\NEWCRMDev\NEWCRM\obj\Debug\NEWCRM.dll
+D:\OTO Project\Origin\NEWCRMDev\NEWCRM\obj\Debug\NEWCRM.pdb
+D:\OTO Project\Origin\NEWCRMDev\NEWCRM\obj\Debug\NEWCRM.csprojResolveAssemblyReference.cache
+E:\my Build\one2one\CRM2015\Code_CRMOrigin\NEWCRMDev\NEWCRM\bin\NEWCRM.dll.config
+E:\my Build\one2one\CRM2015\Code_CRMOrigin\NEWCRMDev\NEWCRM\bin\NEWCRM.dll
+E:\my Build\one2one\CRM2015\Code_CRMOrigin\NEWCRMDev\NEWCRM\bin\NEWCRM.pdb
+E:\my Build\one2one\CRM2015\Code_CRMOrigin\NEWCRMDev\NEWCRM\bin\Antlr3.Runtime.dll
+E:\my Build\one2one\CRM2015\Code_CRMOrigin\NEWCRMDev\NEWCRM\bin\Microsoft.Web.Infrastructure.dll
+E:\my Build\one2one\CRM2015\Code_CRMOrigin\NEWCRMDev\NEWCRM\bin\Newtonsoft.Json.dll
+E:\my Build\one2one\CRM2015\Code_CRMOrigin\NEWCRMDev\NEWCRM\bin\System.Net.Http.Formatting.dll
+E:\my Build\one2one\CRM2015\Code_CRMOrigin\NEWCRMDev\NEWCRM\bin\System.Web.Http.dll
+E:\my Build\one2one\CRM2015\Code_CRMOrigin\NEWCRMDev\NEWCRM\bin\System.Web.Http.WebHost.dll
+E:\my Build\one2one\CRM2015\Code_CRMOrigin\NEWCRMDev\NEWCRM\bin\System.Web.Mvc.dll
+E:\my Build\one2one\CRM2015\Code_CRMOrigin\NEWCRMDev\NEWCRM\bin\System.Web.Optimization.dll
+E:\my Build\one2one\CRM2015\Code_CRMOrigin\NEWCRMDev\NEWCRM\bin\System.Web.Providers.dll
+E:\my Build\one2one\CRM2015\Code_CRMOrigin\NEWCRMDev\NEWCRM\bin\System.Web.Razor.dll
+E:\my Build\one2one\CRM2015\Code_CRMOrigin\NEWCRMDev\NEWCRM\bin\System.Web.WebPages.Deployment.dll
+E:\my Build\one2one\CRM2015\Code_CRMOrigin\NEWCRMDev\NEWCRM\bin\System.Web.WebPages.dll
+E:\my Build\one2one\CRM2015\Code_CRMOrigin\NEWCRMDev\NEWCRM\bin\System.Web.WebPages.Razor.dll
+E:\my Build\one2one\CRM2015\Code_CRMOrigin\NEWCRMDev\NEWCRM\bin\WebGrease.dll
+E:\my Build\one2one\CRM2015\Code_CRMOrigin\NEWCRMDev\NEWCRM\bin\Newtonsoft.Json.xml
+E:\my Build\one2one\CRM2015\Code_CRMOrigin\NEWCRMDev\NEWCRM\bin\System.Net.Http.Formatting.xml
+E:\my Build\one2one\CRM2015\Code_CRMOrigin\NEWCRMDev\NEWCRM\bin\System.Web.Http.xml
+E:\my Build\one2one\CRM2015\Code_CRMOrigin\NEWCRMDev\NEWCRM\bin\System.Web.Http.WebHost.xml
+E:\my Build\one2one\CRM2015\Code_CRMOrigin\NEWCRMDev\NEWCRM\bin\System.Web.Mvc.xml
+E:\my Build\one2one\CRM2015\Code_CRMOrigin\NEWCRMDev\NEWCRM\bin\System.Web.Razor.xml
+E:\my Build\one2one\CRM2015\Code_CRMOrigin\NEWCRMDev\NEWCRM\bin\System.Web.WebPages.xml
+E:\my Build\one2one\CRM2015\Code_CRMOrigin\NEWCRMDev\NEWCRM\bin\System.Web.WebPages.Deployment.xml
+E:\my Build\one2one\CRM2015\Code_CRMOrigin\NEWCRMDev\NEWCRM\bin\System.Web.WebPages.Razor.xml
+E:\my Build\one2one\CRM2015\Code_CRMOrigin\NEWCRMDev\NEWCRM\obj\Debug\NEWCRM.dll
+E:\my Build\one2one\CRM2015\Code_CRMOrigin\NEWCRMDev\NEWCRM\obj\Debug\NEWCRM.pdb
+E:\my Build\one2one\CRM2015\Code_CRMOrigin\NEWCRMDev\NEWCRM\bin\Microsoft.ReportViewer.WebForms.dll
+E:\my Build\one2one\CRM2015\Code_CRMOrigin\NEWCRMDev\NEWCRM\bin\Microsoft.SqlServer.Types.dll
+E:\my Build\one2one\CRM2015\Code_CRMOrigin\NEWCRMDev\NEWCRM\bin\de\Microsoft.SqlServer.Types.resources.dll
+E:\my Build\one2one\CRM2015\Code_CRMOrigin\NEWCRMDev\NEWCRM\bin\es\Microsoft.SqlServer.Types.resources.dll
+E:\my Build\one2one\CRM2015\Code_CRMOrigin\NEWCRMDev\NEWCRM\bin\fr\Microsoft.SqlServer.Types.resources.dll
+E:\my Build\one2one\CRM2015\Code_CRMOrigin\NEWCRMDev\NEWCRM\bin\it\Microsoft.SqlServer.Types.resources.dll
+E:\my Build\one2one\CRM2015\Code_CRMOrigin\NEWCRMDev\NEWCRM\bin\ja\Microsoft.SqlServer.Types.resources.dll
+E:\my Build\one2one\CRM2015\Code_CRMOrigin\NEWCRMDev\NEWCRM\bin\ko\Microsoft.SqlServer.Types.resources.dll
+E:\my Build\one2one\CRM2015\Code_CRMOrigin\NEWCRMDev\NEWCRM\bin\pt\Microsoft.SqlServer.Types.resources.dll
+E:\my Build\one2one\CRM2015\Code_CRMOrigin\NEWCRMDev\NEWCRM\bin\ru\Microsoft.SqlServer.Types.resources.dll
+E:\my Build\one2one\CRM2015\Code_CRMOrigin\NEWCRMDev\NEWCRM\bin\zh-Hans\Microsoft.SqlServer.Types.resources.dll
+E:\my Build\one2one\CRM2015\Code_CRMOrigin\NEWCRMDev\NEWCRM\bin\zh-Hant\Microsoft.SqlServer.Types.resources.dll
+E:\my Build\one2one\CRM2015\Code_CRMOrigin\NEWCRMDev\NEWCRM\bin\Microsoft.ApplicationBlocks.Data.dll
+E:\my Build\one2one\CRM2015\Code_CRMOrigin\NEWCRMDev\NEWCRM\bin\Models\NEWCRM.Context.tt
+E:\my Build\one2one\CRM2015\Code_CRMOrigin\NEWCRMDev\NEWCRM\bin\Models\NEWCRM.edmx.diagram
+E:\my Build\one2one\CRM2015\Code_CRMOrigin\NEWCRMDev\NEWCRM\bin\Models\NEWCRM.tt
+E:\my Build\one2one\CRM2015\Code_CRMOrigin\NEWCRMDev\NEWCRM\bin\Models\Activities.cs
+E:\my Build\one2one\CRM2015\Code_CRMOrigin\NEWCRMDev\NEWCRM\bin\Models\ActivityStatus.cs
+E:\my Build\one2one\CRM2015\Code_CRMOrigin\NEWCRMDev\NEWCRM\bin\Models\ActivityStatus_Locale.cs
+E:\my Build\one2one\CRM2015\Code_CRMOrigin\NEWCRMDev\NEWCRM\bin\Models\Address.cs
+E:\my Build\one2one\CRM2015\Code_CRMOrigin\NEWCRMDev\NEWCRM\bin\Models\Announcement.cs
+E:\my Build\one2one\CRM2015\Code_CRMOrigin\NEWCRMDev\NEWCRM\bin\Models\AuthenLog.cs
+E:\my Build\one2one\CRM2015\Code_CRMOrigin\NEWCRMDev\NEWCRM\bin\Models\Calendar.cs
+E:\my Build\one2one\CRM2015\Code_CRMOrigin\NEWCRMDev\NEWCRM\bin\Models\Callback.cs
+E:\my Build\one2one\CRM2015\Code_CRMOrigin\NEWCRMDev\NEWCRM\bin\Models\CallbackCause.cs
+E:\my Build\one2one\CRM2015\Code_CRMOrigin\NEWCRMDev\NEWCRM\bin\Models\CallbackCause_Locale.cs
+E:\my Build\one2one\CRM2015\Code_CRMOrigin\NEWCRMDev\NEWCRM\bin\Models\CallBackChannel.cs
+E:\my Build\one2one\CRM2015\Code_CRMOrigin\NEWCRMDev\NEWCRM\bin\Models\CallbackType.cs
+E:\my Build\one2one\CRM2015\Code_CRMOrigin\NEWCRMDev\NEWCRM\bin\Models\CallbackType_Locale.cs
+E:\my Build\one2one\CRM2015\Code_CRMOrigin\NEWCRMDev\NEWCRM\bin\Models\Case.cs
+E:\my Build\one2one\CRM2015\Code_CRMOrigin\NEWCRMDev\NEWCRM\bin\Models\CaseAttachFile.cs
+E:\my Build\one2one\CRM2015\Code_CRMOrigin\NEWCRMDev\NEWCRM\bin\Models\CaseLog.cs
+E:\my Build\one2one\CRM2015\Code_CRMOrigin\NEWCRMDev\NEWCRM\bin\Models\CaseLogType.cs
+E:\my Build\one2one\CRM2015\Code_CRMOrigin\NEWCRMDev\NEWCRM\bin\Models\CaseRemindFlow.cs
+E:\my Build\one2one\CRM2015\Code_CRMOrigin\NEWCRMDev\NEWCRM\bin\Models\CaseStatu.cs
+E:\my Build\one2one\CRM2015\Code_CRMOrigin\NEWCRMDev\NEWCRM\bin\Models\CaseStatus_Locale.cs
+E:\my Build\one2one\CRM2015\Code_CRMOrigin\NEWCRMDev\NEWCRM\bin\Models\CaseType.cs
+E:\my Build\one2one\CRM2015\Code_CRMOrigin\NEWCRMDev\NEWCRM\bin\Models\Channel.cs
+E:\my Build\one2one\CRM2015\Code_CRMOrigin\NEWCRMDev\NEWCRM\bin\Models\Contact.cs
+E:\my Build\one2one\CRM2015\Code_CRMOrigin\NEWCRMDev\NEWCRM\bin\Models\ContactLog.cs
+E:\my Build\one2one\CRM2015\Code_CRMOrigin\NEWCRMDev\NEWCRM\bin\Models\ContactType.cs
+E:\my Build\one2one\CRM2015\Code_CRMOrigin\NEWCRMDev\NEWCRM\bin\Models\ContactType_Locale.cs
+E:\my Build\one2one\CRM2015\Code_CRMOrigin\NEWCRMDev\NEWCRM\bin\Models\ContactViewLog.cs
+E:\my Build\one2one\CRM2015\Code_CRMOrigin\NEWCRMDev\NEWCRM\bin\Models\District.cs
+E:\my Build\one2one\CRM2015\Code_CRMOrigin\NEWCRMDev\NEWCRM\bin\Models\District_Locale.cs
+E:\my Build\one2one\CRM2015\Code_CRMOrigin\NEWCRMDev\NEWCRM\bin\Models\DNIS.cs
+E:\my Build\one2one\CRM2015\Code_CRMOrigin\NEWCRMDev\NEWCRM\bin\Models\Function.cs
+E:\my Build\one2one\CRM2015\Code_CRMOrigin\NEWCRMDev\NEWCRM\bin\Models\Gender.cs
+E:\my Build\one2one\CRM2015\Code_CRMOrigin\NEWCRMDev\NEWCRM\bin\Models\Genders_Locale.cs
+E:\my Build\one2one\CRM2015\Code_CRMOrigin\NEWCRMDev\NEWCRM\bin\Models\Group.cs
+E:\my Build\one2one\CRM2015\Code_CRMOrigin\NEWCRMDev\NEWCRM\bin\Models\Group_Role.cs
+E:\my Build\one2one\CRM2015\Code_CRMOrigin\NEWCRMDev\NEWCRM\bin\Models\Locale.cs
+E:\my Build\one2one\CRM2015\Code_CRMOrigin\NEWCRMDev\NEWCRM\bin\Models\MailLog.cs
+E:\my Build\one2one\CRM2015\Code_CRMOrigin\NEWCRMDev\NEWCRM\bin\Models\NEWCRM.Context.cs
+E:\my Build\one2one\CRM2015\Code_CRMOrigin\NEWCRMDev\NEWCRM\bin\Models\NEWCRM.cs
+E:\my Build\one2one\CRM2015\Code_CRMOrigin\NEWCRMDev\NEWCRM\bin\Models\NEWCRM.Designer.cs
+E:\my Build\one2one\CRM2015\Code_CRMOrigin\NEWCRMDev\NEWCRM\bin\Models\Notification.cs
+E:\my Build\one2one\CRM2015\Code_CRMOrigin\NEWCRMDev\NEWCRM\bin\Models\NotificationType.cs
+E:\my Build\one2one\CRM2015\Code_CRMOrigin\NEWCRMDev\NEWCRM\bin\Models\Phone.cs
+E:\my Build\one2one\CRM2015\Code_CRMOrigin\NEWCRMDev\NEWCRM\bin\Models\PhoneType.cs
+E:\my Build\one2one\CRM2015\Code_CRMOrigin\NEWCRMDev\NEWCRM\bin\Models\PhoneType_Locale.cs
+E:\my Build\one2one\CRM2015\Code_CRMOrigin\NEWCRMDev\NEWCRM\bin\Models\Priority.cs
+E:\my Build\one2one\CRM2015\Code_CRMOrigin\NEWCRMDev\NEWCRM\bin\Models\Priority_Locale.cs
+E:\my Build\one2one\CRM2015\Code_CRMOrigin\NEWCRMDev\NEWCRM\bin\Models\Province.cs
+E:\my Build\one2one\CRM2015\Code_CRMOrigin\NEWCRMDev\NEWCRM\bin\Models\Province_Locale.cs
+E:\my Build\one2one\CRM2015\Code_CRMOrigin\NEWCRMDev\NEWCRM\bin\Models\Province_Zone.cs
+E:\my Build\one2one\CRM2015\Code_CRMOrigin\NEWCRMDev\NEWCRM\bin\Models\Role.cs
+E:\my Build\one2one\CRM2015\Code_CRMOrigin\NEWCRMDev\NEWCRM\bin\Models\Role_Functions.cs
+E:\my Build\one2one\CRM2015\Code_CRMOrigin\NEWCRMDev\NEWCRM\bin\Models\sp_ActivityChannelSummary_Result.cs
+E:\my Build\one2one\CRM2015\Code_CRMOrigin\NEWCRMDev\NEWCRM\bin\Models\sp_ContactAutoComplete_Result.cs
+E:\my Build\one2one\CRM2015\Code_CRMOrigin\NEWCRMDev\NEWCRM\bin\Models\sp_GetCaseDetailById_Result.cs
+E:\my Build\one2one\CRM2015\Code_CRMOrigin\NEWCRMDev\NEWCRM\bin\Models\sp_GetCaseDetailTimeline_Result.cs
+E:\my Build\one2one\CRM2015\Code_CRMOrigin\NEWCRMDev\NEWCRM\bin\Models\sp_GetCaseFavourite_Result.cs
+E:\my Build\one2one\CRM2015\Code_CRMOrigin\NEWCRMDev\NEWCRM\bin\Models\sp_GetCaseList_Result.cs
+E:\my Build\one2one\CRM2015\Code_CRMOrigin\NEWCRMDev\NEWCRM\bin\Models\sp_getCaseQuery_Result.cs
+E:\my Build\one2one\CRM2015\Code_CRMOrigin\NEWCRMDev\NEWCRM\bin\Models\sp_getCasesOverSLA_Result.cs
+E:\my Build\one2one\CRM2015\Code_CRMOrigin\NEWCRMDev\NEWCRM\bin\Models\sp_getContactCommonDetail_Result.cs
+E:\my Build\one2one\CRM2015\Code_CRMOrigin\NEWCRMDev\NEWCRM\bin\Models\sp_getContactLogTimeline_Result.cs
+E:\my Build\one2one\CRM2015\Code_CRMOrigin\NEWCRMDev\NEWCRM\bin\Models\sp_getContactSearch_Result.cs
+E:\my Build\one2one\CRM2015\Code_CRMOrigin\NEWCRMDev\NEWCRM\bin\Models\sp_GetContactViewLog_Result.cs
+E:\my Build\one2one\CRM2015\Code_CRMOrigin\NEWCRMDev\NEWCRM\bin\Models\sp_GetGroupUser_Result.cs
+E:\my Build\one2one\CRM2015\Code_CRMOrigin\NEWCRMDev\NEWCRM\bin\Models\sp_GetInboundContact_Result.cs
+E:\my Build\one2one\CRM2015\Code_CRMOrigin\NEWCRMDev\NEWCRM\bin\Models\sp_getLastActivityContact_Result.cs
+E:\my Build\one2one\CRM2015\Code_CRMOrigin\NEWCRMDev\NEWCRM\bin\Models\sp_GetLastCases_Result.cs
+E:\my Build\one2one\CRM2015\Code_CRMOrigin\NEWCRMDev\NEWCRM\bin\Models\sp_GetMailContentInfo_Result.cs
+E:\my Build\one2one\CRM2015\Code_CRMOrigin\NEWCRMDev\NEWCRM\bin\Models\sp_getNewCaseList_Result.cs
+E:\my Build\one2one\CRM2015\Code_CRMOrigin\NEWCRMDev\NEWCRM\bin\Models\sp_GetNotification_Result.cs
+E:\my Build\one2one\CRM2015\Code_CRMOrigin\NEWCRMDev\NEWCRM\bin\Models\sp_GetStatus_Result.cs
+E:\my Build\one2one\CRM2015\Code_CRMOrigin\NEWCRMDev\NEWCRM\bin\Models\sp_getTotalTodolistByChannel_Result.cs
+E:\my Build\one2one\CRM2015\Code_CRMOrigin\NEWCRMDev\NEWCRM\bin\Models\sp_getUserProfileTimeline_Result.cs
+E:\my Build\one2one\CRM2015\Code_CRMOrigin\NEWCRMDev\NEWCRM\bin\Models\sp_getUserProfile_Result.cs
+E:\my Build\one2one\CRM2015\Code_CRMOrigin\NEWCRMDev\NEWCRM\bin\Models\sp_GetUser_Result.cs
+E:\my Build\one2one\CRM2015\Code_CRMOrigin\NEWCRMDev\NEWCRM\bin\Models\sp_Get_Casepending_ByAgent_Result.cs
+E:\my Build\one2one\CRM2015\Code_CRMOrigin\NEWCRMDev\NEWCRM\bin\Models\sp_Get_Casepending_Result.cs
+E:\my Build\one2one\CRM2015\Code_CRMOrigin\NEWCRMDev\NEWCRM\bin\Models\sp_helpdiagramdefinition_Result.cs
+E:\my Build\one2one\CRM2015\Code_CRMOrigin\NEWCRMDev\NEWCRM\bin\Models\sp_helpdiagrams_Result.cs
+E:\my Build\one2one\CRM2015\Code_CRMOrigin\NEWCRMDev\NEWCRM\bin\Models\st_GetUserInGroup_ById_Result.cs
+E:\my Build\one2one\CRM2015\Code_CRMOrigin\NEWCRMDev\NEWCRM\bin\Models\st_Get_Dashbord_CaseStatus_Result.cs
+E:\my Build\one2one\CRM2015\Code_CRMOrigin\NEWCRMDev\NEWCRM\bin\Models\st_GET_UserRole_ById_Result.cs
+E:\my Build\one2one\CRM2015\Code_CRMOrigin\NEWCRMDev\NEWCRM\bin\Models\SubDistrict.cs
+E:\my Build\one2one\CRM2015\Code_CRMOrigin\NEWCRMDev\NEWCRM\bin\Models\SubDistrict_Locale.cs
+E:\my Build\one2one\CRM2015\Code_CRMOrigin\NEWCRMDev\NEWCRM\bin\Models\sysdiagram.cs
+E:\my Build\one2one\CRM2015\Code_CRMOrigin\NEWCRMDev\NEWCRM\bin\Models\Title.cs
+E:\my Build\one2one\CRM2015\Code_CRMOrigin\NEWCRMDev\NEWCRM\bin\Models\Titles_Locale.cs
+E:\my Build\one2one\CRM2015\Code_CRMOrigin\NEWCRMDev\NEWCRM\bin\Models\User.cs
+E:\my Build\one2one\CRM2015\Code_CRMOrigin\NEWCRMDev\NEWCRM\bin\Models\User_Group.cs
+E:\my Build\one2one\CRM2015\Code_CRMOrigin\NEWCRMDev\NEWCRM\bin\Models\User_Role.cs
+E:\my Build\one2one\CRM2015\Code_CRMOrigin\NEWCRMDev\NEWCRM\bin\Models\uspCaseType_Result.cs
+E:\my Build\one2one\CRM2015\Code_CRMOrigin\NEWCRMDev\NEWCRM\bin\Models\uspContactDetail_Result.cs
+E:\my Build\one2one\CRM2015\Code_CRMOrigin\NEWCRMDev\NEWCRM\bin\Models\uspReportCaseSummary_Result.cs
+E:\my Build\one2one\CRM2015\Code_CRMOrigin\NEWCRMDev\NEWCRM\bin\Models\uspSuvitech_CaseStatusSumAll_Result.cs
+E:\my Build\one2one\CRM2015\Code_CRMOrigin\NEWCRMDev\NEWCRM\bin\Models\uspSuvitech_ContactDetailRpt_Result.cs
+E:\my Build\one2one\CRM2015\Code_CRMOrigin\NEWCRMDev\NEWCRM\obj\Debug\NEWCRM.csprojResolveAssemblyReference.cache
+E:\my Build\one2one\CRM2015\Code_CRMOrigin\NEWCRMDev\NEWCRM\bin\Web.config
+E:\my Build\one2one\CRM2015\Code_CRMOrigin\NEWCRMDev\NEWCRM\bin\Web.Debug.config
+E:\my Build\one2one\CRM2015\Code_CRMOrigin\NEWCRMDev\NEWCRM\bin\Web.Release.config
+E:\my Build\one2one\sourcecontrol\NEWCRMDev\NEWCRM\bin\Models\NEWCRM.Context.tt
+E:\my Build\one2one\sourcecontrol\NEWCRMDev\NEWCRM\bin\Models\NEWCRM.edmx.diagram
+E:\my Build\one2one\sourcecontrol\NEWCRMDev\NEWCRM\bin\Models\NEWCRM.tt
+E:\my Build\one2one\sourcecontrol\NEWCRMDev\NEWCRM\bin\Web.config
+E:\my Build\one2one\sourcecontrol\NEWCRMDev\NEWCRM\bin\Web.Debug.config
+E:\my Build\one2one\sourcecontrol\NEWCRMDev\NEWCRM\bin\Web.Release.config
+E:\my Build\one2one\sourcecontrol\NEWCRMDev\NEWCRM\bin\Models\Activities.cs
+E:\my Build\one2one\sourcecontrol\NEWCRMDev\NEWCRM\bin\Models\ActivityStatus.cs
+E:\my Build\one2one\sourcecontrol\NEWCRMDev\NEWCRM\bin\Models\ActivityStatus_Locale.cs
+E:\my Build\one2one\sourcecontrol\NEWCRMDev\NEWCRM\bin\Models\Address.cs
+E:\my Build\one2one\sourcecontrol\NEWCRMDev\NEWCRM\bin\Models\Announcement.cs
+E:\my Build\one2one\sourcecontrol\NEWCRMDev\NEWCRM\bin\Models\AuthenLog.cs
+E:\my Build\one2one\sourcecontrol\NEWCRMDev\NEWCRM\bin\Models\Calendar.cs
+E:\my Build\one2one\sourcecontrol\NEWCRMDev\NEWCRM\bin\Models\Callback.cs
+E:\my Build\one2one\sourcecontrol\NEWCRMDev\NEWCRM\bin\Models\CallbackCause.cs
+E:\my Build\one2one\sourcecontrol\NEWCRMDev\NEWCRM\bin\Models\CallbackCause_Locale.cs
+E:\my Build\one2one\sourcecontrol\NEWCRMDev\NEWCRM\bin\Models\CallBackChannel.cs
+E:\my Build\one2one\sourcecontrol\NEWCRMDev\NEWCRM\bin\Models\CallbackType.cs
+E:\my Build\one2one\sourcecontrol\NEWCRMDev\NEWCRM\bin\Models\CallbackType_Locale.cs
+E:\my Build\one2one\sourcecontrol\NEWCRMDev\NEWCRM\bin\Models\Case.cs
+E:\my Build\one2one\sourcecontrol\NEWCRMDev\NEWCRM\bin\Models\CaseAttachFile.cs
+E:\my Build\one2one\sourcecontrol\NEWCRMDev\NEWCRM\bin\Models\CaseLog.cs
+E:\my Build\one2one\sourcecontrol\NEWCRMDev\NEWCRM\bin\Models\CaseLogType.cs
+E:\my Build\one2one\sourcecontrol\NEWCRMDev\NEWCRM\bin\Models\CaseRemindFlow.cs
+E:\my Build\one2one\sourcecontrol\NEWCRMDev\NEWCRM\bin\Models\CaseStatu.cs
+E:\my Build\one2one\sourcecontrol\NEWCRMDev\NEWCRM\bin\Models\CaseStatus_Locale.cs
+E:\my Build\one2one\sourcecontrol\NEWCRMDev\NEWCRM\bin\Models\CaseType.cs
+E:\my Build\one2one\sourcecontrol\NEWCRMDev\NEWCRM\bin\Models\Channel.cs
+E:\my Build\one2one\sourcecontrol\NEWCRMDev\NEWCRM\bin\Models\Contact.cs
+E:\my Build\one2one\sourcecontrol\NEWCRMDev\NEWCRM\bin\Models\ContactLog.cs
+E:\my Build\one2one\sourcecontrol\NEWCRMDev\NEWCRM\bin\Models\ContactType.cs
+E:\my Build\one2one\sourcecontrol\NEWCRMDev\NEWCRM\bin\Models\ContactType_Locale.cs
+E:\my Build\one2one\sourcecontrol\NEWCRMDev\NEWCRM\bin\Models\ContactViewLog.cs
+E:\my Build\one2one\sourcecontrol\NEWCRMDev\NEWCRM\bin\Models\District.cs
+E:\my Build\one2one\sourcecontrol\NEWCRMDev\NEWCRM\bin\Models\District_Locale.cs
+E:\my Build\one2one\sourcecontrol\NEWCRMDev\NEWCRM\bin\Models\DNIS.cs
+E:\my Build\one2one\sourcecontrol\NEWCRMDev\NEWCRM\bin\Models\Function.cs
+E:\my Build\one2one\sourcecontrol\NEWCRMDev\NEWCRM\bin\Models\Gender.cs
+E:\my Build\one2one\sourcecontrol\NEWCRMDev\NEWCRM\bin\Models\Genders_Locale.cs
+E:\my Build\one2one\sourcecontrol\NEWCRMDev\NEWCRM\bin\Models\Group.cs
+E:\my Build\one2one\sourcecontrol\NEWCRMDev\NEWCRM\bin\Models\Group_Role.cs
+E:\my Build\one2one\sourcecontrol\NEWCRMDev\NEWCRM\bin\Models\Locale.cs
+E:\my Build\one2one\sourcecontrol\NEWCRMDev\NEWCRM\bin\Models\MailLog.cs
+E:\my Build\one2one\sourcecontrol\NEWCRMDev\NEWCRM\bin\Models\NEWCRM.Context.cs
+E:\my Build\one2one\sourcecontrol\NEWCRMDev\NEWCRM\bin\Models\NEWCRM.cs
+E:\my Build\one2one\sourcecontrol\NEWCRMDev\NEWCRM\bin\Models\NEWCRM.Designer.cs
+E:\my Build\one2one\sourcecontrol\NEWCRMDev\NEWCRM\bin\Models\Notification.cs
+E:\my Build\one2one\sourcecontrol\NEWCRMDev\NEWCRM\bin\Models\NotificationType.cs
+E:\my Build\one2one\sourcecontrol\NEWCRMDev\NEWCRM\bin\Models\Phone.cs
+E:\my Build\one2one\sourcecontrol\NEWCRMDev\NEWCRM\bin\Models\PhoneType.cs
+E:\my Build\one2one\sourcecontrol\NEWCRMDev\NEWCRM\bin\Models\PhoneType_Locale.cs
+E:\my Build\one2one\sourcecontrol\NEWCRMDev\NEWCRM\bin\Models\Priority.cs
+E:\my Build\one2one\sourcecontrol\NEWCRMDev\NEWCRM\bin\Models\Priority_Locale.cs
+E:\my Build\one2one\sourcecontrol\NEWCRMDev\NEWCRM\bin\Models\Province.cs
+E:\my Build\one2one\sourcecontrol\NEWCRMDev\NEWCRM\bin\Models\Province_Locale.cs
+E:\my Build\one2one\sourcecontrol\NEWCRMDev\NEWCRM\bin\Models\Province_Zone.cs
+E:\my Build\one2one\sourcecontrol\NEWCRMDev\NEWCRM\bin\Models\Role.cs
+E:\my Build\one2one\sourcecontrol\NEWCRMDev\NEWCRM\bin\Models\Role_Functions.cs
+E:\my Build\one2one\sourcecontrol\NEWCRMDev\NEWCRM\bin\Models\sp_ActivityChannelSummary_Result.cs
+E:\my Build\one2one\sourcecontrol\NEWCRMDev\NEWCRM\bin\Models\sp_ContactAutoComplete_Result.cs
+E:\my Build\one2one\sourcecontrol\NEWCRMDev\NEWCRM\bin\Models\sp_GetCaseDetailById_Result.cs
+E:\my Build\one2one\sourcecontrol\NEWCRMDev\NEWCRM\bin\Models\sp_GetCaseDetailTimeline_Result.cs
+E:\my Build\one2one\sourcecontrol\NEWCRMDev\NEWCRM\bin\Models\sp_GetCaseFavourite_Result.cs
+E:\my Build\one2one\sourcecontrol\NEWCRMDev\NEWCRM\bin\Models\sp_GetCaseList_Result.cs
+E:\my Build\one2one\sourcecontrol\NEWCRMDev\NEWCRM\bin\Models\sp_getCaseQuery_Result.cs
+E:\my Build\one2one\sourcecontrol\NEWCRMDev\NEWCRM\bin\Models\sp_getCasesOverSLA_Result.cs
+E:\my Build\one2one\sourcecontrol\NEWCRMDev\NEWCRM\bin\Models\sp_getContactCommonDetail_Result.cs
+E:\my Build\one2one\sourcecontrol\NEWCRMDev\NEWCRM\bin\Models\sp_getContactLogTimeline_Result.cs
+E:\my Build\one2one\sourcecontrol\NEWCRMDev\NEWCRM\bin\Models\sp_getContactSearch_Result.cs
+E:\my Build\one2one\sourcecontrol\NEWCRMDev\NEWCRM\bin\Models\sp_GetContactViewLog_Result.cs
+E:\my Build\one2one\sourcecontrol\NEWCRMDev\NEWCRM\bin\Models\sp_GetGroupUser_Result.cs
+E:\my Build\one2one\sourcecontrol\NEWCRMDev\NEWCRM\bin\Models\sp_GetInboundContact_Result.cs
+E:\my Build\one2one\sourcecontrol\NEWCRMDev\NEWCRM\bin\Models\sp_getLastActivityContact_Result.cs
+E:\my Build\one2one\sourcecontrol\NEWCRMDev\NEWCRM\bin\Models\sp_GetLastCases_Result.cs
+E:\my Build\one2one\sourcecontrol\NEWCRMDev\NEWCRM\bin\Models\sp_GetMailContentInfo_Result.cs
+E:\my Build\one2one\sourcecontrol\NEWCRMDev\NEWCRM\bin\Models\sp_getNewCaseList_Result.cs
+E:\my Build\one2one\sourcecontrol\NEWCRMDev\NEWCRM\bin\Models\sp_GetNotification_Result.cs
+E:\my Build\one2one\sourcecontrol\NEWCRMDev\NEWCRM\bin\Models\sp_GetStatus_Result.cs
+E:\my Build\one2one\sourcecontrol\NEWCRMDev\NEWCRM\bin\Models\sp_getTotalTodolistByChannel_Result.cs
+E:\my Build\one2one\sourcecontrol\NEWCRMDev\NEWCRM\bin\Models\sp_getUserProfileTimeline_Result.cs
+E:\my Build\one2one\sourcecontrol\NEWCRMDev\NEWCRM\bin\Models\sp_getUserProfile_Result.cs
+E:\my Build\one2one\sourcecontrol\NEWCRMDev\NEWCRM\bin\Models\sp_GetUser_Result.cs
+E:\my Build\one2one\sourcecontrol\NEWCRMDev\NEWCRM\bin\Models\sp_Get_Casepending_ByAgent_Result.cs
+E:\my Build\one2one\sourcecontrol\NEWCRMDev\NEWCRM\bin\Models\sp_Get_Casepending_Result.cs
+E:\my Build\one2one\sourcecontrol\NEWCRMDev\NEWCRM\bin\Models\sp_helpdiagramdefinition_Result.cs
+E:\my Build\one2one\sourcecontrol\NEWCRMDev\NEWCRM\bin\Models\sp_helpdiagrams_Result.cs
+E:\my Build\one2one\sourcecontrol\NEWCRMDev\NEWCRM\bin\Models\st_GetUserInGroup_ById_Result.cs
+E:\my Build\one2one\sourcecontrol\NEWCRMDev\NEWCRM\bin\Models\st_Get_Dashbord_CaseStatus_Result.cs
+E:\my Build\one2one\sourcecontrol\NEWCRMDev\NEWCRM\bin\Models\st_GET_UserRole_ById_Result.cs
+E:\my Build\one2one\sourcecontrol\NEWCRMDev\NEWCRM\bin\Models\SubDistrict.cs
+E:\my Build\one2one\sourcecontrol\NEWCRMDev\NEWCRM\bin\Models\SubDistrict_Locale.cs
+E:\my Build\one2one\sourcecontrol\NEWCRMDev\NEWCRM\bin\Models\Title.cs
+E:\my Build\one2one\sourcecontrol\NEWCRMDev\NEWCRM\bin\Models\Titles_Locale.cs
+E:\my Build\one2one\sourcecontrol\NEWCRMDev\NEWCRM\bin\Models\User.cs
+E:\my Build\one2one\sourcecontrol\NEWCRMDev\NEWCRM\bin\Models\User_Group.cs
+E:\my Build\one2one\sourcecontrol\NEWCRMDev\NEWCRM\bin\Models\User_Role.cs
+E:\my Build\one2one\sourcecontrol\NEWCRMDev\NEWCRM\bin\Models\uspCaseType_Result.cs
+E:\my Build\one2one\sourcecontrol\NEWCRMDev\NEWCRM\bin\Models\uspContactDetail_Result.cs
+E:\my Build\one2one\sourcecontrol\NEWCRMDev\NEWCRM\bin\Models\uspReportCaseSummary_Result.cs
+E:\my Build\one2one\sourcecontrol\NEWCRMDev\NEWCRM\bin\Models\uspSuvitech_CaseStatusSumAll_Result.cs
+E:\my Build\one2one\sourcecontrol\NEWCRMDev\NEWCRM\bin\Models\uspSuvitech_ContactDetailRpt_Result.cs
+E:\my Build\one2one\sourcecontrol\NEWCRMDev\NEWCRM\bin\NEWCRM.dll.config
+E:\my Build\one2one\sourcecontrol\NEWCRMDev\NEWCRM\bin\NEWCRM.dll
+E:\my Build\one2one\sourcecontrol\NEWCRMDev\NEWCRM\bin\NEWCRM.pdb
+E:\my Build\one2one\sourcecontrol\NEWCRMDev\NEWCRM\bin\Antlr3.Runtime.dll
+E:\my Build\one2one\sourcecontrol\NEWCRMDev\NEWCRM\bin\Microsoft.ApplicationBlocks.Data.dll
+E:\my Build\one2one\sourcecontrol\NEWCRMDev\NEWCRM\bin\Microsoft.ReportViewer.WebForms.dll
+E:\my Build\one2one\sourcecontrol\NEWCRMDev\NEWCRM\bin\Microsoft.Web.Infrastructure.dll
+E:\my Build\one2one\sourcecontrol\NEWCRMDev\NEWCRM\bin\Newtonsoft.Json.dll
+E:\my Build\one2one\sourcecontrol\NEWCRMDev\NEWCRM\bin\System.Net.Http.Formatting.dll
+E:\my Build\one2one\sourcecontrol\NEWCRMDev\NEWCRM\bin\System.Web.Http.dll
+E:\my Build\one2one\sourcecontrol\NEWCRMDev\NEWCRM\bin\System.Web.Http.WebHost.dll
+E:\my Build\one2one\sourcecontrol\NEWCRMDev\NEWCRM\bin\System.Web.Mvc.dll
+E:\my Build\one2one\sourcecontrol\NEWCRMDev\NEWCRM\bin\System.Web.Optimization.dll
+E:\my Build\one2one\sourcecontrol\NEWCRMDev\NEWCRM\bin\System.Web.Providers.dll
+E:\my Build\one2one\sourcecontrol\NEWCRMDev\NEWCRM\bin\System.Web.Razor.dll
+E:\my Build\one2one\sourcecontrol\NEWCRMDev\NEWCRM\bin\System.Web.WebPages.Deployment.dll
+E:\my Build\one2one\sourcecontrol\NEWCRMDev\NEWCRM\bin\System.Web.WebPages.dll
+E:\my Build\one2one\sourcecontrol\NEWCRMDev\NEWCRM\bin\System.Web.WebPages.Razor.dll
+E:\my Build\one2one\sourcecontrol\NEWCRMDev\NEWCRM\bin\WebGrease.dll
+E:\my Build\one2one\sourcecontrol\NEWCRMDev\NEWCRM\bin\Microsoft.SqlServer.Types.dll
+E:\my Build\one2one\sourcecontrol\NEWCRMDev\NEWCRM\bin\Newtonsoft.Json.xml
+E:\my Build\one2one\sourcecontrol\NEWCRMDev\NEWCRM\bin\System.Net.Http.Formatting.xml
+E:\my Build\one2one\sourcecontrol\NEWCRMDev\NEWCRM\bin\System.Web.Http.xml
+E:\my Build\one2one\sourcecontrol\NEWCRMDev\NEWCRM\bin\System.Web.Http.WebHost.xml
+E:\my Build\one2one\sourcecontrol\NEWCRMDev\NEWCRM\bin\System.Web.Mvc.xml
+E:\my Build\one2one\sourcecontrol\NEWCRMDev\NEWCRM\bin\System.Web.Razor.xml
+E:\my Build\one2one\sourcecontrol\NEWCRMDev\NEWCRM\bin\System.Web.WebPages.xml
+E:\my Build\one2one\sourcecontrol\NEWCRMDev\NEWCRM\bin\System.Web.WebPages.Deployment.xml
+E:\my Build\one2one\sourcecontrol\NEWCRMDev\NEWCRM\bin\System.Web.WebPages.Razor.xml
+E:\my Build\one2one\sourcecontrol\NEWCRMDev\NEWCRM\bin\de\Microsoft.SqlServer.Types.resources.dll
+E:\my Build\one2one\sourcecontrol\NEWCRMDev\NEWCRM\bin\es\Microsoft.SqlServer.Types.resources.dll
+E:\my Build\one2one\sourcecontrol\NEWCRMDev\NEWCRM\bin\fr\Microsoft.SqlServer.Types.resources.dll
+E:\my Build\one2one\sourcecontrol\NEWCRMDev\NEWCRM\bin\it\Microsoft.SqlServer.Types.resources.dll
+E:\my Build\one2one\sourcecontrol\NEWCRMDev\NEWCRM\bin\ja\Microsoft.SqlServer.Types.resources.dll
+E:\my Build\one2one\sourcecontrol\NEWCRMDev\NEWCRM\bin\ko\Microsoft.SqlServer.Types.resources.dll
+E:\my Build\one2one\sourcecontrol\NEWCRMDev\NEWCRM\bin\pt\Microsoft.SqlServer.Types.resources.dll
+E:\my Build\one2one\sourcecontrol\NEWCRMDev\NEWCRM\bin\ru\Microsoft.SqlServer.Types.resources.dll
+E:\my Build\one2one\sourcecontrol\NEWCRMDev\NEWCRM\bin\zh-Hans\Microsoft.SqlServer.Types.resources.dll
+E:\my Build\one2one\sourcecontrol\NEWCRMDev\NEWCRM\bin\zh-Hant\Microsoft.SqlServer.Types.resources.dll
+E:\my Build\one2one\sourcecontrol\NEWCRMDev\NEWCRM\obj\Debug\NEWCRM.csprojResolveAssemblyReference.cache
+E:\my Build\one2one\sourcecontrol\NEWCRMDev\NEWCRM\obj\Debug\NEWCRM.dll
+E:\my Build\one2one\sourcecontrol\NEWCRMDev\NEWCRM\obj\Debug\NEWCRM.pdb

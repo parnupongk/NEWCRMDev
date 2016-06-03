@@ -1,0 +1,87 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="CRMTHAILANDCHECKINModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="CRMTHAILANDCHECKINModelStoreContainer">
+    <EntitySet Name="CaseLogs" EntityType="CRMTHAILANDCHECKINModel.Store.CaseLogs" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Cases" EntityType="CRMTHAILANDCHECKINModel.Store.Cases" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="TaskScheduleLog" EntityType="CRMTHAILANDCHECKINModel.Store.TaskScheduleLog" store:Type="Tables" Schema="dbo" />
+  </EntityContainer>
+  <EntityType Name="CaseLogs">
+    <Key>
+      <PropertyRef Name="cslID" />
+    </Key>
+    <Property Name="cslID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="casID" Type="int" Nullable="false" />
+    <Property Name="actID" Type="int" Nullable="false" />
+    <Property Name="cltID" Type="int" Nullable="false" />
+    <Property Name="cslNote" Type="ntext" />
+    <Property Name="cslDesc" Type="nvarchar" MaxLength="2000" />
+    <Property Name="cslCreatedOn" Type="datetime" Nullable="false" />
+    <Property Name="cslCreatedBy" Type="int" Nullable="false" />
+    <Property Name="cslModifiedOn" Type="datetime" Nullable="false" />
+    <Property Name="cslModifiedBy" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Cases">
+    <Key>
+      <PropertyRef Name="casID" />
+    </Key>
+    <Property Name="casID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="actID" Type="int" Nullable="false" />
+    <Property Name="ctaID" Type="int" Nullable="false" />
+    <Property Name="casIDName" Type="nvarchar" MaxLength="12" />
+    <Property Name="casParentID" Type="int" />
+    <Property Name="casDuration" Type="int" />
+    <Property Name="casDueDate" Type="datetime" />
+    <Property Name="casPrevDueDate" Type="datetime" />
+    <Property Name="casIDLevel1" Type="int" />
+    <Property Name="casIDLevel2" Type="int" />
+    <Property Name="casIDLevel3" Type="int" />
+    <Property Name="casIDLevel4" Type="int" />
+    <Property Name="casIDLevel5" Type="int" />
+    <Property Name="casIDLevel6" Type="int" />
+    <Property Name="casIDLevel7" Type="int" />
+    <Property Name="casIDLevel8" Type="int" />
+    <Property Name="casLevel1" Type="nvarchar" MaxLength="255" />
+    <Property Name="casLevel2" Type="nvarchar" MaxLength="255" />
+    <Property Name="casLevel3" Type="nvarchar" MaxLength="255" />
+    <Property Name="casLevel4" Type="nvarchar" MaxLength="255" />
+    <Property Name="casLevel5" Type="nvarchar" MaxLength="255" />
+    <Property Name="casLevel6" Type="nvarchar" MaxLength="255" />
+    <Property Name="casLevel7" Type="nvarchar" MaxLength="255" />
+    <Property Name="casLevel8" Type="nvarchar" MaxLength="255" />
+    <Property Name="casIDSummary" Type="int" Nullable="false" />
+    <Property Name="casSummary" Type="nvarchar" MaxLength="255" />
+    <Property Name="casNote" Type="ntext" />
+    <Property Name="cbtID" Type="int" />
+    <Property Name="cbcID" Type="int" />
+    <Property Name="CallbackInfo" Type="nvarchar" MaxLength="255" />
+    <Property Name="CallbackDT" Type="datetime" />
+    <Property Name="casSLA" Type="int" />
+    <Property Name="priID" Type="int" Nullable="false" />
+    <Property Name="cssID" Type="int" Nullable="false" />
+    <Property Name="casEmo" Type="int" />
+    <Property Name="casGroupID" Type="int" />
+    <Property Name="casOwnerID" Type="int" />
+    <Property Name="casCreatedOn" Type="datetime" Nullable="false" />
+    <Property Name="casCreatedBy" Type="int" Nullable="false" />
+    <Property Name="casModifiedOn" Type="datetime" Nullable="false" />
+    <Property Name="casModifiedBy" Type="int" Nullable="false" />
+    <Property Name="casFav" Type="bit" Nullable="false" />
+    <Property Name="assignTo" Type="int" />
+    <Property Name="casRemindID" Type="int" />
+    <Property Name="casRemindStatus" Type="char" MaxLength="1" />
+  </EntityType>
+  <EntityType Name="TaskScheduleLog">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="TaskName" Type="nvarchar" Nullable="false" MaxLength="50" />
+    <Property Name="TaskStart" Type="datetime" />
+    <Property Name="TaskEnd" Type="datetime" />
+    <Property Name="TaskStatus" Type="char" MaxLength="1" />
+    <Property Name="TaskDesc" Type="nvarchar(max)" />
+  </EntityType>
+  <Function Name="sp_getCasesOverSLA" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="p_Now" Type="nvarchar" Mode="In" />
+  </Function>
+</Schema>

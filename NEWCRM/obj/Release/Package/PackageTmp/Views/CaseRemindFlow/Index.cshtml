@@ -1,0 +1,86 @@
+﻿@{    
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model IEnumerable<NEWCRM.Models.CaseRemindFlows>
+@section Scripts {
+<script type="text/javascript">
+    $(document).ready(function () {
+
+    });
+
+    function frmBegin()
+    {
+
+    }
+
+    function frmSuccess()
+    {
+
+    }
+
+    function frmFailure()
+    {
+
+    }
+</script>
+}
+<div class="section-body">
+    <div class="row">
+        <div class="col-lg-12">
+            @using (Ajax.BeginForm("SaveAll", "CaseRemindFlow",
+                new AjaxOptions { HttpMethod = "post", OnBegin = "frmBegin", OnSuccess = "frmSuccess", OnFailure = "frmFailure" },
+                new { id = "frm-remind", @class = "form-horizontal form-validate", novalidate = "novalidate", autocomplete = "off" }))
+            {
+                <div class="card">
+                    <div class="card-head style-primary">
+                        <header>Case Remind Flows</header>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            @foreach (var item in Model)
+                            {
+                                <div class="col-sm-2">
+                                    <div class="form-group">
+                                        <label for="crfID" class="col-sm-4 control-label">Step</label>
+                                        <div class="col-sm-8">
+                                            <input type="text" class="form-control" id="crfID" name="crfID[]" value="@item.crfID" readonly />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="form-group">
+                                        <label for="crfFlowName" class="col-sm-4 control-label">Flow Name</label>
+                                        <div class="col-sm-8">
+                                            <input type="text" class="form-control" id="crfFlowName" name="crfFlowName[]" value="@item.crfFlowName" readonly />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="form-group has-warning">
+                                        <label for="crfFlowPhone" class="col-sm-4 control-label">Flow Phone</label>
+                                        <div class="col-sm-8">
+                                            <input type="text" class="form-control" id="crfFlowPhone" name="crfFlowPhone[]" value="@item.crfFlowPhone" />
+                                        </div>
+                                    </div>
+                                </div> 
+                                <div class="col-sm-2">
+                                    <div class="form-group has-warning">
+                                        <label for="crfFlowMinute" class="col-sm-4 control-label">Minutes</label>
+                                        <div class="col-sm-8">
+                                            <input type="text" class="form-control" id="crfFlowMinute" name="crfFlowMinute[]" value="@item.crfFlowMinute" />
+                                        </div>
+                                    </div>
+                                </div> 
+                            }
+                        </div>
+                    </div>
+                    <div class="card-actionbar">
+                        <div class="card-actionbar-row">
+                            <button type="submit" class="btn ink-reaction btn-raised btn-warning"><i class="fa fa-save fa-fw"></i>&nbsp;Save All</button>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>

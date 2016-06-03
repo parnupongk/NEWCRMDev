@@ -1,0 +1,130 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>ONE TO ONE CONTACTS : CRM ORIGIN</title>
+
+    <!-- BEGIN META -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="keywords" content="your,keywords">
+    <meta name="description" content="Short explanation about this website">
+    <!-- END META -->
+
+    <!-- BEGIN STYLESHEETS -->
+    <link href='http://fonts.googleapis.com/css?family=Roboto:300italic,400italic,300,400,500,700,900' rel='stylesheet' type='text/css' />
+    <link type="text/css" rel="stylesheet" href="~/Content/theme-oto/bootstrap.css?1422792965" />
+    <link type="text/css" rel="stylesheet" href="~/Content/theme-oto/materialadmin.css?1425466319" />
+    <link type="text/css" rel="stylesheet" href="~/Content/theme-oto/font-awesome.min.css?1422529194" />
+    <link type="text/css" rel="stylesheet" href="~/Content/theme-oto/material-design-iconic-font.min.css?1421434286" />
+    <link type="text/css" rel="stylesheet" href="~/Content/theme-oto/libs/toastr/toastr.css?1425466569" />
+    <!-- END STYLESHEETS -->
+</head>
+<body class="menubar-hoverable header-fixed ">
+
+    <!-- BEGIN LOGIN SECTION -->
+    <section class="section-account">
+        <div class="img-backdrop" style="background-color: #FFF; background-image: url('/Images/logo.png'); background-position: 10px; background-repeat: no-repeat; background-size: auto; left: 0; height: 120px"></div>
+        <div class="spacer" style="height:180px"></div>
+        <div class="card contain-sm style-transparent">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-sm-2">&nbsp;</div>
+                    <div class="col-sm-8 style-default-light">
+                        <br />
+                        <span class="text-xl text-bold text-info">Sign in</span>
+                        <br />
+                        <br />
+                        @using (Ajax.BeginForm("Signin", new { controller = "Authentication" },
+                                        new AjaxOptions { HttpMethod = "post", OnSuccess = "successAuthen", OnFailure = "failureAuthen" },
+                                        new { id = "frm-authen", @class = "form form-validate floating-label", novalidate = "novalidate", autocomplete = "off" }))
+                        {
+                            <div class="form-group">
+                                <input type="text" class="form-control" id="username" name="username" required />
+                                <label for="username">Username</label>
+                            </div>
+                            <div class="form-group">
+                                <input type="password" class="form-control" id="password" name="password" required />
+                                <label for="password">Password</label>
+                                @* <p class="help-block"><a href="#">Forgotten?</a></p>*@
+                            </div>
+                            <br />
+                            <div class="row">                              
+                                <div class="col-xs-2">&nbsp;</div>
+                                <div class="col-xs-8">
+                                    <button class="btn btn-danger btn-block" type="submit"><span class="pull-left"><i class="fa fa-key"></i></span>SIGN IN</button>
+                                </div>
+                                <div class="col-xs-2">&nbsp;</div>
+                                <!--end .col -->
+                            </div>
+                            <br />
+                            <!--end .row -->
+                        }
+                    </div>
+                    <div class="col-sm-2">&nbsp;</div>
+                    <!--end .col -->                   
+                </div>
+                <!--end .row -->
+            </div>
+            <!--end .card-body -->
+        </div>
+        <!--end .card -->
+    </section>
+    <!-- END LOGIN SECTION -->
+
+    <!-- BEGIN JAVASCRIPT -->
+    <script src="~/Content/js/libs/jquery/jquery-1.11.2.min.js"></script>
+    <script src="~/Content/js/libs/jquery/jquery-migrate-1.2.1.min.js"></script>
+    <script src="~/Content/js/libs/bootstrap/bootstrap.min.js"></script>
+    <script src="~/Content/js/libs/spin.js/spin.min.js"></script>
+    <script src="~/Content/js/libs/autosize/jquery.autosize.min.js"></script>
+    <script src="~/Content/js/libs/nanoscroller/jquery.nanoscroller.min.js"></script>
+    <script src="~/Content/js/libs/toastr/toastr.js"></script>
+    <script src="~/Content/js/libs/inputmask/jquery.inputmask.bundle.min.js"></script>
+    <script src="~/Content/js/libs/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/Content/js/libs/jquery-validation/dist/additional-methods.min.js"></script>
+    <script src="~/Content/js/core/source/App.js"></script>
+    <script src="~/Content/js/core/source/AppNavigation.js"></script>
+    <script src="~/Content/js/core/source/AppOffcanvas.js"></script>
+    <script src="~/Content/js/core/source/AppCard.js"></script>
+    <script src="~/Content/js/core/source/AppForm.js"></script>
+    <script src="~/Content/js/core/source/AppNavSearch.js"></script>
+    <script src="~/Content/js/core/source/AppVendor.js"></script>
+    <script src="~/Content/js/core/demo/Demo.js"></script>
+    <script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
+    <script src="~/Content/js/libs/bootstrap-typeahead/jquery.mockjax.js"></script>
+    <!-- END JAVASCRIPT -->
+    <script>
+
+        $("#username").focus();
+
+        function successAuthen() {
+            window.location = "@Url.Action("Index", "Dashboard")";
+        }
+
+        function failureAuthen(data) {
+            openErrorDialog(data.responseText);
+            $("#username").focus();
+        }
+
+        function openErrorDialog(msg) {
+
+            toastr.clear();
+            toastr.options.closeButton = true;
+            toastr.options.progressBar = false;
+            toastr.options.debug = false;
+            toastr.options.positionClass = 'toast-top-center';
+            toastr.options.showDuration = 333;
+            toastr.options.hideDuration = 333;
+            toastr.options.timeOut = 4000
+            toastr.options.extendedTimeOut = 4000;
+            toastr.options.showEasing = 'swing';
+            toastr.options.hideEasing = 'swing';
+            toastr.options.showMethod = 'slideDown';
+            toastr.options.hideMethod = 'slideUp';
+            //toastr.options.onclick = null;
+            msg = "<i class='fa fa-bug fa-fw'></i> " + msg;
+            toastr.error(msg, '');
+        }
+    </script>
+</body>
+</html>

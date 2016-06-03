@@ -1,0 +1,178 @@
+﻿@model NEWCRM.Controllers.TodolistViewModel
+@{   
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section Scripts {
+    <script type="text/javascript">
+
+        $(function () {           
+            LoadCaseList('MyWork', 'ib');
+
+            $("ul li a.atabs").click(function (e) {
+                if ($.trim($(this).text()) == 'My Works' || $.trim($(this).text()) == 'My Groups') {
+                    $('#IcbOpen').prop('checked', true);
+                    $('#IcbInitiate').prop('checked', true);
+                    $('#IcbClosed').prop('checked', false);
+                    $('#IcbCancel').prop('checked', false);
+                    $('#IcbNautralized').prop('checked', false);
+                    $('#IcbJobCancel').prop('checked', false);
+                    $('#IcbFailed').prop('checked', false);
+                    $('#IcbSolved').prop('checked', false);
+                    $('#caseno').val('');
+                    $('#ckCreated').prop('checked', true);
+                    $('#ckModified').prop('checked', false);
+                    $('#ckClosed').prop('checked', false);
+
+                    $('#headertitle').html('Search ' + $(this).text());
+                    //$('.datetime').datepicker('setDate', /*startDate*/new Date());
+                    if ($.trim($(this).text()) == 'My Works')
+                        LoadCaseList('MyWork');
+                    if ($.trim($(this).text()) == 'My Groups')
+                        LoadCaseList('MyGroup');
+                }
+            });
+
+            $("#btnReset").click(function () {
+                $(this).closest('form').find("input[type=text]").val("");
+                $(this).closest('form').find("input[type=radio]").prop('checked', false);
+                $(this).closest('form').find("input[type=checkbox]").prop('checked', false);
+                $("#ckCreated").prop('checked', true);
+            });
+
+            $('.datetime').datepicker({ autoclose: true, todayHighlight: true, format: "dd/mm/yyyy" });
+
+        });
+
+        function LoadCaseList(WorkType, Channel) {
+            $('#divCaseList').load('@Url.Action("CaseList", "Todolist")?WorkType=' + WorkType + '&Channel=' + Channel, function () {
+             });
+         }
+
+        function changemenu(ref) {
+            $(".tdlmenu").removeClass("active");
+            $(ref).closest("li").addClass("active");
+        }
+    </script>
+}
+
+<div class="section-body">
+    <div class="card">
+        <div class="card-head style-primary">
+            <header>To Do List</header>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-lg-2">
+                    <ul class="nav nav-pills nav-stacked">
+                        <li><small><i class="fa fa-user fa-fw" style="font-size: 1.2em"></i>&nbsp;My Works</small></li>
+                        <li class="tdlmenu active"><a href="#" onclick="changemenu(this); LoadCaseList('MyWork','ib');" style="padding-left: 20px"><i class="fa fa-arrow-circle-down fa-fw"></i>&nbsp;Inbound <small class="pull-right text-bold opacity-75">@Model.list_total[0].myworkinbound</small></a></li>
+                        <li class="tdlmenu"><a href="#" onclick="changemenu(this); LoadCaseList('MyWork','ob')" style="padding-left: 20px"><i class="fa fa-arrow-circle-up fa-fw"></i>&nbsp;Outbound <small class="pull-right text-bold opacity-75">@Model.list_total[0].myworkoutbound</small></a></li>
+                        <li><small><i class="fa fa-users fa-fw" style="font-size: 1.2em"></i>&nbsp;My Groups</small></li>
+                        <li class="tdlmenu"><a href="#" onclick="changemenu(this); LoadCaseList('MyGroup','ib');" style="padding-left: 20px"><i class="fa fa-arrow-circle-down fa-fw"></i>&nbsp;Inbound <small class="pull-right text-bold opacity-75">@Model.list_total[0].mygroupinbound</small></a></li>
+                        <li class="tdlmenu"><a href="#" onclick="changemenu(this); LoadCaseList('MyGroup','ob');" style="padding-left: 20px"><i class="fa fa-arrow-circle-up fa-fw"></i>&nbsp;Outbound <small class="pull-right text-bold opacity-75">@Model.list_total[0].mygroupoutbound</small></a></li>
+                        @*<li><small style="margin-top: 0; margin-bottom: 0; padding-left: 20px;">CC-Agent</small></li>
+                        <li class="tdlmenu"><a href="#" onclick="changemenu(this); LoadCaseList('MyGroup','ib', 3);" style="padding-left: 50px">Inbound <small class="pull-right text-bold opacity-75">@Model.list_total[0].mygroupinboundagent</small></a></li>
+                        <li class="tdlmenu"><a href="#" onclick="changemenu(this); LoadCaseList('MyGroup','ob', 3);" style="padding-left: 50px">Outbound <small class="pull-right text-bold opacity-75">@Model.list_total[0].mygroupoutboundagent</small></a></li>*@
+                    </ul>
+                </div>
+                <div class="col-lg-10">
+                    <div class="card">
+                       @* <div class="card-head">
+                            <header id="headertitle">&nbsp;</header>
+                            <div class="tools">
+                                <div class="btn-group">
+                                    <a class="btn btn-icon-toggle btn-collapse"><i class="fa fa-search"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body" style="padding-bottom: 0; display: none">
+                            <div class="col-lg-12">
+                                <form class="form" role="form">
+                                    <div class="row">
+                                        <div class="col-lg-5">
+                                            <div class="form-group ">
+                                                <label class="control-label">Case Status</label>
+                                                <div style="margin-top: 10px;">
+                                                    <label class="checkbox-inline checkbox-styled">
+                                                        <input type="checkbox" id="IcbClosed" value="option4"><span>Closed</span>
+                                                    </label>
+                                                    <label class="checkbox-inline checkbox-styled">
+                                                        <input type="checkbox" id="IcbOpen" value="option1" checked="checked"><span>Open</span>
+                                                    </label>
+                                                    &nbsp;&nbsp;&nbsp;
+                                                <label class="checkbox-inline checkbox-styled">
+                                                    <input type="checkbox" id="IcbPending" value="option2" checked="checked"><span>Pending</span>
+                                                </label>
+                                                    <label class="checkbox-inline checkbox-styled">
+                                                        <input type="checkbox" id="IcbCancel" value="option5"><span>Cancel</span>
+                                                    </label>
+                                                </div>
+                                                <!--end .col -->
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-7">
+                                            <div class="form-group floating-label">
+                                                <input type="text" class="form-control" id="caseno">
+                                                <label for="caseno">Case No.</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-5">
+                                            <div class="form-group">
+                                                <label class="control-label">Case Date</label>
+                                                <div style="margin-top: 10px;">
+                                                    <label class="radio-inline radio-styled">
+                                                        <input type="radio" name="inlineRadioOptions" value="Created" id="ckCreated" checked="checked"><span>Created</span>
+                                                    </label>
+                                                    <label class="radio-inline radio-styled">
+                                                        <input type="radio" name="inlineRadioOptions" value="Modified" id="ckModified"><span>Modified</span>
+                                                    </label>
+                                                    <label class="radio-inline radio-styled">
+                                                        <input type="radio" name="inlineRadioOptions" value="Closed" id="ckClosed"><span>Closed</span>
+                                                    </label>
+                                                </div>
+                                                <!--end .col -->
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-7">
+                                            <div class="form-group">
+                                                <div class="input-group date">
+                                                    <div class="input-group-content">
+                                                        <input type="text" class="form-control datetime" id="txtStartdate" name="start">
+                                                        <label>Date range</label>
+                                                    </div>
+                                                    <span class="input-group-addon">to</span>
+                                                    <div class="input-group-content">
+                                                        <input type="text" class="form-control datetime" id="txtEnddate" name="end">
+                                                        <div class="form-control-line"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                            <button type="button" id="btnSearch" class="btn ink-reaction btn-raised btn-primary pull-right"><i class="fa fa-search fa-fw"></i>Search</button>
+                                            <button type="button" id="btnReset" class="btn ink-reaction btn-raised btn-warning pull-right" style="margin-right: 10px"><i class="fa fa-rotate-left fa-fw"></i>Reset</button>
+                                        </div>
+                                    </div>
+                                </form>
+                                <hr class="ruler-xl">
+                            </div>
+                        </div>
+                        <br />*@
+                        <div class="col-lg-12">
+                            <div class="row">
+                                <div class="col-lg-12" style="padding-bottom: 10px;" id="divCaseList">
+                                    <!--end .table-responsive -->
+                                </div>
+                                <!--end .col -->
+                            </div>
+                            <!--end .row -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>       
+    </div>

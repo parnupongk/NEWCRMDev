@@ -1,0 +1,91 @@
+﻿@model List<CRMAubonpain.Models.CaseFormColumn>
+@if (Model.Count() > 0)
+{
+    <input type="hidden" id="DMSAddress" value="" />
+    <input type="hidden" id="NewAddress" value="" />
+    <br />
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card card-underline style-default-light">
+                <div class="card-head">
+                    <ul class="nav nav-tabs tabs-text-contrast tabs-warning" data-toggle="tabs">
+                        <li class="casform active"><a href="#@ViewBag.FormName">@ViewBag.Display</a></li>
+                        <li class="followup" style="display:none"><a href="#followup">Cases Follow Up</a></li>
+                    </ul>
+                </div>
+                <div class="card-body tab-content">
+                    <div class="tab-pane casform active" id="@ViewBag.FormName">
+                        @using (Ajax.BeginForm("CaseFormUISubmit", new { Controller = "Case" },
+                        new AjaxOptions { HttpMethod = "post", OnSuccess = "successSaveCaseForm", OnFailure = "failureSaveCaseForm" },
+                        new { id = ViewBag.FormData, @class = "form casefrom", novalidate = "novalidate", autocomplete = "off" }))
+                        {         
+                            <input type="hidden" name="CaseFormTblName" value="@ViewBag.FormData" />
+                            foreach (var item in Model)
+                            {
+                                var isReq = (item.cfIsRequire ? "required" : string.Empty);
+                                var isMin = (item.cfMin > 0 ? string.Format("data-rule-minlength={0}", item.cfMin) : string.Empty);
+                                var isMax = (item.cfMax > 0 ? string.Format("maxlength={0}", item.cfMax) : string.Empty);
+                                var isReadOnly = (item.cfIsReadOnly ? "readonly" : string.Empty);
+                                                        
+                            <div class="col-lg-@item.cfSize">
+                                <div class="form-group">
+                                    @if (item.cfType.Trim().Equals("Textbox"))
+                                    {                    
+                                        <input type="text" class="form-control" id="@item.cfName" name="@item.cfName" value="@item.cfDefaultValue" placeholder="@item.cfPlaceHolder" onfocus="@item.cfCallFunction" @isMin @isMax @isReq @isReadOnly />
+                                        <label for="@item.cfName">@item.cfDisplayName</label>                    
+                                    }
+                                    else if (item.cfType.Trim().Equals("Textarea"))
+                                    {
+                                        <textarea id="@item.cfName" name="@item.cfName" class="form-control" rows="3" placeholder="@item.cfPlaceHolder" @isReq @isReadOnly>@item.cfDefaultValue</textarea>
+                                        <label for="@item.cfName">@item.cfDisplayName</label>
+
+                                    }
+                                    else if (item.cfType.Trim().Equals("Checkbox"))
+                                    {
+                                        <div class="checkbox checkbox-styled">
+                                            <label>
+                                                <input type="checkbox" id="@item.cfName" name="@item.cfName" value="true">
+                                                <span>@item.cfDisplayName</span>
+                                            </label>
+                                        </div>
+                                    }
+                                    else if (item.cfType.Trim().Equals("Dropdown"))
+                                    {
+                                        <select id="@item.cfName" name="@item.cfName" class="form-control cfSelect" onchange="@item.cfCallFunction" @isReq @isReadOnly>
+                                            <option value="">@item.cfPlaceHolder</option>
+                                            @if(!string.IsNullOrEmpty(item.cfDropdownValue)) {
+                                                string[] ddv = item.cfDropdownValue.Split('|');
+                                                foreach(var d in ddv)
+                                                {
+                                                    <option value="@d">@d</option>
+                                                }
+                                            }
+                                        </select>
+                                        <label for="@item.cfName">@item.cfDisplayName</label>
+                                    }
+                                    else if (item.cfType.Trim().Equals("Ajaxinput"))
+                                    {
+                                        <div class="input-group">
+                                            <div class="input-group-content">
+                                                <input type="text" class="form-control" id="@item.cfName" name="@item.cfName" @isMin @isMax @isReq />
+                                                <label for="@item.cfName">@item.cfDisplayName</label>
+                                            </div>
+                                            <div class="input-group-btn">
+                                                <button class="btn btn-default" type="button" onclick="@item.cfCallFunction"><i class="fa fa-search fa-fw"></i></button>
+                                            </div>
+                                        </div>                                         
+                                    }
+                                </div>
+                            </div>
+                            }
+                        }
+                    </div>
+                    <div class="tab-pane followup" id="followup"></div>
+                </div>
+            </div>
+        </div>
+        @*  <div class="col-lg-2"></div>
+    <div class="col-lg-10 no-padding"> </div> *@
+    </div>
+    <script src="~/Content/js/core/source/AppVendor.js"></script>
+}

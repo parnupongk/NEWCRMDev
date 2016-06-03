@@ -1,0 +1,48 @@
+﻿@model NEWCRM.Models.EngineerSupport
+<input type="hidden" name="espID" value="@Model.espID" />
+<div class="row">
+    <div class="col-lg-3">
+        <div class="form-group control-width-normal">
+            <div class="input-group date field-date">
+                <div class="input-group-content">
+                    <input type="text" class="form-control" id="espStart" name="espStart" value="@Model.espStart.Value.ToString("dd/MM/yyyy")" />
+                    <label>Date Start</label>
+                </div>
+                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-3">
+        <div class="form-group control-width-normal">
+            <div class="input-group date field-date">
+                <div class="input-group-content">
+                    <input type="text" class="form-control" id="espEnd" name="espEnd" value="@Model.espEnd.Value.ToString("dd/MM/yyyy")" />
+                    <label>Date End</label>
+                </div>
+                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-3">
+        <div class="form-group">
+            <div class="input-group">
+                <div class="input-group-content">
+                    <input type="text" class="form-control" id="espEmail" name="espEmail" value="@Model.espEmail" />
+                    <label for="espEmail">Email</label>
+                </div>
+                <span class="input-group-addon"><span class="glyphicon glyphicon-envelope fa-lg"></span></span>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-3">
+        <div class="form-group">
+            <div class="input-group">
+                <div class="input-group-content">
+                    <input type="text" class="form-control" id="espPhone" name="espPhone" value="@Model.espPhone" />
+                    <label for="espPhone">Phone</label>
+                </div>
+                <span class="input-group-addon"><span class="glyphicon glyphicon-phone-alt fa-lg"></span></span>
+            </div>
+        </div>
+    </div>
+</div>

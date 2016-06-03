@@ -1,0 +1,73 @@
+﻿@{
+    ViewBag.Title = "SendEmail";
+    Layout = null;
+}
+@using NEWCRM.Models
+@model CaseModels
+<link type="text/css" rel="stylesheet" href="~/Content/theme-oto/libs/dropzone/dropzone-theme.css?1424887864" />
+@section Scripts {
+
+    <script src="~/Content/js/libs/dropzone/dropzone.min.js"></script>
+}
+
+<form class="form">
+    <div class="form-group">
+        <input type="email" class="form-control" id="MailTo" >
+        <label for="MailTo">To</label>
+    </div>
+    <!--end .form-group -->
+    <div class="form-group">
+        <input type="email" class="form-control" id="Mailcc" >
+        <label for="Mailcc">CC</label>
+        <a class="link-default pull-right" href="#emailOptions" data-toggle="collapse">More</a>
+    </div>
+    <!--end .form-group -->
+    <div id="emailOptions" class="form-group collapse">
+        <input type="email" class="form-control" id="MailBcc">
+        <label for="MailBcc">BCC</label>
+    </div>
+    <!--end .form-group -->
+    <!--end #emailOptions -->
+    <div class="form-group @*floating-label*@">
+        <input type="text" class="form-control" id="Subject" value="@Model.MailContents.MailSubject" />
+        <label for="Subject">Subject</label>
+    </div>
+    <!--end .form-group -->
+    @if (Model.MailContents.MailAttachments != null && Model.MailContents.MailAttachments.Count() > 0)
+    { 
+        <div class="form-group">
+            <label for="Subject">Unchecked, If you don't want to attachfiles</label><br />
+            @*<ul class="nav nav-pills nav-stacked nav-icon">*@
+                @foreach (var atm in Model.MailContents.MailAttachments)
+                {
+                    @*<li><span class="glyphicon glyphicon-paperclip"></span>&nbsp;&nbsp;@atm.cafFilename</li>*@
+                    <div class="checkbox checkbox-styled">
+                        <label>
+                            <input type="checkbox" name="attachFiles" value="@atm.cafID" checked="checked" />
+                            <span><li class="fa fa-paperclip fa-fw"></li>@atm.cafFilename</span>
+                        </label>
+                    </div>
+                }
+            @*</ul>*@
+        </div>        
+    }
+
+@*  <div class="form-group">
+        <div id="uploadDemo" class="dropzone"></div>
+        <label for="file-dropzone">Attach File</label>
+    </div>*@
+    <!--end .form-group -->
+
+
+    <div class="form-group">
+        @*<textarea id="simple-summernote" name="message" class="form-control control-6-rows" spellcheck="false"></textarea>*@
+        <div id="summernote" class="form-control" >
+            @Html.Raw(Model.MailContents.MailBody)
+        </div>
+    </div>
+    <!--end .form-group -->
+</form>
+
+
+
+

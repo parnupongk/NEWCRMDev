@@ -1,0 +1,336 @@
+﻿@model NEWCRM.Models.ContactViewModel
+@{   
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section Scripts {
+    <script src="~/Content/js/libs/dropzone/dropzone.js"></script>
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+
+            //$("#cdt").hide();
+            getLastView();
+            getCommonDetail();           
+
+            $('#p_name').typeahead({
+                ajax: {
+                    url: "@Url.Action("AutoComplete", "Contact")",
+                    timeout: 500,
+                    triggerLength: 2,
+                    method: "get",
+                    preDispatch: function (query) {
+                        return {
+                            search: query
+                        }
+                    },
+                    preProcess: function (data) {
+                        if (data.success === false) {
+                            // Hide the list, there was some error
+                            return false;
+                        }
+                        return data;
+                    }
+                }
+            });
+
+            Dropzone.autoDiscover = false;
+            //Simple Dropzonejs 
+            $("#dropzone-avatar").dropzone({
+                url: "@Url.Action("uploadAvatar", "Contact")",
+                addRemoveLinks: false,
+                success: function (file, response) {
+                    //var img = response;
+                    //alert(img);
+                    //file.previewElement.classList.add("dz-success");
+                    //$("#avatar").attr('src', '/Images/avatars/' + img);
+                    //$("div.dz-preview").hide();
+                    //$("#dropzone-avatar").removeClass("dz-started");
+                    //getLastView();
+                    window.location.reload();
+                },
+                error: function (file, response) {
+                    //alert('yyy');
+                    file.previewElement.classList.add("dz-error");
+                }
+            });
+
+            //var notifications = $.connection.baseHub;
+
+            ////debugger;
+            //// Create a function that the hub can call to broadcast messages.
+            //notifications.client.summaryChannel = function () {
+            //    getChannelSummary()
+            //};
+
+            //notifications.client.contactTimeline = function () {
+            //    getTimeline()
+            //};
+            //// Start the connection.
+            //$.connection.hub.start().done(function () {
+            //    //alert("connection started")
+            //    getChannelSummary();
+            //    getTimeline();
+            //}).fail(function (e) {
+            //    alert(e);
+            //});            
+
+        });
+
+        function getLastView() {
+            var tbl = $('#lastview');
+            $.ajax({
+                url: '@Url.Action("getLastView", "Contact")',
+                contentType: 'application/html ; charset:utf-8',
+                type: 'GET',
+                dataType: 'html'
+            }).success(function (result) {
+                tbl.empty().append(result);
+            }).error(function () {
+
+            });
+        }
+
+        function getChannelSummary() {
+            var tbl = $('#messagesTable');
+            $.ajax({
+            url: '@Url.Action("ChannelSummaryList", "Contact")',
+            contentType: 'application/html ; charset:utf-8',
+            type: 'GET',
+            dataType: 'html'
+            }).success(function (result) {
+            tbl.empty().append(result);
+            }).error(function () {
+
+            });
+        }
+
+        function getTimeline() {
+            var tbl = $('#timeline');
+            $.ajax({
+                url: '@Url.Action("TimeLine", "Contact")/@Model.contact.ctaID',
+                contentType: 'application/html ; charset:utf-8',
+                type: 'GET',
+                dataType: 'html'
+            }).success(function (result) {
+                tbl.empty().append(result);
+            }).error(function () {
+
+            });
+        }
+
+        function cdtoggle() {
+            $("#cd").toggle(400, function () {
+                if ($(this).is(':visible')) {
+                    $(".img-toggle").hide(200);
+                } else {
+                    $(".img-toggle").show(200);
+                }
+            });
+        }
+
+        function getCommonDetail() {
+            var url = '@Url.Action("CommonDetail", "Contact")/@Model.contact.ctaID';
+            $.post(url, function (data) {
+                $("#cd").html(data);
+                $("#cdt").fadeIn(300);
+            });
+        }
+
+        function TimelineFilter(obj) {
+            var css = ".tl_" + $(obj).val();
+            if ($(obj).is(":checked")) {
+                $(css).fadeIn(300);
+            } else {
+                $(css).fadeOut(300);
+            }
+        }
+
+        function changeName(ref)
+        {
+            $(ref).hide();
+            $("#frm-chgname").show();
+        }
+
+        function changeNameClose()
+        {            
+            $("#frm-chgname").hide();
+          @*  $("#firstname").val('@Model.contact.ctaFirstName');
+            $("#lastname").val('@Model.contact.ctaLastName');*@
+            $("#frm-name").show();
+        }
+
+        function successUpdateContact()
+        {
+            var fname = $("#firstname").val();
+            var lname = $("#lastname").val();
+
+            $("#frm-name").find("h2").text(fname + " " + lname);
+            changeNameClose();
+            getTimeline();
+        }
+
+    </script>
+}
+@*<div id="text"></div>*@
+@*<div class="section-header">
+    <ol class="breadcrumb">
+        <li><a href="@Url.Action("Index", "Contact")">Contacts</a></li>
+        <li class="active">Detail</li>
+    </ol>
+</div>*@
+<div class="section-body">
+    <div class="card">
+        <!-- BEGIN CONTACT DETAILS HEADER -->
+        <div class="card-head style-primary">
+            <div class="tools pull-left">
+                <form id="frm-search" class="navbar-search" method="post" autocomplete="off" action="@Url.Action("DetailSearch", "Contact")" style="width:380px">
+                    <div class="form-group" style="overflow: visible">
+                        <input id="p_name" type="text" class="form-control" name="p_name" placeholder="Enter Name, Surname, Phone number" />
+                    </div>
+                    <input type="hidden" id="p_cate" name="p_cate" value="0" />
+                    <input type="hidden" id="p_order" name="p_order" value="name" />
+                    <button id="btn_submit" type="button" class="btn btn-icon-toggle ink-reaction"><i class="fa fa-search"></i></button>
+                </form>
+            </div>
+            <!--end .tools -->
+            <div class="tools">
+                <a class="btn btn-flat hidden-xs" href="@Url.Action("Back", "Contact")" data-toggle="tooltip" data-placement="top" data-original-title="Back to contacts"><span class="glyphicon glyphicon-arrow-left"></span>&nbsp;Back to search results</a>
+            </div>
+            <!--end .tools -->
+        </div>
+        <!--end .card-head -->
+        <!-- END CONTACT DETAILS HEADER -->
+
+        <!-- BEGIN CONTACT DETAILS -->
+        <div class="card-tiles">
+            <div class="hbox-md col-md-12">
+                <div class="hbox-column col-md-11">
+                    <div class="row">
+                        <!-- BEGIN SEARCH NAV -->
+                        <div class="col-sm-4 col-md-3 col-lg-3">
+                            <ul id="messagesTable" class="nav nav-pills nav-stacked">
+                                @{
+                                    Html.RenderAction("ChannelSummaryList", "Contact");
+                                }
+                            </ul>
+                            <br />
+                            <ul id="lastview" class="nav nav-pills nav-stacked"></ul>
+                        </div>
+                        <!--end .col -->
+                        <!-- END SEARCH NAV -->
+                        <!-- BEGIN CONTACTS MAIN CONTENT -->
+                        <div class="col-sm-7 col-md-8 col-lg-9">
+                            <div class="row margin-bottom-xxl">
+                                <div class="img-toggle col-sm-2 col-md-2 col-lg-2">
+                                    <form action="@Url.Action("uploadAvatar", "Contact")" class="dropzone" id="dropzone-avatar" style="min-height: 0; padding: 5px;">
+                                        <div class="dz-message" style="margin-top: 0">
+                                            <div class="pull-left width-3 clearfix hidden-xs">
+                                                @if (!string.IsNullOrEmpty(@Model.contact.ctaAvatar))
+                                                { 
+                                                    <img id="avatar" class="img-circle size-3" src="~/Images/avatars/@Model.contact.ctaAvatar" alt="" />
+                                                }
+                                                else
+                                                {
+                                                    <img class="img-circle size-3" src="~/Images/contact_.png" alt="" />
+                                                }
+                                            </div>
+                                        </div>
+                                        <input type="hidden" name="ctaID" value="@Model.contact.ctaID" />
+                                    </form>
+                                </div>
+                                <div class="col-sm-10 col-md-10 col-lg-10" style="padding: 20px 0 0 20px">
+                                    <div id="frm-name" class="col-md-12 text-medium" style="padding-left: 0; cursor:pointer" onclick="changeName(this)">
+                                        <h2 class="text-light no-margin" data-toggle="tooltip" data-placement="left" data-original-title="Click for changed">@Model.contact.ctaFullName</h2>
+                                    </div>
+                                    @using (Ajax.BeginForm("updateContactName", new { Controller = "Contact" },
+                                    new AjaxOptions { HttpMethod = "post", OnSuccess = "successUpdateContact" },
+                                    new { id = "frm-chgname", @class = "form form-validate", novalidate = "novalidate", autocomplete = "off", @style = "display:none" }))
+                                    {
+                                        <div class="row">
+                                            <div class="col-sm-4">
+                                                <div class="form-group">
+                                                    <input type="text" value="@Model.contact.ctaFirstName" class="form-control" name="firstname" id="firstname" required data-rule-minlength="2">
+                                                    <label for="Firstname1">Firstname</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-4">
+                                                <div class="form-group">
+                                                    <input type="text" value="@Model.contact.ctaLastName" class="form-control" name="lastname" id="lastname" required data-rule-minlength="2">
+                                                    <label for="Lastname1">Lastname</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-2 pull-left">
+                                                <button type="button" class="btn ink-reaction btn-icon-toggle btn-xs btn-default" onclick="changeNameClose()"><i class="fa fa-close fa-fw"></i></button>
+                                                <button type="submit" class="btn ink-reaction btn-raised btn-sm btn-primary">Save</button>
+                                            </div>
+                                        </div> 
+                                        <input type="hidden" name="ctaID" value="@Model.contact.ctaID" />
+                                    }         
+                                    <div class="col-md-3" style="padding-left: 0; padding-top: 5px">                                                                              
+                                        @if (@Model.contact.ctaEmo1.HasValue)
+                                        {
+                                            <a href="javascript:;">
+                                                <img src="~/Images/emoticon/emo32-@(Model.contact.ctaEmo1).png" class="emo32" data-toggle="tooltip" data-placement="bottom" data-original-title="Last Emotion" /></a>
+                                        }
+                                         @if (@Model.contact.ctaEmo2.HasValue)
+                                        {
+                                            <a href="javascript:;">
+                                                <img src="~/Images/emoticon/emo32-@(Model.contact.ctaEmo2).png" class="emo32" data-toggle="tooltip" data-placement="bottom" data-original-title="Last Emotion" /></a>
+                                        }
+                                        @if (@Model.contact.ctaEmo3.HasValue)
+                                        {
+                                            <a href="javascript:;">
+                                                <img src="~/Images/emoticon/emo32-@(Model.contact.ctaEmo3).png" class="emo32" data-toggle="tooltip" data-placement="bottom" data-original-title="Last Emotion" /></a>
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                  <div class="col-lg-12" style="padding-left: 15px">
+                                    <div class="btn-group">
+                                        <button type="button" class="btn ink-reaction btn-accent" onclick="window.location='@Url.Action("NewCaseFromContact","Case")/@Model.contact.ctaID'">
+                                            Make Call <i class="fa fa-whatsapp" style="font-size: 1.2em"></i>
+                                        </button>                                     
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <!-- BEGIN CONTACTS ACTIVITY -->
+                                    <div id="timeline">
+                                        @{
+                                            Html.RenderAction("TimeLine", "Contact", new { id = Model.contact.ctaID });
+                                        }
+                                        <!--end .timeline -->
+                                    </div>
+                                    <!--end #activity -->
+                                    <!-- END CONTACTS ACTIVITY -->
+                                </div>
+                            </div>
+                        </div>                        
+                        <!--end .tab-content -->
+                    </div>
+                    <!--end .col -->
+                    <!-- END CONTACTS MAIN CONTENT -->
+                </div>
+                <!--end .row -->
+                <!-- BEGIN CONTACTS COMMON DETAILS -->
+                <div id="cdt" class="hbox-column col-md-1 style-default-light" style="padding: 5px; width: 45px;">
+                    <a href="javascript:;" class="btn ink-reaction btn-icon-toggle" onclick="cdtoggle();" style="font-size: 20px" data-toggle="tooltip" data-placement="top" data-original-title="Contact common detail"><i class="md md-account-circle"></i></a>
+                </div>
+                <div id="cd" class="hbox-column col-md-4 style-default-light" style="padding-top: 5px; display: none"></div>
+                <!--end .hbox-column -->
+                <!-- END CONTACTS COMMON DETAILS -->
+            </div>
+            <!--end .hbox-column -->
+
+           
+        </div>
+        <!--end .hbox-md -->
+    </div>
+    <!--end .card-tiles -->
+    <!-- END CONTACT DETAILS -->
+
+</div>
+<!--end .card -->

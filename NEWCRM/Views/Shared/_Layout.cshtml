@@ -1,0 +1,493 @@
+﻿<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <title>ONE TO ONE CONTACTS : CRM ORIGIN</title>
+    <!-- BEGIN META -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="keywords" content="crm,contact management,contact center,call center,aspect,genesys,thailand">
+    <meta name="description" content="Contact Management">
+    <!-- END META -->
+
+    <!-- BEGIN STYLESHEETS -->
+    <link href='http://fonts.googleapis.com/css?family=Roboto:300italic,400italic,300,400,500,700,900' rel='stylesheet' type='text/css' />
+    <link type="text/css" rel="stylesheet" href="~/Content/theme-oto/bootstrap.css?1422792965" />
+    <link type="text/css" rel="stylesheet" href="~/Content/theme-oto/materialadmin.css?1425466319" />
+    <link type="text/css" rel="stylesheet" href="~/Content/theme-oto/font-awesome.min.css?1422529194" />
+    <link type="text/css" rel="stylesheet" href="~/Content/theme-oto/material-design-iconic-font.min.css?1421434286" />
+    <link type="text/css" rel="stylesheet" href="~/Content/theme-oto/libs/rickshaw/rickshaw.css?1422792967" />
+    <link type="text/css" rel="stylesheet" href="~/Content/theme-oto/libs/morris/morris.core.css?1420463396" />
+    <link type="text/css" rel="stylesheet" href="~/Content/theme-oto/libs/summernote/summernote.css?1425218701" />
+    <link type="text/css" rel="stylesheet" href="~/Content/theme-oto/libs/toastr/toastr.css?1425466569" />
+    <link type="text/css" rel="stylesheet" href="~/Content/theme-oto/libs/bootstrap-datepicker/datepicker3.css?1424887858" />
+    <link type="text/css" rel="stylesheet" href="~/Content/theme-oto/libs/jquery-ui/jquery-ui-theme.css" />
+    <link type="text/css" rel="stylesheet" href="~/Content/theme-oto/libs/DataTables/jquery.dataTables.css?1423553989" />
+    <link type="text/css" rel="stylesheet" href="~/Content/theme-oto/libs/DataTables/extensions/dataTables.colVis.css?1423553990" />
+    <link type="text/css" rel="stylesheet" href="~/Content/theme-oto/libs/DataTables/extensions/dataTables.tableTools.css?1423553990" />
+    <link type="text/css" rel="stylesheet" href="~/Content/theme-oto/libs/dropzone/dropzone-theme.css?1424887864" />
+    <link href="~/Content/theme-oto/libs/select2/select2.css?1424887856" rel="stylesheet" />
+    <link type="text/css" rel="stylesheet" href="~/Content/theme-oto/libs/multi-select/multi-select.css?1424887857" />
+    <link type="text/css" rel="stylesheet" href="~/Content/theme-oto/oto.css" />
+    <link href="~/Content/js/libs/nprogress/nprogress.css" rel="stylesheet" />
+    <link href="~/Content/js/libs/bootstrap-dialog/src/css/bootstrap-dialog.css" rel="stylesheet" />
+    <link href="~/Content/js/libs/noty/demo/animate.css" rel="stylesheet" />
+    <link href="~/Content/js/libs/noty/demo/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="~/Content/js/libs/jquery.msgbox/javascript/msgbox/jquery.msgbox.css" rel="stylesheet" />
+    <link href="~/Content/js/libs/jquery.sumoselect/sumoselect.css" rel="stylesheet" />
+    <!-- END STYLESHEETS -->
+    <style>
+        div#loading
+        {
+            display: none;
+        }
+
+        .emo32
+        {
+            width: 32px;
+            height: 32px;
+        }
+
+        .ntf_scroll
+        {
+            height: 490px;
+            overflow: auto;
+            overflow-x: hidden;
+        }
+
+            .ntf_scroll::-webkit-scrollbar
+            {
+                width: 0.6em;
+                height: 2em;
+            }
+
+            .ntf_scroll::-webkit-scrollbar-button
+            {
+                display: none;
+            }
+
+            .ntf_scroll::-webkit-scrollbar-track-piece
+            {
+                background: rgba(0, 0, 0, 0.25);
+            }
+
+            .ntf_scroll::-webkit-scrollbar-thumb
+            {
+                background: rgba(0, 0, 0, 0.5);
+            }
+    </style>
+
+    @RenderSection("style", required: false)
+
+</head>
+<body class="menubar-hoverable header-fixed ">
+    <!-- BEGIN HEADER-->
+    <header id="header">
+        @*<div id="scr_pos"></div>*@
+        <div class="headerbar">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="headerbar-left">
+                <ul class="header-nav header-nav-options">
+                    <li class="header-nav-brand">
+                        <div class="brand-holder">
+                            <a href="@Url.Action("Index", "Dashboard")">
+                                <span class="text-lg text-bold text-primary">
+                                    <img src="~/Images/logo.png" />
+                                </span>
+                            </a>
+                        </div>
+                    </li>
+                  @*<li>
+                        <a class="btn btn-icon-toggle menubar-toggle" data-toggle="menubar" href="javascript:void(0);">
+                            <i class="fa fa-bars"></i>
+                        </a>
+                    </li>*@
+                </ul>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="headerbar-right">
+                <ul class="header-nav header-nav-options">
+                    <li>
+                        <!-- Search form -->
+                        @using (Ajax.BeginForm("SearchByNo", new { Controller = "Case" },
+                                new AjaxOptions { HttpMethod = "post", OnSuccess = "successSearchByNo" },
+                                new { id = "frm-searchcaseno", @class = "navbar-search", autocomplete = "off" }))
+                        {
+                            <div class="form-group">
+                                <input type="text" class="form-control" id="headerSearch" name="headerSearch" placeholder="Enter your Case No.">
+                            </div>
+                            <button type="submit" class="btn btn-icon-toggle ink-reaction" data-toggle="tooltip" data-placement="bottom" data-original-title="Search by Case No."><i class="fa fa-search"></i></button>
+                        }
+                    </li>
+                    <!-- Notification icon -->
+                    <li class="dropdown hidden-xs">
+                        <a id="notification" href="javascript:void(0);" class="btn btn-icon-toggle btn-default" data-toggle="dropdown">
+                            <i class="fa fa-bell"></i><sup id="ntf_total" class="badge style-danger" style="display: none">0</sup>
+                        </a>
+                        <ul id="ntflist" class="dropdown-menu animation-expand"></ul>
+                        <!--end .dropdown-menu -->
+                    </li>
+                    <!--end .dropdown -->
+                </ul>
+                <!--end .header-nav-options -->
+                <ul class="header-nav header-nav-profile">
+                    <li class="dropdown">
+                        <a href="javascript:void(0);" class="dropdown-toggle ink-reaction" data-toggle="dropdown">
+                            @if (!string.IsNullOrEmpty(NEWCRM.Common.AppUtils.Session.User.usrAvatar))
+                            { 
+                                <img src="~/Images/users/@NEWCRM.Common.AppUtils.Session.User.usrAvatar" />
+                            }
+                            else
+                            {
+                                <img src="~/Images/contact_.png" />
+                            }
+                            <span class="profile-info">@NEWCRM.Common.AppUtils.Session.User.usrFirstName @NEWCRM.Common.AppUtils.Session.User.usrLastName
+                                <small>@NEWCRM.Common.AppUtils.Session.User.usrDepartment</small>
+                            </span>
+                        </a>
+                        <ul class="dropdown-menu animation-dock">
+                            <li class="dropdown-header">Setting</li>
+                            <li><a href="@Url.Action("getProfile", "User")">Profile</a></li>
+                            <li class="divider"></li>
+                            @*<li><a href="../../html/pages/locked.html"><i class="fa fa-fw fa-lock"></i>&nbsp;Lock Screen</a></li>*@
+                            <li><a href="@Url.Action("Signout", "Authentication")"><i class="fa fa-fw fa-power-off text-danger"></i>&nbsp;Logout</a></li>
+                        </ul>
+                        <!--end .dropdown-menu -->
+                    </li>
+                    <!--end .dropdown -->
+                </ul>
+                <!--end .header-nav-profile -->
+                @*<ul class="header-nav header-nav-options">
+                     <li class="dropdown hidden-xs">                  
+					    <a href="javascript:void(0);" class="btn btn-icon-toggle btn-default" data-toggle="dropdown">
+						    <i class="md md-public"></i>
+					    </a>
+					    <ul class="dropdown-menu animation-expand">
+						    <li><a href="@Url.Action("ChangeCurrentCulture")/1"><img src="~/Images/icon-th.png" /> Thai</a></li>
+						    <li><a href="@Url.Action("ChangeCurrentCulture")/0"><img src="~/Images/icon-en.png" /> English</a></li>							    
+					    </ul>					  
+                    </li>
+                </ul>*@
+                <!--end .header-nav-toggle -->
+            </div>
+            <!--end #header-navbar-collapse -->
+        </div>
+    </header>
+    <!-- END HEADER-->
+    <!-- BEGIN BASE-->
+    <div id="base">
+        <!-- BEGIN CONTENT-->
+        <div id="content">
+            <section>
+                @RenderBody()
+            </section>
+        </div>
+        <!--end #content-->
+        <!-- END CONTENT -->
+
+        <!-- BEGIN MENUBAR-->
+        <div id="menubar" class="menubar-inverse ">
+            <div class="menubar-scroll-panel">
+                <!-- BEGIN MAIN MENU -->
+                <ul id="main-menu" class="gui-controls">
+                    <!-- BEGIN DASHBOARD -->
+                    <li>
+                        <a id="menu_Dashboard" href="@Url.Action("Index", "Dashboard")">
+                            <div class="gui-icon"><i class="md md-home"></i></div>
+                            <span class="title">หน้าหลัก</span>
+                        </a>
+                    </li>
+                    <!--end /menu-li -->
+                    <!-- END DASHBOARD -->
+                    <!-- BEGIN TODOLIST -->
+                    <li>
+                        <a id="menu_Todolist" href="@Url.Action("Index", "Todolist")">
+                            <div class="gui-icon"><i class="md md-assignment"></i></div>
+                            <span class="title">To Do List</span>
+                        </a>
+                    </li>
+                    <!--end /menu-li -->
+                    <!-- END TODOLIST -->
+                    <!-- BEGIN CASE QUERY -->
+                    <li>
+                        <a id="menu_Casequery" href="@Url.Action("Index", "Casequery")">
+                            <div class="gui-icon"><i class="md md-pageview"></i></div>
+                            <span class="title">Case Query</span>
+                        </a>
+                    </li>
+                    <!--end /menu-li -->
+                    <!-- END CASE QUERY -->
+
+                    <!-- BEGIN CUSTOMER PROFILE -->
+                    <li class="gui-single">
+                        <!--<a class="gui-folder" href="../../html/mail/reply.html!" >-->
+                        <a id="menu_Contact" href="@Url.Action("Index", "Contact")">
+                            <div class="gui-icon"><i class="md md-person"></i></div>
+                            <span class="title">ข้อมูลลูกค้า</span>
+                        </a>
+                    </li>
+                    <!--end /menu-li -->
+                    <!-- END CUSTOMER PROFILE -->
+                    <li>
+                        <a id="menu_Calendar" href="@Url.Action("Index", "Calendar")">
+                            <div class="gui-icon"><i class="md md-event-available"></i></div>
+                            <span class="title">Task Calendar</span>
+                        </a>
+                    </li>
+                    <!--end /menu-li -->
+                    <li>
+                        <a id="menu_Inbound" href="@Url.Action("MakeCall", "Inbound")">
+                            <div class="gui-icon"><i class="md md-phone"></i></div>
+                            <span class="title">Make Call</span>
+                        </a>
+                    </li>                  
+                     <li>
+                        <a id="menu_screenpop" href="@Url.Action("Index", "Inbound")??g8=1&phone=021111111&conid=1&dnis=10899">
+                            <div class="gui-icon"><i class="md md-phone"></i></div>
+                            <span class="title">Test Screenpop</span>
+                        </a>
+                    </li>      
+                    <li>
+                        <a id="menu_report" href="@Url.Action("Index", "RepCase")">
+                            <div class="gui-icon"><i class="md md-insert-chart"></i></div>
+                            <span class="title">Report</span>
+                        </a>
+                    </li>   
+                    <!--end /menu-li -->                                       
+                </ul>
+                <!--end .main-menu -->
+                <!-- END MAIN MENU -->
+
+                <div class="menubar-foot-panel">
+                    <small class="no-linebreak hidden-folded">
+                        <span class="opacity-75">&copy; 2016</span> <strong>By One to One Contacts PCL</strong>
+                    </small>
+                </div>
+            </div>
+            <!--end .menubar-scroll-panel-->
+        </div>
+        <!--end #menubar-->
+        <!-- END MENUBAR -->
+
+    </div>
+    <!--end #base-->
+    <!-- END BASE -->
+    <!-- BEGIN JAVASCRIPT -->
+
+    @if (HttpContext.Current.Request.RequestContext.RouteData.Values["controller"].ToString().Equals("Dashboard") || HttpContext.Current.Request.RequestContext.RouteData.Values["action"].ToString().Equals("CaseDetail"))
+    {
+        <script src="~/Content/js/libs/jquery/jquery-1.9.1.min.js"></script>      
+    }
+    else
+    { 
+        <script src="~/Content/js/libs/jquery/jquery-1.11.2.min.js"></script>
+    }
+
+    <script src="~/Content/js/libs/jquery/jquery-migrate-1.2.1.min.js"></script>
+    <script src="~/Content/js/libs/jquery-ui/jquery-ui.min.js"></script>
+    @if (!HttpContext.Current.Request.RequestContext.RouteData.Values["action"].ToString().Equals("CaseDetail"))
+    {
+        <script src="~/Content/js/libs/bootstrap/bootstrap.min.js"></script>
+        <script src="~/Content/js/libs/bootstrap-dialog/src/js/bootstrap-dialog.js"></script>
+    }
+    <script src="~/Content/js/libs/spin.js/spin.min.js"></script>
+    <script src="~/Content/js/libs/autosize/jquery.autosize.min.js"></script>
+    <script src="~/Content/js/libs/inputmask/jquery.inputmask.bundle.min.js"></script>
+    <script src="~/Content/js/libs/moment/moment.min.js"></script>
+    <script src="~/Content/js/libs/bootstrap-datepicker/bootstrap-datepicker.js"></script>
+    <script src="~/Content/js/libs/bootstrap-multiselect/bootstrap-multiselect.js"></script>
+    <script src="~/Content/js/libs/bootstrap-rating/bootstrap-rating-input.min.js"></script>
+    <script src="~/Content/js/libs/DataTables/jquery.dataTables.js"></script>
+    <script src="~/Content/js/libs/DataTables/extensions/TableTools/js/dataTables.tableTools.min.js"></script>
+    <script src="~/Content/js/libs/nanoscroller/jquery.nanoscroller.min.js"></script>
+    <script src="~/Content/js/libs/microtemplating/microtemplating.min.js"></script>
+    <script src="~/Content/js/libs/summernote/summernote.min.js"></script>
+    <script src="~/Content/js/libs/toastr/toastr.js"></script>
+    <script src="~/Content/js/libs/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/Content/js/libs/jquery-validation/dist/additional-methods.min.js"></script>
+    <script src="~/Content/js/core/source/App.js"></script>
+    <script src="~/Content/js/core/source/AppNavigation.js"></script>
+    <script src="~/Content/js/core/source/AppOffcanvas.js"></script>
+    <script src="~/Content/js/core/source/AppCard.js"></script>
+    <script src="~/Content/js/core/source/AppForm.js"></script>
+    <script src="~/Content/js/core/source/AppNavSearch.js"></script>
+    <script src="~/Content/js/core/source/AppVendor.js"></script>
+    <script src="~/Content/js/core/demo/Demo.js"></script>
+    <script src="~/Content/js/core/demo/DemoPageContacts.js"></script>
+    <script src="~/Content/js/core/demo/DemoFormComponents.js"></script>
+    <script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
+    <script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js"></script>
+    <script src="~/Content/js/libs/bootstrap-typeahead/jquery.mockjax.js"></script>
+    <script src="~/Content/js/libs/bootstrap-typeahead/bootstrap-typeahead.js"></script>
+
+    <script src="~/Content/js/libs/multi-select/jquery.multi-select.js"></script>
+    <script src="~/Content/js/libs/datediff/datediff.js"></script>
+    <script src="~/Content/js/libs/noty/js/noty/packaged/jquery.noty.packaged.min.js"></script>
+
+    @if (HttpContext.Current.Request.RequestContext.RouteData.Values["controller"].ToString().Equals("Dashboard") || HttpContext.Current.Request.RequestContext.RouteData.Values["action"].ToString().Equals("CaseDetail"))
+    {
+        <script src="~/Content/js/libs/nprogress/nprogress.js"></script>
+        <script src="~/Content/js/libs/jquery-BlockUI/jquery.blockUI.js"></script>
+        <script src="~/Content/js/libs/noty/demo/notification_html.js"></script>
+        <script src="~/Content/js/libs/jquery.msgbox/javascript/msgbox/jquery.msgbox.js"></script>
+        <script src="~/Content/js/libs/jquery.sumoselect/jquery.sumoselect.js"></script>
+    }
+
+    <!-- END JAVASCRIPT -->
+    <script type="text/javascript">
+
+        $.fn.enterKey = function (fnc) {
+            return this.each(function () {
+                $(this).keypress(function (ev) {
+                    var keycode = (ev.keyCode ? ev.keyCode : ev.which);
+                    if (keycode == '13') {
+                        fnc.call(this, ev);
+                    }
+                })
+            })
+        }
+        // Set Current Menu Active
+        $("#menu_@(HttpContext.Current.Request.RequestContext.RouteData.Values["controller"].ToString())").addClass("active");
+
+        $(document).ready(function () {
+
+            $('#notification').on('click', function () {
+                //alert('open');
+                var url = '@Url.Action("NotificationList", "Notification")';
+                $("#ntflist").empty().load(url);
+                //$("#ntf_total").hide();
+            });
+
+            getNotificationTotal();
+            
+        });
+
+        function getNotificationTotal() {
+            var obj = $('#ntf_total');
+            //obj.hide();
+            $.ajax({
+                url: '@Url.Action("getTotalByUserID", "Notification")',
+                contentType: 'application/html ; charset:utf-8',
+                global: false,
+                type: 'GET',
+                dataType: 'html'
+            }).success(function (result) {
+                if (result !== '0') {
+                    obj.text(result).show();
+                } else {
+                    obj.hide();
+                }
+            }).error(function (error) {
+                //alert(error);
+                console.log('getNotificationTotal failed. Error: ' + error)
+            });
+        }
+
+        function ntfRemove(id) {
+            var url = '@Url.Action("setDisabled", "Notification")/' + id;
+            $.post(url, function () {
+                getNotificationTotal();
+            });
+        }
+
+        function ntfList(c) {
+            //alert(c);
+            if (c > 6) {
+                $("#ntflist").addClass('ntf_scroll');
+            } else {
+                $("#ntflist").removeClass('ntf_scroll');
+            }
+        }
+
+        function openInfoDialog(msg) {
+
+            toastr.clear();
+            toastr.options.closeButton = true;
+            toastr.options.progressBar = false;
+            toastr.options.debug = false;
+            toastr.options.positionClass = 'toast-bottom-left';
+            toastr.options.showDuration = 333;
+            toastr.options.hideDuration = 333;
+            toastr.options.timeOut = 0;
+            //toastr.options.extendedTimeOut = 1000;
+            toastr.options.showEasing = 'swing';
+            toastr.options.hideEasing = 'swing';
+            toastr.options.showMethod = 'slideDown';
+            toastr.options.hideMethod = 'slideUp';
+            //toastr.options.onclick = null;
+            toastr.info(msg, '');
+        }
+
+        function openSuccessDialog(msg) {
+
+            toastr.clear();
+            toastr.options.closeButton = true;
+            toastr.options.progressBar = false;
+            toastr.options.debug = false;
+            toastr.options.positionClass = 'toast-bottom-left';
+            toastr.options.showDuration = 333;
+            toastr.options.hideDuration = 333;
+            toastr.options.timeOut = 4000
+            toastr.options.extendedTimeOut = 4000;
+            toastr.options.showEasing = 'swing';
+            toastr.options.hideEasing = 'swing';
+            toastr.options.showMethod = 'slideDown';
+            toastr.options.hideMethod = 'slideUp';
+            //toastr.options.onclick = null;
+            msg = "<i class='fa fa-check fa-fw'></i> " + msg;
+            toastr.success(msg, '');
+        }
+
+        function openWarningDialog(msg) {
+
+            toastr.clear();
+            toastr.options.closeButton = true;
+            toastr.options.progressBar = false;
+            toastr.options.debug = false;
+            toastr.options.positionClass = 'toast-bottom-left';
+            toastr.options.showDuration = 333;
+            toastr.options.hideDuration = 333;
+            toastr.options.timeOut = 4000
+            toastr.options.extendedTimeOut = 4000;
+            toastr.options.showEasing = 'swing';
+            toastr.options.hideEasing = 'swing';
+            toastr.options.showMethod = 'slideDown';
+            toastr.options.hideMethod = 'slideUp';
+            //toastr.options.onclick = null;
+            msg = "<i class='fa fa-warning fa-fw'></i> " + msg;
+            toastr.warning(msg, '');
+
+        }
+
+        function openErrorDialog(msg) {
+
+            toastr.clear();
+            toastr.options.closeButton = true;
+            toastr.options.progressBar = false;
+            toastr.options.debug = false;
+            toastr.options.positionClass = 'toast-bottom-left';
+            toastr.options.showDuration = 333;
+            toastr.options.hideDuration = 333;
+            toastr.options.timeOut = 4000
+            toastr.options.extendedTimeOut = 4000;
+            toastr.options.showEasing = 'swing';
+            toastr.options.hideEasing = 'swing';
+            toastr.options.showMethod = 'slideDown';
+            toastr.options.hideMethod = 'slideUp';
+            //toastr.options.onclick = null;
+            msg = "<i class='fa fa-bug fa-fw'></i> " + msg;
+            toastr.error(msg, '');
+        }
+
+        function successSearchByNo(casid) {
+            if (casid == '') {
+                openWarningDialog("Case No. was not found");
+            } else {
+                var url = '@Url.Action("CaseDetail", "Case", new { id = "_id" })'.replace("_id", casid);
+                    window.location = url;
+                }
+            }
+    </script>
+    @RenderSection("scripts", required: false)
+</body>
+</html>

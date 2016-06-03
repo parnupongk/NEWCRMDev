@@ -1,0 +1,543 @@
+﻿@model NEWCRM.Models.CaseModels
+@{
+    var cssFav = "none";
+    if ((Model.CaseDetails.casOwnerID == NEWCRM.Common.AppUtils.Session.User.usrID) && Model.CaseDetails.casFav)
+    {
+        cssFav = "";
+    }    
+}
+<div class="card-head">
+    <header>
+        <span id="showFav" data-toggle="tooltip" data-placement="top" data-original-title="Case Favourite" style="display:@cssFav"><i class="fa fa-heart fa-fw"></i></span>
+        <strong>Case No. @Html.DisplayFor(m => m.CaseDetails.CASEIDNO)</strong>
+    </header>
+    <div class="tools">
+        <div class="btn-group">
+            @if (ViewBag.Favourite)
+            {
+                <div id="setFav" style="float: left; width: 36px; height: 36px; line-height: 0;">
+                    @{
+                Html.RenderAction("setFavourite", "Case", new { bFav = Model.CaseDetails.casFav });
+                    }
+                </div>
+            }
+            @if (ViewBag.Edit)
+            {
+                <a class="btn btn-icon-toggle ink-reaction btn-default" href="javascript:void(0);" id="aEdit" data-toggle="tooltip" data-placement="top" data-original-title="Add Note" title="Edit"><i class="fa fa-wrench fa-fw"></i></a>
+            }
+            @if (NEWCRM.Common.AppUtils.Session.Userrolepermission.HasAction(NEWCRM.Models.EnumType.ActionName.ADD_NOTE) && ViewBag.AddNote)
+            {
+                <a class="btn btn-icon-toggle ink-reaction btn-default" href="javascript:void(0);" id="aAddnote" data-toggle="tooltip" data-placement="top" data-original-title="Add Note" title="Add Note"><i class="md md-note-add"></i></a>
+            }
+            @if (NEWCRM.Common.AppUtils.Session.Userrolepermission.HasAction(NEWCRM.Models.EnumType.ActionName.CHANGE_STATUS) && ViewBag.ChangeStatus)
+            {
+                <a class="btn btn-icon-toggle ink-reaction btn-default" href="javascript:void(0);" id="aChangeStatus" data-toggle="tooltip" data-placement="top" data-original-title="Change Status" title="Change Status"><i class="md md-cached"></i></a>
+            }
+            @if (NEWCRM.Common.AppUtils.Session.Userrolepermission.HasAction(NEWCRM.Models.EnumType.ActionName.CLOSED_CASE) && ViewBag.Closed)
+            {
+                <a class="btn btn-icon-toggle ink-reaction btn-default" href="javascript:void(0);" id="aCloseCase" data-toggle="tooltip" data-placement="top" data-original-title="Closed Case" title="Closed Case"><i class="fa fa-lock fa-fw"></i></a>
+            }
+            @if (NEWCRM.Common.AppUtils.Session.Userrolepermission.HasAction(NEWCRM.Models.EnumType.ActionName.DISPATCH) && ViewBag.Dispatch)
+            {
+                <a class="btn btn-icon-toggle ink-reaction btn-default" href="javascript:void(0);" id="aDispatch" data-toggle="tooltip" data-placement="top" data-original-title="Dispatch" title="Dispatch"><i class="fa fa-mail-reply-all fa-fw"></i></a>
+            }
+            @if (NEWCRM.Common.AppUtils.Session.Userrolepermission.HasAction(NEWCRM.Models.EnumType.ActionName.ASSIGN) && ViewBag.Assign)
+            {
+                <a class="btn btn-icon-toggle ink-reaction btn-default" href="javascript:void(0);" id="aAssign" data-toggle="tooltip" data-placement="top" data-original-title="Assign" title="Assign"><i class="fa fa-mail-reply fa-fw"></i></a>
+            }
+            @if (NEWCRM.Common.AppUtils.Session.Userrolepermission.HasAction(NEWCRM.Models.EnumType.ActionName.ACCEPT) && ViewBag.Accept)
+            {
+                <a class="btn btn-icon-toggle ink-reaction btn-default" href="javascript:void(0);" id="aAccept" data-toggle="tooltip" data-placement="top" data-original-title="Accept" title="Accept"><i class="fa fa-check-circle-o fa-fw"></i></a>
+            }
+            @if (NEWCRM.Common.AppUtils.Session.Userrolepermission.HasAction(NEWCRM.Models.EnumType.ActionName.REJECT) && ViewBag.Reject)
+            {
+                <a class="btn btn-icon-toggle ink-reaction btn-default" href="javascript:void(0);" id="aReject" data-toggle="tooltip" data-placement="top" data-original-title="Reject" title="Reject"><i class="fa fa-undo fa-fw"></i></a>
+            }
+            @if (NEWCRM.Common.AppUtils.Session.Userrolepermission.HasAction(NEWCRM.Models.EnumType.ActionName.SEND_EMAIL) && ViewBag.Email)
+            {
+                <a class="btn btn-icon-toggle ink-reaction btn-default" href="javascript:void(0);" id="aSendEmail" data-toggle="tooltip" data-placement="top" data-original-title="Send E-mail" title="Send E-mail"><i class="fa fa-envelope-o fa-fw"></i></a>
+            }           
+        </div>
+    </div>
+</div>
+<div class="card-body">
+    <div class="row">
+        <form class="form">
+            <div class="col-lg-4">
+                <div class="form-group">
+                    <label>Channel</label>
+                    <p class="form-control-static">@Html.DisplayFor(m => m.CaseDetails.chnName)</p>
+                </div>
+            </div>
+            <div class="col-lg-8">
+                <div class="form-group">
+                    <label class="text-danger"><i class="fa fa-clock-o fa-fw"></i>Due Date</label>
+                    <p class="form-control-static text-danger">@Html.DisplayFor(m => m.CaseDetails.casDueDate)</p>
+                </div>
+            </div>
+            <div class="col-lg-12">
+                <div class="form-group">
+                    <label>Case Type</label>
+                    <p class="form-control-static">@(string.IsNullOrWhiteSpace(Model.CaseDetails.CASSUMMARY) ? "-" : Model.CaseDetails.CASSUMMARY)</p>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="form-group">
+                    <label>Status</label>
+                    <p class="form-control-static">@(string.IsNullOrWhiteSpace(Model.CaseDetails.CASESTATUS) ? "-" : Model.CaseDetails.CASESTATUS)</p>
+                </div>
+            </div>
+            <div class="col-lg-8">
+                <div class="form-group">
+                    <label>Owner</label>
+                    <p class="form-control-static">@Model.CaseDetails.OWNERNAME</p>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="form-group">
+                    <label>Created By</label>
+                    <p class="form-control-static">@(string.IsNullOrWhiteSpace(Model.CaseDetails.CREATEBY) ? "-" : Model.CaseDetails.CREATEBY)</p>
+                </div>
+            </div>
+            <div class="col-lg-8">
+                <div class="form-group">
+                    <label>Created Date</label>
+                    <p class="form-control-static">@Html.DisplayFor(m => m.CaseDetails.CREATEDATE)</p>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="form-group">
+                    <label>Modified By</label>
+                    <p class="form-control-static">@(string.IsNullOrWhiteSpace(Model.CaseDetails.MODIFIEDBY) ? "-" : Model.CaseDetails.MODIFIEDBY)</p>
+                </div>
+            </div>
+            <div class="col-lg-8">
+                <div class="form-group">
+                    <label>Modified Date</label>
+                    <p class="form-control-static">@Html.DisplayFor(m => m.CaseDetails.MODIFIEDDATE)</p>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="form-group">
+                    <label>Call Back Type</label>
+                    <p class="form-control-static">@(string.IsNullOrWhiteSpace(Model.CaseDetails.CALLBACKTYPE) ? "-" : Model.CaseDetails.CALLBACKTYPE)</p>
+                </div>
+            </div>
+            <div class="col-lg-8">
+                <div class="form-group">
+                    <label>Call Back Number</label>
+                    <p class="form-control-static">@(string.IsNullOrWhiteSpace(Model.CaseDetails.CALLBACKNUMBER) ? "-" : Model.CaseDetails.CALLBACKNUMBER)</p>
+                </div>
+            </div>
+            <div class="col-lg-12">
+                <div class="form-group">
+                    <label>Recomment</label>
+                    <p class="form-control-static">@(string.IsNullOrWhiteSpace(Model.CaseDetails.REMARK) ? "-" : Model.CaseDetails.REMARK)</p>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<!-- BEGIN FORM MODAL MARKUP -->
+<div class="modal fade" id="formModal" tabindex="-1" role="dialog" aria-labelledby="formModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="formModalLabel">Login to continue</h4>
+            </div>
+            <div class="card-body">
+                <form class="form" role="form" id="frmcontent"></form>
+                <div class="form-group floating-label">
+                    <div class="modal-footer" style="border-top: none;">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                        <button type="button" class="btn btn-primary" id="btnSave">Save</button>
+                        <button type="button" class="btn btn-primary" id="btnSend" style="display:none">Send E-mail</button>
+                    </div>                    
+                </div>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+
+@*<script src="~/Content/js/libs/jquery/jquery-1.9.1.min.js"></script> 
+<script src="~/Content/js/libs/jquery/jquery-migrate-1.2.1.min.js"></script>*@
+@*<script src="~/Content/js/libs/jquery.msgbox/javascript/msgbox/jquery.msgbox.js"></script>*@
+<script src="~/Content/js/core/source/App.js"></script>
+<script src="~/Content/js/core/source/AppVendor.js"></script>
+<script src="~/Content/js/core/demo/Demo.js"></script>
+<script src="~/Content/js/core/demo/DemoFormComponents.js"></script>
+
+@*<script src="~/Scripts/jquery.signalR-2.1.1.js"></script>
+<script src='@Url.Content("~/signalr/hubs")' type="text/javascript"></script>*@
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        //var chat = $.connection.hubMessage;
+
+        //$.connection.hub.start().done(function () {
+        //    // do nothing                
+        //}).fail(function (error) {
+        //    alert('[CaseInfo]Invocation of start failed. Error: ' + error);
+        //});
+
+        $('#aAddnote').click(function () {
+            $("#btnSave").show();
+            $("#btnSend").hide();
+            $('#formModal').modal({ /*closable: false */backdrop: 'static' });
+            $('#formModal').find('.modal-title').text('Add Note');
+            $('.modal-dialog').removeClass('modal-lg');
+
+            $('#frmcontent').load('@Url.Action("AddNote", "Case")', function () {
+                $(this).removeClass("form-horizontal").addClass("form");
+                $('#formModal').modal('show');
+                $('#btnSave').unbind('click');
+                $('#btnSave').click(function () {
+                    $.ajax({
+                        type: "POST",
+                        cache: false,
+                        url: '@Url.Action("DoSaveNote", "Case")',
+                        data: {
+                            CaseId: '@Model.CaseDetails.CASID',
+                                Remark: $.trim($('#txtAddNote').val())
+                            },
+                        success: function (result) {
+                            //$.msgbox("Save Success", { type: "info" });
+                            DetailTimeline();
+                            $('#formModal').modal('toggle');
+                            openSuccessDialog("Save Success");
+                        }
+                    });
+                });
+            });
+        });
+
+
+        $('#aChangeStatus').click(function () {
+            $("#btnSave").show();
+            $("#btnSend").hide();
+            $('#formModal').modal({ /*closable: false */backdrop: 'static' });
+            $('#formModal').find('.modal-title').text('Change Status');
+            $('.modal-dialog').removeClass('modal-lg');
+            $('#frmcontent').load('@Url.Action("ChangeStatus", "Case")', function () {
+                $(this).removeClass("form-horizontal").addClass("form");
+                $('#formModal').modal('show');
+                $('#btnSave').unbind('click');
+                $('#btnSave').click(function () {
+                    //  alert('ChangeStatus');
+                    $.ajax({
+                        type: "POST",
+                        cache: false,
+                        url: '@Url.Action("DoSaveStatus", "Case")',
+                        data: {
+                            CaseId: '@Model.CaseDetails.CASID',
+                            StatusId: $('#ddlStatus').val(),
+                            Remark: $.trim($('#txtRemark').val())
+                        },
+                        success: function (result) {
+                            //$.msgbox("Save Success", { type: "info" });
+                            CaseInfo();
+                            DetailTimeline();
+                            getNotificationTotal();
+                            $('#formModal').modal('toggle');
+                            openSuccessDialog("Save Success");
+                        }
+                    });
+                });
+            });
+
+        });
+
+        $('#aCloseCase').click(function () {
+            $("#btnSave").show();
+            $("#btnSend").hide();
+            $('#formModal').modal({ /*closable: false */backdrop: 'static' });
+            $('#formModal').find('.modal-title').text('Close Case');
+            $('.modal-dialog').removeClass('modal-lg');
+            //$('.modal-body').css('height', $(window).height() * 0.8);
+            $('#frmcontent').load('@Url.Action("CloseCase", "Case")', function () {
+                $(this).removeClass("form-horizontal").addClass("form");
+                $('#formModal').modal('show');
+                $('#btnSave').unbind('click');
+                $('#btnSave').click(function () {
+                    $.ajax({
+                        type: "POST",
+                        cache: false,
+                        url: '@Url.Action("DoSaveCloseCase", "Case")',
+                        data: {
+                            CaseId: '@Model.CaseDetails.CASID',
+                            StatusId: $('#ddlStatus').val(),
+                            Remark: $.trim($('#txtRemark').val())
+                        },
+                        success: function (result) {
+                            //$.msgbox("Save Success", { type: "info" });
+                            CaseInfo();
+                            DetailTimeline();
+                            getNotificationTotal();
+                            $('#formModal').modal('toggle');
+                            openSuccessDialog("Save Success");
+                        }
+                    });
+                });
+            });
+        });
+
+        $('#aDispatch').click(function () {
+            $("#btnSave").show();
+            $("#btnSend").hide();
+            $('#formModal').modal({ /*closable: false */backdrop: 'static' });
+            $('#formModal').find('.modal-title').text('Dispatch');
+            //$('.modal-body').css('height', $(window).height() * 0.8);
+            $('.modal-dialog').removeClass('modal-lg');
+            $('#frmcontent').load('@Url.Action("Dispatch", "Case")', function () {
+                //$('#optgroup').multiSelect({ selectableOptgroup: true });  DoSaveDispatch
+                $(this).removeClass("form-horizontal").addClass("form");
+                $('#formModal').modal('show');
+                $('#btnSave').unbind('click');
+                $('#btnSave').click(function () {
+                    $.ajax({
+                        type: "POST",
+                        cache: false,
+                        url: '@Url.Action("DoSaveDispatch", "Case")',
+                        data: {
+                            CaseId: '@Model.CaseDetails.CASID',
+                            GroupId: $('#selectDispatch').val(),
+                            Remark: $.trim($('#txtRemark').val())
+                        },
+                        success: function (result) {
+                            //$.msgbox("Save Success", { type: "info" });
+                            CaseInfo();
+                            DetailTimeline();
+                            $('#formModal').modal('toggle');
+                            openSuccessDialog("Save Success");
+                        }
+                    });
+                });
+
+            });
+        });
+
+
+        $('#aAssign').click(function () {
+            $("#btnSave").show();
+            $("#btnSend").hide();
+            $('#formModal').modal({ /*closable: false */backdrop: 'static' });
+            $('#formModal').find('.modal-title').text('Assign');
+
+            $('.modal-dialog').removeClass('modal-lg');
+            //$('.modal-body').css('height', $(window).height() * 0.8);
+            $('#frmcontent').load('@Url.Action("AssignCase", "Case")', function () {
+                //$('#optgroup').multiSelect({ selectableOptgroup: true });
+                $(this).removeClass("form-horizontal").addClass("form");
+                $('#formModal').modal('show');
+                $('#btnSave').unbind('click');
+                $('#btnSave').click(function () {
+                    $.ajax({
+                        type: "POST",
+                        cache: false,
+                        url: '@Url.Action("DoSaveAssign", "Case")',
+                        data: {
+                            CaseId: '@Model.CaseDetails.CASID',
+                            UserId: $('#ddlUsers').val(),
+                            Remark: $.trim($('#txtRemark').val())
+                        },
+                        success: function (result) {
+                            @*chat.server.createGroup($('#ddlUsers').val(), '<a href="@Url.Action("CaseDetail", "Case", new { id = "_id" }).Replace("_id", @Model.CaseDetails.CASID.ToString())">@Model.CaseDetails.CASEIDNO</a> has assing to you');*@
+                            //$.msgbox("Save Success", { type: "info" });
+                            CaseInfo();
+                            DetailTimeline();
+                            $('#formModal').modal('toggle');
+                            openSuccessDialog("Save Success");
+                        }
+                    });
+                });
+            });
+        });
+
+
+        $('#aAccept').click(function () {
+            $.ajax({
+                type: "POST",
+                cache: false,
+                url: '@Url.Action("DoSaveAccept", "Case")',
+                    data: {
+                        CaseId: '@Model.CaseDetails.CASID'
+                    },
+                    success: function (result) {
+                        //$.msgbox("Save Success", { type: "info" });
+                        CaseInfo();
+                        DetailTimeline();
+                        openSuccessDialog("Save Success");
+                        getNotificationTotal();
+                    }
+                });
+            });
+
+
+        $('#aReject').click(function () {
+            $.ajax({
+                type: "POST",
+                cache: false,
+                url: '@Url.Action("DoSaveReject", "Case")',
+                    data: {
+                        CaseId: '@Model.CaseDetails.CASID'
+                },
+                    success: function (result) {
+                        //$.msgbox("Save Success", { type: "info" });
+                        CaseInfo();
+                        DetailTimeline();
+                        openSuccessDialog("Save Success");
+                    }
+                });
+            });
+
+        $('#aSendEmail').click(function () {            
+            $("#btnSave").hide();
+            $("#btnSend").show();
+            $('.modal-dialog').addClass('modal-lg');
+            //csscontent
+            //$('.modal-content').height(500);
+            //$('.modal-content').width(1200);
+            $('#formModal').modal({ /*closable: false */backdrop: 'static' });
+            $('#formModal').find('.modal-title').text('Send E-Mail');
+            // $('.csscontent').css({ 'height': $(window).height() * 0.8 });
+
+            var url = '@Url.Action("SendEmail", "Case")/@Model.CaseDetails.CASID';
+            $('#frmcontent').load(url, function () {
+                $(this).removeClass("form-horizontal").addClass("form");
+                var myDropzone;
+                $('#summernote').summernote({
+                    height: 300,
+                    toolbar: [
+                        ['style', ['style']],
+                       ['style', ['bold', 'italic', 'underline', 'clear']],
+                       ['font', ['strikethrough', 'superscript', 'subscript']],
+                       ['fontsize', ['fontsize']],
+                       ['color', ['color']],
+                       ['para', ['ul', 'ol', 'paragraph']],
+                       ['height', ['height']]
+                    ],
+                    fontsize: '18px',
+                });
+                $('#formModal').modal('show');
+                $('#btnSend').unbind('click');
+                $('#btnSend').click(function ()
+                {
+                    $.ajax({
+                        type: "POST",
+                        cache: false,
+                        url: '@Url.Action("SendMail", "Case")',
+
+                        data: {
+                            casID: '@Model.CaseDetails.CASID',
+                            MailTo: $('#MailTo').val(),
+                            MailCc: $('#Mailcc').val(),
+                            MailBcc: $('#MailBcc').val(),
+                            MailSubject: $('#Subject').val(),
+                            MailBody: encodeURIComponent($('.note-editable').html()),
+                            attachFiles: $('input[name=attachFiles]:checked', '#frmcontent').serialize()
+                        },
+                        success: function (result) {
+                            //$.each(myDropzone.files, function (i, o) {
+                            //    myDropzone.removeFile(o);
+                            //});
+                            if (result.strSuccess != '') {
+                                //$.msgbox("Send Mail Success", { type: "info" });
+                                $('#formModal').modal('toggle');
+                                openSuccessDialog("Send mail success");
+                                DetailTimeline();
+                                return;
+                            }
+                            if (result.strError != '') {
+                                //$.msgbox("Send Mail Success", { type: "error" });
+                                openErrorDialog("Send mail failure");
+                                return;
+                            }
+                        }
+                    });
+                });
+            });
+        });
+
+
+        $('#aRemind').click(function () {
+            $("#btnSave").show();
+            $("#btnSend").hide();
+            $('#formModal').modal({ backdrop: 'static' });
+            $('#formModal').find('.modal-title').text('Remind Case');
+            $('.modal-dialog').removeClass('modal-lg');
+
+            var url = "@Url.Action("RemindFlow", "Case")/@Model.CaseDetails.CASID";
+            $('#frmcontent').load(url, function () {
+                $(this).removeClass("form-horizontal").addClass("form");                                
+                $('#formModal').modal('show');
+                $('#btnSave').unbind('click');
+                $('#btnSave').click(function () {
+                    $.ajax({
+                        type: "POST",
+                        cache: false,
+                        url: '@Url.Action("RemindFlowSubmit", "Case")',
+                    data: {
+                        casID: '@Model.CaseDetails.CASID',
+                        crfID: $.trim($('#crfID').val()),
+                        crftime: $("#crfTime").val(),
+                        status: $('input[name=casRemindStatus]:checked', '#frmcontent').val()                        
+                    },
+                    success: function (result) {
+                        $('#formModal').modal('toggle');
+                        DetailTimeline();
+                        getNotificationTotal();
+                        openSuccessDialog("Save Success");
+                    }
+                });
+            });
+            });
+        });
+
+        $('#aEdit').click(function () {
+            $("#btnSave").show();
+            $("#btnSend").hide();
+            $('#formModal').modal({ backdrop: 'static' });
+            $('#formModal').find('.modal-title').text('Edit Case');
+            $('.modal-dialog').removeClass('modal-lg');
+
+            $('#frmcontent').load('@Url.Action("CaseDetailEdit", "Case")/@Model.CaseDetails.CASID', function ()
+            {
+                $(this).removeClass("form").addClass("form-horizontal");                
+                $('#btnSave').unbind('click');
+                $('#btnSave').click(function () {
+                    $("#casLevel1").val($("#casIDLevel1").find("option:selected").text());
+                    if ($("#casIDLevel2").length)
+                    {
+                        $("#casLevel2").val($("#casIDLevel2").find("option:selected").text());
+                    }
+
+                    $.ajax({
+                        type: "POST",
+                        cache: false,
+                        url: '@Url.Action("CaseDetailEditSave", "Case")',
+                        data: $('#frmcontent').serialize(),
+                        success: function (result) {
+                            if (result.strSuccess != '') {
+                                //$.msgbox("Send Mail Success", { type: "info" });
+                                $('#formModal').modal('toggle');                                
+                                openSuccessDialog("Save data success");
+                                CaseInfo();
+                                DetailTimeline();
+                                return;
+                            }
+                            if (result.strError != '') {
+                                //$.msgbox("Send Mail Success", { type: "error" });
+                                openErrorDialog(result.strError);
+                                return;
+                            }
+                        }
+                    });
+                });
+            });
+        });
+
+    });
+</script>

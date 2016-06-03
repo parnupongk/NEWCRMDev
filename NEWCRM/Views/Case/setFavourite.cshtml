@@ -1,0 +1,8 @@
+﻿@if (Convert.ToBoolean(ViewData["Flag"]))
+{
+    <a class="btn btn-icon-toggle ink-reaction btn-default" href="javascript:void(0);" onclick="setFav(false)" title="Remove Favourite"><i class="md md-favorite"></i></a>   
+}
+else
+{
+    <a class="btn btn-icon-toggle ink-reaction btn-default" href="javascript:void(0);" onclick="setFav(true)" title="Add Favourite"><i class="md md-favorite-outline"></i></a>   
+}

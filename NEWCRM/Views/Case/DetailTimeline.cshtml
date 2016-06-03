@@ -1,0 +1,56 @@
+﻿@model NEWCRM.Models.CaseViewModelLocalization
+<ul class="timeline collapse-lg timeline-hairline">
+    @foreach(var item in Model.list_timeline) {
+    <li>
+        <div class="timeline-circ"></div>
+        <div class="timeline-entry">
+            <div class="card style-default-light">
+                <div class="card-body small-padding">
+                    @*<img class="img-circle img-responsive pull-left width-1" src="" alt="" />*@
+                    <span class="text-medium">@item.cltName <span class="opacity-50"><small>@item.cslDesc</small></span></span><br />
+                    @if(!string.IsNullOrEmpty(item.cslNote)) {
+                        <span class="text-primary">@Html.Raw(item.cslNote)</span><br />
+                    }
+                    <span class="opacity-50">by @item.CreatedByName @item.cslCreatedOn.ToShortDateString() @item.cslCreatedOn.ToShortTimeString()</span>
+                </div>
+            </div>
+        </div>
+    </li>
+    }
+</ul>
+    @* <ul class="timeline collapse-lg timeline-hairline">
+        <li class="timeline-inverted">
+            <div class="timeline-circ circ-xl facebook-bg"><i class="fa fa-facebook"></i></div>
+            <div class="timeline-entry">
+                <div class="card style-default-light">
+                    <div class="card-body small-padding">
+                        <span class="text-medium">โพส <span class="text-primary">facebook</span> โดย <span class="text-primary">อรรถพล อาจไชยธร</span></span><br>
+                        <span class="opacity-50">เมื่อ April 29, 2015 1:02pm
+                        </span>
+                        <br>
+                        <br>
+                        สวัสดีค่ะ ขออภัยที่พนักงานเราอาจจะเข้าใจผิด คุณลูกค้าไม่จำเป็นต้องสมัคร ATM ก็ได้ ทางเราได้ติดต่อไปยังสาขาที่เกี่ยวข้องแล้ว สามารถไปติดต่อทำธุรกรรมได้เลยค่ะ ขออภัยในความผิดพลาดครั้งนี้ด้วยค่ะ
+                    </div>
+                </div>
+            </div>
+            <!--end .timeline-entry -->
+        </li>
+
+
+        <li class="timeline-inverted">
+            <div class="timeline-circ circ-xl style-primary"><i class="fa fa-edit"></i></div>
+            <div class="timeline-entry">
+                <div class="card style-default-light">
+                    <div class="card-body small-padding">
+                        <span class="text-medium">สร้างเคส <span class="text-primary">C-1500003201</span> โดย <span class="text-primary">อรรถพล อาจไชยธร</span></span><br>
+                        <span class="opacity-50">เมื่อ April 29, 2015 11:12am
+                        </span>
+                        <br>
+                        <br>
+                        ลูกค้าแจ้งจะขอปิดบัญชี ถอนสลากออมสินออก เนื่องจากเมื่อวานลูกค้าได้มาโพสข้อความถามใน GSB Society แล้วไม่ได้รับการตอบคำถาม ทำให้ลูกค้าไม่พอใจ
+                    </div>
+                </div>
+            </div>
+            <!--end .timeline-entry -->
+        </li>
+    </ul>*@

@@ -1,0 +1,294 @@
+﻿@{   
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section Scripts {
+    <script type="text/javascript">
+
+        $(function () {
+
+            function LoadCaseList(WorkType) {
+                $('#divCaseList').load('@Url.Action("CaseList", "Todolist")?WorkType=' + WorkType, function () {
+            });
+        }
+
+        LoadCaseList('MyWork');
+
+        $("ul li a.atabs").click(function (e) {
+            if ($.trim($(this).text()) == 'My Works' || $.trim($(this).text()) == 'My Groups') {
+                $('#IcbOpen').prop('checked', true);
+                $('#IcbInitiate').prop('checked', true);
+                $('#IcbClosed').prop('checked', false);
+                $('#IcbCancel').prop('checked', false);
+                $('#IcbNautralized').prop('checked', false);
+                $('#IcbJobCancel').prop('checked', false);
+                $('#IcbFailed').prop('checked', false);
+                $('#IcbSolved').prop('checked', false);
+                $('#caseno').val('');
+                $('#ckCreated').prop('checked', true);
+                $('#ckModified').prop('checked', false);
+                $('#ckClosed').prop('checked', false);
+
+                $('#headertitle').html('Search ' + $(this).text());
+                //$('.datetime').datepicker('setDate', /*startDate*/new Date());
+                if ($.trim($(this).text()) == 'My Works')
+                    LoadCaseList('MyWork');
+                if ($.trim($(this).text()) == 'My Groups')
+                    LoadCaseList('MyGroup');
+            }
+        });
+
+        $("#btnReset").click(function () {
+            $(this).closest('form').find("input[type=text]").val("");
+            $(this).closest('form').find("input[type=radio]").prop('checked', false);
+            $(this).closest('form').find("input[type=checkbox]").prop('checked', false);
+            $("#ckCreated").prop('checked', true);
+        });
+
+        $('.datetime').datepicker({ autoclose: true, todayHighlight: true, format: "dd/mm/yyyy" });
+
+    });
+    </script>
+}
+
+<div class="section-body">
+    <div class="card tabs-left style-default-light">
+        <ul class="card-head nav nav-tabs" data-toggle="tabs">
+            <li class="active"><a href="#mygroup" style="font-size: 16px" class="atabs"><i class=" fa fa-child fa-fw"></i>&nbsp;My Works</a></li>
+            <li><a href="#mygroup" style="font-size: 16px" class="atabs"><i class="fa fa-group fa-fw "></i>&nbsp;My Groups</a></li>
+            @*<li><a href="#myfav" style="font-size: 16px" class="atabs"><i class="fa fa-heart fa-fw"></i>&nbsp;My Favourite</a></li>*@
+        </ul>
+        <div class="card-body tab-content style-default-bright">
+            <div class="tab-pane active" id="mygroup">
+                <div class="card">
+                    <div class="card-head">
+                        <header id="headertitle">Search My Works</header>
+                        <div class="tools">
+                            <div class="btn-group">
+                                <a class="btn btn-icon-toggle btn-collapse"><i class="fa fa-search"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body" style="padding-bottom: 0; display: none">
+                        <div class="col-lg-12">
+                            <form class="form" role="form">
+                                <div class="row">
+                                    <div class="col-lg-5">
+                                        <div class="form-group ">
+                                            <label class="control-label">Case Status</label>
+                                            <div style="margin-top: 10px;">
+                                                <label class="checkbox-inline checkbox-styled">
+                                                    <input type="checkbox" id="IcbClosed" value="option4"><span>Closed</span>
+                                                </label>
+                                                <label class="checkbox-inline checkbox-styled">
+                                                    <input type="checkbox" id="IcbOpen" value="option1" checked="checked"><span>Open</span>
+                                                </label>&nbsp;&nbsp;&nbsp;
+                                                <label class="checkbox-inline checkbox-styled">
+                                                    <input type="checkbox" id="IcbPending" value="option2" checked="checked"><span>Pending</span>
+                                                </label>                                               
+                                                <label class="checkbox-inline checkbox-styled">
+                                                    <input type="checkbox" id="IcbCancel" value="option5"><span>Cancel</span>
+                                                </label>                                                
+                                            </div>
+                                            <!--end .col -->
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-7">
+                                        <div class="form-group floating-label">
+                                            <input type="text" class="form-control" id="caseno">
+                                            <label for="caseno">Case No.</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-5">
+                                        <div class="form-group">
+                                            <label class="control-label">Case Date</label>
+                                            <div style="margin-top: 10px;">
+                                                <label class="radio-inline radio-styled">
+                                                    <input type="radio" name="inlineRadioOptions" value="Created" id="ckCreated" checked="checked"><span>Created</span>
+                                                </label>
+                                                <label class="radio-inline radio-styled">
+                                                    <input type="radio" name="inlineRadioOptions" value="Modified" id="ckModified"><span>Modified</span>
+                                                </label>
+                                                <label class="radio-inline radio-styled">
+                                                    <input type="radio" name="inlineRadioOptions" value="Closed" id="ckClosed"><span>Closed</span>
+                                                </label>
+                                            </div>
+                                            <!--end .col -->
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-7">
+                                        <div class="form-group">
+                                            <div class="input-group date">
+                                                <div class="input-group-content">
+                                                    <input type="text" class="form-control datetime" id="txtStartdate" name="start">
+                                                    <label>Date range</label>
+                                                </div>
+                                                <span class="input-group-addon">to</span>
+                                                <div class="input-group-content">
+                                                    <input type="text" class="form-control datetime" id="txtEnddate" name="end">
+                                                    <div class="form-control-line"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <button type="button" id="btnSearch" class="btn ink-reaction btn-raised btn-primary pull-right"><i class="fa fa-search fa-fw"></i>Search</button>
+                                        <button type="button" id="btnReset" class="btn ink-reaction btn-raised btn-warning pull-right" style="margin-right: 10px"><i class="fa fa-rotate-left fa-fw"></i>Reset</button>
+                                    </div>
+                                </div>
+                            </form>
+                            <hr class="ruler-xl">
+                        </div>
+                    </div>
+                    <br />
+                    <div class="col-lg-12">
+                        <div class="row">
+                            <div class="col-lg-12" style="padding-bottom: 10px;" id="divCaseList">
+                                <!--end .table-responsive -->
+                            </div>
+                            <!--end .col -->
+                        </div>
+                        <!--end .row -->
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane" id="myfav">
+                <div>
+                    <span class="text-xl text-normal">My Favourite Cases</span><sup class="badge style-primary" style="top: -15px">5</sup>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="list-results">
+                            <div class="col-xs-12 col-lg-6 hbox-xs">
+                                <div class="hbox-column v-top">
+                                    <div class="clearfix">
+                                        <div class="col-lg-12">
+                                            <a class="btn btn-icon-toggle btn-default pull-right">
+                                                <i class="fa fa-close"></i>
+                                            </a>
+                                            <a class="text-lg text-medium text-primary" href="javascript:;">C-0003142</a>
+                                        </div>
+                                    </div>
+                                    <div class="clearfix">
+                                        <div class="col-md-12">
+                                            General Information > Customer contact detail
+                                        </div>
+                                    </div>
+                                    <div class="clearfix">
+                                        <div class="col-lg-12">
+                                            <span class="opacity-75">Created by Agent01, April 29, 2015 11:12</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--end .hbox-column -->
+                            </div>
+                            <!--end .hbox-xs -->
+                            <div class="col-xs-12 col-lg-6 hbox-xs">
+                                <div class="hbox-column v-top">
+                                    <div class="clearfix">
+                                        <div class="col-lg-12">
+                                            <a class="btn btn-icon-toggle btn-default pull-right">
+                                                <i class="fa fa-close"></i>
+                                            </a>
+                                            <a class="text-lg text-medium text-primary" href="javascript:;">C-0003076</a>
+                                        </div>
+                                    </div>
+                                    <div class="clearfix">
+                                        <div class="col-md-12">
+                                            Complaints > Service of CSC Agent
+                                        </div>
+                                    </div>
+                                    <div class="clearfix">
+                                        <div class="col-lg-12">
+                                            <span class="opacity-75">Created by Agent01, April 29, 2015 11:12</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--end .hbox-column -->
+                            </div>
+                            <!--end .hbox-xs -->
+                            <div class="col-xs-12 col-lg-6 hbox-xs">
+                                <div class="hbox-column v-top">
+                                    <div class="clearfix">
+                                        <div class="col-lg-12">
+                                            <a class="btn btn-icon-toggle btn-default pull-right">
+                                                <i class="fa fa-close"></i>
+                                            </a>
+                                            <a class="text-lg text-medium text-primary" href="javascript:;">C-0002088</a>
+                                        </div>
+                                    </div>
+                                    <div class="clearfix">
+                                        <div class="col-md-12">
+                                            Get Information > Register new ClubSmart card
+                                        </div>
+                                    </div>
+                                    <div class="clearfix">
+                                        <div class="col-lg-12">
+                                            <span class="opacity-75">Created by Agent01, April 29, 2015 11:12</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--end .hbox-column -->
+                            </div>
+                            <!--end .hbox-xs -->
+                            <div class="col-xs-12 col-lg-6 hbox-xs">
+                                <div class="hbox-column v-top">
+                                    <div class="clearfix">
+                                        <div class="col-lg-12">
+                                            <a class="btn btn-icon-toggle btn-default pull-right">
+                                                <i class="fa fa-close"></i>
+                                            </a>
+                                            <a class="text-lg text-medium text-primary" href="javascript:;">C-0001844</a>
+                                        </div>
+                                    </div>
+                                    <div class="clearfix">
+                                        <div class="col-md-12">
+                                            Change of Details > Customer name
+                                        </div>
+                                    </div>
+                                    <div class="clearfix">
+                                        <div class="col-lg-12">
+                                            <span class="opacity-75">Created by Agent01, April 29, 2015 11:12</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--end .hbox-column -->
+                            </div>
+                            <!--end .hbox-xs -->
+                            <div class="col-xs-12 col-lg-6 hbox-xs">
+                                <div class="hbox-column v-top">
+                                    <div class="clearfix">
+                                        <div class="col-lg-12">
+                                            <a class="btn btn-icon-toggle btn-default pull-right">
+                                                <i class="fa fa-close"></i>
+                                            </a>
+                                            <a class="text-lg text-medium text-primary" href="javascript:;">C-0000771</a>
+                                        </div>
+                                    </div>
+                                    <div class="clearfix">
+                                        <div class="col-md-12">
+                                            Complaints > Service of Site
+                                        </div>
+                                    </div>
+                                    <div class="clearfix">
+                                        <div class="col-lg-12">
+                                            <span class="opacity-75">Created by Agent01, April 29, 2015 11:12</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--end .hbox-column -->
+                            </div>
+                            <!--end .hbox-xs -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--end .card-body -->
+    </div>
+</div>
+
+

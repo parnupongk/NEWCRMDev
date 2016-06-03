@@ -1,0 +1,224 @@
+﻿@{   
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section Scripts {
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            $('.field-date').datepicker({ autoclose: true, todayHighlight: true, format: "dd/mm/yyyy" });
+
+            //$(".fl-field").change(function () {
+            //    var opt = $(this).find(":selected");
+            //    alert(opt.attr("data-type"));
+
+            //});
+        });
+
+        function fieldChange(ref, index)
+        {
+            var opt = $(ref).find(":selected");
+            var datatype = opt.attr("data-type");
+
+            $("#data-type-" + index).val(datatype);
+
+            if (datatype == 'date') {
+                $("#condition-text-" + index).hide();
+                $("#condition-status-" + index).hide();
+                $("#condition-date-" + index).show();
+
+                $("#value-text-" + index).hide();
+                $("#value-status-" + index).hide();
+                $("#value-date-" + index).show();
+                $('.field-date').datepicker({ autoclose: true, todayHighlight: true, format: "dd/mm/yyyy" });
+            } 
+            else if (datatype == 'status')
+            {
+                $("#condition-text-" + index).hide();
+                $("#condition-date-" + index).hide();
+                $("#condition-status-" + index).show();
+               
+                $("#value-text-" + index).hide();
+                $("#value-date-" + index).hide();
+                $("#value-status-" + index).show();                
+            } 
+            else 
+            {
+                $("#condition-date-" + index).hide();
+                $("#condition-status-" + index).hide();
+                $("#condition-text-" + index).show();
+
+                $("#value-date-" + index).hide();
+                $("#value-status-" + index).hide();
+                $("#value-text-" + index).show();
+            }
+        }
+
+        function beginQuery() {
+            $(".fv").each(function () {
+                var v = $(this).val();
+                if (v == '') {
+                    $(this).focus();                    
+                }
+            });
+
+            $("#getQuery").fadeOut(300);
+        }
+
+        function successQuery() {
+            $('#datatable1').DataTable({
+                "dom": 'lCfrtip',
+                "order": [[0, "asc"]],
+                "language": {
+                    "lengthMenu": '_MENU_ entries per page',
+                    "search": '<i class="fa fa-search"></i>',
+                    "paginate": {
+                        "previous": '<i class="fa fa-angle-left"></i>',
+                        "next": '<i class="fa fa-angle-right"></i>'
+                    }
+                }
+            });
+            $("#getQuery").fadeIn(300);
+        }
+
+        function failureQuery(data) {
+            openErrorDialog(data.responseText);
+        }
+    </script>
+}
+<div class="section-body">
+    <div class="card">
+        <div class="card-head">
+            <div class="col-lg-12">
+                <header>Advanced Search</header>
+                <div class="tools">
+                    <div class="btn-group">
+                        <a class="btn btn-icon-toggle btn-collapse"><i class="fa fa-search"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card-body" style="padding-bottom: 0;">
+            <div class="col-lg-12">
+                <div class="row">
+                    <div class="col-lg-3">
+                        <div class="form-group no-padding">
+                            <h4>Column Name</h4>
+                        </div>
+                    </div>
+                    <div class="col-lg-2">
+                        <div class="form-group no-padding">
+                            <h4>Criteria</h4>
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="form-group no-padding">
+                            <h4>Value</h4>
+                        </div>
+                    </div>
+                    <div class="col-lg-2">
+                        <div class="form-group no-padding">
+                            <h4>Match</h4>
+                        </div>
+                    </div>
+                    <div class="col-lg-2">
+                        <div class="form-group no-padding">
+                            &nbsp;
+                        </div>
+                    </div>
+                </div>
+                @using (Ajax.BeginForm("getQuery", "Casequery",
+                                        new AjaxOptions { UpdateTargetId = "getQuery", HttpMethod = "post", OnBegin = "return beginQuery()", OnSuccess = "successQuery", OnFailure = "failureQuery" },
+                                        new { id = "frm-casequery", @class = "form", autocomplete = "off" }))
+                {
+                    <div id="filterList"></div>
+                    <script type="text/html" id="filterTmpl">
+                        <input type="hidden" id="data-type-<%=index%>" name="data-type-<%=index%>" value="text" />
+                        <div class="row">
+                            <div class="col-lg-3">
+                                <div class="form-group no-padding">
+                                    <select id="field-<%=index%>" name="field-<%=index%>" class="form-control fl-field" onchange="fieldChange(this,'<%=index%>')">
+                                        <option data-type="text" value="casIDName">Case No.</option>
+                                        <option data-type="text" value="casSummary">Casetype</option>
+                                        <option data-type="text" value="cta.ctaFullName">Contact Name</option>
+                                        <option data-type="text" value="casCreatedByName">Created by</option>
+                                        <option data-type="text" value="casModifiedByName">Modified by</option>
+                                        <option data-type="text" value="casOwnerByName">Owner by</option>
+                                        <option data-type="date" value="casCreatedOn">Created date</option>
+                                        <option data-type="date" value="casModifiedOn">Modified date</option>
+                                        <option data-type="status" value="cas.cssID">Status</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-lg-2">
+                                <div class="form-group no-padding">
+                                    <select id="condition-text-<%=index%>" name="condition-text-<%=index%>" class="form-control">
+                                        <option value="={0}" title="==">Equal</option>
+                                        <option value="<>{0}" title="!=">Not Equal</option>
+                                        <option value="like $%{0}%$" title="..N..">Contain</option>
+                                        <option value="like ${0}%$" title="N...">Begin With</option>
+                                        <option value="like $%{0}$" title="...N">End With</option>
+                                    </select>
+                                    <select id="condition-date-<%=index%>" name="condition-date-<%=index%>" class="form-control" style="display: none">
+                                        <option value="={0}" title="Is">==</option>
+                                        <option value=">={0}" title="More than or equal">>=</option>
+                                        <option value="<={0}" title="Less than or equal"><=</option>
+                                    </select>
+                                    <select id="condition-status-<%=index%>" name="condition-status-<%=index%>" class="form-control" style="display: none">
+                                        <option value="={0}" title="Is">==</option>
+                                        <option value="<>{0}" title="Is Not">!=</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="form-group no-padding">
+                                    <div id="value-text-<%=index%>">
+                                        <input type="text" name="value-text-<%=index%>" class="form-control fv" value="" />
+                                    </div>
+                                    <div id="value-date-<%=index%>" class="input-group date field-date" style="display: none">
+                                        <div class="input-group-content">
+                                            <input type="text" name="value-date-<%=index%>" class="form-control fv">
+                                        </div>
+                                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                    </div>
+                                    <div id="value-status-<%=index%>" style="display: none">
+                                        <select name="value-status-<%=index%>" class="form-control">
+                                            <option value="1">Close non lead</option>
+                                            <option value="2">Open non lead</option>
+                                            <option value="3">Cancel</option>
+                                            <option value="4">Pending</option>
+                                            <option value="5">Open Lead</option>
+                                            <option value="6">Close Lead</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-2">
+                                <div class="form-group no-padding">
+                                    <select name="operator-<%=index%>" class="form-control">
+                                        <option value="AND">AND</option>
+                                        <option value="OR">OR</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-lg-2">
+                                <div class="form-group no-padding">
+                                    <button id="btn_last_criteria_x" type="button" class="btn ink-reaction btn-icon-toggle btn-primary btn-delete"><i class="fa fa-minus"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </script>
+                    <div class="row" style="margin: 10px">
+                        <div class="card-actionbar-row col-lg-12" style="padding-right: 80px">
+                            <a class="btn btn-flat" href="javascript:;" data-duplicate="filterTmpl" data-target="#filterList"><i class="fa fa-plus fa-fw"></i>&nbsp;ADD NEW FILTER</a>
+                            <button type="submit" class="btn ink-reaction btn-primary"><i class="fa fa-search fa-fw"></i>&nbsp;Search</button>
+                        </div>
+                    </div>
+                }
+                <hr class="ruler-xl">
+            </div>
+        </div>
+        <br />
+        <div id="getQuery" class="col-lg-12"></div>
+    </div>
+</div>

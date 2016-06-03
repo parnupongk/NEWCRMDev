@@ -1,0 +1,116 @@
+﻿@using MvcPaging
+@model IPagedList<NEWCRM.Models.sp_getContactSearch_Result>
+@if (@Model.TotalItemCount > 0)
+{
+    <!-- BEGIN SEARCH RESULTS LIST -->
+    <div class="margin-bottom-xxl">
+        <span class="text-light text-lg">Filtered results <strong>@Model.TotalItemCount</strong></span>
+        @*<div class="btn-group btn-group-sm pull-right">
+		<button type="button" class="btn btn-default-light dropdown-toggle" data-toggle="dropdown">
+			<span class="glyphicon glyphicon-arrow-down"></span> Sort
+		</button>
+		<ul class="dropdown-menu dropdown-menu-right animation-dock" role="menu">
+			<li><a href="#" onclick="setOrder('name');">First name</a></li>
+			<li><a href="#" onclick="setOrder('surname');">Last name</a></li>
+			<li><a href="#" onclick="setOrder('email');">Email address</a></li>
+		</ul>
+	</div>*@
+    </div>
+    <!--end .margin-bottom-xxl -->
+    <!-- BEGIN SEARCH RESULTS LIST -->
+    <div class="list-results">
+        @foreach (var item in Model)
+        {
+            <div class="col-xs-12 col-lg-6 hbox-xs height-4">
+                <div class="hbox-column width-2">
+                    @if (!string.IsNullOrEmpty(item.ctaAvatar))
+                    {
+                        <img class="img-circle img-responsive pull-left" src="~/Images/avatars/@item.ctaAvatar" alt="" />            
+                    }
+                    else
+                    {
+                        <img class="img-circle img-responsive pull-left" src="~/Images/contact_.png" alt="" />
+                    }
+                </div>
+                <!--end .hbox-column -->
+                <div class="hbox-column v-top">
+                    <div class="clearfix">
+                        <div class="col-lg-10 margin-bottom-lg">
+                            <a class="text-lg text-medium" href="@Url.Action("Detail", "Contact")/@item.ctaID">@item.ctaFullName</a>
+                        </div>
+                        <div class="col-lg-2">
+                            <button type="button" title="Make Call.." class="btn ink-reaction btn-floating-action btn-sm btn-accent" onclick="window.location='@Url.Action("NewCaseFromContact", "Case")/@item.ctaID'">
+                                <i class="fa fa-whatsapp" style="font-size: 1.8em"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="clearfix opacity-75">
+                        <div class="col-lg-12">
+                            <span class="glyphicon glyphicon-phone-alt text-sm">&nbsp;</span>@item.phnMain
+                            @if (!string.IsNullOrEmpty(item.phnOther))
+                            {
+                                <span>@string.Concat(", " + item.phnOther)</span>
+                            }
+                        </div>
+                        @*	<div class="col-md-5 opacity-75">
+                @if(item.ctaEmail.Length > 16) {
+				    <span class="glyphicon glyphicon-envelope text-sm" data-toggle="tooltip" data-placement="top" data-original-title="@item.ctaEmail">&nbsp;</span>@String.Concat(item.ctaEmail.Substring(0,15),"...")
+                } else {
+                    <span class="glyphicon glyphicon-envelope text-sm">&nbsp;</span>@item.ctaEmail
+                }
+			</div>*@
+                    </div>
+                    <div class="clearfix">
+                        <div class="col-lg-12 opacity-75">
+                            @if (item.adrSummary.Length > 100)
+                            {
+                                <span class="glyphicon glyphicon-map-marker text-sm" data-toggle="tooltip" data-placement="top" data-original-title="@item.adrSummary"></span>@String.Concat(item.adrSummary.Substring(0, 99), "...")
+                            }
+                            else
+                            {
+                                <span class="glyphicon glyphicon-map-marker text-sm">&nbsp;</span>@item.adrSummary
+                            }
+                        </div>
+                    </div>
+                </div>
+                <!--end .hbox-column -->
+            </div>
+            <!--end .hbox-xs -->
+        }
+    </div>
+    <!-- END SEARCH RESULTS LIST -->
+    <div class="pager1 text-center">
+        @Html.Raw(Ajax.Pager(
+            new Options
+            {
+                PageSize = Model.PageSize,
+                TotalItemCount = Model.TotalItemCount,
+                CurrentPage = Model.PageNumber,
+                ItemTexts = new ItemTexts() { Next = "", Previous = "", Page = "" },
+                ItemIcon = new ItemIcon() { Previous = "icon-chevron-left", Next = "icon-chevron-right" },
+                TooltipTitles = new TooltipTitles() { Next = "Next page", Previous = "Previous page", Page = "Page {0}." },
+                Size = Size.normal,
+                Alignment = Alignment.centered,
+                IsShowControls = true,
+                IsShowFirstLast = false,
+                CssClass = ""
+            },
+            new AjaxOptions
+            {
+                UpdateTargetId = "grid-list",
+                LoadingElementId = "loading",
+                OnBegin = "beginPaging",
+                OnSuccess = "successPaging",
+                OnFailure = "failurePaging"
+            }, new { controller = "Contact", action = "Search", p_name = ViewData["p_name"], p_cate = ViewData["p_cate"], p_order = ViewData["p_order"] }))
+    </div>
+}
+else
+{
+    <div class="margin-bottom-xxl">
+        <span class="text-light text-lg"><i class="md md-announcement"></i><strong>No record found</strong></span>
+    </div>    
+}
+<input type="hidden" id="view_name" value="@ViewData["p_name"]" />
+<input type="hidden" id="view_cate" value="@ViewData["p_cate"]" />
+<script src="~/Content/js/core/source/AppVendor.js"></script>

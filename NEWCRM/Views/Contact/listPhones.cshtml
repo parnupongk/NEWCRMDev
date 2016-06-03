@@ -1,0 +1,27 @@
+﻿@model NEWCRM.Models.ContactViewModel
+<script>
+    $(".fa-save").hide();
+    $(".cmd").on('click', function () {
+        prev_val = $(this).val();
+        $(this).removeClass("nledt").addClass("nledt_f");
+    }).on('blur', function () {
+        $(this).val(prev_val);
+        $(this).removeClass("nledt_f").addClass("nledt");
+    }).keypress(function (e) {
+        if (e.which == 13) {           
+            prev_val = $(this).val();
+            $(e.target).blur();
+            //$(this).removeClass("nledt_f").addClass("nledt");            
+            dosave_phn(this);
+        }
+    });
+</script>
+
+@foreach (var item in @Model.list_phones.Where(p => p.phnIsMain == false))
+{
+    <span class="text-medium" data-toggle="tooltip" data-placement="left" data-original-title="Click for changed">
+        <input type="text" class="cmd nledt" value="@item.phnNumber" data-field="" data-table="Phones" data-ID="@item.phnID" data-ismain="0" />
+        <i class="fa fa-save fa-fw"></i>
+    </span>
+}
+<script src="~/Content/js/core/source/AppVendor.js"></script>

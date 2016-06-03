@@ -1,0 +1,27 @@
+﻿@model List<CRMSuvitech.Models.sp_GetCaseFollowUp_Result>
+@if (Model.Count() > 0)
+{
+    using (Ajax.BeginForm("CaseFollowupSubmit", new { Controller = "Case" },
+    new AjaxOptions { HttpMethod = "post", OnSuccess = "successSaveCaseForm()", OnFailure = "failureSaveCaseForm" },
+    new { id = "frmCasesFollowup", @class = "form" }))
+    {         
+    <ul class="list" data-sortable="true">
+        @foreach (var item in Model)
+        { 
+            <li class="tile">
+                <div class="checkbox checkbox-styled checkbox-danger tile-text">
+                    <label style="padding-top: 0">
+                        <input type="checkbox" name="casFollowup[]" value="@item.casID" class="chkfollowup" />
+                        <span>@item.casIDName
+                            <small>@item.memEquipmentNo : @item.memRemark</small>
+                            <small><span class="text-sm">By @item.usrFullName @item.casCreatedOn</span></small>
+                        </span>
+                    </label>
+                </div>
+            </li>
+        }
+    </ul>
+     }
+} else {
+    <div class="text-xl text-info text-medium text-center">No Data</div>
+}

@@ -1,0 +1,11 @@
+﻿@model NEWCRM.Models.ContactViewModel
+
+@if (ViewBag.MapAddress != null)
+{
+<div style="text-decoration:none; overflow:hidden; height:300px; width:450px; max-width:100%;">
+    <div id="gmap_canvas" style="height:100%; width:100%;max-width:100%;">
+        <iframe style="height:100%;width:100%;border:0;" frameborder="0" src="https://www.google.com/maps/embed/v1/place?q=+@ViewBag.MapAddress&key=AIzaSyAN0om9mFmy1QN6Wf54tXAowK4eT0ZUPrU"></iframe>
+</div>
+<a class="embed-map-code" rel="nofollow" href="https://www.treat-lice.com/best-head-lice-shampoo-treatments-in-2015/" id="get-data-for-map">6 Best Head Lice Shampoo Treatments in 2015</a><style>#gmap_canvas img{max-width:none!important;background:none!important;}</style>
+</div>
+}

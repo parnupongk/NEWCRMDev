@@ -1,0 +1,20 @@
+﻿@{
+    ViewBag.Title = "Assign";
+    Layout = null;
+}
+@using NEWCRM.Models
+@model CaseModels
+<div class="form-group">
+    <select id="ddlUsers"  class="form-control">
+           @foreach (var Item in Model.Users)
+        { 
+         <option value="@Item.usrID">@(Item.usrFirstName+" "+(string.IsNullOrWhiteSpace(Item.usrLastName)?string.Empty:Item.usrLastName))</option>
+        }
+    </select>
+    <label for="ddlUsers">Operation</label>
+</div>
+<div class="form-group">
+    <textarea  id="txtRemark" class="form-control" rows="3" placeholder=""></textarea>
+    <label for="txtRemark">Remark</label>
+</div>
+

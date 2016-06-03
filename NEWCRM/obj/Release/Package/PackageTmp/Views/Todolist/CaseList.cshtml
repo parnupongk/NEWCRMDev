@@ -1,0 +1,251 @@
+﻿@{
+    ViewBag.Title = "CaseList";
+    Layout = null;
+}
+@using NEWCRM.Models
+@model TodoListModels
+
+@*@section Style {*@
+    <link type="text/css" rel="stylesheet" href="~/Content/theme-oto/libs/jquery-ui/jquery-ui-theme.css?1423393666" />
+
+
+@*}*@
+
+@*@section Scripts {*@
+    <script type="text/javascript">
+        var _table;
+        $(document).ready(function () {
+
+
+            function convertMS(seconds) {
+                var numdays = Math.floor(seconds / 86400);
+
+                var numhours = Math.floor((seconds % 86400) / 3600);
+
+                var numminutes = Math.floor(((seconds % 86400) % 3600) / 60);
+
+                var numseconds = ((seconds % 86400) % 3600) % 60;
+
+                return numdays + " days " + numhours + " hours " + numminutes + " minutes " + numseconds + " seconds";
+            };
+
+
+            function OpenCaseDetail(Id)
+            {
+
+                window.location = '@Url.Action("CaseDetail","Case")?Id='+Id;
+
+            }
+
+            function parseJsonDate(jdate) {
+                if (jdate != null)
+                    return new Date(parseInt(jdate.substr(6)));
+                else
+                    return jdate;
+            }
+             _table = $('#tbCaseList').DataTable({
+                "dom": 'lCfrtip',
+                'ajax': {
+                    "type": "POST",
+                    "bServerSide": true,
+                    "url": '@Url.Action("DoloadCaseData","Todolist")',
+                    "data": function (d) {
+                        d.IsClosed = (($('#IcbClosed').length == 0) ? false : $('#IcbClosed').is(':checked'));
+                        d.IsOpen = (($('#IcbOpen').length == 0) ? false : $('#IcbOpen').is(':checked'));
+                        d.IsPending = (($('#IcbPending').length == 0) ? false : $('#IcbPending').is(':checked'));
+                        d.IsCancel = (($('#IcbCancel').length == 0) ? false : $('#IcbCancel').is(':checked'));                       
+                        d.StartDate = (($('#txtStartdate').length == 0) ? '' : $('#txtStartdate').val());
+                        d.EndDate = (($('#txtEnddate').length == 0) ? '' : $('#txtEnddate').val());
+                        d.strIsDate = (($('input:radio[name=inlineRadioOptions]:checked').length == 0) ? '' : $('input:radio[name=inlineRadioOptions]:checked').val());
+                        d.CaseNo = (($('#caseno').length == 0) ? '' : $.trim($('#caseno').val()));
+                        d.WorkType = '@Model.WorkType';
+                        d.Pages = '@Model.Pages';
+                        d.Channel = '@Model.Channel';
+                    },
+                    //"success": function () {
+                    //    $('#tbCaseList tbody tr').each(function (i, v) {
+
+                    //        alert($(this).find('td').find('input[type=hidden]').val());
+
+                    //    });
+
+
+                    //},
+                    "dataSrc": ""
+                },
+                "aoColumns": [
+                         {
+                             "sTitle": "Case No.", "mData": "CaseId", "render": function (data, type, row)
+                             {                                 
+                                 var casno = "";                                 
+                                if (row.chnID == 'ib') {
+                                    casno = "<div class='date'><i class='fa fa-arrow-circle-down fa-fw'></i><a href='@Url.Action("CaseDetail","Case")/" + row.Id + "' target='_blank'>" + data + "</a><input type='hidden' value='" + row.ISOVERSLA + "'/><div>";                              
+                                }
+                                else if (row.chnID == 'ob') {
+                                    casno = "<div class='date'><i class='fa fa-arrow-circle-up fa-fw'></i><a href='@Url.Action("CaseDetail","Case")/" + row.Id + "' target='_blank'>" + data + "</a><input type='hidden' value='" + row.ISOVERSLA + "'/><div>";
+                                }
+                                else
+                                {
+                                    casno = "<div class='date'><i class='fa fa-arrow-circle-down fa-fw'></i><a href='@Url.Action("CaseDetail","Case")/" + row.Id + "' target='_blank'>" + data + "</a><input type='hidden' value='" + row.ISOVERSLA + "'/><div>";
+                                }
+                                                                
+                                if (row.ISASSIGN === 1) {                                   
+                                    casno += "<center><span class='text-warning' title='This case has assignt to you'><i class='fa fa-cloud-download' style='font-size:1.5em'></i></span></center>";
+                                }
+                                if (row.MYASSIGN === 1) {
+                                    casno += "<center><span class='text-info' title='This case is assigning'><i class='md md-person' style='font-size:1.5em'></i></span></center>";
+                                }
+                                if (row.MYDISPATCH === 1) {
+                                    casno += "<center><span class='text-info' title='This case is dispatching'><i class='md md-group' style='font-size:1.5em'></i></span></center>";
+                                }
+
+                                return casno;
+                             }
+                             , "fnCreatedCell": function (nTd, sData, oData, iRow, iCol)
+                             {
+                                if (oData.ISOVERSLA==1)
+                                    $(nTd).css('width', '90px').css('background-color', '#fad7d4').css('border-color', '#f7bec3').css('color', '#a94442');
+                                    //$(nTd).addClass('alert-danger');
+                                    //background-color: #fad7d4;
+                                    //border-color: #f7bec3;
+                                    //color: #a94442;
+                                else
+                                    $(nTd).css('width', '90px').css('color', '#2196f3');//.css('font-weight', 'bold');
+                             }
+                         },
+                         {
+                             "sTitle": "Contact Name", "mData": "NameContact", "fnCreatedCell": function (nTd, sData, oData, iRow, iCol) {
+                                 if (oData.ISOVERSLA == 1)
+                                     $(nTd).css('background-color', '#fad7d4').css('border-color', '#f7bec3').css('color', '#a94442');
+                             }
+                         },
+                           {
+                               "sTitle": "Case Type", "mData": "casSummary", "fnCreatedCell": function (nTd, sData, oData, iRow, iCol) {
+                                   if (oData.ISOVERSLA == 1)
+                                       $(nTd).css('background-color', '#fad7d4').css('border-color', '#f7bec3').css('color', '#a94442');
+                               }
+                           },
+                         {
+                             "sTitle": "Case Status", "mData": "CaseStatus", "fnCreatedCell": function (nTd, sData, oData, iRow, iCol) {
+                                 if (oData.ISOVERSLA == 1)
+                                     $(nTd).css('background-color', '#fad7d4').css('border-color', '#f7bec3').css('color', '#a94442');
+                             }
+                         },
+                           {
+                               "sTitle": "Create Date", "mData": "casCreatedOn", "sType": "string", "render": function (data, type, row) {
+                                   var javascriptDate = parseJsonDate(data);
+                                   var sortdate = javascriptDate.getFullYear().toString() + ((javascriptDate.getMonth() + 1) < 10 ? "0" + (javascriptDate.getMonth() + 1) : javascriptDate.getMonth() + 1) + (javascriptDate.getDate() < 10 ? "0" + javascriptDate.getDate() : javascriptDate.getDate().toString());
+                                   var jTime = (javascriptDate.getHours() < 10 ? "0" + javascriptDate.getHours() : javascriptDate.getHours()) + ":" + (javascriptDate.getUTCMinutes() < 10 ? "0" + javascriptDate.getUTCMinutes() : javascriptDate.getUTCMinutes()) + ":" + (javascriptDate.getUTCSeconds() < 10 ? "0" + javascriptDate.getUTCSeconds() : javascriptDate.getUTCSeconds());
+                                   javascriptDate = (javascriptDate.getDate() < 10 ? "0" + javascriptDate.getDate() : javascriptDate.getDate()) + "/" + ((javascriptDate.getMonth() + 1) < 10 ? "0" + (javascriptDate.getMonth() + 1) : javascriptDate.getMonth() + 1) + "/" + javascriptDate.getFullYear();
+                                   return "<span style='display:none'>" + sortdate + "</span>" + "<div class='dates'>" + javascriptDate + " " + jTime + "</div><input type='hidden' class='hdates' value='" + data + "' />";
+                               }, "fnCreatedCell": function (nTd, sData, oData, iRow, iCol) {
+                                   if (oData.ISOVERSLA == 1)
+                                       $(nTd).css('background-color', '#fad7d4').css('border-color', '#f7bec3').css('color', '#a94442');
+                               }
+                           },
+                           {
+                               "sTitle": "Create By", "mData": "Creater", "fnCreatedCell": function (nTd, sData, oData, iRow, iCol) {
+                                   if (oData.ISOVERSLA == 1)
+                                       $(nTd).css('background-color', '#fad7d4').css('border-color', '#f7bec3').css('color', '#a94442');
+                               }
+                           },
+                            {
+                                "sTitle": "Owner", "mData": "Owner", "fnCreatedCell": function (nTd, sData, oData, iRow, iCol) {
+                                    if (oData.ISOVERSLA == 1)
+                                        $(nTd).css('background-color', '#fad7d4').css('border-color', '#f7bec3').css('color', '#a94442');
+                                }
+                            }
+                         //{
+                         //    "sTitle": "Case Duration", "mData": "CaseDuration", "render": function (data, type, row) {
+                  
+                         //        return '<span  id="spdate" title="' + data + '">' + data + '</span>'
+
+                         //    }, "fnCreatedCell": function (nTd, sData, oData, iRow, iCol) {
+                         //        if (oData.ISOVERSLA == 1)
+                         //            //$(nTd).css('background-color', '#ff9800').css('color', '#ffffff');//.css('font-weight', 'bold');
+                         //            $(nTd).css('background-color', '#fad7d4').css('border-color', '#f7bec3').css('color', '#a94442');
+                         //    }
+                         //}
+                         //,
+                         //{
+                         //   "bVisible": false, "sTitle": "OwenerId", "mData": "casOwnerID", "render": function (data, type, row) {
+
+                         //        return data;
+
+                         //    }
+                         //}
+                ],
+                 /*"order": [[0, "desc"]],*/
+                "aaSorting": [],
+                "language": {
+                    "lengthMenu": '_MENU_ entries per page',
+                    "search": '<i class="fa fa-search"></i>',
+                    "paginate": {
+                        "previous": '<i class="fa fa-angle-left"></i>',
+                        "next": '<i class="fa fa-angle-right"></i>'
+                    }
+                }
+             });
+
+            //
+            $('#btnSearch').click(function (e) {
+                if ($('#txtStartdate').length > 0 && $.trim($('#txtStartdate').val()) == '') {
+                    openWarningDialog('กรุณาระบุ วันที่เริ่มต้น');
+                    return;
+                }
+
+                if ($('#txtEnddate').length > 0 && $.trim($('#txtEnddate').val()) == '') {
+                    openWarningDialog('กรุณาระบุ วันที่สิ้นสุด');
+                    return;
+                }
+                _table.ajax.type = 'POST';
+                _table.ajax.data = function (d) {
+                    d.IsClosed = (($('#IcbClosed').length == 0) ? false : $('#IcbClosed').is(':checked'));
+                    d.IsOpen = (($('#IcbOpen').length == 0) ? false : $('#IcbOpen').is(':checked'));
+                    d.IsPending = (($('#IcbPending').length == 0) ? false : $('#IcbPending').is(':checked'));
+                    d.IsCancel = (($('#IcbCancel').length == 0) ? false : $('#IcbCancel').is(':checked'));                   
+                    d.StartDate = (($('#txtStartdate').length == 0) ? '' : $('#txtStartdate').val());
+                    d.EndDate = (($('#txtEnddate').length == 0) ? '' : $('#txtEnddate').val());
+                    d.strIsDate = ($('input:radio[name=inlineRadioOptions]:checked').length == 0) ? '' : $('input:radio[name=inlineRadioOptions]:checked').val();
+                    d.WorkType = '@Model.WorkType';
+                    d.Pages = '@Model.Pages';
+                };
+                _table.ajax.url('@Url.Action("DoloadCaseData","Todolist")').load();
+            });
+            $('#tbCaseList tbody').on('click', 'tr', function () {
+                var data = _table.row(this).data();
+                // alert(data.Id);
+            });
+              
+                var difdate;
+                var strdate = '';
+                setInterval(function () {
+                    $.each($('.hdates'), function (i, v) {
+
+                        //  alert($(this).val());
+                        if ($.trim($(this).val()) != '') {
+                            difdate = Date.diff(new Date(), parseJsonDate($(this).val()));
+                            //alert(Date.diff(new Date(), parseJsonDate($(this).val())).days);
+                            //alert(Date.diff(new Date(), parseJsonDate(data)).hours);
+                            //alert(Date.diff(new Date(), parseJsonDate(data)).minutes);
+                            //alert(Date.diff(new Date(), parseJsonDate(data)).seconds);
+                            strdate = difdate.days + ' days ' + difdate.hours + ' hours ' + difdate.minutes + ' minutes ';//+ difdate.seconds + ' seconds';
+                            $(this).closest('td').next('td').find('span').html(strdate)
+                        }
+                    });
+                }, 1000);
+          
+        });
+    </script>
+
+@*}*@
+
+<div class="table-responsive">
+    <table id="tbCaseList" class="table table-striped table-hover">
+
+    </table>
+</div>
+
+
+
+

@@ -1,0 +1,48 @@
+﻿@model NEWCRM.Models.UserViewModel
+
+<ul class="timeline collapse-lg timeline-hairline">
+    @foreach (var item in Model.list_timeline)
+    {
+        <li class="@item.logCSS">
+            @if (item.logType.Equals("User Created"))
+            { 
+                <div class="timeline-circ circ-xl style-default-dark"><span class="glyphicon glyphicon-plus-sign"></span></div>
+            }
+            else if (item.logType.Equals("Inbound Call"))
+            { 
+                <div class="timeline-circ circ-xl style-primary-dark"><i class="md md-phone-in-talk"></i></div>        
+            }
+            else if (item.logType.Equals("Created Case"))
+            {
+                <div class="timeline-circ circ-xl style-warning"><i class="md md-speaker-notes"></i></div>
+            }
+            else if (item.logType.Equals("Created Contact"))
+            {
+                <div class="timeline-circ circ-xl style-danger"><i class="md md-person-add"></i></div>
+            }
+            else if (item.logType.Equals("Sign in"))
+            {
+                <div class="timeline-circ circ-xl style-primary"><i class="md md-vpn-key"></i></div>
+            }
+            
+            <div class="timeline-entry">
+                <div class="card style-default-light">
+                    <div class="card-body small-padding">
+                        @if(item.logType.Equals("Sign in")) {
+                            <span class="text-medium">@item.logType&nbsp;&nbsp;<span class="text-primary">@item.logText  @item.logCreated.ToShortTimeString()</span></span><br />                        
+                            <span class="opacity-50">@item.logCreated.ToLongDateString()</span>
+                        }
+                        else if (item.logType.Equals("Created Case"))
+                        {
+                            <span class="text-medium">@item.logType&nbsp;&nbsp;<span class="text-primary"><a href="@Url.Action("CaseDetail","Case")/@item.ID">@item.logText</a></span></span><br />
+                            <span class="opacity-50">@item.logCreated.ToLongDateString() @item.logCreated.ToLongTimeString()</span>
+                        } else {
+                            <span class="text-medium">@item.logType&nbsp;&nbsp;<span class="text-primary">@item.logText</span></span><br />                        
+                            <span class="opacity-50">@item.logCreated.ToLongDateString() @item.logCreated.ToLongTimeString()</span>
+                        }
+                    </div>
+                </div>
+            </div>
+        </li>
+    }
+</ul>

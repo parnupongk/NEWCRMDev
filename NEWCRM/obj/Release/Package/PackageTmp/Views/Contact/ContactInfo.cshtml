@@ -1,0 +1,59 @@
+﻿@model NEWCRM.Models.ContactViewModel
+@*<div class="col-lg-1">&nbsp;</div>*@
+<div class="margin-bottom-xl col-lg-11" style="opacity: 0.85; margin-left: 20px">
+    <div class="well clearfix">
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="pull-left clearfix hidden-xs" style="margin-right: 10px">
+                    @if(!string.IsNullOrEmpty(Model.contact.ctaAvatar)) {
+                       <img class="img-circle size-2" src="~/Images/avatars/@Model.contact.ctaAvatar" alt="">
+                    } else {
+                        <img class="img-circle size-2" src="~/Images/contact_.png" alt="">
+                    }
+                </div>
+                <h2 class="text-light no-margin">@Model.contact.ctaFullName</h2>
+                <div class="col-md-4" style="padding-left: 0; padding-top: 5px">
+                    @if (@Model.contact.ctaEmo3.HasValue)
+                    {
+                        <a href="javascript:;"><img src="~/Images/emoticon/emo32-@(Model.contact.ctaEmo3).png" class="emo32" data-toggle="tooltip" data-placement="bottom" data-original-title="Last Emotion" /></a>
+                    }
+                    @if (@Model.contact.ctaEmo2.HasValue)
+                    {
+                        <a href="javascript:;"><img src="~/Images/emoticon/emo32-@(Model.contact.ctaEmo2).png" class="emo32" data-toggle="tooltip" data-placement="bottom" data-original-title="Last Emotion" /></a>
+                    }
+                    @if (@Model.contact.ctaEmo1.HasValue)
+                    {
+                        <a href="javascript:;"><img src="~/Images/emoticon/emo32-@(Model.contact.ctaEmo1).png" class="emo32" data-toggle="tooltip" data-placement="bottom" data-original-title="Last Emotion" /></a>
+                    }
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <span>Lasted Cases</span>
+                @if (Model.list_lastcases != null && Model.list_lastcases.Count() > 0)
+                {
+                    foreach (var item in Model.list_lastcases)
+                    {
+                    <div>
+                        @if (item.cssID == 2 || item.cssID == 4 || item.cssID == 5)
+                        {
+                            @*<a href="javascript:;" data-toggle="tooltip" data-placement="top" data-original-title="Status is opened"><i class="md md-brightness-1 text-warning"></i></a>*@
+                            <a href="javascript:;"><i class="md md-lock-open"></i></a>
+                        }
+                        else
+                        {
+                            @*<a href="javascript:;" data-toggle="tooltip" data-placement="top" data-original-title="Status is closed"><i class="md md-brightness-1 text-success"></i></a>*@
+                            <a href="javascript:;"><i class="md md-lock"></i></a>
+                        }
+                        &nbsp;<span class="text-bold">@item.casIDName</span> : @item.casSummary
+                        @*&nbsp;<a href="javascript:;" data-toggle="tooltip" data-placement="top" data-original-title="Created by @item.CreatedByName (@item.casCreatedOn)"><i class="fa fa-user"></i></a>*@
+                    </div>
+                    }
+                } else {
+                    <div>&nbsp;<span>- none -</span></div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+<div class="col-lg-1">&nbsp;</div>
+@*<script src="~/Content/js/core/source/AppVendor.js"></script>*@

@@ -1,0 +1,243 @@
+﻿@{   
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section Scripts {
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+        });
+
+        function beginSave(args) {
+            openWarningDialog("Saving...");
+        }
+
+        function successSave(ctaID) {
+            //openSuccessDialog('Save data completed');            
+            window.location = '@Url.Action("Detail", "Contact")/' + ctaID;
+        }
+
+        function failureSave(data) {
+            openWarningDialog(data.responseText);
+        }
+    </script>
+}
+@*<div class="section-header">
+    <ol class="breadcrumb">
+        <li><a href="@Url.Action("Index", "Contact")">Contacts</a></li>
+        <li class="active">Add new</li>
+    </ol>
+</div>*@
+<div class="section-body">
+    <div class="card">
+        @using (Ajax.BeginForm("AddNew", "Contact",
+                                        new AjaxOptions { HttpMethod = "post", OnBegin = "beginSave", OnSuccess = "successSave", OnFailure = "failureSave" },
+                                        new { id = "frm-newcontact", @class = "form form-validate", novalidate = "novalidate", autocomplete = "off" }))
+        {                    
+            <!-- BEGIN DEFAULT FORM ITEMS -->
+            <div class="card-body" style="padding-bottom: 0">
+                <div class="row">
+                    <div class="col-xs-10">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group floating-label has-warning">
+                                    <input type="text" class="form-control input-lg" id="ctaFirstName" name="ctaFirstName" required data-rule-minlength="2">
+                                    <label for="ctaFirstName">Firstname</label>
+                                </div>
+                            </div>
+                            <!--end .col -->
+                            <div class="col-md-6">
+                                <div class="form-group floating-label has-warning">
+                                    <input type="text" class="form-control input-lg" id="ctaLastName" name="ctaLastName" required data-rule-minlength="2">
+                                    <label for="ctaLastName">Lastname</label>
+                                </div>
+                            </div>
+                            <!--end .col -->
+                        </div>
+                        <!--end .row -->
+                        <hr />
+                    </div>
+                    <!--end .col -->
+                </div>
+                <!--end .row -->
+            </div>
+            <!--end .card-body -->
+            <!-- END DEFAULT FORM ITEMS -->                                                      
+            <!-- BEGIN FORM TAB PANES -->
+            <div class="row">
+                <div class="col-xs-10">
+                    <div class="card-body tab-content">
+                        <ul class="nav nav-tabs" data-toggle="tabs">
+                            <li class="active"><a href="#info"><i class="fa fa-user fa-fw"></i>Info</a></li>
+                            <li><a href="#address"><i class="fa fa-home fa-fw"></i>Address</a></li>
+                        </ul>
+                        <br />
+                        <div class="tab-pane active" id="info">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="form-group has-warning">
+                                                <input type="text" class="form-control" id="phnMNumber" name="phnMNumber" data-rule-number="true" required>
+                                                <label for="phnMNumber"><i class="fa fa-mobile fa-fw"></i>Main Phone</label>
+                                            </div>
+                                        </div>
+                                        <!--end .col -->
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <input type="text" class="form-control" id="phnNumber" name="phnNumber" data-rule-number="true">
+                                                <label for="phnNumber"><i class="fa fa-phone fa-fw"></i>Others Phone</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <select id="gndID" name="gndID" class="form-control">
+                                                    <option value="0">Unknow</option>
+                                                    <option value="1">Male</option>
+                                                    <option value="2">Female</option>
+                                                </select>
+                                                <label for="gndID"><i class="fa fa-venus-mars fa-fw"></i>Gender</label>
+                                            </div>
+                                        </div>
+                                        <!--end .col -->
+                                    </div>
+                                    <!--end .row -->
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <input type="email" class="form-control" id="ctaEmail" name="ctaEmail" data-inputmask="'alias': 'email'">
+                                                <label for="ctaEmail"><i class="fa fa-envelope fa-fw"></i>&nbsp;Email</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <input type="text" id="ctaDOB" name="ctaDOB" class="form-control" value="" data-inputmask="'alias': 'date'" />
+                                                <label for="ctaDOB"><i class="fa fa-birthday-cake fa-fw"></i>&nbsp;DOB</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane" id="address">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="form-group floating-label">
+                                                <input type="text" class="form-control" id="adrHomeNo" name="adrHomeNo">
+                                                <label for="adrHomeNo">Home No.</label>
+                                            </div>
+                                        </div>
+                                        <!--end .col -->
+                                        <div class="col-md-4">
+                                            <div class="form-group floating-label">
+                                                <input type="text" class="form-control" id="adrMoo" name="adrMoo">
+                                                <label for="adrMoo">Moo</label>
+                                            </div>
+                                        </div>
+                                        <!--end .col -->
+                                        <div class="col-md-4">
+                                            <div class="form-group floating-label">
+                                                <input type="text" class="form-control" id="adrBuilding" name="adrBuilding">
+                                                <label for="street">Building</label>
+                                            </div>
+                                        </div>
+                                        <!--end .col -->
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="form-group floating-label">
+                                                <input type="text" class="form-control" id="adrRoom" name="adrRoom">
+                                                <label for="adrRoom">Room</label>
+                                            </div>
+                                        </div>
+                                        <!--end .col -->
+                                        <div class="col-md-4">
+                                            <div class="form-group floating-label">
+                                                <input type="text" class="form-control" id="adrMooban" name="adrMooban">
+                                                <label for="adrMooban">Mooban</label>
+                                            </div>
+                                        </div>
+                                        <!--end .col -->
+                                        <div class="col-md-4">
+                                            <div class="form-group floating-label">
+                                                <input type="text" class="form-control" id="adrSoi" name="adrSoi">
+                                                <label for="adrSoi">Soi</label>
+                                            </div>
+                                        </div>
+                                        <!--end .col -->
+                                    </div>
+                                    <!--end .row -->
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="form-group floating-label">
+                                                <input type="text" class="form-control" id="adrRoad" name="adrRoad">
+                                                <label for="adrRoad">Road</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group floating-label">
+                                                <input type="text" class="form-control" id="adrSubDistrict" name="adrSubDistrict">
+                                                <label for="adrSubDistrict">Sub District</label>
+                                            </div>
+                                        </div>
+                                        <!--end .col -->
+                                        <div class="col-md-4">
+                                            <div class="form-group floating-label">
+                                                <input type="text" class="form-control" id="adrDistrict" name="adrDistrict">
+                                                <label for="adrDistrict">District</label>
+                                            </div>
+                                        </div>
+                                        <!--end .col -->
+                                    </div>
+                                    <!--end .row -->
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="form-group floating-label">
+                                                <input type="text" class="form-control" id="adrProvince" name="adrProvince">
+                                                <label for="adrProvince">Province</label>
+                                            </div>
+                                        </div>
+                                        <!--end .col -->
+                                        <div class="col-md-4">
+                                            <div class="form-group floating-label">
+                                                <input type="text" class="form-control" id="adrZip" name="adrZip" data-rule-number="true">
+                                                <label for="adrZip">Zipcode</label>
+                                            </div>
+                                        </div>
+                                        <!--end .col -->
+                                    </div>
+                                    <!--end .row -->
+                                </div>
+                                <!--end .col -->
+                            </div>
+                            <!--end .row -->
+                        </div>
+                        <!--end .tab-pane -->
+                    </div>
+                </div>
+            </div>
+            <!--end .card-body.tab-content -->
+            <!-- END FORM TAB PANES -->
+
+            <!-- BEGIN FORM FOOTER -->
+            <div class="row">
+                <div class="col-xs-10">
+                    <div class="card-actionbar">
+                        <div class="card-actionbar-row">
+                            <a class="btn btn-flat" href="@Url.Action("Index", "Contact")">Cancel</a>
+                            <button type="submit" name="isSave" class="btn ink-reaction btn-primary" value="true">Save Contact</button>
+                        </div>
+                        <!--end .card-actionbar-row -->
+                    </div>
+                </div>
+            </div>
+            <!--end .card-actionbar -->
+            <!-- END FORM FOOTER -->
+        }
+    </div>
+    <!--end .card -->
+</div>
+<!--end .section-body -->

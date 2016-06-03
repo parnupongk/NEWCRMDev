@@ -1,0 +1,33 @@
+﻿@{
+    ViewBag.Title = "RemindFlow";
+    Layout = null;
+}
+@using NEWCRM.Models
+@model CaseModels
+<input type="hidden" id="crfID" name="crfID" value="@Model.RemindFlow.crfID" />
+<input type="hidden" id="crfTime" name="crfTime" value="@Model.RemindFlow.crfFlowMinute" />
+<div class="form-group">
+    <input type="text" class="form-control" id="crfFlowname" value="@Model.RemindFlow.crfFlowName" readonly />
+    <label for="crfFlowname">Remind Flow State</label>
+</div>
+<div class="form-group">
+    <input type="text" class="form-control input-lg" id="cdfFlowPhone" value="@Model.RemindFlow.crfFlowPhone" readonly />
+    <label for="cdfFlowPhone" class="control-label">Phone No.</label>
+</div>
+<div class="form-group">
+    <label class="control-label">Received</label>
+    <div style="margin-top: 10px">
+        <div class="radio-inline radio-styled radio-success">
+            <label>
+                <input type="radio" name="casRemindStatus" value="Y" checked>
+                <span>Yes</span>
+            </label>
+        </div>
+        <div class="radio-inline radio-styled radio-danger">
+            <label>
+                <input type="radio" name="casRemindStatus" value="N">
+                <span>No</span>
+            </label>
+        </div>
+    </div>
+</div>

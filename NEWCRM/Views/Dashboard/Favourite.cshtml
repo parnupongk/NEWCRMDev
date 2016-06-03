@@ -1,0 +1,23 @@
+﻿@model IEnumerable<NEWCRM.Models.sp_GetCaseFavourite_Result>
+<div class="list-group list-email list-gray">
+    @foreach(var item in Model) {
+        <a href="@Url.Action("CaseDetail","Case")/@item.casID"  class="list-group-item" style="padding-top: 14px; padding-bottom: 10px" target="_blank">
+            <div class="stick-top-left small-padding" style="margin-top: 2px;">                
+                @if (item.cssID == 2 || item.cssID == 4 || item.cssID == 5)
+                {
+                    @*<i class="md md-brightness-1 text-warning" data-toggle="tooltip" data-placement="top" data-original-title="Status Open"></i>*@
+                    <i class="fa fa-unlock fa-fw"></i>
+                } else {
+                    <i class="fa fa-lock fa-fw"></i>
+                }
+            </div>
+            <span class="text-info text-bold">@item.casIDName</span>&nbsp;&nbsp;
+            @if(item.casDueDate.HasValue) {
+                <span class="text-danger"><i class="fa fa-clock-o" style="margin-right:5px"></i>Due Date: @item.casDueDate</span>
+            }          
+            <p class="hidden-xs hidden-sm" style="color:#313335">@item.casSummary</p>
+            <p class="hidden-xs hidden-sm" style="padding-top:4px">Created @item.casCreatedOn</p>
+            <div class="stick-top-right small-padding" title="Remove favorite" onclick="setFav('@item.casID'); return false;"><span class="fa fa-close fa-fw"></span></div>            
+        </a>           
+    }
+</div>

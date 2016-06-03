@@ -1,0 +1,69 @@
+﻿
+<div class="row">
+    <label class="col-sm-3 control-label">Commerce Type</label>
+    <div class="col-sm-9 margin-bottom-xl">
+        <select id="commerceType" name="commerceType" class="form-control">
+
+            @foreach (var item in Model.commerceType)
+            {
+                <option value="@item">@item</option>
+            }
+        </select>
+    </div>
+    <br />
+    <label class="col-sm-3 control-label">Product Category</label>
+    <div class="col-sm-9 margin-bottom-xl">
+        <select id="productCategory" name="productCategory" class="form-control">
+
+            @foreach (var item in Model.productCategory)
+            {
+                <option value="@item">@item</option>
+            }
+            
+        </select>
+    </div>
+    <br />
+    <label class="col-sm-3 control-label">Service Category</label>
+    <div class="col-sm-9 margin-bottom-xl">
+        <select id="serviceCategory" name="serviceCategory" class="form-control">
+
+            @foreach (var item in Model.serviceCategory)
+            {
+                <option value="@item">@item</option>
+            }
+        </select>
+    </div>
+    <br />
+    <label class="col-sm-3 control-label">Delivery Type</label>
+    <div class="col-sm-9 margin-bottom-xl">
+        <select id="deliveryType" name="deliveryType" class="form-control">
+
+            @foreach (var item in Model.deliveryType)
+            {
+                <option value="@item">@item</option>
+            }
+        </select>
+    </div>
+    <br />
+    <label class="col-sm-3 control-label">Value Range</label>
+    <div class="col-sm-9 margin-bottom-xl">
+        <select id="valueRange" name="valueRange" class="form-control">
+
+            @foreach (var item in Model.valueRange)
+            {
+                <option value="@item">@item</option>
+            }
+        </select>
+    </div>
+    <br />
+    <label class="col-sm-3 control-label">Conversation Channel</label>
+    <div class="col-sm-9 margin-bottom-xl">
+        <select id="conversationChannel" name="conversationChannel" class="form-control">
+
+            @foreach (var item in Model.conversationChannel)
+            {
+                <option value="@item">@item</option>
+            }
+        </select>
+    </div>
+</div>

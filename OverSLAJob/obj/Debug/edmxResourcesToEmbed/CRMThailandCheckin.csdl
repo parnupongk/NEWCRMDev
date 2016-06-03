@@ -1,0 +1,93 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="CRMTHAILANDCHECKINModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="CRMTHAILANDCHECKINEntities" p1:LazyLoadingEnabled="true">
+    <EntitySet Name="CaseLogs" EntityType="CRMTHAILANDCHECKINModel.CaseLogs" />
+    <EntitySet Name="Cases" EntityType="CRMTHAILANDCHECKINModel.Cases" />
+    <EntitySet Name="TaskScheduleLog" EntityType="CRMTHAILANDCHECKINModel.TaskScheduleLog" />
+    <FunctionImport Name="sp_getCasesOverSLA" ReturnType="Collection(CRMTHAILANDCHECKINModel.sp_getCasesOverSLA_Result)">
+      <Parameter Name="p_Now" Mode="In" Type="String" />
+    </FunctionImport>
+  </EntityContainer>
+  <EntityType Name="CaseLogs">
+    <Key>
+      <PropertyRef Name="cslID" />
+    </Key>
+    <Property Name="cslID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="casID" Type="Int32" Nullable="false" />
+    <Property Name="actID" Type="Int32" Nullable="false" />
+    <Property Name="cltID" Type="Int32" Nullable="false" />
+    <Property Name="cslNote" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="cslDesc" Type="String" MaxLength="2000" Unicode="true" FixedLength="false" />
+    <Property Name="cslCreatedOn" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="cslCreatedBy" Type="Int32" Nullable="false" />
+    <Property Name="cslModifiedOn" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="cslModifiedBy" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Cases">
+    <Key>
+      <PropertyRef Name="casID" />
+    </Key>
+    <Property Name="casID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="actID" Type="Int32" Nullable="false" />
+    <Property Name="ctaID" Type="Int32" Nullable="false" />
+    <Property Name="casIDName" Type="String" MaxLength="12" Unicode="true" FixedLength="false" />
+    <Property Name="casParentID" Type="Int32" />
+    <Property Name="casDuration" Type="Int32" />
+    <Property Name="casDueDate" Type="DateTime" Precision="3" />
+    <Property Name="casPrevDueDate" Type="DateTime" Precision="3" />
+    <Property Name="casIDLevel1" Type="Int32" />
+    <Property Name="casIDLevel2" Type="Int32" />
+    <Property Name="casIDLevel3" Type="Int32" />
+    <Property Name="casIDLevel4" Type="Int32" />
+    <Property Name="casIDLevel5" Type="Int32" />
+    <Property Name="casIDLevel6" Type="Int32" />
+    <Property Name="casIDLevel7" Type="Int32" />
+    <Property Name="casIDLevel8" Type="Int32" />
+    <Property Name="casLevel1" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="casLevel2" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="casLevel3" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="casLevel4" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="casLevel5" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="casLevel6" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="casLevel7" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="casLevel8" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="casIDSummary" Type="Int32" Nullable="false" />
+    <Property Name="casSummary" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="casNote" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="cbtID" Type="Int32" />
+    <Property Name="cbcID" Type="Int32" />
+    <Property Name="CallbackInfo" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="CallbackDT" Type="DateTime" Precision="3" />
+    <Property Name="casSLA" Type="Int32" />
+    <Property Name="priID" Type="Int32" Nullable="false" />
+    <Property Name="cssID" Type="Int32" Nullable="false" />
+    <Property Name="casEmo" Type="Int32" />
+    <Property Name="casGroupID" Type="Int32" />
+    <Property Name="casOwnerID" Type="Int32" />
+    <Property Name="casCreatedOn" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="casCreatedBy" Type="Int32" Nullable="false" />
+    <Property Name="casModifiedOn" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="casModifiedBy" Type="Int32" Nullable="false" />
+    <Property Name="casFav" Type="Boolean" Nullable="false" />
+    <Property Name="assignTo" Type="Int32" />
+    <Property Name="casRemindID" Type="Int32" />
+    <Property Name="casRemindStatus" Type="String" MaxLength="1" Unicode="false" FixedLength="true" />
+  </EntityType>
+  <EntityType Name="TaskScheduleLog">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="TaskName" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="TaskStart" Type="DateTime" Precision="3" />
+    <Property Name="TaskEnd" Type="DateTime" Precision="3" />
+    <Property Name="TaskStatus" Type="String" MaxLength="1" Unicode="false" FixedLength="true" />
+    <Property Name="TaskDesc" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+  </EntityType>
+  <ComplexType Name="sp_getCasesOverSLA_Result">
+    <Property Type="Int32" Name="casID" Nullable="false" />
+    <Property Type="String" Name="casIDName" Nullable="true" MaxLength="12" />
+    <Property Type="String" Name="casSummary" Nullable="true" MaxLength="255" />
+    <Property Type="DateTime" Name="casDueDate" Nullable="true" Precision="23" />
+  </ComplexType>
+</Schema>

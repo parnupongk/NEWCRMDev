@@ -1,0 +1,46 @@
+﻿@using NEWCRM.Models;
+@if (ViewData["list_contact"] != null && ((List<sp_GetInboundContact_Result>)ViewData["list_contact"]).Count() > 0)
+{
+    <ul class="list divider-full-bleed">
+        @foreach (var item in (List<sp_GetInboundContact_Result>)ViewData["list_contact"])
+        {
+            <li class="tile" style="line-height: 2em;">
+                <a class="tile-content ink-reaction" href="@Url.Action("NewCase", "Case")/@item.ctaID" >
+                    <div class="tile-icon">
+                        @if (!string.IsNullOrEmpty(item.ctaAvatar)) { 
+                            <img src="~/Images/avatars/@item.ctaAvatar" alt="" />
+                        } else {
+                            <img src="~/Images/contact_.png" alt="" />
+                        }
+
+                    </div>
+                    <div class="tile-text" style="width: 320px">
+                        <span>@item.ctaFullName</span>
+                        <small><i class="fa fa-mobile fa-fw"></i>@item.phnNumber</small>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12" data-toggle="tooltip" data-placement="top" data-original-title="Last Emotion">                                                       
+                            @if (@item.ctaEmo1.HasValue)
+                            {
+                                <img src="~/Images/emoticon/emo32-@(item.ctaEmo1).png" class="emo32" />
+                            }
+                            @if (@item.ctaEmo2.HasValue)
+                            {
+                                <img src="~/Images/emoticon/emo32-@(item.ctaEmo2).png" class="emo32" />
+                            }
+                            @if (@item.ctaEmo3.HasValue)
+                            {
+                                <img src="~/Images/emoticon/emo32-@(item.ctaEmo3).png" class="emo32" />
+                            }
+                        </div>
+                    </div>
+                </a>
+            </li>
+        }
+    </ul>
+}
+else
+{
+    <center><span class="text-xl text-medium opacity-50"><i class="fa fa-question-circle fa-fw"></i>&nbsp;No Contact Found.</span></center>
+}
+<script src="~/Content/js/core/source/AppVendor.js"></script>

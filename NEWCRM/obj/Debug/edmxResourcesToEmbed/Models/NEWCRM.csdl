@@ -1,0 +1,1840 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="NEWCRMModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="NEWCRMEntities" p1:LazyLoadingEnabled="true">
+    <EntitySet Name="Activities" EntityType="NEWCRMModel.Activities" />
+    <EntitySet Name="ActivityStatus1" EntityType="NEWCRMModel.ActivityStatus" />
+    <EntitySet Name="ActivityStatus_Locale" EntityType="NEWCRMModel.ActivityStatus_Locale" />
+    <EntitySet Name="Address" EntityType="NEWCRMModel.Address" />
+    <EntitySet Name="Announcements" EntityType="NEWCRMModel.Announcement" />
+    <EntitySet Name="AuthenLogs" EntityType="NEWCRMModel.AuthenLog" />
+    <EntitySet Name="Calendars" EntityType="NEWCRMModel.Calendar" />
+    <EntitySet Name="Callbacks" EntityType="NEWCRMModel.Callback" />
+    <EntitySet Name="CallbackCauses" EntityType="NEWCRMModel.CallbackCause" />
+    <EntitySet Name="CallbackCause_Locale" EntityType="NEWCRMModel.CallbackCause_Locale" />
+    <EntitySet Name="CallBackChannels" EntityType="NEWCRMModel.CallBackChannel" />
+    <EntitySet Name="CallbackTypes" EntityType="NEWCRMModel.CallbackType" />
+    <EntitySet Name="CallbackType_Locale" EntityType="NEWCRMModel.CallbackType_Locale" />
+    <EntitySet Name="CaseAttachFiles" EntityType="NEWCRMModel.CaseAttachFile" />
+    <EntitySet Name="CaseLogs" EntityType="NEWCRMModel.CaseLog" />
+    <EntitySet Name="CaseLogTypes" EntityType="NEWCRMModel.CaseLogType" />
+    <EntitySet Name="CaseRemindFlows" EntityType="NEWCRMModel.CaseRemindFlow" />
+    <EntitySet Name="Cases" EntityType="NEWCRMModel.Case" />
+    <EntitySet Name="CaseStatus" EntityType="NEWCRMModel.CaseStatu" />
+    <EntitySet Name="CaseStatus_Locale" EntityType="NEWCRMModel.CaseStatus_Locale" />
+    <EntitySet Name="CaseTypes" EntityType="NEWCRMModel.CaseType" />
+    <EntitySet Name="Channels" EntityType="NEWCRMModel.Channel" />
+    <EntitySet Name="ContactLogs" EntityType="NEWCRMModel.ContactLog" />
+    <EntitySet Name="Contacts" EntityType="NEWCRMModel.Contact" />
+    <EntitySet Name="ContactTypes" EntityType="NEWCRMModel.ContactType" />
+    <EntitySet Name="ContactType_Locale" EntityType="NEWCRMModel.ContactType_Locale" />
+    <EntitySet Name="ContactViewLogs" EntityType="NEWCRMModel.ContactViewLog" />
+    <EntitySet Name="Districts" EntityType="NEWCRMModel.District" />
+    <EntitySet Name="District_Locale" EntityType="NEWCRMModel.District_Locale" />
+    <EntitySet Name="Functions" EntityType="NEWCRMModel.Function" />
+    <EntitySet Name="Genders" EntityType="NEWCRMModel.Gender" />
+    <EntitySet Name="Genders_Locale" EntityType="NEWCRMModel.Genders_Locale" />
+    <EntitySet Name="Group_Role" EntityType="NEWCRMModel.Group_Role" />
+    <EntitySet Name="Groups" EntityType="NEWCRMModel.Group" />
+    <EntitySet Name="Locales" EntityType="NEWCRMModel.Locale" />
+    <EntitySet Name="MailLogs" EntityType="NEWCRMModel.MailLog" />
+    <EntitySet Name="Notifications" EntityType="NEWCRMModel.Notification" />
+    <EntitySet Name="NotificationTypes" EntityType="NEWCRMModel.NotificationType" />
+    <EntitySet Name="Phones" EntityType="NEWCRMModel.Phone" />
+    <EntitySet Name="PhoneTypes" EntityType="NEWCRMModel.PhoneType" />
+    <EntitySet Name="PhoneType_Locale" EntityType="NEWCRMModel.PhoneType_Locale" />
+    <EntitySet Name="Priorities" EntityType="NEWCRMModel.Priority" />
+    <EntitySet Name="Priority_Locale" EntityType="NEWCRMModel.Priority_Locale" />
+    <EntitySet Name="Provinces" EntityType="NEWCRMModel.Province" />
+    <EntitySet Name="Province_Locale" EntityType="NEWCRMModel.Province_Locale" />
+    <EntitySet Name="Province_Zone" EntityType="NEWCRMModel.Province_Zone" />
+    <EntitySet Name="Role_Functions" EntityType="NEWCRMModel.Role_Functions" />
+    <EntitySet Name="Roles" EntityType="NEWCRMModel.Role" />
+    <EntitySet Name="SubDistricts" EntityType="NEWCRMModel.SubDistrict" />
+    <EntitySet Name="SubDistrict_Locale" EntityType="NEWCRMModel.SubDistrict_Locale" />
+    <EntitySet Name="Titles" EntityType="NEWCRMModel.Title" />
+    <EntitySet Name="Titles_Locale" EntityType="NEWCRMModel.Titles_Locale" />
+    <EntitySet Name="User_Group" EntityType="NEWCRMModel.User_Group" />
+    <EntitySet Name="User_Role" EntityType="NEWCRMModel.User_Role" />
+    <EntitySet Name="Users" EntityType="NEWCRMModel.User" />
+    <AssociationSet Name="ActivityStatus_ActivityStatus_Locale_FK1" Association="NEWCRMModel.ActivityStatus_ActivityStatus_Locale_FK1">
+      <End Role="ActivityStatus" EntitySet="ActivityStatus1" />
+      <End Role="ActivityStatus_Locale" EntitySet="ActivityStatus_Locale" />
+    </AssociationSet>
+    <AssociationSet Name="Locale_ActivityStatus_Locale_FK1" Association="NEWCRMModel.Locale_ActivityStatus_Locale_FK1">
+      <End Role="Locale" EntitySet="Locales" />
+      <End Role="ActivityStatus_Locale" EntitySet="ActivityStatus_Locale" />
+    </AssociationSet>
+    <AssociationSet Name="District_District_Locale_FK1" Association="NEWCRMModel.District_District_Locale_FK1">
+      <End Role="District" EntitySet="Districts" />
+      <End Role="District_Locale" EntitySet="District_Locale" />
+    </AssociationSet>
+    <AssociationSet Name="District_SubDistrict_FK1" Association="NEWCRMModel.District_SubDistrict_FK1">
+      <End Role="District" EntitySet="Districts" />
+      <End Role="SubDistrict" EntitySet="SubDistricts" />
+    </AssociationSet>
+    <AssociationSet Name="Province_District_FK1" Association="NEWCRMModel.Province_District_FK1">
+      <End Role="Province" EntitySet="Provinces" />
+      <End Role="District" EntitySet="Districts" />
+    </AssociationSet>
+    <AssociationSet Name="Locale_District_Locale_FK1" Association="NEWCRMModel.Locale_District_Locale_FK1">
+      <End Role="Locale" EntitySet="Locales" />
+      <End Role="District_Locale" EntitySet="District_Locale" />
+    </AssociationSet>
+    <AssociationSet Name="Genders_Genders_Locale_FK1" Association="NEWCRMModel.Genders_Genders_Locale_FK1">
+      <End Role="Genders" EntitySet="Genders" />
+      <End Role="Genders_Locale" EntitySet="Genders_Locale" />
+    </AssociationSet>
+    <AssociationSet Name="Locale_Genders_Locale_FK1" Association="NEWCRMModel.Locale_Genders_Locale_FK1">
+      <End Role="Locale" EntitySet="Locales" />
+      <End Role="Genders_Locale" EntitySet="Genders_Locale" />
+    </AssociationSet>
+    <AssociationSet Name="Groups_Group_Role_FK1" Association="NEWCRMModel.Groups_Group_Role_FK1">
+      <End Role="Groups" EntitySet="Groups" />
+      <End Role="Group_Role" EntitySet="Group_Role" />
+    </AssociationSet>
+    <AssociationSet Name="Roles_Group_Role_FK1" Association="NEWCRMModel.Roles_Group_Role_FK1">
+      <End Role="Roles" EntitySet="Roles" />
+      <End Role="Group_Role" EntitySet="Group_Role" />
+    </AssociationSet>
+    <AssociationSet Name="Groups_User_Group_FK1" Association="NEWCRMModel.Groups_User_Group_FK1">
+      <End Role="Groups" EntitySet="Groups" />
+      <End Role="User_Group" EntitySet="User_Group" />
+    </AssociationSet>
+    <AssociationSet Name="Locale_PhoneType_Locale_FK1" Association="NEWCRMModel.Locale_PhoneType_Locale_FK1">
+      <End Role="Locale" EntitySet="Locales" />
+      <End Role="PhoneType_Locale" EntitySet="PhoneType_Locale" />
+    </AssociationSet>
+    <AssociationSet Name="Locale_Province_Locale_FK1" Association="NEWCRMModel.Locale_Province_Locale_FK1">
+      <End Role="Locale" EntitySet="Locales" />
+      <End Role="Province_Locale" EntitySet="Province_Locale" />
+    </AssociationSet>
+    <AssociationSet Name="Locale_SubDistrict_Locale_FK1" Association="NEWCRMModel.Locale_SubDistrict_Locale_FK1">
+      <End Role="Locale" EntitySet="Locales" />
+      <End Role="SubDistrict_Locale" EntitySet="SubDistrict_Locale" />
+    </AssociationSet>
+    <AssociationSet Name="Locale_Titles_Locale_FK1" Association="NEWCRMModel.Locale_Titles_Locale_FK1">
+      <End Role="Locale" EntitySet="Locales" />
+      <End Role="Titles_Locale" EntitySet="Titles_Locale" />
+    </AssociationSet>
+    <AssociationSet Name="PhoneType_PhoneType_Locale_FK1" Association="NEWCRMModel.PhoneType_PhoneType_Locale_FK1">
+      <End Role="PhoneType" EntitySet="PhoneTypes" />
+      <End Role="PhoneType_Locale" EntitySet="PhoneType_Locale" />
+    </AssociationSet>
+    <AssociationSet Name="Province_Province_Locale_FK1" Association="NEWCRMModel.Province_Province_Locale_FK1">
+      <End Role="Province" EntitySet="Provinces" />
+      <End Role="Province_Locale" EntitySet="Province_Locale" />
+    </AssociationSet>
+    <AssociationSet Name="SubDistrict_SubDistrict_Locale_FK1" Association="NEWCRMModel.SubDistrict_SubDistrict_Locale_FK1">
+      <End Role="SubDistrict" EntitySet="SubDistricts" />
+      <End Role="SubDistrict_Locale" EntitySet="SubDistrict_Locale" />
+    </AssociationSet>
+    <AssociationSet Name="Titles_Titles_Locale_FK1" Association="NEWCRMModel.Titles_Titles_Locale_FK1">
+      <End Role="Titles" EntitySet="Titles" />
+      <End Role="Titles_Locale" EntitySet="Titles_Locale" />
+    </AssociationSet>
+    <FunctionImport Name="sp_ActivityChannelSummary" ReturnType="Collection(NEWCRMModel.sp_ActivityChannelSummary_Result)" />
+    <FunctionImport Name="sp_alterdiagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="version" Mode="In" Type="Int32" />
+      <Parameter Name="definition" Mode="In" Type="Binary" />
+    </FunctionImport>
+    <FunctionImport Name="sp_ContactAutoComplete" ReturnType="Collection(NEWCRMModel.sp_ContactAutoComplete_Result)">
+      <Parameter Name="p_Search" Mode="In" Type="String" />
+      <Parameter Name="p_Row" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_creatediagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="version" Mode="In" Type="Int32" />
+      <Parameter Name="definition" Mode="In" Type="Binary" />
+    </FunctionImport>
+    <FunctionImport Name="sp_dropdiagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_Get_Casepending" ReturnType="Collection(NEWCRMModel.sp_Get_Casepending_Result)">
+      <Parameter Name="p_Now" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_Get_Casepending_ByAgent" ReturnType="Collection(NEWCRMModel.sp_Get_Casepending_ByAgent_Result)">
+      <Parameter Name="USERID" Mode="In" Type="Int32" />
+      <Parameter Name="CREATEDATE" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_GetAssetBySerialNo">
+      <Parameter Name="p_sn" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_GetCaseDetailById" ReturnType="Collection(NEWCRMModel.sp_GetCaseDetailById_Result)">
+      <Parameter Name="CASEID" Mode="In" Type="Decimal" />
+      <Parameter Name="LANG" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_GetCaseDetailTimeline" ReturnType="Collection(NEWCRMModel.sp_GetCaseDetailTimeline_Result)">
+      <Parameter Name="casID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_GetCaseFavourite" ReturnType="Collection(NEWCRMModel.sp_GetCaseFavourite_Result)">
+      <Parameter Name="usrID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_GetCaseFollowUp">
+      <Parameter Name="p_ctaID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_GetCaseList" ReturnType="Collection(NEWCRMModel.sp_GetCaseList_Result)">
+      <Parameter Name="CaseId" Mode="In" Type="String" />
+      <Parameter Name="StartCreateOn" Mode="In" Type="String" />
+      <Parameter Name="EndCreateOn" Mode="In" Type="String" />
+      <Parameter Name="StartModified" Mode="In" Type="String" />
+      <Parameter Name="EndModified" Mode="In" Type="String" />
+      <Parameter Name="StartClosed" Mode="In" Type="String" />
+      <Parameter Name="EndClosed" Mode="In" Type="String" />
+      <Parameter Name="Open" Mode="In" Type="String" />
+      <Parameter Name="Closed" Mode="In" Type="String" />
+      <Parameter Name="Cancel" Mode="In" Type="String" />
+      <Parameter Name="Pending" Mode="In" Type="String" />
+      <Parameter Name="OBJID" Mode="In" Type="Decimal" />
+      <Parameter Name="USERID" Mode="In" Type="Int32" />
+      <Parameter Name="GROUPID" Mode="In" Type="Int32" />
+      <Parameter Name="GROUPUSERID" Mode="In" Type="Int32" />
+      <Parameter Name="Channel" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_getCaseQuery" ReturnType="Collection(NEWCRMModel.sp_getCaseQuery_Result)">
+      <Parameter Name="p_query" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_getCasesOverSLA" ReturnType="Collection(NEWCRMModel.sp_getCasesOverSLA_Result)">
+      <Parameter Name="p_Now" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_getContactCommonDetail" ReturnType="Collection(NEWCRMModel.sp_getContactCommonDetail_Result)">
+      <Parameter Name="p_ctaId" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_getContactLogTimeline" ReturnType="Collection(NEWCRMModel.sp_getContactLogTimeline_Result)">
+      <Parameter Name="p_ctaID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_getContactSearch" ReturnType="Collection(NEWCRMModel.sp_getContactSearch_Result)">
+      <Parameter Name="p_Name" Mode="In" Type="String" />
+      <Parameter Name="p_Cate" Mode="In" Type="Int32" />
+      <Parameter Name="p_Order" Mode="In" Type="String" />
+      <Parameter Name="p_Top" Mode="In" Type="Int32" />
+      <Parameter Name="p_Created" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_GetContactViewLog" ReturnType="Collection(NEWCRMModel.sp_GetContactViewLog_Result)">
+      <Parameter Name="p_UsrID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_GetGroupUser" ReturnType="Collection(NEWCRMModel.sp_GetGroupUser_Result)" />
+    <FunctionImport Name="sp_GetInboundContact" ReturnType="Collection(NEWCRMModel.sp_GetInboundContact_Result)">
+      <Parameter Name="p_Phone" Mode="In" Type="String" />
+      <Parameter Name="p_Name" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_getLastActivityContact" ReturnType="Collection(NEWCRMModel.sp_getLastActivityContact_Result)">
+      <Parameter Name="p_usrID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_GetLastCases" ReturnType="Collection(NEWCRMModel.sp_GetLastCases_Result)">
+      <Parameter Name="p_ctaID" Mode="In" Type="Int32" />
+      <Parameter Name="p_top" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_GetMailContentInfo" ReturnType="Collection(NEWCRMModel.sp_GetMailContentInfo_Result)">
+      <Parameter Name="CASEID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_getMailRemind">
+      <Parameter Name="p_Date" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_getNewCaseList" ReturnType="Collection(NEWCRMModel.sp_getNewCaseList_Result)">
+      <Parameter Name="p_actID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_GetNotification" ReturnType="Collection(NEWCRMModel.sp_GetNotification_Result)">
+      <Parameter Name="usrID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_GetNotification_Total" ReturnType="Collection(Int32)">
+      <Parameter Name="usrID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_GetStatus" ReturnType="Collection(NEWCRMModel.sp_GetStatus_Result)">
+      <Parameter Name="Lang" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_GetUser" ReturnType="Collection(NEWCRMModel.sp_GetUser_Result)" />
+    <FunctionImport Name="sp_getUserProfile" ReturnType="Collection(NEWCRMModel.sp_getUserProfile_Result)">
+      <Parameter Name="p_usrID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_getUserProfileTimeline" ReturnType="Collection(NEWCRMModel.sp_getUserProfileTimeline_Result)">
+      <Parameter Name="p_UsrID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(NEWCRMModel.sp_helpdiagramdefinition_Result)">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(NEWCRMModel.sp_helpdiagrams_Result)">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_renamediagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="new_diagramname" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_upgraddiagrams" />
+    <FunctionImport Name="st_CategorySearch">
+      <Parameter Name="CatId" Mode="In" Type="Guid" />
+      <Parameter Name="CatParentId" Mode="In" Type="Guid" />
+      <Parameter Name="ArtId" Mode="In" Type="Guid" />
+    </FunctionImport>
+    <FunctionImport Name="ST_CATEGORYSEARCH_ROOT" />
+    <FunctionImport Name="st_Get_Dashbord_CaseStatus" ReturnType="Collection(NEWCRMModel.st_Get_Dashbord_CaseStatus_Result)">
+      <Parameter Name="CREATEDATE" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="st_GET_UserRole_ById" ReturnType="Collection(NEWCRMModel.st_GET_UserRole_ById_Result)">
+      <Parameter Name="USERID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="st_GetUserInGroup_ById" ReturnType="Collection(NEWCRMModel.st_GetUserInGroup_ById_Result)">
+      <Parameter Name="USERID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="uspCaseType" ReturnType="Collection(NEWCRMModel.uspCaseType_Result)">
+      <Parameter Name="catLevel" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="uspContactDetail" ReturnType="Collection(NEWCRMModel.uspContactDetail_Result)">
+      <Parameter Name="STARTDATE" Mode="In" Type="String" />
+      <Parameter Name="ENDDATE" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="uspGetAgentName">
+      <Parameter Name="AGENTID" Mode="In" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="uspReportCaseSummary" ReturnType="Collection(NEWCRMModel.uspReportCaseSummary_Result)">
+      <Parameter Name="STARTDATE" Mode="In" Type="String" />
+      <Parameter Name="ENDDATE" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="uspSuvitech_CaseStatusByDay" ReturnType="Collection(Int32)">
+      <Parameter Name="DDATE" Mode="In" Type="String" />
+      <Parameter Name="CASESTATUSID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="uspSuvitech_CaseStatusSumAll" ReturnType="Collection(NEWCRMModel.uspSuvitech_CaseStatusSumAll_Result)">
+      <Parameter Name="STARTDATE" Mode="In" Type="String" />
+      <Parameter Name="ENDDATE" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="uspSuvitech_ContactDetailRpt" ReturnType="Collection(NEWCRMModel.uspSuvitech_ContactDetailRpt_Result)">
+      <Parameter Name="STARTDATE" Mode="In" Type="String" />
+      <Parameter Name="ENDDATE" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_getTotalTodolistByChannel" ReturnType="Collection(NEWCRMModel.sp_getTotalTodolistByChannel_Result)">
+      <Parameter Name="usrID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <EntitySet Name="DNIS" EntityType="NEWCRMModel.DNIS" />
+    <EntitySet Name="TaskScheduleLogs" EntityType="NEWCRMModel.TaskScheduleLog" />
+    <FunctionImport Name="SP_Contact_Detail_RP" ReturnType="Collection(NEWCRMModel.SP_Contact_Detail_RP_Result)">
+      <Parameter Name="STARTDATE" Mode="In" Type="String" />
+      <Parameter Name="ENDDATE" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_GetGroupCaseOnlineAcc" ReturnType="Collection(String)" />
+    <FunctionImport Name="uspReportCaseLevel" ReturnType="Collection(NEWCRMModel.uspReportCaseLevel_Result)">
+      <Parameter Name="STARTDATE" Mode="In" Type="String" />
+      <Parameter Name="ENDDATE" Mode="In" Type="String" />
+    </FunctionImport>
+  </EntityContainer>
+  <EntityType Name="Activities">
+    <Key>
+      <PropertyRef Name="actID" />
+    </Key>
+    <Property Name="actID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="ctaID" Type="Int32" />
+    <Property Name="chnID" Type="String" Nullable="false" MaxLength="2" Unicode="false" FixedLength="false" />
+    <Property Name="atsID" Type="Int32" Nullable="false" />
+    <Property Name="actChannelData" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="actIVRMenu" Type="String" MaxLength="10" Unicode="true" FixedLength="false" />
+    <Property Name="actDuration" Type="Int32" />
+    <Property Name="actStart" Type="DateTime" Precision="3" />
+    <Property Name="actStop" Type="DateTime" Precision="3" />
+    <Property Name="actEmo" Type="Int32" />
+    <Property Name="conID" Type="String" MaxLength="20" Unicode="true" FixedLength="false" />
+    <Property Name="actCreatedOn" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="actCreatedBy" Type="Int32" Nullable="false" />
+    <Property Name="actModifiedOn" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="actModifiedBy" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ActivityStatus">
+    <Key>
+      <PropertyRef Name="atsID" />
+    </Key>
+    <Property Name="atsID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="atsActive" Type="Boolean" Nullable="false" />
+    <Property Name="atsModifiedOn" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="atsModifiedBy" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="ActivityStatus_Locale" Relationship="NEWCRMModel.ActivityStatus_ActivityStatus_Locale_FK1" FromRole="ActivityStatus" ToRole="ActivityStatus_Locale" />
+  </EntityType>
+  <EntityType Name="ActivityStatus_Locale">
+    <Key>
+      <PropertyRef Name="atsID" />
+      <PropertyRef Name="lclID" />
+    </Key>
+    <Property Name="atsID" Type="Int32" Nullable="false" />
+    <Property Name="lclID" Type="String" Nullable="false" MaxLength="2" Unicode="false" FixedLength="false" />
+    <Property Name="atsName" Type="String" Nullable="false" MaxLength="100" Unicode="true" FixedLength="false" />
+    <Property Name="atsModifiedOn" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="atsModifiedBy" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="ActivityStatu" Relationship="NEWCRMModel.ActivityStatus_ActivityStatus_Locale_FK1" FromRole="ActivityStatus_Locale" ToRole="ActivityStatus" />
+    <NavigationProperty Name="Locale" Relationship="NEWCRMModel.Locale_ActivityStatus_Locale_FK1" FromRole="ActivityStatus_Locale" ToRole="Locale" />
+  </EntityType>
+  <EntityType Name="Address">
+    <Key>
+      <PropertyRef Name="adrID" />
+    </Key>
+    <Property Name="adrID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="ctaID" Type="Int32" Nullable="false" />
+    <Property Name="adtID" Type="Int32" Nullable="false" />
+    <Property Name="adrSummary" Type="String" MaxLength="2000" Unicode="true" FixedLength="false" />
+    <Property Name="adrHomeNo" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="adrMoo" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="adrBuilding" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="adrRoom" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="adrMooban" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="adrSoi" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="adrRoad" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="adrSubDistrict" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="adrDistrict" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="adrProvince" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="sdtID" Type="Int32" />
+    <Property Name="dstID" Type="Int32" />
+    <Property Name="pvnID" Type="Int32" />
+    <Property Name="adrZip" Type="String" MaxLength="5" Unicode="false" FixedLength="false" />
+    <Property Name="adrNote" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="adrCreatedOn" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="adrCreatedBy" Type="Int32" Nullable="false" />
+    <Property Name="adrModifiedOn" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="adrModifiedBy" Type="Int32" Nullable="false" />
+    <Property Name="lclID" Type="String" MaxLength="2" Unicode="false" FixedLength="false" />
+    <Property Name="adrActive" Type="Boolean" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Announcement">
+    <Key>
+      <PropertyRef Name="annID" />
+    </Key>
+    <Property Name="annID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="annText" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="annActive" Type="Boolean" Nullable="false" />
+    <Property Name="annCreatedOn" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="annCreatedBy" Type="Int32" Nullable="false" />
+    <Property Name="annModifiedOn" Type="DateTime" Precision="3" />
+    <Property Name="annModifiedBy" Type="Int32" />
+  </EntityType>
+  <EntityType Name="AuthenLog">
+    <Key>
+      <PropertyRef Name="authID" />
+    </Key>
+    <Property Name="authID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="usrID" Type="Int32" Nullable="false" />
+    <Property Name="authCreatedOn" Type="DateTime" Nullable="false" Precision="3" />
+  </EntityType>
+  <EntityType Name="Calendar">
+    <Key>
+      <PropertyRef Name="cldID" />
+    </Key>
+    <Property Name="cldID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="cldMessage" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="cldDate" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="cldTimestart" Type="Time" Precision="7" />
+    <Property Name="cldTimeend" Type="Time" Precision="7" />
+    <Property Name="cldColor" Type="String" MaxLength="20" Unicode="true" FixedLength="false" />
+    <Property Name="cldCreatedOn" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="cldCreatedBy" Type="Int32" Nullable="false" />
+    <Property Name="cldModifiedOn" Type="DateTime" Precision="3" />
+    <Property Name="cldModifiedBy" Type="Int32" />
+    <Property Name="cldActive" Type="Boolean" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Callback">
+    <Key>
+      <PropertyRef Name="clbID" />
+    </Key>
+    <Property Name="clbID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="cbtID" Type="Int32" Nullable="false" />
+    <Property Name="cbcID" Type="Int32" Nullable="false" />
+    <Property Name="casID" Type="Int32" Nullable="false" />
+    <Property Name="clbDatetime" Type="DateTime" Precision="3" />
+    <Property Name="clbNumber" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
+    <Property Name="clbNote" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="clbCreatedOn" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="clbCreatedBy" Type="Int32" Nullable="false" />
+    <Property Name="clbModifiedOn" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="clbModifiedBy" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="CallbackCause">
+    <Key>
+      <PropertyRef Name="cbcID" />
+    </Key>
+    <Property Name="cbcID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="cbcActive" Type="Boolean" Nullable="false" />
+    <Property Name="cbcModifiedOn" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="cbcModifiedBy" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="CallbackCause_Locale">
+    <Key>
+      <PropertyRef Name="cbcID" />
+      <PropertyRef Name="lclID" />
+    </Key>
+    <Property Name="cbcID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="lclID" Type="String" Nullable="false" MaxLength="2" Unicode="false" FixedLength="false" />
+    <Property Name="cbcName" Type="String" Nullable="false" MaxLength="500" Unicode="true" FixedLength="false" />
+    <Property Name="cbcModifiedOn" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="cbcModifiedBy" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="CallBackChannel">
+    <Key>
+      <PropertyRef Name="cbcID" />
+    </Key>
+    <Property Name="cbcID" Type="Int32" Nullable="false" />
+    <Property Name="cbcName" Type="String" Nullable="false" MaxLength="250" Unicode="true" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="CallbackType">
+    <Key>
+      <PropertyRef Name="cbtID" />
+    </Key>
+    <Property Name="cbtID" Type="Int32" Nullable="false" />
+    <Property Name="cbtActive" Type="Boolean" Nullable="false" />
+    <Property Name="cbtModifiedOn" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="cbtModifiedBy" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="CallbackType_Locale">
+    <Key>
+      <PropertyRef Name="cbtID" />
+      <PropertyRef Name="lclID" />
+    </Key>
+    <Property Name="cbtID" Type="Int32" Nullable="false" />
+    <Property Name="lclID" Type="String" Nullable="false" MaxLength="2" Unicode="false" FixedLength="false" />
+    <Property Name="cbtName" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="cbtModifiedOn" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="cbtModifiedBy" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="CaseAttachFile">
+    <Key>
+      <PropertyRef Name="cafID" />
+    </Key>
+    <Property Name="cafID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="casID" Type="Int32" Nullable="false" />
+    <Property Name="cafFilename" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="cafFileType" Type="String" MaxLength="500" Unicode="true" FixedLength="false" />
+    <Property Name="cafCreatedOn" Type="DateTime" Precision="3" />
+    <Property Name="cafCreatedBy" Type="Int32" />
+  </EntityType>
+  <EntityType Name="CaseLog">
+    <Key>
+      <PropertyRef Name="cslID" />
+    </Key>
+    <Property Name="cslID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="casID" Type="Int32" Nullable="false" />
+    <Property Name="actID" Type="Int32" Nullable="false" />
+    <Property Name="cltID" Type="Int32" Nullable="false" />
+    <Property Name="cslNote" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="cslDesc" Type="String" MaxLength="2000" Unicode="true" FixedLength="false" />
+    <Property Name="cslCreatedOn" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="cslCreatedBy" Type="Int32" Nullable="false" />
+    <Property Name="cslModifiedOn" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="cslModifiedBy" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="CaseLogType">
+    <Key>
+      <PropertyRef Name="cltID" />
+    </Key>
+    <Property Name="cltID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="cltName" Type="String" Nullable="false" MaxLength="100" Unicode="true" FixedLength="false" />
+    <Property Name="cslModifiedOn" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="cslModifiedBy" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="CaseRemindFlow">
+    <Key>
+      <PropertyRef Name="crfID" />
+    </Key>
+    <Property Name="crfID" Type="Int32" Nullable="false" />
+    <Property Name="crfFlowName" Type="String" MaxLength="250" Unicode="true" FixedLength="false" />
+    <Property Name="crfFlowPhone" Type="String" MaxLength="20" Unicode="true" FixedLength="false" />
+    <Property Name="crfFlowMinute" Type="Int32" />
+  </EntityType>
+  <EntityType Name="Case">
+    <Key>
+      <PropertyRef Name="casID" />
+    </Key>
+    <Property Name="casID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="actID" Type="Int32" Nullable="false" />
+    <Property Name="ctaID" Type="Int32" Nullable="false" />
+    <Property Name="casIDName" Type="String" MaxLength="12" Unicode="true" FixedLength="false" />
+    <Property Name="casParentID" Type="Int32" />
+    <Property Name="casDuration" Type="Int32" />
+    <Property Name="casDueDate" Type="DateTime" Precision="3" />
+    <Property Name="casPrevDueDate" Type="DateTime" Precision="3" />
+    <Property Name="casIDLevel1" Type="Int32" />
+    <Property Name="casIDLevel2" Type="Int32" />
+    <Property Name="casIDLevel3" Type="Int32" />
+    <Property Name="casIDLevel4" Type="Int32" />
+    <Property Name="casIDLevel5" Type="Int32" />
+    <Property Name="casIDLevel6" Type="Int32" />
+    <Property Name="casIDLevel7" Type="Int32" />
+    <Property Name="casIDLevel8" Type="Int32" />
+    <Property Name="casLevel1" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="casLevel2" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="casLevel3" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="casLevel4" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="casLevel5" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="casLevel6" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="casLevel7" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="casLevel8" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="casIDSummary" Type="Int32" Nullable="false" />
+    <Property Name="casSummary" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="casNote" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="cbtID" Type="Int32" />
+    <Property Name="cbcID" Type="Int32" />
+    <Property Name="CallbackInfo" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="CallbackDT" Type="DateTime" Precision="3" />
+    <Property Name="casSLA" Type="Int32" />
+    <Property Name="priID" Type="Int32" Nullable="false" />
+    <Property Name="cssID" Type="Int32" Nullable="false" />
+    <Property Name="casEmo" Type="Int32" />
+    <Property Name="casGroupID" Type="Int32" />
+    <Property Name="casOwnerID" Type="Int32" />
+    <Property Name="casCreatedOn" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="casCreatedBy" Type="Int32" Nullable="false" />
+    <Property Name="casModifiedOn" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="casModifiedBy" Type="Int32" Nullable="false" />
+    <Property Name="casFav" Type="Boolean" Nullable="false" />
+    <Property Name="assignTo" Type="Int32" />
+    <Property Name="casRemindID" Type="Int32" />
+    <Property Name="casRemindStatus" Type="String" MaxLength="1" Unicode="false" FixedLength="true" />
+    <Property Name="cascommerceType" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="casproductCategory" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="casserviceCategory" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="casdeliveryType" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="casvalueRange" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="casconversationChannel" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="casreferenceDetail" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="casdetail" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="CaseStatu">
+    <Key>
+      <PropertyRef Name="cssID" />
+    </Key>
+    <Property Name="cssID" Type="Int32" Nullable="false" />
+    <Property Name="cssActive" Type="Boolean" Nullable="false" />
+    <Property Name="cssModifiedOn" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="cssModifiedBy" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="CaseStatus_Locale">
+    <Key>
+      <PropertyRef Name="cssID" />
+      <PropertyRef Name="lclID" />
+    </Key>
+    <Property Name="cssID" Type="Int32" Nullable="false" />
+    <Property Name="lclID" Type="String" Nullable="false" MaxLength="2" Unicode="false" FixedLength="false" />
+    <Property Name="cssName" Type="String" Nullable="false" MaxLength="100" Unicode="true" FixedLength="false" />
+    <Property Name="cssModifiedOn" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="cssModifiedBy" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="CaseType">
+    <Key>
+      <PropertyRef Name="catID" />
+    </Key>
+    <Property Name="catID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="slaID" Type="Int32" />
+    <Property Name="catName" Type="String" Nullable="false" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="catParrentID" Type="Int32" />
+    <Property Name="catOrder" Type="Int32" />
+    <Property Name="catSLA" Type="Int32" />
+    <Property Name="catLevel" Type="Int32" />
+    <Property Name="catDialogue" Type="String" MaxLength="2000" Unicode="true" FixedLength="false" />
+    <Property Name="catActive" Type="Boolean" Nullable="false" />
+    <Property Name="catCreatedOn" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="catCreatedBy" Type="Int32" Nullable="false" />
+    <Property Name="catModifiedOn" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="catModifiedBy" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Channel">
+    <Key>
+      <PropertyRef Name="chnID" />
+    </Key>
+    <Property Name="chnID" Type="String" Nullable="false" MaxLength="2" Unicode="false" FixedLength="false" />
+    <Property Name="chnName" Type="String" Nullable="false" MaxLength="100" Unicode="true" FixedLength="false" />
+    <Property Name="chnActive" Type="Boolean" Nullable="false" />
+    <Property Name="chnIcon" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="chnModifiedOn" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="chnModifiedBy" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ContactLog">
+    <Key>
+      <PropertyRef Name="ctlID" />
+    </Key>
+    <Property Name="ctlID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="ctaID" Type="Int32" Nullable="false" />
+    <Property Name="actID" Type="Int32" />
+    <Property Name="cltID" Type="Int32" />
+    <Property Name="ctlNote" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="ctlCreatedOn" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="ctlCreatedBy" Type="Int32" Nullable="false" />
+    <Property Name="ctlModifiedOn" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="ctlModifiedBy" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Contact">
+    <Key>
+      <PropertyRef Name="ctaID" />
+    </Key>
+    <Property Name="ctaID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="ctyID" Type="Int32" Nullable="false" />
+    <Property Name="ctaFullName" Type="String" MaxLength="400" Unicode="true" FixedLength="false" />
+    <Property Name="ctaFirstName" Type="String" MaxLength="200" Unicode="true" FixedLength="false" />
+    <Property Name="ctaLastName" Type="String" MaxLength="200" Unicode="true" FixedLength="false" />
+    <Property Name="ctaAvatar" Type="String" MaxLength="2000" Unicode="true" FixedLength="false" />
+    <Property Name="ttlID" Type="Int32" />
+    <Property Name="ctaDOB" Type="DateTime" Precision="3" />
+    <Property Name="gndID" Type="Int32" />
+    <Property Name="marID" Type="Int32" />
+    <Property Name="ctaNote" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="ctaRating" Type="Int16" />
+    <Property Name="ctaEmail" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
+    <Property Name="ctaWebSite" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="ctaFacebook" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
+    <Property Name="ctaTwitter" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
+    <Property Name="ctaDoNotEmail" Type="Boolean" Nullable="false" />
+    <Property Name="ctaDoNotPhone" Type="Boolean" Nullable="false" />
+    <Property Name="ctaDoNotFax" Type="Boolean" Nullable="false" />
+    <Property Name="ctaDoNotPostalMail" Type="Boolean" Nullable="false" />
+    <Property Name="ctaCareer" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="ctaEmo1" Type="Int32" />
+    <Property Name="ctaEmo2" Type="Int32" />
+    <Property Name="ctaEmo3" Type="Int32" />
+    <Property Name="ctaCreatedOn" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="ctaCreatedBy" Type="Int32" Nullable="false" />
+    <Property Name="ctaModifiedOn" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="ctaModifiedBy" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ContactType">
+    <Key>
+      <PropertyRef Name="ctyID" />
+    </Key>
+    <Property Name="ctyID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="ctyActive" Type="Boolean" Nullable="false" />
+    <Property Name="ctyModifiedOn" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="ctyModifiedBy" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ContactType_Locale">
+    <Key>
+      <PropertyRef Name="ctyID" />
+      <PropertyRef Name="lclID" />
+    </Key>
+    <Property Name="ctyID" Type="Int32" Nullable="false" />
+    <Property Name="lclID" Type="String" Nullable="false" MaxLength="2" Unicode="false" FixedLength="false" />
+    <Property Name="ctyName" Type="String" Nullable="false" MaxLength="100" Unicode="true" FixedLength="false" />
+    <Property Name="ctyModifiedOn" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="ctyModifiedBy" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ContactViewLog">
+    <Key>
+      <PropertyRef Name="ctvID" />
+    </Key>
+    <Property Name="ctvID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="ctaID" Type="Int32" Nullable="false" />
+    <Property Name="usrID" Type="Int32" Nullable="false" />
+    <Property Name="ctvCreatedOn" Type="DateTime" Nullable="false" Precision="3" />
+  </EntityType>
+  <EntityType Name="District">
+    <Key>
+      <PropertyRef Name="dstID" />
+    </Key>
+    <Property Name="dstID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="pvnID" Type="Int32" Nullable="false" />
+    <Property Name="dstActive" Type="Boolean" Nullable="false" />
+    <Property Name="dstModifiedOn" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="dstModifiedBy" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="District_Locale" Relationship="NEWCRMModel.District_District_Locale_FK1" FromRole="District" ToRole="District_Locale" />
+    <NavigationProperty Name="SubDistricts" Relationship="NEWCRMModel.District_SubDistrict_FK1" FromRole="District" ToRole="SubDistrict" />
+    <NavigationProperty Name="Province" Relationship="NEWCRMModel.Province_District_FK1" FromRole="District" ToRole="Province" />
+  </EntityType>
+  <EntityType Name="District_Locale">
+    <Key>
+      <PropertyRef Name="dstID" />
+      <PropertyRef Name="lclID" />
+    </Key>
+    <Property Name="dstID" Type="Int32" Nullable="false" />
+    <Property Name="lclID" Type="String" Nullable="false" MaxLength="2" Unicode="false" FixedLength="false" />
+    <Property Name="dstName" Type="String" Nullable="false" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="dstModifiedOn" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="dstModifiedBy" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="District" Relationship="NEWCRMModel.District_District_Locale_FK1" FromRole="District_Locale" ToRole="District" />
+    <NavigationProperty Name="Locale" Relationship="NEWCRMModel.Locale_District_Locale_FK1" FromRole="District_Locale" ToRole="Locale" />
+  </EntityType>
+  <EntityType Name="Function">
+    <Key>
+      <PropertyRef Name="fncID" />
+    </Key>
+    <Property Name="fncID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="fncName" Type="String" Nullable="false" MaxLength="100" Unicode="true" FixedLength="false" />
+    <Property Name="fncNote" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="fncActive" Type="Boolean" Nullable="false" />
+    <Property Name="fncCreatedOn" Type="DateTime" Precision="3" />
+    <Property Name="fncCreatedBy" Type="Int32" />
+    <Property Name="fncModifiedOn" Type="DateTime" Precision="3" />
+    <Property Name="fncModifiedBy" Type="Int32" />
+  </EntityType>
+  <EntityType Name="Gender">
+    <Key>
+      <PropertyRef Name="gndID" />
+    </Key>
+    <Property Name="gndID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="gndActive" Type="Boolean" Nullable="false" />
+    <Property Name="gndModifiedOn" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="gndModifiedBy" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Genders_Locale" Relationship="NEWCRMModel.Genders_Genders_Locale_FK1" FromRole="Genders" ToRole="Genders_Locale" />
+  </EntityType>
+  <EntityType Name="Genders_Locale">
+    <Key>
+      <PropertyRef Name="gndID" />
+      <PropertyRef Name="lclID" />
+    </Key>
+    <Property Name="gndID" Type="Int32" Nullable="false" />
+    <Property Name="lclID" Type="String" Nullable="false" MaxLength="2" Unicode="false" FixedLength="false" />
+    <Property Name="gndName" Type="String" Nullable="false" MaxLength="20" Unicode="true" FixedLength="false" />
+    <Property Name="gndModifiedOn" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="gndModifiedBy" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Gender" Relationship="NEWCRMModel.Genders_Genders_Locale_FK1" FromRole="Genders_Locale" ToRole="Genders" />
+    <NavigationProperty Name="Locale" Relationship="NEWCRMModel.Locale_Genders_Locale_FK1" FromRole="Genders_Locale" ToRole="Locale" />
+  </EntityType>
+  <EntityType Name="Group_Role">
+    <Key>
+      <PropertyRef Name="grpID" />
+      <PropertyRef Name="rolID" />
+    </Key>
+    <Property Name="grpID" Type="Int32" Nullable="false" />
+    <Property Name="rolID" Type="Int32" Nullable="false" />
+    <Property Name="gprCreatedOn" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="gprCreatedBy" Type="Int32" Nullable="false" />
+    <Property Name="gprModifiedOn" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="gprModifiedBy" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Group" Relationship="NEWCRMModel.Groups_Group_Role_FK1" FromRole="Group_Role" ToRole="Groups" />
+    <NavigationProperty Name="Role" Relationship="NEWCRMModel.Roles_Group_Role_FK1" FromRole="Group_Role" ToRole="Roles" />
+  </EntityType>
+  <EntityType Name="Group">
+    <Key>
+      <PropertyRef Name="grpID" />
+    </Key>
+    <Property Name="grpID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="grpName" Type="String" Nullable="false" MaxLength="100" Unicode="true" FixedLength="false" />
+    <Property Name="grpActive" Type="Boolean" Nullable="false" />
+    <Property Name="grpModifiedOn" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="grpModifiedBy" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Group_Role" Relationship="NEWCRMModel.Groups_Group_Role_FK1" FromRole="Groups" ToRole="Group_Role" />
+    <NavigationProperty Name="User_Group" Relationship="NEWCRMModel.Groups_User_Group_FK1" FromRole="Groups" ToRole="User_Group" />
+  </EntityType>
+  <EntityType Name="Locale">
+    <Key>
+      <PropertyRef Name="lclID" />
+    </Key>
+    <Property Name="lclID" Type="String" Nullable="false" MaxLength="2" Unicode="false" FixedLength="false" />
+    <Property Name="lclName" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="lclActive" Type="Boolean" Nullable="false" />
+    <Property Name="lclModifiedOn" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="lclModifiedBy" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="ActivityStatus_Locale" Relationship="NEWCRMModel.Locale_ActivityStatus_Locale_FK1" FromRole="Locale" ToRole="ActivityStatus_Locale" />
+    <NavigationProperty Name="District_Locale" Relationship="NEWCRMModel.Locale_District_Locale_FK1" FromRole="Locale" ToRole="District_Locale" />
+    <NavigationProperty Name="Genders_Locale" Relationship="NEWCRMModel.Locale_Genders_Locale_FK1" FromRole="Locale" ToRole="Genders_Locale" />
+    <NavigationProperty Name="PhoneType_Locale" Relationship="NEWCRMModel.Locale_PhoneType_Locale_FK1" FromRole="Locale" ToRole="PhoneType_Locale" />
+    <NavigationProperty Name="Province_Locale" Relationship="NEWCRMModel.Locale_Province_Locale_FK1" FromRole="Locale" ToRole="Province_Locale" />
+    <NavigationProperty Name="SubDistrict_Locale" Relationship="NEWCRMModel.Locale_SubDistrict_Locale_FK1" FromRole="Locale" ToRole="SubDistrict_Locale" />
+    <NavigationProperty Name="Titles_Locale" Relationship="NEWCRMModel.Locale_Titles_Locale_FK1" FromRole="Locale" ToRole="Titles_Locale" />
+  </EntityType>
+  <EntityType Name="MailLog">
+    <Key>
+      <PropertyRef Name="mlID" />
+    </Key>
+    <Property Name="mlID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="casID" Type="Int32" />
+    <Property Name="mailTo" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="mailCC" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="mailSubject" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="mailBody" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="mailSending" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="mailStatus" Type="String" Nullable="false" MaxLength="1" Unicode="false" FixedLength="true" />
+    <Property Name="mailException" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="mailType" Type="String" MaxLength="20" Unicode="true" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="Notification">
+    <Key>
+      <PropertyRef Name="notID" />
+    </Key>
+    <Property Name="notID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="nttID" Type="Int32" Nullable="false" />
+    <Property Name="refID" Type="Int32" />
+    <Property Name="Sender" Type="Int32" />
+    <Property Name="Receiver" Type="Int32" />
+    <Property Name="notNote" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="notDesc" Type="String" MaxLength="2000" Unicode="true" FixedLength="false" />
+    <Property Name="notRead" Type="Boolean" />
+    <Property Name="notActive" Type="Boolean" />
+    <Property Name="notCreatedOn" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="notCreatedBy" Type="Int32" Nullable="false" />
+    <Property Name="notModifiedOn" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="notModifiedBy" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="NotificationType">
+    <Key>
+      <PropertyRef Name="nttID" />
+    </Key>
+    <Property Name="nttID" Type="Int32" Nullable="false" />
+    <Property Name="nttName" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="nttActive" Type="Boolean" Nullable="false" />
+    <Property Name="nttModifiedOn" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="nttModifiedBy" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Phone">
+    <Key>
+      <PropertyRef Name="phnID" />
+    </Key>
+    <Property Name="phnID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="ctaID" Type="Int32" Nullable="false" />
+    <Property Name="phtID" Type="Int32" Nullable="false" />
+    <Property Name="phnNumber" Type="String" Nullable="false" MaxLength="100" Unicode="true" FixedLength="false" />
+    <Property Name="phnExt" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="phnNote" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="phnIsMain" Type="Boolean" Nullable="false" />
+    <Property Name="phnActive" Type="Boolean" Nullable="false" />
+    <Property Name="phnCreatedOn" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="phnCreatedBy" Type="Int32" Nullable="false" />
+    <Property Name="phnModifiedOn" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="phnModifiedBy" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="PhoneType">
+    <Key>
+      <PropertyRef Name="phtID" />
+    </Key>
+    <Property Name="phtID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="phtActive" Type="String" Nullable="false" MaxLength="10" Unicode="false" FixedLength="false" />
+    <Property Name="phtModifiedOn" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="phtModifiedBy" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="PhoneType_Locale" Relationship="NEWCRMModel.PhoneType_PhoneType_Locale_FK1" FromRole="PhoneType" ToRole="PhoneType_Locale" />
+  </EntityType>
+  <EntityType Name="PhoneType_Locale">
+    <Key>
+      <PropertyRef Name="phtID" />
+      <PropertyRef Name="lclID" />
+    </Key>
+    <Property Name="phtID" Type="Int32" Nullable="false" />
+    <Property Name="lclID" Type="String" Nullable="false" MaxLength="2" Unicode="false" FixedLength="false" />
+    <Property Name="phtName" Type="String" MaxLength="10" Unicode="true" FixedLength="false" />
+    <Property Name="phtModifiedOn" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="phtModifiedBy" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Locale" Relationship="NEWCRMModel.Locale_PhoneType_Locale_FK1" FromRole="PhoneType_Locale" ToRole="Locale" />
+    <NavigationProperty Name="PhoneType" Relationship="NEWCRMModel.PhoneType_PhoneType_Locale_FK1" FromRole="PhoneType_Locale" ToRole="PhoneType" />
+  </EntityType>
+  <EntityType Name="Priority">
+    <Key>
+      <PropertyRef Name="priID" />
+    </Key>
+    <Property Name="priID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="priActive" Type="Boolean" Nullable="false" />
+    <Property Name="priModifiedOn" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="priModifiedBy" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Priority_Locale">
+    <Key>
+      <PropertyRef Name="priID" />
+      <PropertyRef Name="lclID" />
+    </Key>
+    <Property Name="priID" Type="Int32" Nullable="false" />
+    <Property Name="lclID" Type="String" Nullable="false" MaxLength="2" Unicode="false" FixedLength="false" />
+    <Property Name="priName" Type="String" Nullable="false" MaxLength="100" Unicode="true" FixedLength="false" />
+    <Property Name="priModifiedOn" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="priModifiedBy" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Province">
+    <Key>
+      <PropertyRef Name="pvnID" />
+    </Key>
+    <Property Name="pvnID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="pvnActive" Type="Boolean" Nullable="false" />
+    <Property Name="pvnModifiedOn" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="pvnModifiedBy" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Districts" Relationship="NEWCRMModel.Province_District_FK1" FromRole="Province" ToRole="District" />
+    <NavigationProperty Name="Province_Locale" Relationship="NEWCRMModel.Province_Province_Locale_FK1" FromRole="Province" ToRole="Province_Locale" />
+  </EntityType>
+  <EntityType Name="Province_Locale">
+    <Key>
+      <PropertyRef Name="pvnID" />
+      <PropertyRef Name="lclID" />
+    </Key>
+    <Property Name="pvnID" Type="Int32" Nullable="false" />
+    <Property Name="lclID" Type="String" Nullable="false" MaxLength="2" Unicode="false" FixedLength="false" />
+    <Property Name="zneID" Type="Int32" />
+    <Property Name="pvnName" Type="String" Nullable="false" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="pvnModifiedOn" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="pvnModifiedBy" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Locale" Relationship="NEWCRMModel.Locale_Province_Locale_FK1" FromRole="Province_Locale" ToRole="Locale" />
+    <NavigationProperty Name="Province" Relationship="NEWCRMModel.Province_Province_Locale_FK1" FromRole="Province_Locale" ToRole="Province" />
+  </EntityType>
+  <EntityType Name="Province_Zone">
+    <Key>
+      <PropertyRef Name="zneID" />
+    </Key>
+    <Property Name="zneID" Type="Int32" Nullable="false" />
+    <Property Name="zneName" Type="String" Nullable="false" MaxLength="100" Unicode="true" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="Role_Functions">
+    <Key>
+      <PropertyRef Name="rfID" />
+    </Key>
+    <Property Name="rfID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="rolID" Type="Int32" Nullable="false" />
+    <Property Name="fncID" Type="Int32" />
+    <Property Name="rfCreatedOn" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="rfCreatedBy" Type="Int32" Nullable="false" />
+    <Property Name="rfModifiedOn" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="rfModifiedBy" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Role">
+    <Key>
+      <PropertyRef Name="rolID" />
+    </Key>
+    <Property Name="rolID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="rolName" Type="String" Nullable="false" MaxLength="100" Unicode="true" FixedLength="false" />
+    <Property Name="rolNote" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="rolCreatedOn" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="rolCreatedBy" Type="Int32" Nullable="false" />
+    <Property Name="rolModifiedOn" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="rolModifiedBy" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Group_Role" Relationship="NEWCRMModel.Roles_Group_Role_FK1" FromRole="Roles" ToRole="Group_Role" />
+  </EntityType>
+  <EntityType Name="SubDistrict">
+    <Key>
+      <PropertyRef Name="sdtID" />
+    </Key>
+    <Property Name="sdtID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="dstID" Type="Int32" Nullable="false" />
+    <Property Name="pvnID" Type="Int32" Nullable="false" />
+    <Property Name="sdtActive" Type="Boolean" Nullable="false" />
+    <Property Name="sdtModifiedOn" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="sdtModifiedBy" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="District" Relationship="NEWCRMModel.District_SubDistrict_FK1" FromRole="SubDistrict" ToRole="District" />
+    <NavigationProperty Name="SubDistrict_Locale" Relationship="NEWCRMModel.SubDistrict_SubDistrict_Locale_FK1" FromRole="SubDistrict" ToRole="SubDistrict_Locale" />
+  </EntityType>
+  <EntityType Name="SubDistrict_Locale">
+    <Key>
+      <PropertyRef Name="sdtID" />
+      <PropertyRef Name="lclID" />
+    </Key>
+    <Property Name="sdtID" Type="Int32" Nullable="false" />
+    <Property Name="lclID" Type="String" Nullable="false" MaxLength="2" Unicode="false" FixedLength="false" />
+    <Property Name="sdtName" Type="String" Nullable="false" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="dstID" Type="Int32" Nullable="false" />
+    <Property Name="pvnID" Type="Int32" Nullable="false" />
+    <Property Name="sdtModifiedOn" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="sdtModifiedBy" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Locale" Relationship="NEWCRMModel.Locale_SubDistrict_Locale_FK1" FromRole="SubDistrict_Locale" ToRole="Locale" />
+    <NavigationProperty Name="SubDistrict" Relationship="NEWCRMModel.SubDistrict_SubDistrict_Locale_FK1" FromRole="SubDistrict_Locale" ToRole="SubDistrict" />
+  </EntityType>
+  <EntityType Name="Title">
+    <Key>
+      <PropertyRef Name="ttlID" />
+    </Key>
+    <Property Name="ttlID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="ttlActive" Type="Boolean" Nullable="false" />
+    <Property Name="ttlModifiedOn" Type="String" Nullable="false" MaxLength="10" Unicode="false" FixedLength="true" />
+    <Property Name="ttlModifiedBy" Type="String" Nullable="false" MaxLength="10" Unicode="false" FixedLength="true" />
+    <NavigationProperty Name="Titles_Locale" Relationship="NEWCRMModel.Titles_Titles_Locale_FK1" FromRole="Titles" ToRole="Titles_Locale" />
+  </EntityType>
+  <EntityType Name="Titles_Locale">
+    <Key>
+      <PropertyRef Name="ttlID" />
+      <PropertyRef Name="lclID" />
+    </Key>
+    <Property Name="ttlID" Type="Int32" Nullable="false" />
+    <Property Name="lclID" Type="String" Nullable="false" MaxLength="2" Unicode="false" FixedLength="false" />
+    <Property Name="ttlName" Type="String" Nullable="false" MaxLength="100" Unicode="true" FixedLength="false" />
+    <Property Name="ttlModifiedOn" Type="String" Nullable="false" MaxLength="10" Unicode="false" FixedLength="true" />
+    <Property Name="ttlModifiedBy" Type="String" Nullable="false" MaxLength="10" Unicode="false" FixedLength="true" />
+    <NavigationProperty Name="Locale" Relationship="NEWCRMModel.Locale_Titles_Locale_FK1" FromRole="Titles_Locale" ToRole="Locale" />
+    <NavigationProperty Name="Title" Relationship="NEWCRMModel.Titles_Titles_Locale_FK1" FromRole="Titles_Locale" ToRole="Titles" />
+  </EntityType>
+  <EntityType Name="User_Group">
+    <Key>
+      <PropertyRef Name="grpID" />
+      <PropertyRef Name="usrID" />
+    </Key>
+    <Property Name="grpID" Type="Int32" Nullable="false" />
+    <Property Name="usrID" Type="Int32" Nullable="false" />
+    <Property Name="usgCreatedOn" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="usgCreatedBy" Type="Int32" Nullable="false" />
+    <Property Name="usgModifiedOn" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="usgModifiedBy" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Group" Relationship="NEWCRMModel.Groups_User_Group_FK1" FromRole="User_Group" ToRole="Groups" />
+  </EntityType>
+  <EntityType Name="User_Role">
+    <Key>
+      <PropertyRef Name="urolID" />
+    </Key>
+    <Property Name="urolID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="rolID" Type="Int32" Nullable="false" />
+    <Property Name="usrID" Type="Int32" Nullable="false" />
+    <Property Name="urCreatedOn" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="urCreatedBy" Type="Int32" Nullable="false" />
+    <Property Name="urModifiedOn" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="urModifiedBy" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="usrID" />
+    </Key>
+    <Property Name="usrID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="grpID" Type="Int32" />
+    <Property Name="usrUsername" Type="String" Nullable="false" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="usrPassword" Type="String" Nullable="false" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="usrFirstName" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="usrLastName" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="usrDepartment" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
+    <Property Name="usrAvatar" Type="String" MaxLength="2000" Unicode="true" FixedLength="false" />
+    <Property Name="usrIsActive" Type="Boolean" Nullable="false" />
+    <Property Name="usrCreatedOn" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="usrCreatedBy" Type="Int32" Nullable="false" />
+    <Property Name="usrModifiedOn" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="usrModifiedBy" Type="Int32" Nullable="false" />
+    <Property Name="ACD" Type="Int32" />
+  </EntityType>
+  <Association Name="ActivityStatus_ActivityStatus_Locale_FK1">
+    <End Role="ActivityStatus" Type="NEWCRMModel.ActivityStatus" Multiplicity="1" />
+    <End Role="ActivityStatus_Locale" Type="NEWCRMModel.ActivityStatus_Locale" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ActivityStatus">
+        <PropertyRef Name="atsID" />
+      </Principal>
+      <Dependent Role="ActivityStatus_Locale">
+        <PropertyRef Name="atsID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Locale_ActivityStatus_Locale_FK1">
+    <End Role="Locale" Type="NEWCRMModel.Locale" Multiplicity="1" />
+    <End Role="ActivityStatus_Locale" Type="NEWCRMModel.ActivityStatus_Locale" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Locale">
+        <PropertyRef Name="lclID" />
+      </Principal>
+      <Dependent Role="ActivityStatus_Locale">
+        <PropertyRef Name="lclID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="District_District_Locale_FK1">
+    <End Role="District" Type="NEWCRMModel.District" Multiplicity="1" />
+    <End Role="District_Locale" Type="NEWCRMModel.District_Locale" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="District">
+        <PropertyRef Name="dstID" />
+      </Principal>
+      <Dependent Role="District_Locale">
+        <PropertyRef Name="dstID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="District_SubDistrict_FK1">
+    <End Role="District" Type="NEWCRMModel.District" Multiplicity="1" />
+    <End Role="SubDistrict" Type="NEWCRMModel.SubDistrict" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="District">
+        <PropertyRef Name="dstID" />
+      </Principal>
+      <Dependent Role="SubDistrict">
+        <PropertyRef Name="dstID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Province_District_FK1">
+    <End Role="Province" Type="NEWCRMModel.Province" Multiplicity="1" />
+    <End Role="District" Type="NEWCRMModel.District" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Province">
+        <PropertyRef Name="pvnID" />
+      </Principal>
+      <Dependent Role="District">
+        <PropertyRef Name="pvnID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Locale_District_Locale_FK1">
+    <End Role="Locale" Type="NEWCRMModel.Locale" Multiplicity="1" />
+    <End Role="District_Locale" Type="NEWCRMModel.District_Locale" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Locale">
+        <PropertyRef Name="lclID" />
+      </Principal>
+      <Dependent Role="District_Locale">
+        <PropertyRef Name="lclID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Genders_Genders_Locale_FK1">
+    <End Role="Genders" Type="NEWCRMModel.Gender" Multiplicity="1" />
+    <End Role="Genders_Locale" Type="NEWCRMModel.Genders_Locale" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Genders">
+        <PropertyRef Name="gndID" />
+      </Principal>
+      <Dependent Role="Genders_Locale">
+        <PropertyRef Name="gndID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Locale_Genders_Locale_FK1">
+    <End Role="Locale" Type="NEWCRMModel.Locale" Multiplicity="1" />
+    <End Role="Genders_Locale" Type="NEWCRMModel.Genders_Locale" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Locale">
+        <PropertyRef Name="lclID" />
+      </Principal>
+      <Dependent Role="Genders_Locale">
+        <PropertyRef Name="lclID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Groups_Group_Role_FK1">
+    <End Role="Groups" Type="NEWCRMModel.Group" Multiplicity="1" />
+    <End Role="Group_Role" Type="NEWCRMModel.Group_Role" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Groups">
+        <PropertyRef Name="grpID" />
+      </Principal>
+      <Dependent Role="Group_Role">
+        <PropertyRef Name="grpID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Roles_Group_Role_FK1">
+    <End Role="Roles" Type="NEWCRMModel.Role" Multiplicity="1" />
+    <End Role="Group_Role" Type="NEWCRMModel.Group_Role" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Roles">
+        <PropertyRef Name="rolID" />
+      </Principal>
+      <Dependent Role="Group_Role">
+        <PropertyRef Name="rolID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Groups_User_Group_FK1">
+    <End Role="Groups" Type="NEWCRMModel.Group" Multiplicity="1" />
+    <End Role="User_Group" Type="NEWCRMModel.User_Group" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Groups">
+        <PropertyRef Name="grpID" />
+      </Principal>
+      <Dependent Role="User_Group">
+        <PropertyRef Name="grpID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Locale_PhoneType_Locale_FK1">
+    <End Role="Locale" Type="NEWCRMModel.Locale" Multiplicity="1" />
+    <End Role="PhoneType_Locale" Type="NEWCRMModel.PhoneType_Locale" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Locale">
+        <PropertyRef Name="lclID" />
+      </Principal>
+      <Dependent Role="PhoneType_Locale">
+        <PropertyRef Name="lclID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Locale_Province_Locale_FK1">
+    <End Role="Locale" Type="NEWCRMModel.Locale" Multiplicity="1" />
+    <End Role="Province_Locale" Type="NEWCRMModel.Province_Locale" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Locale">
+        <PropertyRef Name="lclID" />
+      </Principal>
+      <Dependent Role="Province_Locale">
+        <PropertyRef Name="lclID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Locale_SubDistrict_Locale_FK1">
+    <End Role="Locale" Type="NEWCRMModel.Locale" Multiplicity="1" />
+    <End Role="SubDistrict_Locale" Type="NEWCRMModel.SubDistrict_Locale" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Locale">
+        <PropertyRef Name="lclID" />
+      </Principal>
+      <Dependent Role="SubDistrict_Locale">
+        <PropertyRef Name="lclID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Locale_Titles_Locale_FK1">
+    <End Role="Locale" Type="NEWCRMModel.Locale" Multiplicity="1" />
+    <End Role="Titles_Locale" Type="NEWCRMModel.Titles_Locale" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Locale">
+        <PropertyRef Name="lclID" />
+      </Principal>
+      <Dependent Role="Titles_Locale">
+        <PropertyRef Name="lclID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="PhoneType_PhoneType_Locale_FK1">
+    <End Role="PhoneType" Type="NEWCRMModel.PhoneType" Multiplicity="1" />
+    <End Role="PhoneType_Locale" Type="NEWCRMModel.PhoneType_Locale" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PhoneType">
+        <PropertyRef Name="phtID" />
+      </Principal>
+      <Dependent Role="PhoneType_Locale">
+        <PropertyRef Name="phtID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Province_Province_Locale_FK1">
+    <End Role="Province" Type="NEWCRMModel.Province" Multiplicity="1" />
+    <End Role="Province_Locale" Type="NEWCRMModel.Province_Locale" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Province">
+        <PropertyRef Name="pvnID" />
+      </Principal>
+      <Dependent Role="Province_Locale">
+        <PropertyRef Name="pvnID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="SubDistrict_SubDistrict_Locale_FK1">
+    <End Role="SubDistrict" Type="NEWCRMModel.SubDistrict" Multiplicity="1" />
+    <End Role="SubDistrict_Locale" Type="NEWCRMModel.SubDistrict_Locale" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SubDistrict">
+        <PropertyRef Name="sdtID" />
+      </Principal>
+      <Dependent Role="SubDistrict_Locale">
+        <PropertyRef Name="sdtID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Titles_Titles_Locale_FK1">
+    <End Role="Titles" Type="NEWCRMModel.Title" Multiplicity="1" />
+    <End Role="Titles_Locale" Type="NEWCRMModel.Titles_Locale" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Titles">
+        <PropertyRef Name="ttlID" />
+      </Principal>
+      <Dependent Role="Titles_Locale">
+        <PropertyRef Name="ttlID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <ComplexType Name="sp_ActivityChannelSummary_Result">
+    <Property Type="Int32" Name="Total" Nullable="true" />
+    <Property Type="String" Name="chnName" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="chnIcon" Nullable="true" MaxLength="50" />
+  </ComplexType>
+  <ComplexType Name="sp_Get_Casepending_Result">
+    <Property Type="Int32" Name="OVERSLA" Nullable="true" />
+    <Property Type="Int32" Name="INOVERSLA" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="sp_Get_Casepending_ByAgent_Result">
+    <Property Type="Int32" Name="OVERSLA" Nullable="true" />
+    <Property Type="Int32" Name="INOVERSLA" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="sp_GetCaseDetailById_Result">
+    <Property Type="Int32" Name="CASID" Nullable="false" />
+    <Property Type="Int32" Name="CONTACTID" Nullable="false" />
+    <Property Type="String" Name="CONTACTCODE" Nullable="false" MaxLength="1" />
+    <Property Type="String" Name="CASEIDNO" Nullable="true" MaxLength="12" />
+    <Property Type="Int32" Name="ctaID" Nullable="true" />
+    <Property Type="String" Name="CTAFULLNAME" Nullable="true" MaxLength="400" />
+    <Property Type="Int32" Name="CTAEMO1" Nullable="true" />
+    <Property Type="Int32" Name="CTAEMO2" Nullable="true" />
+    <Property Type="Int32" Name="CTAEMO3" Nullable="true" />
+    <Property Type="String" Name="PHONES" Nullable="true" />
+    <Property Type="String" Name="CTAEMAIL" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="CTAFACEBOOK" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="CTATWITTER" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="ADDRESS" Nullable="true" MaxLength="2774" />
+    <Property Type="String" Name="CASSUMMARY" Nullable="true" MaxLength="255" />
+    <Property Type="String" Name="CASESTATUS" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="TALKTIME" Nullable="false" MaxLength="1" />
+    <Property Type="String" Name="CALLBACKTYPE" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="CALLBACKNUMBER" Nullable="true" MaxLength="255" />
+    <Property Type="String" Name="CREATEBY" Nullable="false" MaxLength="511" />
+    <Property Type="DateTime" Name="CREATEDATE" Nullable="false" Precision="23" />
+    <Property Type="String" Name="MODIFIEDBY" Nullable="false" MaxLength="511" />
+    <Property Type="DateTime" Name="MODIFIEDDATE" Nullable="false" Precision="23" />
+    <Property Type="DateTime" Name="CLOSEDATE" Nullable="true" Precision="23" />
+    <Property Type="DateTime" Name="DUEDATE" Nullable="true" Precision="23" />
+    <Property Type="String" Name="REMARK" Nullable="true" MaxLength="Max" />
+    <Property Type="Boolean" Name="casFav" Nullable="false" />
+    <Property Type="Int32" Name="casOwnerID" Nullable="true" />
+    <Property Type="Int32" Name="casCreatedBy" Nullable="false" />
+    <Property Type="Int32" Name="assignTo" Nullable="true" />
+    <Property Type="Int32" Name="dispatchTo" Nullable="true" />
+    <Property Type="DateTime" Name="casDueDate" Nullable="true" Precision="23" />
+    <Property Type="String" Name="OWNERNAME" Nullable="false" MaxLength="511" />
+    <Property Type="String" Name="chnName" Nullable="true" MaxLength="100" />
+    <Property Type="Int32" Name="casIDLevel1" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="sp_GetCaseDetailTimeline_Result">
+    <Property Type="Int32" Name="cslID" Nullable="false" />
+    <Property Type="Int32" Name="casID" Nullable="false" />
+    <Property Type="Int32" Name="actID" Nullable="false" />
+    <Property Type="Int32" Name="cltID" Nullable="false" />
+    <Property Type="String" Name="cslNote" Nullable="true" MaxLength="Max" />
+    <Property Type="String" Name="cslDesc" Nullable="true" MaxLength="2000" />
+    <Property Type="DateTime" Name="cslCreatedOn" Nullable="false" Precision="23" />
+    <Property Type="Int32" Name="cslCreatedBy" Nullable="false" />
+    <Property Type="DateTime" Name="cslModifiedOn" Nullable="false" Precision="23" />
+    <Property Type="Int32" Name="cslModifiedBy" Nullable="false" />
+    <Property Type="String" Name="cltName" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="CreatedByName" Nullable="false" MaxLength="511" />
+  </ComplexType>
+  <ComplexType Name="sp_GetCaseFavourite_Result">
+    <Property Type="Int32" Name="casID" Nullable="false" />
+    <Property Type="Int32" Name="actID" Nullable="false" />
+    <Property Type="Int32" Name="ctaID" Nullable="false" />
+    <Property Type="String" Name="casIDName" Nullable="true" MaxLength="12" />
+    <Property Type="Int32" Name="casParentID" Nullable="true" />
+    <Property Type="Int32" Name="casDuration" Nullable="true" />
+    <Property Type="DateTime" Name="casDueDate" Nullable="true" Precision="23" />
+    <Property Type="DateTime" Name="casPrevDueDate" Nullable="true" Precision="23" />
+    <Property Type="Int32" Name="casIDLevel1" Nullable="true" />
+    <Property Type="Int32" Name="casIDLevel2" Nullable="true" />
+    <Property Type="Int32" Name="casIDLevel3" Nullable="true" />
+    <Property Type="Int32" Name="casIDLevel4" Nullable="true" />
+    <Property Type="Int32" Name="casIDLevel5" Nullable="true" />
+    <Property Type="Int32" Name="casIDLevel6" Nullable="true" />
+    <Property Type="Int32" Name="casIDLevel7" Nullable="true" />
+    <Property Type="Int32" Name="casIDLevel8" Nullable="true" />
+    <Property Type="String" Name="casLevel1" Nullable="true" MaxLength="255" />
+    <Property Type="String" Name="casLevel2" Nullable="true" MaxLength="255" />
+    <Property Type="String" Name="casLevel3" Nullable="true" MaxLength="255" />
+    <Property Type="String" Name="casLevel4" Nullable="true" MaxLength="255" />
+    <Property Type="String" Name="casLevel5" Nullable="true" MaxLength="255" />
+    <Property Type="String" Name="casLevel6" Nullable="true" MaxLength="255" />
+    <Property Type="String" Name="casLevel7" Nullable="true" MaxLength="255" />
+    <Property Type="String" Name="casLevel8" Nullable="true" MaxLength="255" />
+    <Property Type="Int32" Name="casIDSummary" Nullable="false" />
+    <Property Type="String" Name="casSummary" Nullable="true" MaxLength="255" />
+    <Property Type="String" Name="casNote" Nullable="true" MaxLength="Max" />
+    <Property Type="Int32" Name="cbtID" Nullable="true" />
+    <Property Type="Int32" Name="cbcID" Nullable="true" />
+    <Property Type="String" Name="CallbackInfo" Nullable="true" MaxLength="255" />
+    <Property Type="DateTime" Name="CallbackDT" Nullable="true" Precision="23" />
+    <Property Type="Int32" Name="casSLA" Nullable="true" />
+    <Property Type="Int32" Name="priID" Nullable="false" />
+    <Property Type="Int32" Name="cssID" Nullable="false" />
+    <Property Type="Int32" Name="casEmo" Nullable="true" />
+    <Property Type="Int32" Name="casGroupID" Nullable="true" />
+    <Property Type="Int32" Name="casOwnerID" Nullable="true" />
+    <Property Type="DateTime" Name="casCreatedOn" Nullable="false" Precision="23" />
+    <Property Type="Int32" Name="casCreatedBy" Nullable="false" />
+    <Property Type="DateTime" Name="casModifiedOn" Nullable="false" Precision="23" />
+    <Property Type="Int32" Name="casModifiedBy" Nullable="false" />
+    <Property Type="Boolean" Name="casFav" Nullable="false" />
+    <Property Type="Int32" Name="assignTo" Nullable="true" />
+    <Property Type="Int32" Name="casRemindID" Nullable="true" />
+    <Property Type="String" Name="casRemindStatus" Nullable="true" MaxLength="1" />
+  </ComplexType>
+  <ComplexType Name="sp_GetCaseList_Result">
+    <Property Type="Int32" Name="Id" Nullable="false" />
+    <Property Type="String" Name="CaseId" Nullable="true" MaxLength="12" />
+    <Property Type="String" Name="casSummary" Nullable="true" MaxLength="255" />
+    <Property Type="Int32" Name="casSLA" Nullable="true" />
+    <Property Type="DateTime" Name="casCreatedOn" Nullable="false" Precision="23" />
+    <Property Type="String" Name="chnID" Nullable="false" MaxLength="2" />
+    <Property Type="String" Name="Channels" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="CaseStatus" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="NameContact" Nullable="true" MaxLength="400" />
+    <Property Type="String" Name="CaseDuration" Nullable="true" MaxLength="100" />
+    <Property Type="Int32" Name="ISOVERSLA" Nullable="false" />
+    <Property Type="DateTime" Name="casSLADate" Nullable="true" Precision="23" />
+    <Property Type="Int32" Name="casOwnerID" Nullable="true" />
+    <Property Type="String" Name="Owner" Nullable="false" MaxLength="511" />
+    <Property Type="String" Name="Creater" Nullable="false" MaxLength="511" />
+    <Property Type="Int32" Name="assignTo" Nullable="true" />
+    <Property Type="Int32" Name="ISASSIGN" Nullable="false" />
+    <Property Type="Int32" Name="MYASSIGN" Nullable="false" />
+    <Property Type="Int32" Name="MYDISPATCH" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="sp_getCasesOverSLA_Result">
+    <Property Type="Int32" Name="casID" Nullable="false" />
+    <Property Type="String" Name="casIDName" Nullable="true" MaxLength="12" />
+    <Property Type="String" Name="casSummary" Nullable="true" MaxLength="255" />
+    <Property Type="DateTime" Name="casDueDate" Nullable="true" Precision="23" />
+  </ComplexType>
+  <ComplexType Name="sp_getContactCommonDetail_Result">
+    <Property Type="String" Name="mainPhone" Nullable="true" MaxLength="100" />
+    <Property Type="Int32" Name="mainPhoneID" Nullable="true" />
+    <Property Type="String" Name="Phone" Nullable="true" MaxLength="100" />
+    <Property Type="Int32" Name="PhoneID" Nullable="true" />
+    <Property Type="String" Name="mainAddress" Nullable="true" MaxLength="2000" />
+    <Property Type="Int32" Name="mainAddressID" Nullable="true" />
+    <Property Type="String" Name="Address" Nullable="true" MaxLength="2000" />
+    <Property Type="Int32" Name="AddressID" Nullable="true" />
+    <Property Type="String" Name="ctaEmail" Nullable="true" MaxLength="100" />
+    <Property Type="DateTime" Name="ctaDOB" Nullable="true" Precision="23" />
+    <Property Type="Int32" Name="gndID" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="sp_getContactLogTimeline_Result">
+    <Property Type="Int32" Name="casID" Nullable="true" />
+    <Property Type="String" Name="casIDName" Nullable="true" MaxLength="12" />
+    <Property Type="DateTime" Name="casDueDate" Nullable="true" Precision="23" />
+    <Property Type="Int32" Name="cssID" Nullable="true" />
+    <Property Type="Int32" Name="cbtID" Nullable="true" />
+    <Property Type="String" Name="Lognote" Nullable="true" />
+    <Property Type="String" Name="cltName" Nullable="false" MaxLength="100" />
+    <Property Type="DateTime" Name="Created" Nullable="false" Precision="23" />
+    <Property Type="String" Name="Owner" Nullable="false" MaxLength="511" />
+    <Property Type="String" Name="usrAvatar" Nullable="true" MaxLength="2000" />
+    <Property Type="String" Name="LogType" Nullable="false" MaxLength="7" />
+  </ComplexType>
+  <ComplexType Name="sp_getContactSearch_Result">
+    <Property Type="Int32" Name="ctaID" Nullable="false" />
+    <Property Type="String" Name="ctaFullName" Nullable="true" MaxLength="400" />
+    <Property Type="String" Name="ctaEmail" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="ctaAvatar" Nullable="true" MaxLength="2000" />
+    <Property Type="String" Name="adrSummary" Nullable="false" MaxLength="2000" />
+    <Property Type="String" Name="phnMain" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="phnOther" Nullable="true" MaxLength="100" />
+  </ComplexType>
+  <ComplexType Name="sp_GetContactViewLog_Result">
+    <Property Type="Int32" Name="ctaID" Nullable="false" />
+    <Property Type="String" Name="ctaFullName" Nullable="true" MaxLength="400" />
+    <Property Type="String" Name="ctaAvatar" Nullable="true" MaxLength="2000" />
+    <Property Type="String" Name="phnMain" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="phnOther" Nullable="true" MaxLength="100" />
+    <Property Type="DateTime" Name="CreatedOn" Nullable="true" Precision="23" />
+  </ComplexType>
+  <ComplexType Name="sp_GetGroupUser_Result">
+    <Property Type="Int32" Name="grpID" Nullable="false" />
+    <Property Type="String" Name="grpName" Nullable="false" MaxLength="100" />
+    <Property Type="Boolean" Name="grpActive" Nullable="false" />
+    <Property Type="DateTime" Name="grpModifiedOn" Nullable="false" Precision="23" />
+    <Property Type="Int32" Name="grpModifiedBy" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="sp_GetInboundContact_Result">
+    <Property Type="Int32" Name="ctaID" Nullable="false" />
+    <Property Type="String" Name="ctaFullName" Nullable="true" MaxLength="400" />
+    <Property Type="Int32" Name="ctaEmo1" Nullable="true" />
+    <Property Type="Int32" Name="ctaEmo2" Nullable="true" />
+    <Property Type="Int32" Name="ctaEmo3" Nullable="true" />
+    <Property Type="String" Name="ctaAvatar" Nullable="true" MaxLength="2000" />
+    <Property Type="String" Name="phnNumber" Nullable="false" MaxLength="100" />
+  </ComplexType>
+  <ComplexType Name="sp_getLastActivityContact_Result">
+    <Property Type="Int32" Name="ctaID" Nullable="false" />
+    <Property Type="String" Name="ctaFullName" Nullable="true" MaxLength="400" />
+    <Property Type="String" Name="ctaEmail" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="ctaAvatar" Nullable="true" MaxLength="2000" />
+    <Property Type="String" Name="adrSummary" Nullable="false" MaxLength="2000" />
+    <Property Type="String" Name="phnMain" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="phnOther" Nullable="true" MaxLength="100" />
+  </ComplexType>
+  <ComplexType Name="sp_GetLastCases_Result">
+    <Property Type="Int32" Name="casID" Nullable="false" />
+    <Property Type="String" Name="casIDName" Nullable="true" MaxLength="12" />
+    <Property Type="String" Name="casSummary" Nullable="true" MaxLength="255" />
+    <Property Type="Int32" Name="cssID" Nullable="false" />
+    <Property Type="DateTime" Name="casCreatedOn" Nullable="false" Precision="23" />
+    <Property Type="String" Name="CreatedByName" Nullable="false" MaxLength="511" />
+  </ComplexType>
+  <ComplexType Name="sp_GetMailContentInfo_Result">
+    <Property Type="String" Name="CASSUMMARY" Nullable="true" MaxLength="255" />
+    <Property Type="String" Name="CASIDNAME" Nullable="true" MaxLength="12" />
+    <Property Type="String" Name="CTAFULLNAME" Nullable="true" MaxLength="400" />
+    <Property Type="String" Name="PHNNUMBER" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="OWENERNAME" Nullable="false" MaxLength="511" />
+    <Property Type="DateTime" Name="CASDUEDATE" Nullable="true" Precision="23" />
+    <Property Type="String" Name="CASNOTE" Nullable="true" MaxLength="Max" />
+    <Property Type="String" Name="adrSummary" Nullable="true" MaxLength="2000" />
+  </ComplexType>
+  <ComplexType Name="sp_getNewCaseList_Result">
+    <Property Type="Int32" Name="casID" Nullable="false" />
+    <Property Type="Int32" Name="actID" Nullable="false" />
+    <Property Type="Int32" Name="ctaID" Nullable="false" />
+    <Property Type="String" Name="casIDName" Nullable="true" MaxLength="12" />
+    <Property Type="Int32" Name="casParentID" Nullable="true" />
+    <Property Type="Int32" Name="casDuration" Nullable="true" />
+    <Property Type="DateTime" Name="casDueDate" Nullable="true" Precision="23" />
+    <Property Type="DateTime" Name="casPrevDueDate" Nullable="true" Precision="23" />
+    <Property Type="Int32" Name="casIDLevel1" Nullable="true" />
+    <Property Type="Int32" Name="casIDLevel2" Nullable="true" />
+    <Property Type="Int32" Name="casIDLevel3" Nullable="true" />
+    <Property Type="Int32" Name="casIDLevel4" Nullable="true" />
+    <Property Type="Int32" Name="casIDLevel5" Nullable="true" />
+    <Property Type="Int32" Name="casIDLevel6" Nullable="true" />
+    <Property Type="Int32" Name="casIDLevel7" Nullable="true" />
+    <Property Type="Int32" Name="casIDLevel8" Nullable="true" />
+    <Property Type="String" Name="casLevel1" Nullable="true" MaxLength="255" />
+    <Property Type="String" Name="casLevel2" Nullable="true" MaxLength="255" />
+    <Property Type="String" Name="casLevel3" Nullable="true" MaxLength="255" />
+    <Property Type="String" Name="casLevel4" Nullable="true" MaxLength="255" />
+    <Property Type="String" Name="casLevel5" Nullable="true" MaxLength="255" />
+    <Property Type="String" Name="casLevel6" Nullable="true" MaxLength="255" />
+    <Property Type="String" Name="casLevel7" Nullable="true" MaxLength="255" />
+    <Property Type="String" Name="casLevel8" Nullable="true" MaxLength="255" />
+    <Property Type="Int32" Name="casIDSummary" Nullable="false" />
+    <Property Type="String" Name="casSummary" Nullable="true" MaxLength="255" />
+    <Property Type="String" Name="casNote" Nullable="true" MaxLength="Max" />
+    <Property Type="Int32" Name="cbtID" Nullable="true" />
+    <Property Type="Int32" Name="cbcID" Nullable="true" />
+    <Property Type="String" Name="CallbackInfo" Nullable="true" MaxLength="255" />
+    <Property Type="DateTime" Name="CallbackDT" Nullable="true" Precision="23" />
+    <Property Type="Int32" Name="casSLA" Nullable="true" />
+    <Property Type="Int32" Name="priID" Nullable="false" />
+    <Property Type="Int32" Name="cssID" Nullable="false" />
+    <Property Type="Int32" Name="casEmo" Nullable="true" />
+    <Property Type="Int32" Name="casGroupID" Nullable="true" />
+    <Property Type="Int32" Name="casOwnerID" Nullable="true" />
+    <Property Type="DateTime" Name="casCreatedOn" Nullable="false" Precision="23" />
+    <Property Type="Int32" Name="casCreatedBy" Nullable="false" />
+    <Property Type="DateTime" Name="casModifiedOn" Nullable="false" Precision="23" />
+    <Property Type="Int32" Name="casModifiedBy" Nullable="false" />
+    <Property Type="Boolean" Name="casFav" Nullable="false" />
+    <Property Type="Int32" Name="assignTo" Nullable="true" />
+    <Property Type="Int32" Name="casRemindID" Nullable="true" />
+    <Property Type="String" Name="casRemindStatus" Nullable="true" MaxLength="1" />
+    <Property Type="String" Name="casCreatedByName" Nullable="false" MaxLength="511" />
+    <Property Type="String" Name="cbcName" Nullable="true" MaxLength="250" />
+  </ComplexType>
+  <ComplexType Name="sp_GetNotification_Result">
+    <Property Type="Int32" Name="notID" Nullable="false" />
+    <Property Type="Int32" Name="nttID" Nullable="false" />
+    <Property Type="Int32" Name="refID" Nullable="true" />
+    <Property Type="Int32" Name="Sender" Nullable="true" />
+    <Property Type="Int32" Name="Receiver" Nullable="true" />
+    <Property Type="String" Name="notNote" Nullable="true" MaxLength="Max" />
+    <Property Type="String" Name="notDesc" Nullable="true" MaxLength="2000" />
+    <Property Type="Boolean" Name="notRead" Nullable="true" />
+    <Property Type="Boolean" Name="notActive" Nullable="true" />
+    <Property Type="DateTime" Name="notCreatedOn" Nullable="false" Precision="23" />
+    <Property Type="Int32" Name="notCreatedBy" Nullable="false" />
+    <Property Type="DateTime" Name="notModifiedOn" Nullable="false" Precision="23" />
+    <Property Type="Int32" Name="notModifiedBy" Nullable="false" />
+    <Property Type="String" Name="nttName" Nullable="true" MaxLength="50" />
+    <Property Type="DateTime" Name="casDueDate" Nullable="true" Precision="23" />
+  </ComplexType>
+  <ComplexType Name="sp_GetStatus_Result">
+    <Property Type="Int32" Name="cssID" Nullable="false" />
+    <Property Type="String" Name="cssName" Nullable="false" MaxLength="100" />
+  </ComplexType>
+  <ComplexType Name="sp_GetUser_Result">
+    <Property Type="Int32" Name="usrID" Nullable="false" />
+    <Property Type="Int32" Name="grpID" Nullable="true" />
+    <Property Type="String" Name="usrUsername" Nullable="false" MaxLength="255" />
+    <Property Type="String" Name="usrPassword" Nullable="false" MaxLength="255" />
+    <Property Type="String" Name="usrFirstName" Nullable="true" MaxLength="255" />
+    <Property Type="String" Name="usrLastName" Nullable="true" MaxLength="255" />
+    <Property Type="String" Name="usrDepartment" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="usrAvatar" Nullable="true" MaxLength="2000" />
+    <Property Type="Boolean" Name="usrIsActive" Nullable="false" />
+    <Property Type="DateTime" Name="usrCreatedOn" Nullable="false" Precision="23" />
+    <Property Type="Int32" Name="usrCreatedBy" Nullable="false" />
+    <Property Type="DateTime" Name="usrModifiedOn" Nullable="false" Precision="23" />
+    <Property Type="Int32" Name="usrModifiedBy" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="sp_getUserProfile_Result">
+    <Property Type="Int32" Name="usrID" Nullable="false" />
+    <Property Type="String" Name="usrUsername" Nullable="false" MaxLength="255" />
+    <Property Type="String" Name="usrPassword" Nullable="false" MaxLength="255" />
+    <Property Type="String" Name="usrFirstName" Nullable="true" MaxLength="255" />
+    <Property Type="String" Name="usrLastName" Nullable="true" MaxLength="255" />
+    <Property Type="String" Name="usrDepartment" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="usrAvatar" Nullable="true" MaxLength="2000" />
+    <Property Type="String" Name="grpName" Nullable="true" MaxLength="100" />
+    <Property Type="Int32" Name="TotalCases" Nullable="true" />
+    <Property Type="Int32" Name="TotalPending" Nullable="true" />
+    <Property Type="Int32" Name="TotalClosed" Nullable="true" />
+    <Property Type="Int32" Name="TotalContacts" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="sp_getUserProfileTimeline_Result">
+    <Property Type="String" Name="logType" Nullable="false" MaxLength="15" />
+    <Property Type="String" Name="logCSS" Nullable="false" MaxLength="9" />
+    <Property Type="String" Name="logText" Nullable="true" MaxLength="400" />
+    <Property Type="Int32" Name="ID" Nullable="false" />
+    <Property Type="DateTime" Name="logCreated" Nullable="false" Precision="23" />
+  </ComplexType>
+  <ComplexType Name="sp_helpdiagramdefinition_Result">
+    <Property Type="Int32" Name="version" Nullable="true" />
+    <Property Type="Binary" Name="definition" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="sp_helpdiagrams_Result">
+    <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
+    <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
+    <Property Type="Int32" Name="ID" Nullable="false" />
+    <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
+    <Property Type="Int32" Name="OwnerID" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="st_Get_Dashbord_CaseStatus_Result">
+    <Property Type="Decimal" Name="Close" Nullable="true" Precision="27" Scale="13" />
+    <Property Type="Decimal" Name="Open" Nullable="true" Precision="27" Scale="13" />
+    <Property Type="Decimal" Name="Cancel" Nullable="true" Precision="27" Scale="13" />
+    <Property Type="Decimal" Name="Pending" Nullable="true" Precision="27" Scale="13" />
+    <Property Type="Decimal" Name="OpenLead" Nullable="true" Precision="27" Scale="13" />
+    <Property Type="Decimal" Name="CloseLead" Nullable="true" Precision="27" Scale="13" />
+    <Property Type="Int32" Name="Total" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="st_GET_UserRole_ById_Result">
+    <Property Type="Int32" Name="rolID" Nullable="false" />
+    <Property Type="String" Name="rolName" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="fncName" Nullable="false" MaxLength="100" />
+  </ComplexType>
+  <ComplexType Name="st_GetUserInGroup_ById_Result">
+    <Property Type="Int32" Name="usrID" Nullable="false" />
+    <Property Type="String" Name="usrUsername" Nullable="false" MaxLength="255" />
+    <Property Type="String" Name="FullName" Nullable="false" MaxLength="511" />
+    <Property Type="String" Name="grpName" Nullable="false" MaxLength="100" />
+  </ComplexType>
+  <ComplexType Name="uspCaseType_Result">
+    <Property Type="Int32" Name="catID" Nullable="false" />
+    <Property Type="Int32" Name="slaID" Nullable="true" />
+    <Property Type="String" Name="catName" Nullable="false" MaxLength="255" />
+    <Property Type="Int32" Name="catParrentID" Nullable="true" />
+    <Property Type="Int32" Name="catOrder" Nullable="true" />
+    <Property Type="Int32" Name="catSLA" Nullable="true" />
+    <Property Type="Int32" Name="catLevel" Nullable="true" />
+    <Property Type="String" Name="catDialogue" Nullable="true" MaxLength="2000" />
+    <Property Type="Boolean" Name="catActive" Nullable="false" />
+    <Property Type="DateTime" Name="catCreatedOn" Nullable="false" Precision="23" />
+    <Property Type="Int32" Name="catCreatedBy" Nullable="false" />
+    <Property Type="DateTime" Name="catModifiedOn" Nullable="false" Precision="23" />
+    <Property Type="Int32" Name="catModifiedBy" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="uspContactDetail_Result">
+    <Property Type="Int32" Name="casID" Nullable="false" />
+    <Property Type="String" Name="chnName" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="casIDName" Nullable="true" MaxLength="12" />
+    <Property Type="String" Name="casSummary" Nullable="true" MaxLength="255" />
+    <Property Type="String" Name="casNote" Nullable="true" MaxLength="Max" />
+    <Property Type="String" Name="CallbackInfo" Nullable="true" MaxLength="255" />
+    <Property Type="DateTime" Name="casCreatedOn" Nullable="false" Precision="23" />
+    <Property Type="DateTime" Name="casModifiedOn" Nullable="false" Precision="23" />
+    <Property Type="String" Name="ctaFullName" Nullable="true" MaxLength="400" />
+  </ComplexType>
+  <ComplexType Name="uspReportCaseSummary_Result">
+    <Property Type="Int32" Name="ROWNUMBER" Nullable="false" />
+    <Property Type="Int32" Name="catID" Nullable="true" />
+    <Property Type="Int32" Name="HID" Nullable="true" />
+    <Property Type="Int32" Name="CID" Nullable="true" />
+    <Property Type="Int32" Name="catParrentID" Nullable="true" />
+    <Property Type="Int32" Name="NEXTGROUPID" Nullable="true" />
+    <Property Type="Int32" Name="GROUPCASE" Nullable="true" />
+    <Property Type="String" Name="catName" Nullable="true" />
+    <Property Type="Int32" Name="LEVEL" Nullable="true" />
+    <Property Type="Int32" Name="COUNT" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="uspSuvitech_CaseStatusSumAll_Result">
+    <Property Type="String" Name="C_DATE" Nullable="true" MaxLength="10" />
+    <Property Type="Int32" Name="CASECOUNT" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="uspSuvitech_ContactDetailRpt_Result">
+    <Property Type="String" Name="CASEIDNAME" Nullable="true" MaxLength="12" />
+    <Property Type="String" Name="CREATEDATE" Nullable="true" MaxLength="20" />
+    <Property Type="String" Name="CHANNELNAME" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="DETAIL" Nullable="true" MaxLength="Max" />
+    <Property Type="String" Name="AGENTNAME" Nullable="false" MaxLength="511" />
+    <Property Type="String" Name="CASETYPE" Nullable="true" MaxLength="255" />
+    <Property Type="String" Name="PHONENUMBER" Nullable="true" MaxLength="255" />
+    <Property Type="String" Name="CONTACTNAME" Nullable="true" MaxLength="400" />
+    <Property Type="String" Name="CASESTATUS" Nullable="true" MaxLength="100" />
+  </ComplexType>
+  <ComplexType Name="sp_getCaseQuery_Result">
+    <Property Type="String" Name="casCreatedByName" Nullable="false" MaxLength="511" />
+    <Property Type="DateTime" Name="casCreatedOn" Nullable="false" Precision="23" />
+    <Property Type="Int32" Name="casID" Nullable="false" />
+    <Property Type="String" Name="casIDName" Nullable="true" MaxLength="12" />
+    <Property Type="String" Name="casSummary" Nullable="true" MaxLength="255" />
+    <Property Type="String" Name="cssName" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="chnID" Nullable="false" MaxLength="2" />
+    <Property Type="String" Name="casOwnerByName" Nullable="false" MaxLength="511" />
+  </ComplexType>
+  <ComplexType Name="sp_ContactAutoComplete_Result">
+    <Property Type="String" Name="name" Nullable="false" MaxLength="400" />
+  </ComplexType>
+  <ComplexType Name="sp_getTotalTodolistByChannel_Result">
+    <Property Type="Int32" Name="myworkinbound" Nullable="true" />
+    <Property Type="Int32" Name="myworkoutbound" Nullable="true" />
+    <Property Type="Int32" Name="mygroupinbound" Nullable="true" />
+    <Property Type="Int32" Name="mygroupoutbound" Nullable="true" />
+  </ComplexType>
+  <EntityType Name="DNIS">
+    <Key>
+      <PropertyRef Name="objID" />
+    </Key>
+    <Property Type="Int32" Name="objID" Nullable="false" />
+    <Property Type="String" Name="DNIS_Name" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="Int32" Name="Is_Active" />
+  </EntityType>
+  <EntityType Name="TaskScheduleLog">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TaskName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="TaskStart" Type="DateTime" Precision="3" />
+    <Property Name="TaskEnd" Type="DateTime" Precision="3" />
+    <Property Name="TaskStatus" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+    <Property Name="TaskDesc" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <ComplexType Name="SP_Contact_Detail_RP_Result">
+    <Property Type="Int32" Name="CAS_ID" Nullable="false" />
+    <Property Type="String" Name="CASE_ID" Nullable="true" MaxLength="12" />
+    <Property Type="String" Name="CREATEDATE" Nullable="true" MaxLength="10" />
+    <Property Type="String" Name="CREATETIME" Nullable="true" MaxLength="10" />
+    <Property Type="String" Name="CHANEL" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="PHONE_NUMBER" Nullable="true" MaxLength="255" />
+    <Property Type="String" Name="CONT_NAME" Nullable="true" MaxLength="400" />
+    <Property Type="String" Name="CASE_SUMMARY" Nullable="true" MaxLength="255" />
+    <Property Type="String" Name="NOTE" Nullable="true" MaxLength="Max" />
+    <Property Type="String" Name="CASE_STATUS" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="CREATEBY" Nullable="false" MaxLength="511" />
+    <Property Type="DateTime" Name="CASMODIFIEDON" Nullable="false" Precision="23" />
+    <Property Type="String" Name="MODIFIEDBY" Nullable="true" MaxLength="511" />
+    <Property Type="String" Name="CLOSEDATE" Nullable="true" MaxLength="21" />
+  </ComplexType>
+  <ComplexType Name="uspReportCaseLevel_Result">
+    <Property Type="String" Name="chnID" Nullable="false" MaxLength="2" />
+    <Property Type="String" Name="cssName" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="casCreatedByName" Nullable="false" MaxLength="511" />
+    <Property Type="String" Name="casOwnerByName" Nullable="false" MaxLength="511" />
+    <Property Type="Int32" Name="casID" Nullable="false" />
+    <Property Type="Int32" Name="actID" Nullable="false" />
+    <Property Type="Int32" Name="ctaID" Nullable="false" />
+    <Property Type="String" Name="casIDName" Nullable="true" MaxLength="12" />
+    <Property Type="Int32" Name="casParentID" Nullable="true" />
+    <Property Type="Int32" Name="casDuration" Nullable="true" />
+    <Property Type="DateTime" Name="casDueDate" Nullable="true" Precision="23" />
+    <Property Type="DateTime" Name="casPrevDueDate" Nullable="true" Precision="23" />
+    <Property Type="Int32" Name="casIDLevel1" Nullable="true" />
+    <Property Type="Int32" Name="casIDLevel2" Nullable="true" />
+    <Property Type="Int32" Name="casIDLevel3" Nullable="true" />
+    <Property Type="Int32" Name="casIDLevel4" Nullable="true" />
+    <Property Type="Int32" Name="casIDLevel5" Nullable="true" />
+    <Property Type="Int32" Name="casIDLevel6" Nullable="true" />
+    <Property Type="Int32" Name="casIDLevel7" Nullable="true" />
+    <Property Type="Int32" Name="casIDLevel8" Nullable="true" />
+    <Property Type="String" Name="casLevel1" Nullable="true" MaxLength="255" />
+    <Property Type="String" Name="casLevel2" Nullable="true" MaxLength="255" />
+    <Property Type="String" Name="casLevel3" Nullable="true" MaxLength="255" />
+    <Property Type="String" Name="casLevel4" Nullable="true" MaxLength="255" />
+    <Property Type="String" Name="casLevel5" Nullable="true" MaxLength="255" />
+    <Property Type="String" Name="casLevel6" Nullable="true" MaxLength="255" />
+    <Property Type="String" Name="casLevel7" Nullable="true" MaxLength="255" />
+    <Property Type="String" Name="casLevel8" Nullable="true" MaxLength="255" />
+    <Property Type="Int32" Name="casIDSummary" Nullable="false" />
+    <Property Type="String" Name="casSummary" Nullable="true" MaxLength="255" />
+    <Property Type="String" Name="casNote" Nullable="true" MaxLength="Max" />
+    <Property Type="Int32" Name="cbtID" Nullable="true" />
+    <Property Type="Int32" Name="cbcID" Nullable="true" />
+    <Property Type="String" Name="CallbackInfo" Nullable="true" MaxLength="255" />
+    <Property Type="DateTime" Name="CallbackDT" Nullable="true" Precision="23" />
+    <Property Type="Int32" Name="casSLA" Nullable="true" />
+    <Property Type="Int32" Name="priID" Nullable="false" />
+    <Property Type="Int32" Name="cssID" Nullable="false" />
+    <Property Type="Int32" Name="casEmo" Nullable="true" />
+    <Property Type="Int32" Name="casGroupID" Nullable="true" />
+    <Property Type="Int32" Name="casOwnerID" Nullable="true" />
+    <Property Type="DateTime" Name="casCreatedOn" Nullable="false" Precision="23" />
+    <Property Type="Int32" Name="casCreatedBy" Nullable="false" />
+    <Property Type="DateTime" Name="casModifiedOn" Nullable="false" Precision="23" />
+    <Property Type="Int32" Name="casModifiedBy" Nullable="false" />
+    <Property Type="Boolean" Name="casFav" Nullable="false" />
+    <Property Type="Int32" Name="assignTo" Nullable="true" />
+    <Property Type="Int32" Name="casRemindID" Nullable="true" />
+    <Property Type="String" Name="casRemindStatus" Nullable="true" MaxLength="1" />
+    <Property Type="String" Name="cascommerceType" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="casproductCategory" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="casserviceCategory" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="casdeliveryType" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="casvalueRange" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="casconversationChannel" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="casreferenceDetail" Nullable="true" MaxLength="Max" />
+    <Property Type="String" Name="casdetail" Nullable="true" MaxLength="Max" />
+  </ComplexType>
+</Schema>

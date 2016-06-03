@@ -1,0 +1,92 @@
+﻿<div class="card-head">
+    <header>
+        <span class="selected-day">&nbsp;</span> &nbsp;<small class="selected-date">&nbsp;</small>
+    </header>
+    <div class="tools">
+        <div class="btn-group">
+            <a id="calender-prev" class="btn btn-icon-toggle ink-reaction"><i class="fa fa-angle-left"></i></a>
+            <a id="calender-next" class="btn btn-icon-toggle ink-reaction"><i class="fa fa-angle-right"></i></a>
+        </div>
+        <div class="btn-group pull-right">
+        </div>
+    </div>
+    <ul class="nav nav-tabs tabs-text-contrast tabs-accent" data-toggle="tabs">
+        <li data-mode="month" class="active"><a href="#">Month</a></li>
+        <li data-mode="agendaWeek"><a href="#">Week</a></li>
+        <li data-mode="agendaDay"><a href="#">Day</a></li>
+    </ul>
+</div>
+<!--end .card-head -->
+<div class="card-body no-padding">
+    <div id="calendar"></div>
+</div>
+
+@*<script src="~/Content/js/libs/jquery/jquery-1.11.2.min.js"></script>
+<script src="~/Content/js/libs/jquery/jquery-migrate-1.2.1.min.js"></script>
+<script src="~/Content/js/libs/jquery-ui/jquery-ui.min.js"></script>
+<script src="~/Content/js/libs/bootstrap/bootstrap.min.js"></script>
+<script src="~/Content/js/libs/moment/moment.min.js"></script>
+<script src="~/Content/js/core/source/App.js"></script>
+<script src="~/Content/js/core/demo/Demo.js"></script>
+<script src="~/Content/js/core/demo/DemoFormComponents.js"></script>
+<script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>*@
+<script src="~/Content/js/libs/fullcalendar/fullcalendar.js"></script>
+<script src="~/Content/js/core/demo/DemoCalendar.js"></script>
+<script>
+    var date = new Date();
+    //var d = date.getDate();
+    //var m = date.getMonth();
+    //alert(m);
+    //var y = date.getFullYear();
+
+    $('#calendar').fullCalendar({
+        height: 700,
+        header: false,
+        allDaySlot: false,
+        editable: true,
+        droppable: true,        
+        events: [ @Html.Raw(ViewData["evt"])],            
+        eventRender: function (event, element) {
+            element.find('#date-title').html(element.find('span.fc-event-title').text());
+        },
+        eventDrop: function (event, delta, revertFunc) {
+            //if (!confirm("Are you sure about this change?")) {
+            //    revertFunc();
+            //}
+            var id = event.id;
+            var start = event.start.format();
+            var end = event.end.format();
+            updateTask(id, start, end);
+        },
+        eventResize: function (event, delta, revertFunc) {
+
+            //alert(event.start.format());
+            //alert(event.end.format());           
+            var id = event.id;
+            var start = event.start.format();
+            var end = event.end.format();
+            updateTask(id, start, end);
+        },
+        eventClick: function (calEvent, jsEvent, view) {
+
+            //alert('Event: ' + calEvent.id);
+            var id = calEvent.id;
+            getById(id);
+            //alert('Coordinates: ' + jsEvent.pageX + ',' + jsEvent.pageY);
+            //alert('View: ' + view.name);
+
+            // change the border color just for fun
+            //$(this).css('border-color', 'red');
+        },
+        dayClick: function (date, jsEvent, view) {
+            //alert('Clicked on: ' + date.format());           
+            return;
+        }
+    });
+
+    function updateTask(id, start, end)
+    {
+        var url = '@Url.Action("updateTask","Calendar")';
+        $.post(url, { id: id, start: start, end: end });
+    }
+</script>

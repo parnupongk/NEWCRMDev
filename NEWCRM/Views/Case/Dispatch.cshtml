@@ -1,0 +1,36 @@
+﻿@{
+    ViewBag.Title = "Dispatch";
+    Layout = null;
+}
+@using NEWCRM.Models
+@model CaseModels
+<div class="form-group">
+    <select id="selectDispatch" name="select1" class="form-control">
+         @foreach (var Item in Model.UserGroups)
+        { 
+         <option value="@Item.grpID">@Item.grpName</option>
+        }
+    </select>
+    <label for="select1">Department</label>
+</div>
+<div class="form-group">
+    <textarea  id="txtRemark" class="form-control" rows="3" placeholder=""></textarea>
+    <label for="txtRemark">Remark</label>
+</div>
+
+
+@section Scripts {
+@*    <script src="~/Content/js/core/demo/DemoFormComponents.js"></script>*@
+<script type="text/javascript">
+   
+
+  
+
+    //$(function () {
+    //    debugger;
+    //    $('#optgroup').multiSelect({ selectableOptgroup: true });
+    //});
+
+</script>
+    }
+

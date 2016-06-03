@@ -1,0 +1,1284 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="CRMSUVITECHModelStoreContainer" CdmEntityContainer="CRMSUVITECHEntities">
+    <EntitySetMapping Name="Activities">
+      <EntityTypeMapping TypeName="CRMSUVITECHModel.Activities">
+        <MappingFragment StoreEntitySet="Activities">
+          <ScalarProperty Name="actID" ColumnName="actID" />
+          <ScalarProperty Name="ctaID" ColumnName="ctaID" />
+          <ScalarProperty Name="chnID" ColumnName="chnID" />
+          <ScalarProperty Name="atsID" ColumnName="atsID" />
+          <ScalarProperty Name="actChannelData" ColumnName="actChannelData" />
+          <ScalarProperty Name="actIVRMenu" ColumnName="actIVRMenu" />
+          <ScalarProperty Name="actDuration" ColumnName="actDuration" />
+          <ScalarProperty Name="actStart" ColumnName="actStart" />
+          <ScalarProperty Name="actStop" ColumnName="actStop" />
+          <ScalarProperty Name="actEmo" ColumnName="actEmo" />
+          <ScalarProperty Name="conID" ColumnName="conID" />
+          <ScalarProperty Name="actCreatedOn" ColumnName="actCreatedOn" />
+          <ScalarProperty Name="actCreatedBy" ColumnName="actCreatedBy" />
+          <ScalarProperty Name="actModifiedOn" ColumnName="actModifiedOn" />
+          <ScalarProperty Name="actModifiedBy" ColumnName="actModifiedBy" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ActivityStatus">
+      <EntityTypeMapping TypeName="CRMSUVITECHModel.ActivityStatus">
+        <MappingFragment StoreEntitySet="ActivityStatus">
+          <ScalarProperty Name="atsID" ColumnName="atsID" />
+          <ScalarProperty Name="atsActive" ColumnName="atsActive" />
+          <ScalarProperty Name="atsModifiedOn" ColumnName="atsModifiedOn" />
+          <ScalarProperty Name="atsModifiedBy" ColumnName="atsModifiedBy" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ActivityStatus_Locale">
+      <EntityTypeMapping TypeName="CRMSUVITECHModel.ActivityStatus_Locale">
+        <MappingFragment StoreEntitySet="ActivityStatus_Locale">
+          <ScalarProperty Name="atsID" ColumnName="atsID" />
+          <ScalarProperty Name="lclID" ColumnName="lclID" />
+          <ScalarProperty Name="atsName" ColumnName="atsName" />
+          <ScalarProperty Name="atsModifiedOn" ColumnName="atsModifiedOn" />
+          <ScalarProperty Name="atsModifiedBy" ColumnName="atsModifiedBy" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Address">
+      <EntityTypeMapping TypeName="CRMSUVITECHModel.Address">
+        <MappingFragment StoreEntitySet="Address">
+          <ScalarProperty Name="adrID" ColumnName="adrID" />
+          <ScalarProperty Name="ctaID" ColumnName="ctaID" />
+          <ScalarProperty Name="adtID" ColumnName="adtID" />
+          <ScalarProperty Name="adrSummary" ColumnName="adrSummary" />
+          <ScalarProperty Name="adrHomeNo" ColumnName="adrHomeNo" />
+          <ScalarProperty Name="adrMoo" ColumnName="adrMoo" />
+          <ScalarProperty Name="adrBuilding" ColumnName="adrBuilding" />
+          <ScalarProperty Name="adrRoom" ColumnName="adrRoom" />
+          <ScalarProperty Name="adrMooban" ColumnName="adrMooban" />
+          <ScalarProperty Name="adrSoi" ColumnName="adrSoi" />
+          <ScalarProperty Name="adrRoad" ColumnName="adrRoad" />
+          <ScalarProperty Name="adrSubDistrict" ColumnName="adrSubDistrict" />
+          <ScalarProperty Name="adrDistrict" ColumnName="adrDistrict" />
+          <ScalarProperty Name="adrProvince" ColumnName="adrProvince" />
+          <ScalarProperty Name="sdtID" ColumnName="sdtID" />
+          <ScalarProperty Name="dstID" ColumnName="dstID" />
+          <ScalarProperty Name="pvnID" ColumnName="pvnID" />
+          <ScalarProperty Name="adrZip" ColumnName="adrZip" />
+          <ScalarProperty Name="adrNote" ColumnName="adrNote" />
+          <ScalarProperty Name="adrCreatedOn" ColumnName="adrCreatedOn" />
+          <ScalarProperty Name="adrCreatedBy" ColumnName="adrCreatedBy" />
+          <ScalarProperty Name="adrModifiedOn" ColumnName="adrModifiedOn" />
+          <ScalarProperty Name="adrModifiedBy" ColumnName="adrModifiedBy" />
+          <ScalarProperty Name="lclID" ColumnName="lclID" />
+          <ScalarProperty Name="adrActive" ColumnName="adrActive" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Announcement">
+      <EntityTypeMapping TypeName="CRMSUVITECHModel.Announcement">
+        <MappingFragment StoreEntitySet="Announcement">
+          <ScalarProperty Name="annID" ColumnName="annID" />
+          <ScalarProperty Name="annText" ColumnName="annText" />
+          <ScalarProperty Name="annActive" ColumnName="annActive" />
+          <ScalarProperty Name="annCreatedOn" ColumnName="annCreatedOn" />
+          <ScalarProperty Name="annCreatedBy" ColumnName="annCreatedBy" />
+          <ScalarProperty Name="annModifiedOn" ColumnName="annModifiedOn" />
+          <ScalarProperty Name="annModifiedBy" ColumnName="annModifiedBy" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AuthenLog">
+      <EntityTypeMapping TypeName="CRMSUVITECHModel.AuthenLog">
+        <MappingFragment StoreEntitySet="AuthenLog">
+          <ScalarProperty Name="authID" ColumnName="authID" />
+          <ScalarProperty Name="usrID" ColumnName="usrID" />
+          <ScalarProperty Name="authCreatedOn" ColumnName="authCreatedOn" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Calendar">
+      <EntityTypeMapping TypeName="CRMSUVITECHModel.Calendar">
+        <MappingFragment StoreEntitySet="Calendar">
+          <ScalarProperty Name="cldID" ColumnName="cldID" />
+          <ScalarProperty Name="cldMessage" ColumnName="cldMessage" />
+          <ScalarProperty Name="cldDate" ColumnName="cldDate" />
+          <ScalarProperty Name="cldTimestart" ColumnName="cldTimestart" />
+          <ScalarProperty Name="cldTimeend" ColumnName="cldTimeend" />
+          <ScalarProperty Name="cldColor" ColumnName="cldColor" />
+          <ScalarProperty Name="cldCreatedOn" ColumnName="cldCreatedOn" />
+          <ScalarProperty Name="cldCreatedBy" ColumnName="cldCreatedBy" />
+          <ScalarProperty Name="cldModifiedOn" ColumnName="cldModifiedOn" />
+          <ScalarProperty Name="cldModifiedBy" ColumnName="cldModifiedBy" />
+          <ScalarProperty Name="cldActive" ColumnName="cldActive" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Callback">
+      <EntityTypeMapping TypeName="CRMSUVITECHModel.Callback">
+        <MappingFragment StoreEntitySet="Callback">
+          <ScalarProperty Name="clbID" ColumnName="clbID" />
+          <ScalarProperty Name="cbtID" ColumnName="cbtID" />
+          <ScalarProperty Name="cbcID" ColumnName="cbcID" />
+          <ScalarProperty Name="casID" ColumnName="casID" />
+          <ScalarProperty Name="clbDatetime" ColumnName="clbDatetime" />
+          <ScalarProperty Name="clbNumber" ColumnName="clbNumber" />
+          <ScalarProperty Name="clbNote" ColumnName="clbNote" />
+          <ScalarProperty Name="clbCreatedOn" ColumnName="clbCreatedOn" />
+          <ScalarProperty Name="clbCreatedBy" ColumnName="clbCreatedBy" />
+          <ScalarProperty Name="clbModifiedOn" ColumnName="clbModifiedOn" />
+          <ScalarProperty Name="clbModifiedBy" ColumnName="clbModifiedBy" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CallbackCause">
+      <EntityTypeMapping TypeName="CRMSUVITECHModel.CallbackCause">
+        <MappingFragment StoreEntitySet="CallbackCause">
+          <ScalarProperty Name="cbcID" ColumnName="cbcID" />
+          <ScalarProperty Name="cbcActive" ColumnName="cbcActive" />
+          <ScalarProperty Name="cbcModifiedOn" ColumnName="cbcModifiedOn" />
+          <ScalarProperty Name="cbcModifiedBy" ColumnName="cbcModifiedBy" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CallbackCause_Locale">
+      <EntityTypeMapping TypeName="CRMSUVITECHModel.CallbackCause_Locale">
+        <MappingFragment StoreEntitySet="CallbackCause_Locale">
+          <ScalarProperty Name="cbcID" ColumnName="cbcID" />
+          <ScalarProperty Name="lclID" ColumnName="lclID" />
+          <ScalarProperty Name="cbcName" ColumnName="cbcName" />
+          <ScalarProperty Name="cbcModifiedOn" ColumnName="cbcModifiedOn" />
+          <ScalarProperty Name="cbcModifiedBy" ColumnName="cbcModifiedBy" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CallbackType">
+      <EntityTypeMapping TypeName="CRMSUVITECHModel.CallbackType">
+        <MappingFragment StoreEntitySet="CallbackType">
+          <ScalarProperty Name="cbtID" ColumnName="cbtID" />
+          <ScalarProperty Name="cbtActive" ColumnName="cbtActive" />
+          <ScalarProperty Name="cbtModifiedOn" ColumnName="cbtModifiedOn" />
+          <ScalarProperty Name="cbtModifiedBy" ColumnName="cbtModifiedBy" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CallbackType_Locale">
+      <EntityTypeMapping TypeName="CRMSUVITECHModel.CallbackType_Locale">
+        <MappingFragment StoreEntitySet="CallbackType_Locale">
+          <ScalarProperty Name="cbtID" ColumnName="cbtID" />
+          <ScalarProperty Name="lclID" ColumnName="lclID" />
+          <ScalarProperty Name="cbtName" ColumnName="cbtName" />
+          <ScalarProperty Name="cbtModifiedOn" ColumnName="cbtModifiedOn" />
+          <ScalarProperty Name="cbtModifiedBy" ColumnName="cbtModifiedBy" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CaseLogs">
+      <EntityTypeMapping TypeName="CRMSUVITECHModel.CaseLogs">
+        <MappingFragment StoreEntitySet="CaseLogs">
+          <ScalarProperty Name="cslID" ColumnName="cslID" />
+          <ScalarProperty Name="casID" ColumnName="casID" />
+          <ScalarProperty Name="actID" ColumnName="actID" />
+          <ScalarProperty Name="cltID" ColumnName="cltID" />
+          <ScalarProperty Name="cslNote" ColumnName="cslNote" />
+          <ScalarProperty Name="cslDesc" ColumnName="cslDesc" />
+          <ScalarProperty Name="cslCreatedOn" ColumnName="cslCreatedOn" />
+          <ScalarProperty Name="cslCreatedBy" ColumnName="cslCreatedBy" />
+          <ScalarProperty Name="cslModifiedOn" ColumnName="cslModifiedOn" />
+          <ScalarProperty Name="cslModifiedBy" ColumnName="cslModifiedBy" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CaseLogType">
+      <EntityTypeMapping TypeName="CRMSUVITECHModel.CaseLogType">
+        <MappingFragment StoreEntitySet="CaseLogType">
+          <ScalarProperty Name="cltID" ColumnName="cltID" />
+          <ScalarProperty Name="cltName" ColumnName="cltName" />
+          <ScalarProperty Name="cslModifiedOn" ColumnName="cslModifiedOn" />
+          <ScalarProperty Name="cslModifiedBy" ColumnName="cslModifiedBy" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CaseStatus">
+      <EntityTypeMapping TypeName="CRMSUVITECHModel.CaseStatus">
+        <MappingFragment StoreEntitySet="CaseStatus">
+          <ScalarProperty Name="cssID" ColumnName="cssID" />
+          <ScalarProperty Name="cssActive" ColumnName="cssActive" />
+          <ScalarProperty Name="cssModifiedOn" ColumnName="cssModifiedOn" />
+          <ScalarProperty Name="cssModifiedBy" ColumnName="cssModifiedBy" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CaseStatus_Locale">
+      <EntityTypeMapping TypeName="CRMSUVITECHModel.CaseStatus_Locale">
+        <MappingFragment StoreEntitySet="CaseStatus_Locale">
+          <ScalarProperty Name="cssID" ColumnName="cssID" />
+          <ScalarProperty Name="lclID" ColumnName="lclID" />
+          <ScalarProperty Name="cssName" ColumnName="cssName" />
+          <ScalarProperty Name="cssModifiedOn" ColumnName="cssModifiedOn" />
+          <ScalarProperty Name="cssModifiedBy" ColumnName="cssModifiedBy" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CaseType">
+      <EntityTypeMapping TypeName="CRMSUVITECHModel.CaseType">
+        <MappingFragment StoreEntitySet="CaseType">
+          <ScalarProperty Name="catID" ColumnName="catID" />
+          <ScalarProperty Name="slaID" ColumnName="slaID" />
+          <ScalarProperty Name="catName" ColumnName="catName" />
+          <ScalarProperty Name="catParrentID" ColumnName="catParrentID" />
+          <ScalarProperty Name="catOrder" ColumnName="catOrder" />
+          <ScalarProperty Name="catSLA" ColumnName="catSLA" />
+          <ScalarProperty Name="catLevel" ColumnName="catLevel" />
+          <ScalarProperty Name="catDialogue" ColumnName="catDialogue" />
+          <ScalarProperty Name="catActive" ColumnName="catActive" />
+          <ScalarProperty Name="catCreatedOn" ColumnName="catCreatedOn" />
+          <ScalarProperty Name="catCreatedBy" ColumnName="catCreatedBy" />
+          <ScalarProperty Name="catModifiedOn" ColumnName="catModifiedOn" />
+          <ScalarProperty Name="catModifiedBy" ColumnName="catModifiedBy" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Channels">
+      <EntityTypeMapping TypeName="CRMSUVITECHModel.Channels">
+        <MappingFragment StoreEntitySet="Channels">
+          <ScalarProperty Name="chnID" ColumnName="chnID" />
+          <ScalarProperty Name="chnName" ColumnName="chnName" />
+          <ScalarProperty Name="chnActive" ColumnName="chnActive" />
+          <ScalarProperty Name="chnIcon" ColumnName="chnIcon" />
+          <ScalarProperty Name="chnModifiedOn" ColumnName="chnModifiedOn" />
+          <ScalarProperty Name="chnModifiedBy" ColumnName="chnModifiedBy" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ContactLogs">
+      <EntityTypeMapping TypeName="CRMSUVITECHModel.ContactLogs">
+        <MappingFragment StoreEntitySet="ContactLogs">
+          <ScalarProperty Name="ctlID" ColumnName="ctlID" />
+          <ScalarProperty Name="ctaID" ColumnName="ctaID" />
+          <ScalarProperty Name="actID" ColumnName="actID" />
+          <ScalarProperty Name="cltID" ColumnName="cltID" />
+          <ScalarProperty Name="ctlNote" ColumnName="ctlNote" />
+          <ScalarProperty Name="ctlCreatedOn" ColumnName="ctlCreatedOn" />
+          <ScalarProperty Name="ctlCreatedBy" ColumnName="ctlCreatedBy" />
+          <ScalarProperty Name="ctlModifiedOn" ColumnName="ctlModifiedOn" />
+          <ScalarProperty Name="ctlModifiedBy" ColumnName="ctlModifiedBy" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Contacts">
+      <EntityTypeMapping TypeName="CRMSUVITECHModel.Contacts">
+        <MappingFragment StoreEntitySet="Contacts">
+          <ScalarProperty Name="ctaID" ColumnName="ctaID" />
+          <ScalarProperty Name="ctyID" ColumnName="ctyID" />
+          <ScalarProperty Name="ctaFullName" ColumnName="ctaFullName" />
+          <ScalarProperty Name="ctaFirstName" ColumnName="ctaFirstName" />
+          <ScalarProperty Name="ctaLastName" ColumnName="ctaLastName" />
+          <ScalarProperty Name="ctaAvatar" ColumnName="ctaAvatar" />
+          <ScalarProperty Name="ttlID" ColumnName="ttlID" />
+          <ScalarProperty Name="ctaDOB" ColumnName="ctaDOB" />
+          <ScalarProperty Name="gndID" ColumnName="gndID" />
+          <ScalarProperty Name="marID" ColumnName="marID" />
+          <ScalarProperty Name="ctaNote" ColumnName="ctaNote" />
+          <ScalarProperty Name="ctaRating" ColumnName="ctaRating" />
+          <ScalarProperty Name="ctaEmail" ColumnName="ctaEmail" />
+          <ScalarProperty Name="ctaWebSite" ColumnName="ctaWebSite" />
+          <ScalarProperty Name="ctaFacebook" ColumnName="ctaFacebook" />
+          <ScalarProperty Name="ctaTwitter" ColumnName="ctaTwitter" />
+          <ScalarProperty Name="ctaDoNotEmail" ColumnName="ctaDoNotEmail" />
+          <ScalarProperty Name="ctaDoNotPhone" ColumnName="ctaDoNotPhone" />
+          <ScalarProperty Name="ctaDoNotFax" ColumnName="ctaDoNotFax" />
+          <ScalarProperty Name="ctaDoNotPostalMail" ColumnName="ctaDoNotPostalMail" />
+          <ScalarProperty Name="ctaCareer" ColumnName="ctaCareer" />
+          <ScalarProperty Name="ctaEmo1" ColumnName="ctaEmo1" />
+          <ScalarProperty Name="ctaEmo2" ColumnName="ctaEmo2" />
+          <ScalarProperty Name="ctaEmo3" ColumnName="ctaEmo3" />
+          <ScalarProperty Name="ctaCreatedOn" ColumnName="ctaCreatedOn" />
+          <ScalarProperty Name="ctaCreatedBy" ColumnName="ctaCreatedBy" />
+          <ScalarProperty Name="ctaModifiedOn" ColumnName="ctaModifiedOn" />
+          <ScalarProperty Name="ctaModifiedBy" ColumnName="ctaModifiedBy" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ContactType">
+      <EntityTypeMapping TypeName="CRMSUVITECHModel.ContactType">
+        <MappingFragment StoreEntitySet="ContactType">
+          <ScalarProperty Name="ctyID" ColumnName="ctyID" />
+          <ScalarProperty Name="ctyActive" ColumnName="ctyActive" />
+          <ScalarProperty Name="ctyModifiedOn" ColumnName="ctyModifiedOn" />
+          <ScalarProperty Name="ctyModifiedBy" ColumnName="ctyModifiedBy" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ContactType_Locale">
+      <EntityTypeMapping TypeName="CRMSUVITECHModel.ContactType_Locale">
+        <MappingFragment StoreEntitySet="ContactType_Locale">
+          <ScalarProperty Name="ctyID" ColumnName="ctyID" />
+          <ScalarProperty Name="lclID" ColumnName="lclID" />
+          <ScalarProperty Name="ctyName" ColumnName="ctyName" />
+          <ScalarProperty Name="ctyModifiedOn" ColumnName="ctyModifiedOn" />
+          <ScalarProperty Name="ctyModifiedBy" ColumnName="ctyModifiedBy" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ContactViewLog">
+      <EntityTypeMapping TypeName="CRMSUVITECHModel.ContactViewLog">
+        <MappingFragment StoreEntitySet="ContactViewLog">
+          <ScalarProperty Name="ctvID" ColumnName="ctvID" />
+          <ScalarProperty Name="ctaID" ColumnName="ctaID" />
+          <ScalarProperty Name="usrID" ColumnName="usrID" />
+          <ScalarProperty Name="ctvCreatedOn" ColumnName="ctvCreatedOn" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="District">
+      <EntityTypeMapping TypeName="CRMSUVITECHModel.District">
+        <MappingFragment StoreEntitySet="District">
+          <ScalarProperty Name="dstID" ColumnName="dstID" />
+          <ScalarProperty Name="pvnID" ColumnName="pvnID" />
+          <ScalarProperty Name="dstActive" ColumnName="dstActive" />
+          <ScalarProperty Name="dstModifiedOn" ColumnName="dstModifiedOn" />
+          <ScalarProperty Name="dstModifiedBy" ColumnName="dstModifiedBy" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="District_Locale">
+      <EntityTypeMapping TypeName="CRMSUVITECHModel.District_Locale">
+        <MappingFragment StoreEntitySet="District_Locale">
+          <ScalarProperty Name="dstID" ColumnName="dstID" />
+          <ScalarProperty Name="lclID" ColumnName="lclID" />
+          <ScalarProperty Name="dstName" ColumnName="dstName" />
+          <ScalarProperty Name="dstModifiedOn" ColumnName="dstModifiedOn" />
+          <ScalarProperty Name="dstModifiedBy" ColumnName="dstModifiedBy" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Functions">
+      <EntityTypeMapping TypeName="CRMSUVITECHModel.Functions">
+        <MappingFragment StoreEntitySet="Functions">
+          <ScalarProperty Name="fncID" ColumnName="fncID" />
+          <ScalarProperty Name="fncName" ColumnName="fncName" />
+          <ScalarProperty Name="fncNote" ColumnName="fncNote" />
+          <ScalarProperty Name="fncActive" ColumnName="fncActive" />
+          <ScalarProperty Name="fncCreatedOn" ColumnName="fncCreatedOn" />
+          <ScalarProperty Name="fncCreatedBy" ColumnName="fncCreatedBy" />
+          <ScalarProperty Name="fncModifiedOn" ColumnName="fncModifiedOn" />
+          <ScalarProperty Name="fncModifiedBy" ColumnName="fncModifiedBy" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Genders">
+      <EntityTypeMapping TypeName="CRMSUVITECHModel.Genders">
+        <MappingFragment StoreEntitySet="Genders">
+          <ScalarProperty Name="gndID" ColumnName="gndID" />
+          <ScalarProperty Name="gndActive" ColumnName="gndActive" />
+          <ScalarProperty Name="gndModifiedOn" ColumnName="gndModifiedOn" />
+          <ScalarProperty Name="gndModifiedBy" ColumnName="gndModifiedBy" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Genders_Locale">
+      <EntityTypeMapping TypeName="CRMSUVITECHModel.Genders_Locale">
+        <MappingFragment StoreEntitySet="Genders_Locale">
+          <ScalarProperty Name="gndID" ColumnName="gndID" />
+          <ScalarProperty Name="lclID" ColumnName="lclID" />
+          <ScalarProperty Name="gndName" ColumnName="gndName" />
+          <ScalarProperty Name="gndModifiedOn" ColumnName="gndModifiedOn" />
+          <ScalarProperty Name="gndModifiedBy" ColumnName="gndModifiedBy" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Group_Role">
+      <EntityTypeMapping TypeName="CRMSUVITECHModel.Group_Role">
+        <MappingFragment StoreEntitySet="Group_Role">
+          <ScalarProperty Name="grpID" ColumnName="grpID" />
+          <ScalarProperty Name="rolID" ColumnName="rolID" />
+          <ScalarProperty Name="gprCreatedOn" ColumnName="gprCreatedOn" />
+          <ScalarProperty Name="gprCreatedBy" ColumnName="gprCreatedBy" />
+          <ScalarProperty Name="gprModifiedOn" ColumnName="gprModifiedOn" />
+          <ScalarProperty Name="gprModifiedBy" ColumnName="gprModifiedBy" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Groups">
+      <EntityTypeMapping TypeName="CRMSUVITECHModel.Groups">
+        <MappingFragment StoreEntitySet="Groups">
+          <ScalarProperty Name="grpID" ColumnName="grpID" />
+          <ScalarProperty Name="grpName" ColumnName="grpName" />
+          <ScalarProperty Name="grpActive" ColumnName="grpActive" />
+          <ScalarProperty Name="grpModifiedOn" ColumnName="grpModifiedOn" />
+          <ScalarProperty Name="grpModifiedBy" ColumnName="grpModifiedBy" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Locale">
+      <EntityTypeMapping TypeName="CRMSUVITECHModel.Locale">
+        <MappingFragment StoreEntitySet="Locale">
+          <ScalarProperty Name="lclID" ColumnName="lclID" />
+          <ScalarProperty Name="lclName" ColumnName="lclName" />
+          <ScalarProperty Name="lclActive" ColumnName="lclActive" />
+          <ScalarProperty Name="lclModifiedOn" ColumnName="lclModifiedOn" />
+          <ScalarProperty Name="lclModifiedBy" ColumnName="lclModifiedBy" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MailLog">
+      <EntityTypeMapping TypeName="CRMSUVITECHModel.MailLog">
+        <MappingFragment StoreEntitySet="MailLog">
+          <ScalarProperty Name="mlID" ColumnName="mlID" />
+          <ScalarProperty Name="casID" ColumnName="casID" />
+          <ScalarProperty Name="mailTo" ColumnName="mailTo" />
+          <ScalarProperty Name="mailCC" ColumnName="mailCC" />
+          <ScalarProperty Name="mailSubject" ColumnName="mailSubject" />
+          <ScalarProperty Name="mailBody" ColumnName="mailBody" />
+          <ScalarProperty Name="mailSending" ColumnName="mailSending" />
+          <ScalarProperty Name="mailStatus" ColumnName="mailStatus" />
+          <ScalarProperty Name="mailException" ColumnName="mailException" />
+          <ScalarProperty Name="mailType" ColumnName="mailType" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Notification">
+      <EntityTypeMapping TypeName="CRMSUVITECHModel.Notification">
+        <MappingFragment StoreEntitySet="Notification">
+          <ScalarProperty Name="notID" ColumnName="notID" />
+          <ScalarProperty Name="nttID" ColumnName="nttID" />
+          <ScalarProperty Name="refID" ColumnName="refID" />
+          <ScalarProperty Name="Sender" ColumnName="Sender" />
+          <ScalarProperty Name="Receiver" ColumnName="Receiver" />
+          <ScalarProperty Name="notNote" ColumnName="notNote" />
+          <ScalarProperty Name="notDesc" ColumnName="notDesc" />
+          <ScalarProperty Name="notRead" ColumnName="notRead" />
+          <ScalarProperty Name="notActive" ColumnName="notActive" />
+          <ScalarProperty Name="notCreatedOn" ColumnName="notCreatedOn" />
+          <ScalarProperty Name="notCreatedBy" ColumnName="notCreatedBy" />
+          <ScalarProperty Name="notModifiedOn" ColumnName="notModifiedOn" />
+          <ScalarProperty Name="notModifiedBy" ColumnName="notModifiedBy" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="NotificationType">
+      <EntityTypeMapping TypeName="CRMSUVITECHModel.NotificationType">
+        <MappingFragment StoreEntitySet="NotificationType">
+          <ScalarProperty Name="nttID" ColumnName="nttID" />
+          <ScalarProperty Name="nttName" ColumnName="nttName" />
+          <ScalarProperty Name="nttActive" ColumnName="nttActive" />
+          <ScalarProperty Name="nttModifiedOn" ColumnName="nttModifiedOn" />
+          <ScalarProperty Name="nttModifiedBy" ColumnName="nttModifiedBy" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Phones">
+      <EntityTypeMapping TypeName="CRMSUVITECHModel.Phones">
+        <MappingFragment StoreEntitySet="Phones">
+          <ScalarProperty Name="phnID" ColumnName="phnID" />
+          <ScalarProperty Name="ctaID" ColumnName="ctaID" />
+          <ScalarProperty Name="phtID" ColumnName="phtID" />
+          <ScalarProperty Name="phnNumber" ColumnName="phnNumber" />
+          <ScalarProperty Name="phnExt" ColumnName="phnExt" />
+          <ScalarProperty Name="phnNote" ColumnName="phnNote" />
+          <ScalarProperty Name="phnIsMain" ColumnName="phnIsMain" />
+          <ScalarProperty Name="phnActive" ColumnName="phnActive" />
+          <ScalarProperty Name="phnCreatedOn" ColumnName="phnCreatedOn" />
+          <ScalarProperty Name="phnCreatedBy" ColumnName="phnCreatedBy" />
+          <ScalarProperty Name="phnModifiedOn" ColumnName="phnModifiedOn" />
+          <ScalarProperty Name="phnModifiedBy" ColumnName="phnModifiedBy" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PhoneType">
+      <EntityTypeMapping TypeName="CRMSUVITECHModel.PhoneType">
+        <MappingFragment StoreEntitySet="PhoneType">
+          <ScalarProperty Name="phtID" ColumnName="phtID" />
+          <ScalarProperty Name="phtActive" ColumnName="phtActive" />
+          <ScalarProperty Name="phtModifiedOn" ColumnName="phtModifiedOn" />
+          <ScalarProperty Name="phtModifiedBy" ColumnName="phtModifiedBy" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PhoneType_Locale">
+      <EntityTypeMapping TypeName="CRMSUVITECHModel.PhoneType_Locale">
+        <MappingFragment StoreEntitySet="PhoneType_Locale">
+          <ScalarProperty Name="phtID" ColumnName="phtID" />
+          <ScalarProperty Name="lclID" ColumnName="lclID" />
+          <ScalarProperty Name="phtName" ColumnName="phtName" />
+          <ScalarProperty Name="phtModifiedOn" ColumnName="phtModifiedOn" />
+          <ScalarProperty Name="phtModifiedBy" ColumnName="phtModifiedBy" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Priority">
+      <EntityTypeMapping TypeName="CRMSUVITECHModel.Priority">
+        <MappingFragment StoreEntitySet="Priority">
+          <ScalarProperty Name="priID" ColumnName="priID" />
+          <ScalarProperty Name="priActive" ColumnName="priActive" />
+          <ScalarProperty Name="priModifiedOn" ColumnName="priModifiedOn" />
+          <ScalarProperty Name="priModifiedBy" ColumnName="priModifiedBy" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Priority_Locale">
+      <EntityTypeMapping TypeName="CRMSUVITECHModel.Priority_Locale">
+        <MappingFragment StoreEntitySet="Priority_Locale">
+          <ScalarProperty Name="priID" ColumnName="priID" />
+          <ScalarProperty Name="lclID" ColumnName="lclID" />
+          <ScalarProperty Name="priName" ColumnName="priName" />
+          <ScalarProperty Name="priModifiedOn" ColumnName="priModifiedOn" />
+          <ScalarProperty Name="priModifiedBy" ColumnName="priModifiedBy" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Province">
+      <EntityTypeMapping TypeName="CRMSUVITECHModel.Province">
+        <MappingFragment StoreEntitySet="Province">
+          <ScalarProperty Name="pvnID" ColumnName="pvnID" />
+          <ScalarProperty Name="pvnActive" ColumnName="pvnActive" />
+          <ScalarProperty Name="pvnModifiedOn" ColumnName="pvnModifiedOn" />
+          <ScalarProperty Name="pvnModifiedBy" ColumnName="pvnModifiedBy" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Province_Locale">
+      <EntityTypeMapping TypeName="CRMSUVITECHModel.Province_Locale">
+        <MappingFragment StoreEntitySet="Province_Locale">
+          <ScalarProperty Name="pvnID" ColumnName="pvnID" />
+          <ScalarProperty Name="lclID" ColumnName="lclID" />
+          <ScalarProperty Name="zneID" ColumnName="zneID" />
+          <ScalarProperty Name="pvnName" ColumnName="pvnName" />
+          <ScalarProperty Name="pvnModifiedOn" ColumnName="pvnModifiedOn" />
+          <ScalarProperty Name="pvnModifiedBy" ColumnName="pvnModifiedBy" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Province_Zone">
+      <EntityTypeMapping TypeName="CRMSUVITECHModel.Province_Zone">
+        <MappingFragment StoreEntitySet="Province_Zone">
+          <ScalarProperty Name="zneID" ColumnName="zneID" />
+          <ScalarProperty Name="zneName" ColumnName="zneName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Role_Functions">
+      <EntityTypeMapping TypeName="CRMSUVITECHModel.Role_Functions">
+        <MappingFragment StoreEntitySet="Role_Functions">
+          <ScalarProperty Name="rfID" ColumnName="rfID" />
+          <ScalarProperty Name="rolID" ColumnName="rolID" />
+          <ScalarProperty Name="fncID" ColumnName="fncID" />
+          <ScalarProperty Name="rfCreatedOn" ColumnName="rfCreatedOn" />
+          <ScalarProperty Name="rfCreatedBy" ColumnName="rfCreatedBy" />
+          <ScalarProperty Name="rfModifiedOn" ColumnName="rfModifiedOn" />
+          <ScalarProperty Name="rfModifiedBy" ColumnName="rfModifiedBy" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Roles">
+      <EntityTypeMapping TypeName="CRMSUVITECHModel.Roles">
+        <MappingFragment StoreEntitySet="Roles">
+          <ScalarProperty Name="rolID" ColumnName="rolID" />
+          <ScalarProperty Name="rolName" ColumnName="rolName" />
+          <ScalarProperty Name="rolNote" ColumnName="rolNote" />
+          <ScalarProperty Name="rolCreatedOn" ColumnName="rolCreatedOn" />
+          <ScalarProperty Name="rolCreatedBy" ColumnName="rolCreatedBy" />
+          <ScalarProperty Name="rolModifiedOn" ColumnName="rolModifiedOn" />
+          <ScalarProperty Name="rolModifiedBy" ColumnName="rolModifiedBy" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SubDistrict">
+      <EntityTypeMapping TypeName="CRMSUVITECHModel.SubDistrict">
+        <MappingFragment StoreEntitySet="SubDistrict">
+          <ScalarProperty Name="sdtID" ColumnName="sdtID" />
+          <ScalarProperty Name="dstID" ColumnName="dstID" />
+          <ScalarProperty Name="pvnID" ColumnName="pvnID" />
+          <ScalarProperty Name="sdtActive" ColumnName="sdtActive" />
+          <ScalarProperty Name="sdtModifiedOn" ColumnName="sdtModifiedOn" />
+          <ScalarProperty Name="sdtModifiedBy" ColumnName="sdtModifiedBy" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SubDistrict_Locale">
+      <EntityTypeMapping TypeName="CRMSUVITECHModel.SubDistrict_Locale">
+        <MappingFragment StoreEntitySet="SubDistrict_Locale">
+          <ScalarProperty Name="sdtID" ColumnName="sdtID" />
+          <ScalarProperty Name="lclID" ColumnName="lclID" />
+          <ScalarProperty Name="sdtName" ColumnName="sdtName" />
+          <ScalarProperty Name="dstID" ColumnName="dstID" />
+          <ScalarProperty Name="pvnID" ColumnName="pvnID" />
+          <ScalarProperty Name="sdtModifiedOn" ColumnName="sdtModifiedOn" />
+          <ScalarProperty Name="sdtModifiedBy" ColumnName="sdtModifiedBy" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="sysdiagrams">
+      <EntityTypeMapping TypeName="CRMSUVITECHModel.sysdiagrams">
+        <MappingFragment StoreEntitySet="sysdiagrams">
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+          <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="definition" ColumnName="definition" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Titles">
+      <EntityTypeMapping TypeName="CRMSUVITECHModel.Titles">
+        <MappingFragment StoreEntitySet="Titles">
+          <ScalarProperty Name="ttlID" ColumnName="ttlID" />
+          <ScalarProperty Name="ttlActive" ColumnName="ttlActive" />
+          <ScalarProperty Name="ttlModifiedOn" ColumnName="ttlModifiedOn" />
+          <ScalarProperty Name="ttlModifiedBy" ColumnName="ttlModifiedBy" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Titles_Locale">
+      <EntityTypeMapping TypeName="CRMSUVITECHModel.Titles_Locale">
+        <MappingFragment StoreEntitySet="Titles_Locale">
+          <ScalarProperty Name="ttlID" ColumnName="ttlID" />
+          <ScalarProperty Name="lclID" ColumnName="lclID" />
+          <ScalarProperty Name="ttlName" ColumnName="ttlName" />
+          <ScalarProperty Name="ttlModifiedOn" ColumnName="ttlModifiedOn" />
+          <ScalarProperty Name="ttlModifiedBy" ColumnName="ttlModifiedBy" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="User_Group">
+      <EntityTypeMapping TypeName="CRMSUVITECHModel.User_Group">
+        <MappingFragment StoreEntitySet="User_Group">
+          <ScalarProperty Name="grpID" ColumnName="grpID" />
+          <ScalarProperty Name="usrID" ColumnName="usrID" />
+          <ScalarProperty Name="usgCreatedOn" ColumnName="usgCreatedOn" />
+          <ScalarProperty Name="usgCreatedBy" ColumnName="usgCreatedBy" />
+          <ScalarProperty Name="usgModifiedOn" ColumnName="usgModifiedOn" />
+          <ScalarProperty Name="usgModifiedBy" ColumnName="usgModifiedBy" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="User_Role">
+      <EntityTypeMapping TypeName="CRMSUVITECHModel.User_Role">
+        <MappingFragment StoreEntitySet="User_Role">
+          <ScalarProperty Name="urolID" ColumnName="urolID" />
+          <ScalarProperty Name="rolID" ColumnName="rolID" />
+          <ScalarProperty Name="usrID" ColumnName="usrID" />
+          <ScalarProperty Name="urCreatedOn" ColumnName="urCreatedOn" />
+          <ScalarProperty Name="urCreatedBy" ColumnName="urCreatedBy" />
+          <ScalarProperty Name="urModifiedOn" ColumnName="urModifiedOn" />
+          <ScalarProperty Name="urModifiedBy" ColumnName="urModifiedBy" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Users">
+      <EntityTypeMapping TypeName="CRMSUVITECHModel.Users">
+        <MappingFragment StoreEntitySet="Users">
+          <ScalarProperty Name="usrID" ColumnName="usrID" />
+          <ScalarProperty Name="grpID" ColumnName="grpID" />
+          <ScalarProperty Name="usrUsername" ColumnName="usrUsername" />
+          <ScalarProperty Name="usrPassword" ColumnName="usrPassword" />
+          <ScalarProperty Name="usrFirstName" ColumnName="usrFirstName" />
+          <ScalarProperty Name="usrLastName" ColumnName="usrLastName" />
+          <ScalarProperty Name="usrDepartment" ColumnName="usrDepartment" />
+          <ScalarProperty Name="usrAvatar" ColumnName="usrAvatar" />
+          <ScalarProperty Name="usrIsActive" ColumnName="usrIsActive" />
+          <ScalarProperty Name="usrCreatedOn" ColumnName="usrCreatedOn" />
+          <ScalarProperty Name="usrCreatedBy" ColumnName="usrCreatedBy" />
+          <ScalarProperty Name="usrModifiedOn" ColumnName="usrModifiedOn" />
+          <ScalarProperty Name="usrModifiedBy" ColumnName="usrModifiedBy" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="sp_ActivityChannelSummary" FunctionName="CRMSUVITECHModel.Store.sp_ActivityChannelSummary">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="CRMSUVITECHModel.sp_ActivityChannelSummary_Result">
+          <ScalarProperty Name="Total" ColumnName="Total" />
+          <ScalarProperty Name="chnName" ColumnName="chnName" />
+          <ScalarProperty Name="chnIcon" ColumnName="chnIcon" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="CRMSUVITECHModel.Store.sp_alterdiagram" />
+    <FunctionImportMapping FunctionImportName="sp_ContactAutoComplete" FunctionName="CRMSUVITECHModel.Store.sp_ContactAutoComplete">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="CRMSUVITECHModel.sp_ContactAutoComplete_Result">
+          <ScalarProperty Name="name" ColumnName="name" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="CRMSUVITECHModel.Store.sp_creatediagram" />
+    <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="CRMSUVITECHModel.Store.sp_dropdiagram" />
+    <FunctionImportMapping FunctionImportName="sp_Get_Casepending" FunctionName="CRMSUVITECHModel.Store.sp_Get_Casepending">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="CRMSUVITECHModel.sp_Get_Casepending_Result">
+          <ScalarProperty Name="OVERSLA" ColumnName="OVERSLA" />
+          <ScalarProperty Name="INOVERSLA" ColumnName="INOVERSLA" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_Get_Casepending_ByAgent" FunctionName="CRMSUVITECHModel.Store.sp_Get_Casepending_ByAgent">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="CRMSUVITECHModel.sp_Get_Casepending_ByAgent_Result">
+          <ScalarProperty Name="OVERSLA" ColumnName="OVERSLA" />
+          <ScalarProperty Name="INOVERSLA" ColumnName="INOVERSLA" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_GetAssetBySerialNo" FunctionName="CRMSUVITECHModel.Store.sp_GetAssetBySerialNo" />
+    <FunctionImportMapping FunctionImportName="sp_GetCaseDetailById" FunctionName="CRMSUVITECHModel.Store.sp_GetCaseDetailById">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="CRMSUVITECHModel.sp_GetCaseDetailById_Result">
+          <ScalarProperty Name="CASID" ColumnName="CASID" />
+          <ScalarProperty Name="CONTACTID" ColumnName="CONTACTID" />
+          <ScalarProperty Name="CONTACTCODE" ColumnName="CONTACTCODE" />
+          <ScalarProperty Name="CASEIDNO" ColumnName="CASEIDNO" />
+          <ScalarProperty Name="ctaID" ColumnName="ctaID" />
+          <ScalarProperty Name="CTAFULLNAME" ColumnName="CTAFULLNAME" />
+          <ScalarProperty Name="CTAEMO1" ColumnName="CTAEMO1" />
+          <ScalarProperty Name="CTAEMO2" ColumnName="CTAEMO2" />
+          <ScalarProperty Name="CTAEMO3" ColumnName="CTAEMO3" />
+          <ScalarProperty Name="PHONES" ColumnName="PHONES" />
+          <ScalarProperty Name="CTAEMAIL" ColumnName="CTAEMAIL" />
+          <ScalarProperty Name="CTAFACEBOOK" ColumnName="CTAFACEBOOK" />
+          <ScalarProperty Name="CTATWITTER" ColumnName="CTATWITTER" />
+          <ScalarProperty Name="ADDRESS" ColumnName="ADDRESS" />
+          <ScalarProperty Name="CASSUMMARY" ColumnName="CASSUMMARY" />
+          <ScalarProperty Name="CASESTATUS" ColumnName="CASESTATUS" />
+          <ScalarProperty Name="TALKTIME" ColumnName="TALKTIME" />
+          <ScalarProperty Name="CALLBACKTYPE" ColumnName="CALLBACKTYPE" />
+          <ScalarProperty Name="CALLBACKNUMBER" ColumnName="CALLBACKNUMBER" />
+          <ScalarProperty Name="CREATEBY" ColumnName="CREATEBY" />
+          <ScalarProperty Name="CREATEDATE" ColumnName="CREATEDATE" />
+          <ScalarProperty Name="MODIFIEDBY" ColumnName="MODIFIEDBY" />
+          <ScalarProperty Name="MODIFIEDDATE" ColumnName="MODIFIEDDATE" />
+          <ScalarProperty Name="CLOSEDATE" ColumnName="CLOSEDATE" />
+          <ScalarProperty Name="DUEDATE" ColumnName="DUEDATE" />
+          <ScalarProperty Name="REMARK" ColumnName="REMARK" />
+          <ScalarProperty Name="casFav" ColumnName="casFav" />
+          <ScalarProperty Name="casOwnerID" ColumnName="casOwnerID" />
+          <ScalarProperty Name="casCreatedBy" ColumnName="casCreatedBy" />
+          <ScalarProperty Name="assignTo" ColumnName="assignTo" />
+          <ScalarProperty Name="dispatchTo" ColumnName="dispatchTo" />
+          <ScalarProperty Name="casDueDate" ColumnName="casDueDate" />
+          <ScalarProperty Name="OWNERNAME" ColumnName="OWNERNAME" />
+          <ScalarProperty Name="chnName" ColumnName="chnName" />
+          <ScalarProperty Name="casIDLevel1" ColumnName="casIDLevel1" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_GetCaseDetailTimeline" FunctionName="CRMSUVITECHModel.Store.sp_GetCaseDetailTimeline">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="CRMSUVITECHModel.sp_GetCaseDetailTimeline_Result">
+          <ScalarProperty Name="cslID" ColumnName="cslID" />
+          <ScalarProperty Name="casID" ColumnName="casID" />
+          <ScalarProperty Name="actID" ColumnName="actID" />
+          <ScalarProperty Name="cltID" ColumnName="cltID" />
+          <ScalarProperty Name="cslNote" ColumnName="cslNote" />
+          <ScalarProperty Name="cslDesc" ColumnName="cslDesc" />
+          <ScalarProperty Name="cslCreatedOn" ColumnName="cslCreatedOn" />
+          <ScalarProperty Name="cslCreatedBy" ColumnName="cslCreatedBy" />
+          <ScalarProperty Name="cslModifiedOn" ColumnName="cslModifiedOn" />
+          <ScalarProperty Name="cslModifiedBy" ColumnName="cslModifiedBy" />
+          <ScalarProperty Name="cltName" ColumnName="cltName" />
+          <ScalarProperty Name="CreatedByName" ColumnName="CreatedByName" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_GetCaseFavourite" FunctionName="CRMSUVITECHModel.Store.sp_GetCaseFavourite">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="CRMSUVITECHModel.sp_GetCaseFavourite_Result">
+          <ScalarProperty Name="casID" ColumnName="casID" />
+          <ScalarProperty Name="actID" ColumnName="actID" />
+          <ScalarProperty Name="ctaID" ColumnName="ctaID" />
+          <ScalarProperty Name="casIDName" ColumnName="casIDName" />
+          <ScalarProperty Name="casParentID" ColumnName="casParentID" />
+          <ScalarProperty Name="casDuration" ColumnName="casDuration" />
+          <ScalarProperty Name="casDueDate" ColumnName="casDueDate" />
+          <ScalarProperty Name="casPrevDueDate" ColumnName="casPrevDueDate" />
+          <ScalarProperty Name="casIDLevel1" ColumnName="casIDLevel1" />
+          <ScalarProperty Name="casIDLevel2" ColumnName="casIDLevel2" />
+          <ScalarProperty Name="casIDLevel3" ColumnName="casIDLevel3" />
+          <ScalarProperty Name="casIDLevel4" ColumnName="casIDLevel4" />
+          <ScalarProperty Name="casIDLevel5" ColumnName="casIDLevel5" />
+          <ScalarProperty Name="casIDLevel6" ColumnName="casIDLevel6" />
+          <ScalarProperty Name="casIDLevel7" ColumnName="casIDLevel7" />
+          <ScalarProperty Name="casIDLevel8" ColumnName="casIDLevel8" />
+          <ScalarProperty Name="casLevel1" ColumnName="casLevel1" />
+          <ScalarProperty Name="casLevel2" ColumnName="casLevel2" />
+          <ScalarProperty Name="casLevel3" ColumnName="casLevel3" />
+          <ScalarProperty Name="casLevel4" ColumnName="casLevel4" />
+          <ScalarProperty Name="casLevel5" ColumnName="casLevel5" />
+          <ScalarProperty Name="casLevel6" ColumnName="casLevel6" />
+          <ScalarProperty Name="casLevel7" ColumnName="casLevel7" />
+          <ScalarProperty Name="casLevel8" ColumnName="casLevel8" />
+          <ScalarProperty Name="casIDSummary" ColumnName="casIDSummary" />
+          <ScalarProperty Name="casSummary" ColumnName="casSummary" />
+          <ScalarProperty Name="casNote" ColumnName="casNote" />
+          <ScalarProperty Name="cbtID" ColumnName="cbtID" />
+          <ScalarProperty Name="cbcID" ColumnName="cbcID" />
+          <ScalarProperty Name="CallbackInfo" ColumnName="CallbackInfo" />
+          <ScalarProperty Name="CallbackDT" ColumnName="CallbackDT" />
+          <ScalarProperty Name="casSLA" ColumnName="casSLA" />
+          <ScalarProperty Name="priID" ColumnName="priID" />
+          <ScalarProperty Name="cssID" ColumnName="cssID" />
+          <ScalarProperty Name="casEmo" ColumnName="casEmo" />
+          <ScalarProperty Name="casGroupID" ColumnName="casGroupID" />
+          <ScalarProperty Name="casOwnerID" ColumnName="casOwnerID" />
+          <ScalarProperty Name="casCreatedOn" ColumnName="casCreatedOn" />
+          <ScalarProperty Name="casCreatedBy" ColumnName="casCreatedBy" />
+          <ScalarProperty Name="casModifiedOn" ColumnName="casModifiedOn" />
+          <ScalarProperty Name="casModifiedBy" ColumnName="casModifiedBy" />
+          <ScalarProperty Name="casFav" ColumnName="casFav" />
+          <ScalarProperty Name="assignTo" ColumnName="assignTo" />
+          <ScalarProperty Name="casRemindID" ColumnName="casRemindID" />
+          <ScalarProperty Name="casRemindStatus" ColumnName="casRemindStatus" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_GetCaseFollowUp" FunctionName="CRMSUVITECHModel.Store.sp_GetCaseFollowUp" />
+    <FunctionImportMapping FunctionImportName="sp_GetCaseList" FunctionName="CRMSUVITECHModel.Store.sp_GetCaseList">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="CRMSUVITECHModel.sp_GetCaseList_Result">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="CaseId" ColumnName="CaseId" />
+          <ScalarProperty Name="casSummary" ColumnName="casSummary" />
+          <ScalarProperty Name="casSLA" ColumnName="casSLA" />
+          <ScalarProperty Name="casCreatedOn" ColumnName="casCreatedOn" />
+          <ScalarProperty Name="chnID" ColumnName="chnID" />
+          <ScalarProperty Name="Channels" ColumnName="Channels" />
+          <ScalarProperty Name="CaseStatus" ColumnName="CaseStatus" />
+          <ScalarProperty Name="NameContact" ColumnName="NameContact" />
+          <ScalarProperty Name="CaseDuration" ColumnName="CaseDuration" />
+          <ScalarProperty Name="ISOVERSLA" ColumnName="ISOVERSLA" />
+          <ScalarProperty Name="casSLADate" ColumnName="casSLADate" />
+          <ScalarProperty Name="casOwnerID" ColumnName="casOwnerID" />
+          <ScalarProperty Name="Owner" ColumnName="Owner" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_getCaseQuery" FunctionName="CRMSUVITECHModel.Store.sp_getCaseQuery">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="CRMSUVITECHModel.sp_getCaseQuery_Result">
+          <ScalarProperty Name="casID" ColumnName="casID" />
+          <ScalarProperty Name="casIDName" ColumnName="casIDName" />
+          <ScalarProperty Name="casSummary" ColumnName="casSummary" />
+          <ScalarProperty Name="cssName" ColumnName="cssName" />
+          <ScalarProperty Name="casCreatedOn" ColumnName="casCreatedOn" />
+          <ScalarProperty Name="casCreatedByName" ColumnName="casCreatedByName" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_getCasesOverSLA" FunctionName="CRMSUVITECHModel.Store.sp_getCasesOverSLA">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="CRMSUVITECHModel.sp_getCasesOverSLA_Result">
+          <ScalarProperty Name="casID" ColumnName="casID" />
+          <ScalarProperty Name="casIDName" ColumnName="casIDName" />
+          <ScalarProperty Name="casSummary" ColumnName="casSummary" />
+          <ScalarProperty Name="casDueDate" ColumnName="casDueDate" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_getContactCommonDetail" FunctionName="CRMSUVITECHModel.Store.sp_getContactCommonDetail">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="CRMSUVITECHModel.sp_getContactCommonDetail_Result">
+          <ScalarProperty Name="mainPhone" ColumnName="mainPhone" />
+          <ScalarProperty Name="mainPhoneID" ColumnName="mainPhoneID" />
+          <ScalarProperty Name="Phone" ColumnName="Phone" />
+          <ScalarProperty Name="PhoneID" ColumnName="PhoneID" />
+          <ScalarProperty Name="mainAddress" ColumnName="mainAddress" />
+          <ScalarProperty Name="mainAddressID" ColumnName="mainAddressID" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="AddressID" ColumnName="AddressID" />
+          <ScalarProperty Name="ctaEmail" ColumnName="ctaEmail" />
+          <ScalarProperty Name="ctaDOB" ColumnName="ctaDOB" />
+          <ScalarProperty Name="gndID" ColumnName="gndID" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_getContactLogTimeline" FunctionName="CRMSUVITECHModel.Store.sp_getContactLogTimeline">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="CRMSUVITECHModel.sp_getContactLogTimeline_Result">
+          <ScalarProperty Name="casID" ColumnName="casID" />
+          <ScalarProperty Name="casIDName" ColumnName="casIDName" />
+          <ScalarProperty Name="casDueDate" ColumnName="casDueDate" />
+          <ScalarProperty Name="cssID" ColumnName="cssID" />
+          <ScalarProperty Name="cbtID" ColumnName="cbtID" />
+          <ScalarProperty Name="Lognote" ColumnName="Lognote" />
+          <ScalarProperty Name="cltName" ColumnName="cltName" />
+          <ScalarProperty Name="Created" ColumnName="Created" />
+          <ScalarProperty Name="Owner" ColumnName="Owner" />
+          <ScalarProperty Name="usrAvatar" ColumnName="usrAvatar" />
+          <ScalarProperty Name="LogType" ColumnName="LogType" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_getContactSearch" FunctionName="CRMSUVITECHModel.Store.sp_getContactSearch">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="CRMSUVITECHModel.sp_getContactSearch_Result">
+          <ScalarProperty Name="ctaID" ColumnName="ctaID" />
+          <ScalarProperty Name="ctaFullName" ColumnName="ctaFullName" />
+          <ScalarProperty Name="ctaEmail" ColumnName="ctaEmail" />
+          <ScalarProperty Name="ctaAvatar" ColumnName="ctaAvatar" />
+          <ScalarProperty Name="adrSummary" ColumnName="adrSummary" />
+          <ScalarProperty Name="phnMain" ColumnName="phnMain" />
+          <ScalarProperty Name="phnOther" ColumnName="phnOther" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_GetContactViewLog" FunctionName="CRMSUVITECHModel.Store.sp_GetContactViewLog">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="CRMSUVITECHModel.sp_GetContactViewLog_Result">
+          <ScalarProperty Name="ctaID" ColumnName="ctaID" />
+          <ScalarProperty Name="ctaFullName" ColumnName="ctaFullName" />
+          <ScalarProperty Name="ctaAvatar" ColumnName="ctaAvatar" />
+          <ScalarProperty Name="phnMain" ColumnName="phnMain" />
+          <ScalarProperty Name="phnOther" ColumnName="phnOther" />
+          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_GetGroupUser" FunctionName="CRMSUVITECHModel.Store.sp_GetGroupUser">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="CRMSUVITECHModel.sp_GetGroupUser_Result">
+          <ScalarProperty Name="grpID" ColumnName="grpID" />
+          <ScalarProperty Name="grpName" ColumnName="grpName" />
+          <ScalarProperty Name="grpActive" ColumnName="grpActive" />
+          <ScalarProperty Name="grpModifiedOn" ColumnName="grpModifiedOn" />
+          <ScalarProperty Name="grpModifiedBy" ColumnName="grpModifiedBy" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_GetInboundContact" FunctionName="CRMSUVITECHModel.Store.sp_GetInboundContact">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="CRMSUVITECHModel.sp_GetInboundContact_Result">
+          <ScalarProperty Name="ctaID" ColumnName="ctaID" />
+          <ScalarProperty Name="ctaFullName" ColumnName="ctaFullName" />
+          <ScalarProperty Name="ctaEmo1" ColumnName="ctaEmo1" />
+          <ScalarProperty Name="ctaEmo2" ColumnName="ctaEmo2" />
+          <ScalarProperty Name="ctaEmo3" ColumnName="ctaEmo3" />
+          <ScalarProperty Name="ctaAvatar" ColumnName="ctaAvatar" />
+          <ScalarProperty Name="phnNumber" ColumnName="phnNumber" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_getLastActivityContact" FunctionName="CRMSUVITECHModel.Store.sp_getLastActivityContact">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="CRMSUVITECHModel.sp_getLastActivityContact_Result">
+          <ScalarProperty Name="ctaID" ColumnName="ctaID" />
+          <ScalarProperty Name="ctaFullName" ColumnName="ctaFullName" />
+          <ScalarProperty Name="ctaEmail" ColumnName="ctaEmail" />
+          <ScalarProperty Name="ctaAvatar" ColumnName="ctaAvatar" />
+          <ScalarProperty Name="adrSummary" ColumnName="adrSummary" />
+          <ScalarProperty Name="phnMain" ColumnName="phnMain" />
+          <ScalarProperty Name="phnOther" ColumnName="phnOther" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_GetLastCases" FunctionName="CRMSUVITECHModel.Store.sp_GetLastCases">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="CRMSUVITECHModel.sp_GetLastCases_Result">
+          <ScalarProperty Name="casID" ColumnName="casID" />
+          <ScalarProperty Name="casIDName" ColumnName="casIDName" />
+          <ScalarProperty Name="casSummary" ColumnName="casSummary" />
+          <ScalarProperty Name="cssID" ColumnName="cssID" />
+          <ScalarProperty Name="casCreatedOn" ColumnName="casCreatedOn" />
+          <ScalarProperty Name="CreatedByName" ColumnName="CreatedByName" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_GetMailContentInfo" FunctionName="CRMSUVITECHModel.Store.sp_GetMailContentInfo">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="CRMSUVITECHModel.sp_GetMailContentInfo_Result">
+          <ScalarProperty Name="CASSUMMARY" ColumnName="CASSUMMARY" />
+          <ScalarProperty Name="CASIDNAME" ColumnName="CASIDNAME" />
+          <ScalarProperty Name="CTAFULLNAME" ColumnName="CTAFULLNAME" />
+          <ScalarProperty Name="PHNNUMBER" ColumnName="PHNNUMBER" />
+          <ScalarProperty Name="OWENERNAME" ColumnName="OWENERNAME" />
+          <ScalarProperty Name="CASDUEDATE" ColumnName="CASDUEDATE" />
+          <ScalarProperty Name="CASNOTE" ColumnName="CASNOTE" />
+          <ScalarProperty Name="adrSummary" ColumnName="adrSummary" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_getMailRemind" FunctionName="CRMSUVITECHModel.Store.sp_getMailRemind" />
+    <FunctionImportMapping FunctionImportName="sp_GetNotification" FunctionName="CRMSUVITECHModel.Store.sp_GetNotification">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="CRMSUVITECHModel.sp_GetNotification_Result">
+          <ScalarProperty Name="notID" ColumnName="notID" />
+          <ScalarProperty Name="nttID" ColumnName="nttID" />
+          <ScalarProperty Name="refID" ColumnName="refID" />
+          <ScalarProperty Name="Sender" ColumnName="Sender" />
+          <ScalarProperty Name="Receiver" ColumnName="Receiver" />
+          <ScalarProperty Name="notNote" ColumnName="notNote" />
+          <ScalarProperty Name="notDesc" ColumnName="notDesc" />
+          <ScalarProperty Name="notRead" ColumnName="notRead" />
+          <ScalarProperty Name="notActive" ColumnName="notActive" />
+          <ScalarProperty Name="notCreatedOn" ColumnName="notCreatedOn" />
+          <ScalarProperty Name="notCreatedBy" ColumnName="notCreatedBy" />
+          <ScalarProperty Name="notModifiedOn" ColumnName="notModifiedOn" />
+          <ScalarProperty Name="notModifiedBy" ColumnName="notModifiedBy" />
+          <ScalarProperty Name="nttName" ColumnName="nttName" />
+          <ScalarProperty Name="casDueDate" ColumnName="casDueDate" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_GetNotification_Total" FunctionName="CRMSUVITECHModel.Store.sp_GetNotification_Total" />
+    <FunctionImportMapping FunctionImportName="sp_GetStatus" FunctionName="CRMSUVITECHModel.Store.sp_GetStatus">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="CRMSUVITECHModel.sp_GetStatus_Result">
+          <ScalarProperty Name="cssID" ColumnName="cssID" />
+          <ScalarProperty Name="cssName" ColumnName="cssName" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_GetUser" FunctionName="CRMSUVITECHModel.Store.sp_GetUser">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="CRMSUVITECHModel.sp_GetUser_Result">
+          <ScalarProperty Name="usrID" ColumnName="usrID" />
+          <ScalarProperty Name="grpID" ColumnName="grpID" />
+          <ScalarProperty Name="usrUsername" ColumnName="usrUsername" />
+          <ScalarProperty Name="usrPassword" ColumnName="usrPassword" />
+          <ScalarProperty Name="usrFirstName" ColumnName="usrFirstName" />
+          <ScalarProperty Name="usrLastName" ColumnName="usrLastName" />
+          <ScalarProperty Name="usrDepartment" ColumnName="usrDepartment" />
+          <ScalarProperty Name="usrAvatar" ColumnName="usrAvatar" />
+          <ScalarProperty Name="usrIsActive" ColumnName="usrIsActive" />
+          <ScalarProperty Name="usrCreatedOn" ColumnName="usrCreatedOn" />
+          <ScalarProperty Name="usrCreatedBy" ColumnName="usrCreatedBy" />
+          <ScalarProperty Name="usrModifiedOn" ColumnName="usrModifiedOn" />
+          <ScalarProperty Name="usrModifiedBy" ColumnName="usrModifiedBy" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_getUserProfile" FunctionName="CRMSUVITECHModel.Store.sp_getUserProfile">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="CRMSUVITECHModel.sp_getUserProfile_Result">
+          <ScalarProperty Name="usrID" ColumnName="usrID" />
+          <ScalarProperty Name="usrUsername" ColumnName="usrUsername" />
+          <ScalarProperty Name="usrPassword" ColumnName="usrPassword" />
+          <ScalarProperty Name="usrFirstName" ColumnName="usrFirstName" />
+          <ScalarProperty Name="usrLastName" ColumnName="usrLastName" />
+          <ScalarProperty Name="usrDepartment" ColumnName="usrDepartment" />
+          <ScalarProperty Name="usrAvatar" ColumnName="usrAvatar" />
+          <ScalarProperty Name="grpName" ColumnName="grpName" />
+          <ScalarProperty Name="TotalCases" ColumnName="TotalCases" />
+          <ScalarProperty Name="TotalPending" ColumnName="TotalPending" />
+          <ScalarProperty Name="TotalClosed" ColumnName="TotalClosed" />
+          <ScalarProperty Name="TotalContacts" ColumnName="TotalContacts" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_getUserProfileTimeline" FunctionName="CRMSUVITECHModel.Store.sp_getUserProfileTimeline">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="CRMSUVITECHModel.sp_getUserProfileTimeline_Result">
+          <ScalarProperty Name="logType" ColumnName="logType" />
+          <ScalarProperty Name="logCSS" ColumnName="logCSS" />
+          <ScalarProperty Name="logText" ColumnName="logText" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="logCreated" ColumnName="logCreated" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition" FunctionName="CRMSUVITECHModel.Store.sp_helpdiagramdefinition">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="CRMSUVITECHModel.sp_helpdiagramdefinition_Result">
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="definition" ColumnName="definition" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_helpdiagrams" FunctionName="CRMSUVITECHModel.Store.sp_helpdiagrams">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="CRMSUVITECHModel.sp_helpdiagrams_Result">
+          <ScalarProperty Name="Database" ColumnName="Database" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Owner" ColumnName="Owner" />
+          <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="CRMSUVITECHModel.Store.sp_renamediagram" />
+    <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="CRMSUVITECHModel.Store.sp_upgraddiagrams" />
+    <FunctionImportMapping FunctionImportName="st_CategorySearch" FunctionName="CRMSUVITECHModel.Store.st_CategorySearch" />
+    <FunctionImportMapping FunctionImportName="ST_CATEGORYSEARCH_ROOT" FunctionName="CRMSUVITECHModel.Store.ST_CATEGORYSEARCH_ROOT" />
+    <FunctionImportMapping FunctionImportName="st_Get_Dashbord_CaseStatus" FunctionName="CRMSUVITECHModel.Store.st_Get_Dashbord_CaseStatus">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="CRMSUVITECHModel.st_Get_Dashbord_CaseStatus_Result">
+          <ScalarProperty Name="OPENS" ColumnName="OPENS" />
+          <ScalarProperty Name="TOTAL" ColumnName="TOTAL" />
+          <ScalarProperty Name="INITIATE" ColumnName="INITIATE" />
+          <ScalarProperty Name="NEUTRALIZED" ColumnName="NEUTRALIZED" />
+          <ScalarProperty Name="CLOSED" ColumnName="CLOSED" />
+          <ScalarProperty Name="CANCEL" ColumnName="CANCEL" />
+          <ScalarProperty Name="JOBCANCEL" ColumnName="JOBCANCEL" />
+          <ScalarProperty Name="FAILED" ColumnName="FAILED" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="st_GET_UserRole_ById" FunctionName="CRMSUVITECHModel.Store.st_GET_UserRole_ById">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="CRMSUVITECHModel.st_GET_UserRole_ById_Result">
+          <ScalarProperty Name="rolID" ColumnName="rolID" />
+          <ScalarProperty Name="rolName" ColumnName="rolName" />
+          <ScalarProperty Name="fncName" ColumnName="fncName" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="st_GetUserInGroup_ById" FunctionName="CRMSUVITECHModel.Store.st_GetUserInGroup_ById">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="CRMSUVITECHModel.st_GetUserInGroup_ById_Result">
+          <ScalarProperty Name="usrID" ColumnName="usrID" />
+          <ScalarProperty Name="usrUsername" ColumnName="usrUsername" />
+          <ScalarProperty Name="FullName" ColumnName="FullName" />
+          <ScalarProperty Name="grpName" ColumnName="grpName" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <EntitySetMapping Name="CaseAttachFiles">
+      <EntityTypeMapping TypeName="CRMSUVITECHModel.CaseAttachFiles">
+        <MappingFragment StoreEntitySet="CaseAttachFiles">
+          <ScalarProperty Name="cafCreatedBy" ColumnName="cafCreatedBy" />
+          <ScalarProperty Name="cafCreatedOn" ColumnName="cafCreatedOn" />
+          <ScalarProperty Name="cafFileType" ColumnName="cafFileType" />
+          <ScalarProperty Name="cafFilename" ColumnName="cafFilename" />
+          <ScalarProperty Name="casID" ColumnName="casID" />
+          <ScalarProperty Name="cafID" ColumnName="cafID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Cases">
+      <EntityTypeMapping TypeName="CRMSUVITECHModel.Cases">
+        <MappingFragment StoreEntitySet="Cases">
+          <ScalarProperty Name="casRemindStatus" ColumnName="casRemindStatus" />
+          <ScalarProperty Name="casRemindID" ColumnName="casRemindID" />
+          <ScalarProperty Name="assignTo" ColumnName="assignTo" />
+          <ScalarProperty Name="casFav" ColumnName="casFav" />
+          <ScalarProperty Name="casModifiedBy" ColumnName="casModifiedBy" />
+          <ScalarProperty Name="casModifiedOn" ColumnName="casModifiedOn" />
+          <ScalarProperty Name="casCreatedBy" ColumnName="casCreatedBy" />
+          <ScalarProperty Name="casCreatedOn" ColumnName="casCreatedOn" />
+          <ScalarProperty Name="casOwnerID" ColumnName="casOwnerID" />
+          <ScalarProperty Name="casGroupID" ColumnName="casGroupID" />
+          <ScalarProperty Name="casEmo" ColumnName="casEmo" />
+          <ScalarProperty Name="cssID" ColumnName="cssID" />
+          <ScalarProperty Name="priID" ColumnName="priID" />
+          <ScalarProperty Name="casSLA" ColumnName="casSLA" />
+          <ScalarProperty Name="CallbackDT" ColumnName="CallbackDT" />
+          <ScalarProperty Name="CallbackInfo" ColumnName="CallbackInfo" />
+          <ScalarProperty Name="cbcID" ColumnName="cbcID" />
+          <ScalarProperty Name="cbtID" ColumnName="cbtID" />
+          <ScalarProperty Name="casNote" ColumnName="casNote" />
+          <ScalarProperty Name="casSummary" ColumnName="casSummary" />
+          <ScalarProperty Name="casIDSummary" ColumnName="casIDSummary" />
+          <ScalarProperty Name="casLevel8" ColumnName="casLevel8" />
+          <ScalarProperty Name="casLevel7" ColumnName="casLevel7" />
+          <ScalarProperty Name="casLevel6" ColumnName="casLevel6" />
+          <ScalarProperty Name="casLevel5" ColumnName="casLevel5" />
+          <ScalarProperty Name="casLevel4" ColumnName="casLevel4" />
+          <ScalarProperty Name="casLevel3" ColumnName="casLevel3" />
+          <ScalarProperty Name="casLevel2" ColumnName="casLevel2" />
+          <ScalarProperty Name="casLevel1" ColumnName="casLevel1" />
+          <ScalarProperty Name="casIDLevel8" ColumnName="casIDLevel8" />
+          <ScalarProperty Name="casIDLevel7" ColumnName="casIDLevel7" />
+          <ScalarProperty Name="casIDLevel6" ColumnName="casIDLevel6" />
+          <ScalarProperty Name="casIDLevel5" ColumnName="casIDLevel5" />
+          <ScalarProperty Name="casIDLevel4" ColumnName="casIDLevel4" />
+          <ScalarProperty Name="casIDLevel3" ColumnName="casIDLevel3" />
+          <ScalarProperty Name="casIDLevel2" ColumnName="casIDLevel2" />
+          <ScalarProperty Name="casIDLevel1" ColumnName="casIDLevel1" />
+          <ScalarProperty Name="casPrevDueDate" ColumnName="casPrevDueDate" />
+          <ScalarProperty Name="casDueDate" ColumnName="casDueDate" />
+          <ScalarProperty Name="casDuration" ColumnName="casDuration" />
+          <ScalarProperty Name="casParentID" ColumnName="casParentID" />
+          <ScalarProperty Name="casIDName" ColumnName="casIDName" />
+          <ScalarProperty Name="ctaID" ColumnName="ctaID" />
+          <ScalarProperty Name="actID" ColumnName="actID" />
+          <ScalarProperty Name="casID" ColumnName="casID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="sp_getNewCaseList" FunctionName="CRMSUVITECHModel.Store.sp_getNewCaseList">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="CRMSUVITECHModel.sp_getNewCaseList_Result">
+          <ScalarProperty Name="casID" ColumnName="casID" />
+          <ScalarProperty Name="actID" ColumnName="actID" />
+          <ScalarProperty Name="ctaID" ColumnName="ctaID" />
+          <ScalarProperty Name="casIDName" ColumnName="casIDName" />
+          <ScalarProperty Name="casParentID" ColumnName="casParentID" />
+          <ScalarProperty Name="casDuration" ColumnName="casDuration" />
+          <ScalarProperty Name="casDueDate" ColumnName="casDueDate" />
+          <ScalarProperty Name="casPrevDueDate" ColumnName="casPrevDueDate" />
+          <ScalarProperty Name="casIDLevel1" ColumnName="casIDLevel1" />
+          <ScalarProperty Name="casIDLevel2" ColumnName="casIDLevel2" />
+          <ScalarProperty Name="casIDLevel3" ColumnName="casIDLevel3" />
+          <ScalarProperty Name="casIDLevel4" ColumnName="casIDLevel4" />
+          <ScalarProperty Name="casIDLevel5" ColumnName="casIDLevel5" />
+          <ScalarProperty Name="casIDLevel6" ColumnName="casIDLevel6" />
+          <ScalarProperty Name="casIDLevel7" ColumnName="casIDLevel7" />
+          <ScalarProperty Name="casIDLevel8" ColumnName="casIDLevel8" />
+          <ScalarProperty Name="casLevel1" ColumnName="casLevel1" />
+          <ScalarProperty Name="casLevel2" ColumnName="casLevel2" />
+          <ScalarProperty Name="casLevel3" ColumnName="casLevel3" />
+          <ScalarProperty Name="casLevel4" ColumnName="casLevel4" />
+          <ScalarProperty Name="casLevel5" ColumnName="casLevel5" />
+          <ScalarProperty Name="casLevel6" ColumnName="casLevel6" />
+          <ScalarProperty Name="casLevel7" ColumnName="casLevel7" />
+          <ScalarProperty Name="casLevel8" ColumnName="casLevel8" />
+          <ScalarProperty Name="casIDSummary" ColumnName="casIDSummary" />
+          <ScalarProperty Name="casSummary" ColumnName="casSummary" />
+          <ScalarProperty Name="casNote" ColumnName="casNote" />
+          <ScalarProperty Name="cbtID" ColumnName="cbtID" />
+          <ScalarProperty Name="cbcID" ColumnName="cbcID" />
+          <ScalarProperty Name="CallbackInfo" ColumnName="CallbackInfo" />
+          <ScalarProperty Name="CallbackDT" ColumnName="CallbackDT" />
+          <ScalarProperty Name="casSLA" ColumnName="casSLA" />
+          <ScalarProperty Name="priID" ColumnName="priID" />
+          <ScalarProperty Name="cssID" ColumnName="cssID" />
+          <ScalarProperty Name="casEmo" ColumnName="casEmo" />
+          <ScalarProperty Name="casGroupID" ColumnName="casGroupID" />
+          <ScalarProperty Name="casOwnerID" ColumnName="casOwnerID" />
+          <ScalarProperty Name="casCreatedOn" ColumnName="casCreatedOn" />
+          <ScalarProperty Name="casCreatedBy" ColumnName="casCreatedBy" />
+          <ScalarProperty Name="casModifiedOn" ColumnName="casModifiedOn" />
+          <ScalarProperty Name="casModifiedBy" ColumnName="casModifiedBy" />
+          <ScalarProperty Name="casFav" ColumnName="casFav" />
+          <ScalarProperty Name="assignTo" ColumnName="assignTo" />
+          <ScalarProperty Name="casRemindID" ColumnName="casRemindID" />
+          <ScalarProperty Name="casRemindStatus" ColumnName="casRemindStatus" />
+          <ScalarProperty Name="casCreatedByName" ColumnName="casCreatedByName" />
+          <ScalarProperty Name="cbcName" ColumnName="cbcName" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <EntitySetMapping Name="CallBackChannel">
+      <EntityTypeMapping TypeName="CRMSUVITECHModel.CallBackChannel">
+        <MappingFragment StoreEntitySet="CallBackChannel">
+          <ScalarProperty Name="cbcName" ColumnName="cbcName" />
+          <ScalarProperty Name="cbcID" ColumnName="cbcID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CaseRemindFlows">
+      <EntityTypeMapping TypeName="CRMSUVITECHModel.CaseRemindFlows">
+        <MappingFragment StoreEntitySet="CaseRemindFlows">
+          <ScalarProperty Name="crfFlowMinute" ColumnName="crfFlowMinute" />
+          <ScalarProperty Name="crfFlowPhone" ColumnName="crfFlowPhone" />
+          <ScalarProperty Name="crfFlowName" ColumnName="crfFlowName" />
+          <ScalarProperty Name="crfID" ColumnName="crfID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="EngineerSupport">
+      <EntityTypeMapping TypeName="CRMSUVITECHModel.EngineerSupport">
+        <MappingFragment StoreEntitySet="EngineerSupport">
+          <ScalarProperty Name="espActive" ColumnName="espActive" />
+          <ScalarProperty Name="espModifiedBy" ColumnName="espModifiedBy" />
+          <ScalarProperty Name="espModifiedOn" ColumnName="espModifiedOn" />
+          <ScalarProperty Name="espCreatedBy" ColumnName="espCreatedBy" />
+          <ScalarProperty Name="espCreatedOn" ColumnName="espCreatedOn" />
+          <ScalarProperty Name="espPhone" ColumnName="espPhone" />
+          <ScalarProperty Name="espEmail" ColumnName="espEmail" />
+          <ScalarProperty Name="espEnd" ColumnName="espEnd" />
+          <ScalarProperty Name="espStart" ColumnName="espStart" />
+          <ScalarProperty Name="espID" ColumnName="espID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

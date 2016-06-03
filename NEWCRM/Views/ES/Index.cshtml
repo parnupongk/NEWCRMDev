@@ -1,0 +1,209 @@
+﻿@{    
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section Scripts 
+{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('.field-date').datepicker({ autoclose: true, todayHighlight: true, format: "dd/mm/yyyy" });
+            getList();
+        });
+
+        function resetForm() {
+            $("#frm .form-control").val('');
+        }
+
+        function submitForm() {
+            $("#frm").submit();
+        }
+
+        function frmSuccess() {
+            openSuccessDialog("Save data success");
+            resetForm();
+            getList();
+        }
+
+        function frmFailure(ref) {
+            //alert(ref.responseText);
+            $(ref.responseText).focus();
+        }
+
+        function getList()
+        {
+            var url = "@Url.Action("getList","ES")";
+            $.post(url, function (data) {
+                $("#getList").empty().html(data);
+                $('#datatable1').DataTable({
+                    "dom": 'lCfrtip',
+                    "order": [[0, "asc"]],
+                    "language": {
+                        "lengthMenu": '_MENU_ entries per page',
+                        "search": '<i class="fa fa-search"></i>',
+                        "paginate": {
+                            "previous": '<i class="fa fa-angle-left"></i>',
+                            "next": '<i class="fa fa-angle-right"></i>'
+                        }
+                    }
+                });
+            });
+        }
+
+        function espEdit(id)
+        {
+            var url = "@Url.Action("Edit","ES")/" + id;
+            $('#formModal').modal({ backdrop: 'static' });                       
+            $('#frmcontent').load(url, function () {
+                $('.field-date').datepicker({ autoclose: true, todayHighlight: true, format: "dd/mm/yyyy" });
+                $('#formModal').modal('show');
+                $('#btnSave').unbind('click');
+                $('#btnSave').click(function () {
+                    $.ajax({
+                        type: "POST",
+                        cache: false,
+                        url: '@Url.Action("EditSave", "ES")',
+                        data: $('#frmcontent').serialize(),
+                        success: function (result) {
+                            $('#formModal').modal('toggle');
+                            getList();
+                        },
+                        error: function (xhr, status, error) {
+                            //alert(xhr.responseText);
+                            $("#frmcontent " + xhr.responseText).focus();
+                        }
+                    });
+                });
+            });
+        }
+
+        function espRemove(id)
+        {
+            $('#modalConfirm').modal({ backdrop: 'static' });
+            $('#modalConfirm').modal('show');
+            $('#btnOK').unbind('click');
+            $('#btnOK').click(function () {
+                var url = "@Url.Action("Remove","ES")/" + id;
+                $.ajax({
+                    cache: false,
+                    url: url,
+                    success: function (result) {
+                        $('#modalConfirm').modal('toggle');
+                        getList();
+                    },
+                    error: function (xhr, status, error) {
+                        openErrorDialog(xhr.responseText);
+                    }
+                });
+            });
+        }
+    </script>
+}
+<div class="section-body">
+    <div class="card">
+        <div class="card-head">
+            <header>Create New</header>
+        </div>
+        <div class="card-body">
+            @using (Ajax.BeginForm("AddNew", "ES",
+                new AjaxOptions { HttpMethod = "post", OnSuccess = "frmSuccess", OnFailure = "frmFailure" },
+                new { id = "frm", @class = "form", novalidate = "novalidate", autocomplete = "off" }))
+            {                
+                <div class="row">
+                    <div class="col-lg-3">
+                        <div class="form-group control-width-normal">
+                            <div class="input-group date field-date">
+                                <div class="input-group-content">
+                                    <input type="text" class="form-control" id="espStart" name="espStart" />
+                                    <label>Date Start</label>
+                                </div>
+                                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="form-group control-width-normal">
+                            <div class="input-group date field-date">
+                                <div class="input-group-content">
+                                    <input type="text" class="form-control" id="espEnd" name="espEnd" />
+                                    <label>Date End</label>
+                                </div>
+                                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="form-group">
+                            <div class="input-group">
+                                <div class="input-group-content">
+                                    <input type="text" class="form-control" id="espEmail" name="espEmail" />
+                                    <label for="espEmail">Email</label>
+                                </div>
+                                <span class="input-group-addon"><span class="glyphicon glyphicon-envelope fa-lg"></span></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="form-group">
+                            <div class="input-group">
+                                <div class="input-group-content">
+                                    <input type="text" class="form-control" id="espPhone" name="espPhone" />
+                                    <label for="espPhone">Phone</label>
+                                </div>
+                                <span class="input-group-addon"><span class="glyphicon glyphicon-phone-alt fa-lg"></span></span>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            }
+        </div>
+        <div class="card-actionbar">
+            <div class="card-actionbar-row">
+                <a href="javascript:void(0);" class="btn btn-flat btn-default ink-reaction" onclick="resetForm()">Cancel</a>
+                <a href="javascript:void(0);" class="btn btn-flat btn-info ink-reaction" onclick="submitForm()">Save</a>
+            </div>
+        </div>
+    </div>
+    <div class="card">
+        <div id="getList" class="card-body"></div>
+    </div>
+</div>
+<!-- BEGIN FORM MODAL MARKUP -->
+<div class="modal fade" id="formModal" tabindex="-1" role="dialog" aria-labelledby="formModalLabel" aria-hidden="true">
+    <div class="modal-dialog" style="width: 95%">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">Edit</h4>
+            </div>
+            <div class="card-body">
+                <form class="form" role="form" id="frmcontent" autocomplete="off" novalidate="novalidate"></form>
+                <div class="form-group floating-label">
+                    <div class="modal-footer" style="border-top: none;">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                        <button type="button" class="btn btn-primary" id="btnSave">Save</button>                        
+                    </div>                    
+                </div>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<div class="modal fade" id="modalConfirm" tabindex="-1" role="dialog" aria-labelledby="formModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">          
+            <div class="card-body">
+                <h2><i class="fa fa-trash-o fa-fw"></i>Please confirm for remove?</h2>
+                <div class="form-group floating-label">
+                    <div class="modal-footer" style="border-top: none;">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                        <button type="button" class="btn btn-danger" id="btnOK"> OK </button>                        
+                    </div>                    
+                </div>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>

@@ -1,0 +1,45 @@
+﻿@model IEnumerable<NEWCRM.Models.CaseAttachFiles>
+@if (Model.Count() > 0)
+{
+    <div class="card-body no-padding">
+        <ul class="list divider-full-bleed">
+            @foreach (var item in Model)
+            {            
+                <li class="tile" style="height: 3em; line-height: 3em;">
+                    <a class="tile-content ink-reaction" href="/Uploadfiles/@item.cafFilename" target="_blank">
+                        <div class="tile-icon">
+                            @if (item.cafFileType.Equals("image/jpeg"))
+                            {
+                                <i class="fa fa-file-photo-o fa-fw"></i>
+                            }
+                            else if (item.cafFileType.Equals("application/x-zip-compressed"))
+                            {
+                                <i class="fa fa-file-archive-o fa-fw"></i>
+                            }
+                            else if (item.cafFileType.Contains("wordprocess"))
+                            {
+                                <i class="fa fa-file-word-o fa-fw"></i>
+                            }
+                            else if (item.cafFileType.Contains("spreadsheet"))
+                            {
+                                <i class="fa fa-file-excel-o fa-fw"></i>
+                            }
+                            else if (item.cafFileType.Equals("application/pdf"))
+                            {
+                                <i class="fa fa-file-pdf-o fa-fw"></i>
+                            }
+                            else
+                            {
+                                <i class="fa fa-file-code-o fa-fw"></i>
+                            }
+                        </div>
+                        <div class="tile-text">@item.cafFilename</div>
+                    </a>
+                    <a class="btn btn-flat ink-reaction" href="javascript:;" onclick="removeFile('@item.cafID')">
+                        <i class="fa fa-trash"></i>
+                    </a>
+                </li>               
+            }
+        </ul>
+    </div>
+}

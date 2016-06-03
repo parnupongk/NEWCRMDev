@@ -1,0 +1,102 @@
+﻿@using NEWCRM.Models;
+@if (NEWCRM.Common.AppUtils.Session.NewCase != null && NEWCRM.Common.AppUtils.Session.NewCase.Count() > 0)
+{
+    <div class="row">
+        <div class="col-lg-1">&nbsp;</div>
+        <div class="col-lg-10 text-info">            
+            <h2>New Cases</h2>
+        </div>    
+    </div>
+    <div class="row">
+        <div class="col-lg-1">&nbsp;</div>
+        <div class="col-lg-10">
+            <div class="card">
+                <div class="card-body no-padding">                  
+                    <ul class="list divider-full-bleed style-default-light">
+                        @foreach (var newcase in NEWCRM.Common.AppUtils.Session.NewCase)
+                        {                            
+                            <li class="tile" style="line-height: 24px; height: 0; border: 0;">
+                                <div class="tile-content">
+                                    <div class="tile-text">
+                                        @if (newcase.cssID == 2 || newcase.cssID == 4 || newcase.cssID == 5)
+                                        {
+                                            <i class="fa fa-unlock fa-fw" data-toggle="tooltip" data-placement="top" data-original-title="Opened"></i>
+                                        }
+                                        else
+                                        { 
+                                            <i class="fa fa-lock fa-fw" data-toggle="tooltip" data-placement="top" data-original-title="Closed"></i>
+                                        }
+                                        @Html.Raw(newcase.casSummary)
+                                        <small style="padding-left:25px">@newcase.casNote</small>
+                                        <span class="text-sm" style="padding-left:25px">Created by @newcase.casCreatedByName @newcase.casCreatedOn</span>
+                                        @if(newcase.casDueDate.HasValue) 
+                                        {
+                                            string _mg = (newcase.cbtID.HasValue && newcase.cbcID > 0 ? "180px" : "10px");                                                                                            
+                                            <div class="stick-bottom-right text-danger text-sm" style="margin: 0 @_mg 12px 0;"><span><i class="fa fa-clock-o fa-fw"></i> Due Date @newcase.casDueDate</span></div>
+                                        }
+                                    </div>
+                                    <div class="btn-group stick-top-right">
+                                        <a href="javascript:;" onclick="newcase_favbyid('@newcase.id')" class="btn btn-icon-toggle btn-default">
+                                            @if (newcase.casFav)
+                                            {
+                                                <i class="md md-favorite" title="Remove Favorite"></i>
+                                            }
+                                            else
+                                            {
+                                                <i class="md md-favorite-outline" title="Add Favorite"></i>
+                                            }
+                                        </a>
+                                        <a href="javascript:;" onclick="newcase_removebyid('@newcase.id');" title="Remove" class="btn btn-icon-toggle btn-default" @*data-toggle="tooltip" data-placement="top" data-original-title="Remove this case"*@><i class="md md-clear"></i></a>
+                                    </div>
+                                    @if (newcase.cbtID.HasValue && newcase.cbcID > 0)
+                                    {
+                                        <div class="stick-bottom-right" style="margin: 0 10px 12px 0;"><span class="opacity-75"><i class="md md-phone-forwarded" data-toggle="tooltip" data-placement="top" data-original-title="Call Back" style="vertical-align: middle"></i>&nbsp;@newcase.cbcName&nbsp;@newcase.CallbackInfo</span></div>
+                                    }
+                                </div>
+                            </li>
+                        }
+                    </ul>
+                </div>
+                <!--end .card-body -->
+            </div>
+        </div>
+    </div>
+    
+    <div class="row">
+        <div class="col-lg-1">&nbsp;</div>
+        <div class="col-lg-10">
+            <div class="pull-right">
+                @using (Ajax.BeginForm("NewCaseEndCall", "Case",
+                                        new AjaxOptions { HttpMethod = "post", OnBegin = "beginEndCall", OnSuccess = "successEndCall", OnFailure = "failureEndCall" },
+                                        new { id = "frm-endcall", @class = "form" }))
+                {
+                    <!--end .btn-group -->
+                    <div class="btn-group" data-toggle="buttons">
+                        <label class="btn ink-reaction btn-flat btn-lg btn-primary" style="border-radius: 999px;" data-toggle="tooltip" data-placement="top" data-original-title="Angry">
+                            <input type="radio" name="casEmoticon" id="casEmoticon1" value="1" />
+                            <img src="~/Images/emoticon/emo32-1.png" class="emo32" />
+                        </label>
+                        <label class="btn ink-reaction btn-flat btn-lg btn-primary" style="border-radius: 999px;" data-toggle="tooltip" data-placement="top" data-original-title="Upset">
+                            <input type="radio" name="casEmoticon" id="casEmoticon2" value="2" />
+                            <img src="~/Images/emoticon/emo32-2.png" class="emo32" />
+                        </label>
+                        <label class="btn ink-reaction btn-flat btn-lg btn-primary active" style="border-radius: 999px;" data-toggle="tooltip" data-placement="top" data-original-title="Normal">
+                            <input type="radio" name="casEmoticon" id="casEmoticon3" value="3" checked="checked" />
+                            <img src="~/Images/emoticon/emo32-3.png" class="emo32" />
+                        </label>
+                        <label class="btn ink-reaction btn-flat btn-lg btn-primary" style="border-radius: 999px;" data-toggle="tooltip" data-placement="top" data-original-title="Good">
+                            <input type="radio" name="casEmoticon" id="casEmoticon4" value="4" />
+                            <img src="~/Images/emoticon/emo32-4.png" class="emo32" />
+                        </label>
+                        <label class="btn ink-reaction btn-flat btn-lg btn-primary" style="border-radius: 999px;" data-toggle="tooltip" data-placement="top" data-original-title="Happy">
+                            <input type="radio" name="casEmoticon" id="casEmoticon5" value="5" />
+                            <img src="~/Images/emoticon/emo32-5.png" class="emo32" />
+                        </label>
+                    </div>
+                    <button type="submit" class="btn ink-reaction btn-floating-action btn-lg btn-danger" data-toggle="tooltip" data-placement="top" data-original-title="End Call"><i class="md md-call-end"></i></button>
+                }
+            </div>
+        </div>
+    </div>
+}
+@*<script src="~/Content/js/core/source/AppVendor.js"></script>*@

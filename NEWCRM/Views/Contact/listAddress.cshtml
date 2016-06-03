@@ -1,0 +1,29 @@
+﻿@model NEWCRM.Models.ContactViewModel
+
+<script>
+    $(".fa-save").hide();
+    $(".adr").on('click', function () {
+        prev_val = $(this).val();
+        $(this).removeClass("nledt_adr").addClass("nledt_adr_f");
+    }).on('blur', function () {
+        $(this).val(prev_val);
+        $(this).removeClass("nledt_adr_f").addClass("nledt_adr");
+    }).keypress(function (e) {
+        if (e.which == 13) {
+            prev_val = $(this).val();
+            $(e.target).blur();
+            //$(this).removeClass("nledt_f").addClass("nledt");            
+            dosave_adr(this);
+        }
+    });
+</script>
+
+
+@foreach (var item in Model.list_address)
+{     
+    <span class="text-medium">
+        <textarea class="adr nledt_adr" data-table="Address" data-ID="@item.adrID" data-toggle="tooltip" data-placement="left" data-original-title="Click for changed">@item.adrSummary</textarea>        
+        <i class="fa fa-save fa-fw"></i>
+    </span>
+}
+<script src="~/Content/js/core/source/AppVendor.js"></script>

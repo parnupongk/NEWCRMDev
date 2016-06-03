@@ -1,0 +1,181 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="rptCase" targetNamespace="http://tempuri.org/rptCase.xsd" xmlns:mstns="http://tempuri.org/rptCase.xsd" xmlns="http://tempuri.org/rptCase.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections>
+          <Connection AppSettingsObjectName="Web.config" AppSettingsPropertyName="DefaultConnection" ConnectionStringObject="" IsAppSettingsProperty="true" Modifier="Assembly" Name="DefaultConnection (Web.config)" ParameterPrefix="@" PropertyReference="AppConfig.System.Configuration.ConfigurationManager.0.ConnectionStrings.DefaultConnection.ConnectionString" Provider="System.Data.SqlClient" />
+        </Connections>
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="rptCase" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="rptCase" msprop:Generator_UserDSName="rptCase">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="uspReportCaseLevel" msprop:Generator_TableClassName="uspReportCaseLevelDataTable" msprop:Generator_TableVarName="tableuspReportCaseLevel" msprop:Generator_TablePropName="uspReportCaseLevel" msprop:Generator_RowDeletingName="uspReportCaseLevelRowDeleting" msprop:Generator_RowChangingName="uspReportCaseLevelRowChanging" msprop:Generator_RowEvHandlerName="uspReportCaseLevelRowChangeEventHandler" msprop:Generator_RowDeletedName="uspReportCaseLevelRowDeleted" msprop:Generator_UserTableName="uspReportCaseLevel" msprop:Generator_RowChangedName="uspReportCaseLevelRowChanged" msprop:Generator_RowEvArgName="uspReportCaseLevelRowChangeEvent" msprop:Generator_RowClassName="uspReportCaseLevelRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="chnID" msprop:Generator_ColumnVarNameInTable="columnchnID" msprop:Generator_ColumnPropNameInRow="chnID" msprop:Generator_ColumnPropNameInTable="chnIDColumn" msprop:Generator_UserColumnName="chnID">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="2" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="cssName" msprop:Generator_ColumnVarNameInTable="columncssName" msprop:Generator_ColumnPropNameInRow="cssName" msprop:Generator_ColumnPropNameInTable="cssNameColumn" msprop:Generator_UserColumnName="cssName">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="100" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="casCreatedByName" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columncasCreatedByName" msprop:Generator_ColumnPropNameInRow="casCreatedByName" msprop:Generator_ColumnPropNameInTable="casCreatedByNameColumn" msprop:Generator_UserColumnName="casCreatedByName" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="511" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="casOwnerByName" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columncasOwnerByName" msprop:Generator_ColumnPropNameInRow="casOwnerByName" msprop:Generator_ColumnPropNameInTable="casOwnerByNameColumn" msprop:Generator_UserColumnName="casOwnerByName" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="511" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="casID" msdata:ReadOnly="true" msdata:AutoIncrement="true" msprop:Generator_ColumnVarNameInTable="columncasID" msprop:Generator_ColumnPropNameInRow="casID" msprop:Generator_ColumnPropNameInTable="casIDColumn" msprop:Generator_UserColumnName="casID" type="xs:int" />
+              <xs:element name="actID" msprop:Generator_ColumnVarNameInTable="columnactID" msprop:Generator_ColumnPropNameInRow="actID" msprop:Generator_ColumnPropNameInTable="actIDColumn" msprop:Generator_UserColumnName="actID" type="xs:int" />
+              <xs:element name="ctaID" msprop:Generator_ColumnVarNameInTable="columnctaID" msprop:Generator_ColumnPropNameInRow="ctaID" msprop:Generator_ColumnPropNameInTable="ctaIDColumn" msprop:Generator_UserColumnName="ctaID" type="xs:int" />
+              <xs:element name="casIDName" msprop:Generator_ColumnVarNameInTable="columncasIDName" msprop:Generator_ColumnPropNameInRow="casIDName" msprop:Generator_ColumnPropNameInTable="casIDNameColumn" msprop:Generator_UserColumnName="casIDName" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="12" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="casParentID" msprop:Generator_ColumnVarNameInTable="columncasParentID" msprop:Generator_ColumnPropNameInRow="casParentID" msprop:Generator_ColumnPropNameInTable="casParentIDColumn" msprop:Generator_UserColumnName="casParentID" type="xs:int" minOccurs="0" />
+              <xs:element name="casDuration" msprop:Generator_ColumnVarNameInTable="columncasDuration" msprop:Generator_ColumnPropNameInRow="casDuration" msprop:Generator_ColumnPropNameInTable="casDurationColumn" msprop:Generator_UserColumnName="casDuration" type="xs:int" minOccurs="0" />
+              <xs:element name="casDueDate" msprop:Generator_ColumnVarNameInTable="columncasDueDate" msprop:Generator_ColumnPropNameInRow="casDueDate" msprop:Generator_ColumnPropNameInTable="casDueDateColumn" msprop:Generator_UserColumnName="casDueDate" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="casPrevDueDate" msprop:Generator_ColumnVarNameInTable="columncasPrevDueDate" msprop:Generator_ColumnPropNameInRow="casPrevDueDate" msprop:Generator_ColumnPropNameInTable="casPrevDueDateColumn" msprop:Generator_UserColumnName="casPrevDueDate" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="casIDLevel1" msprop:Generator_ColumnVarNameInTable="columncasIDLevel1" msprop:Generator_ColumnPropNameInRow="casIDLevel1" msprop:Generator_ColumnPropNameInTable="casIDLevel1Column" msprop:Generator_UserColumnName="casIDLevel1" type="xs:int" minOccurs="0" />
+              <xs:element name="casIDLevel2" msprop:Generator_ColumnVarNameInTable="columncasIDLevel2" msprop:Generator_ColumnPropNameInRow="casIDLevel2" msprop:Generator_ColumnPropNameInTable="casIDLevel2Column" msprop:Generator_UserColumnName="casIDLevel2" type="xs:int" minOccurs="0" />
+              <xs:element name="casIDLevel3" msprop:Generator_ColumnVarNameInTable="columncasIDLevel3" msprop:Generator_ColumnPropNameInRow="casIDLevel3" msprop:Generator_ColumnPropNameInTable="casIDLevel3Column" msprop:Generator_UserColumnName="casIDLevel3" type="xs:int" minOccurs="0" />
+              <xs:element name="casIDLevel4" msprop:Generator_ColumnVarNameInTable="columncasIDLevel4" msprop:Generator_ColumnPropNameInRow="casIDLevel4" msprop:Generator_ColumnPropNameInTable="casIDLevel4Column" msprop:Generator_UserColumnName="casIDLevel4" type="xs:int" minOccurs="0" />
+              <xs:element name="casIDLevel5" msprop:Generator_ColumnVarNameInTable="columncasIDLevel5" msprop:Generator_ColumnPropNameInRow="casIDLevel5" msprop:Generator_ColumnPropNameInTable="casIDLevel5Column" msprop:Generator_UserColumnName="casIDLevel5" type="xs:int" minOccurs="0" />
+              <xs:element name="casIDLevel6" msprop:Generator_ColumnVarNameInTable="columncasIDLevel6" msprop:Generator_ColumnPropNameInRow="casIDLevel6" msprop:Generator_ColumnPropNameInTable="casIDLevel6Column" msprop:Generator_UserColumnName="casIDLevel6" type="xs:int" minOccurs="0" />
+              <xs:element name="casIDLevel7" msprop:Generator_ColumnVarNameInTable="columncasIDLevel7" msprop:Generator_ColumnPropNameInRow="casIDLevel7" msprop:Generator_ColumnPropNameInTable="casIDLevel7Column" msprop:Generator_UserColumnName="casIDLevel7" type="xs:int" minOccurs="0" />
+              <xs:element name="casIDLevel8" msprop:Generator_ColumnVarNameInTable="columncasIDLevel8" msprop:Generator_ColumnPropNameInRow="casIDLevel8" msprop:Generator_ColumnPropNameInTable="casIDLevel8Column" msprop:Generator_UserColumnName="casIDLevel8" type="xs:int" minOccurs="0" />
+              <xs:element name="casLevel1" msprop:Generator_ColumnVarNameInTable="columncasLevel1" msprop:Generator_ColumnPropNameInRow="casLevel1" msprop:Generator_ColumnPropNameInTable="casLevel1Column" msprop:Generator_UserColumnName="casLevel1" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="255" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="casLevel2" msprop:Generator_ColumnVarNameInTable="columncasLevel2" msprop:Generator_ColumnPropNameInRow="casLevel2" msprop:Generator_ColumnPropNameInTable="casLevel2Column" msprop:Generator_UserColumnName="casLevel2" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="255" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="casLevel3" msprop:Generator_ColumnVarNameInTable="columncasLevel3" msprop:Generator_ColumnPropNameInRow="casLevel3" msprop:Generator_ColumnPropNameInTable="casLevel3Column" msprop:Generator_UserColumnName="casLevel3" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="255" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="casLevel4" msprop:Generator_ColumnVarNameInTable="columncasLevel4" msprop:Generator_ColumnPropNameInRow="casLevel4" msprop:Generator_ColumnPropNameInTable="casLevel4Column" msprop:Generator_UserColumnName="casLevel4" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="255" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="casLevel5" msprop:Generator_ColumnVarNameInTable="columncasLevel5" msprop:Generator_ColumnPropNameInRow="casLevel5" msprop:Generator_ColumnPropNameInTable="casLevel5Column" msprop:Generator_UserColumnName="casLevel5" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="255" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="casLevel6" msprop:Generator_ColumnVarNameInTable="columncasLevel6" msprop:Generator_ColumnPropNameInRow="casLevel6" msprop:Generator_ColumnPropNameInTable="casLevel6Column" msprop:Generator_UserColumnName="casLevel6" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="255" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="casLevel7" msprop:Generator_ColumnVarNameInTable="columncasLevel7" msprop:Generator_ColumnPropNameInRow="casLevel7" msprop:Generator_ColumnPropNameInTable="casLevel7Column" msprop:Generator_UserColumnName="casLevel7" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="255" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="casLevel8" msprop:Generator_ColumnVarNameInTable="columncasLevel8" msprop:Generator_ColumnPropNameInRow="casLevel8" msprop:Generator_ColumnPropNameInTable="casLevel8Column" msprop:Generator_UserColumnName="casLevel8" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="255" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="casIDSummary" msprop:Generator_ColumnVarNameInTable="columncasIDSummary" msprop:Generator_ColumnPropNameInRow="casIDSummary" msprop:Generator_ColumnPropNameInTable="casIDSummaryColumn" msprop:Generator_UserColumnName="casIDSummary" type="xs:int" />
+              <xs:element name="casSummary" msprop:Generator_ColumnVarNameInTable="columncasSummary" msprop:Generator_ColumnPropNameInRow="casSummary" msprop:Generator_ColumnPropNameInTable="casSummaryColumn" msprop:Generator_UserColumnName="casSummary" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="255" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="casNote" msprop:Generator_ColumnVarNameInTable="columncasNote" msprop:Generator_ColumnPropNameInRow="casNote" msprop:Generator_ColumnPropNameInTable="casNoteColumn" msprop:Generator_UserColumnName="casNote" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="1073741823" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="cbtID" msprop:Generator_ColumnVarNameInTable="columncbtID" msprop:Generator_ColumnPropNameInRow="cbtID" msprop:Generator_ColumnPropNameInTable="cbtIDColumn" msprop:Generator_UserColumnName="cbtID" type="xs:int" minOccurs="0" />
+              <xs:element name="cbcID" msprop:Generator_ColumnVarNameInTable="columncbcID" msprop:Generator_ColumnPropNameInRow="cbcID" msprop:Generator_ColumnPropNameInTable="cbcIDColumn" msprop:Generator_UserColumnName="cbcID" type="xs:int" minOccurs="0" />
+              <xs:element name="CallbackInfo" msprop:Generator_ColumnVarNameInTable="columnCallbackInfo" msprop:Generator_ColumnPropNameInRow="CallbackInfo" msprop:Generator_ColumnPropNameInTable="CallbackInfoColumn" msprop:Generator_UserColumnName="CallbackInfo" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="255" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="CallbackDT" msprop:Generator_ColumnVarNameInTable="columnCallbackDT" msprop:Generator_ColumnPropNameInRow="CallbackDT" msprop:Generator_ColumnPropNameInTable="CallbackDTColumn" msprop:Generator_UserColumnName="CallbackDT" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="casSLA" msprop:Generator_ColumnVarNameInTable="columncasSLA" msprop:Generator_ColumnPropNameInRow="casSLA" msprop:Generator_ColumnPropNameInTable="casSLAColumn" msprop:Generator_UserColumnName="casSLA" type="xs:int" minOccurs="0" />
+              <xs:element name="priID" msprop:Generator_ColumnVarNameInTable="columnpriID" msprop:Generator_ColumnPropNameInRow="priID" msprop:Generator_ColumnPropNameInTable="priIDColumn" msprop:Generator_UserColumnName="priID" type="xs:int" />
+              <xs:element name="cssID" msprop:Generator_ColumnVarNameInTable="columncssID" msprop:Generator_ColumnPropNameInRow="cssID" msprop:Generator_ColumnPropNameInTable="cssIDColumn" msprop:Generator_UserColumnName="cssID" type="xs:int" />
+              <xs:element name="casEmo" msprop:Generator_ColumnVarNameInTable="columncasEmo" msprop:Generator_ColumnPropNameInRow="casEmo" msprop:Generator_ColumnPropNameInTable="casEmoColumn" msprop:Generator_UserColumnName="casEmo" type="xs:int" minOccurs="0" />
+              <xs:element name="casGroupID" msprop:Generator_ColumnVarNameInTable="columncasGroupID" msprop:Generator_ColumnPropNameInRow="casGroupID" msprop:Generator_ColumnPropNameInTable="casGroupIDColumn" msprop:Generator_UserColumnName="casGroupID" type="xs:int" minOccurs="0" />
+              <xs:element name="casOwnerID" msprop:Generator_ColumnVarNameInTable="columncasOwnerID" msprop:Generator_ColumnPropNameInRow="casOwnerID" msprop:Generator_ColumnPropNameInTable="casOwnerIDColumn" msprop:Generator_UserColumnName="casOwnerID" type="xs:int" minOccurs="0" />
+              <xs:element name="casCreatedOn" msprop:Generator_ColumnVarNameInTable="columncasCreatedOn" msprop:Generator_ColumnPropNameInRow="casCreatedOn" msprop:Generator_ColumnPropNameInTable="casCreatedOnColumn" msprop:Generator_UserColumnName="casCreatedOn" type="xs:dateTime" />
+              <xs:element name="casCreatedBy" msprop:Generator_ColumnVarNameInTable="columncasCreatedBy" msprop:Generator_ColumnPropNameInRow="casCreatedBy" msprop:Generator_ColumnPropNameInTable="casCreatedByColumn" msprop:Generator_UserColumnName="casCreatedBy" type="xs:int" />
+              <xs:element name="casModifiedOn" msprop:Generator_ColumnVarNameInTable="columncasModifiedOn" msprop:Generator_ColumnPropNameInRow="casModifiedOn" msprop:Generator_ColumnPropNameInTable="casModifiedOnColumn" msprop:Generator_UserColumnName="casModifiedOn" type="xs:dateTime" />
+              <xs:element name="casModifiedBy" msprop:Generator_ColumnVarNameInTable="columncasModifiedBy" msprop:Generator_ColumnPropNameInRow="casModifiedBy" msprop:Generator_ColumnPropNameInTable="casModifiedByColumn" msprop:Generator_UserColumnName="casModifiedBy" type="xs:int" />
+              <xs:element name="casFav" msprop:Generator_ColumnVarNameInTable="columncasFav" msprop:Generator_ColumnPropNameInRow="casFav" msprop:Generator_ColumnPropNameInTable="casFavColumn" msprop:Generator_UserColumnName="casFav" type="xs:boolean" />
+              <xs:element name="assignTo" msprop:Generator_ColumnVarNameInTable="columnassignTo" msprop:Generator_ColumnPropNameInRow="assignTo" msprop:Generator_ColumnPropNameInTable="assignToColumn" msprop:Generator_UserColumnName="assignTo" type="xs:int" minOccurs="0" />
+              <xs:element name="casRemindID" msprop:Generator_ColumnVarNameInTable="columncasRemindID" msprop:Generator_ColumnPropNameInRow="casRemindID" msprop:Generator_ColumnPropNameInTable="casRemindIDColumn" msprop:Generator_UserColumnName="casRemindID" type="xs:int" minOccurs="0" />
+              <xs:element name="casRemindStatus" msprop:Generator_ColumnVarNameInTable="columncasRemindStatus" msprop:Generator_ColumnPropNameInRow="casRemindStatus" msprop:Generator_ColumnPropNameInTable="casRemindStatusColumn" msprop:Generator_UserColumnName="casRemindStatus" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="1" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+    <xs:unique name="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:uspReportCaseLevel" />
+      <xs:field xpath="mstns:casID" />
+    </xs:unique>
+  </xs:element>
+</xs:schema>

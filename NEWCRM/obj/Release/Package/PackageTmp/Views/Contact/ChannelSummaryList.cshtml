@@ -1,0 +1,6 @@
+﻿@model IEnumerable<NEWCRM.Models.sp_ActivityChannelSummary_Result>
+<li><small>CHANNELS</small></li>
+@foreach (var item in Model)
+{
+    <li style="padding: 8px 15px 8px 15px;" class="text-medium"><span><i class="fa fa-fw @item.chnIcon"></i>&nbsp;@item.chnName <small class="pull-right text-bold opacity-75">@item.Total</small></span></li>
+}

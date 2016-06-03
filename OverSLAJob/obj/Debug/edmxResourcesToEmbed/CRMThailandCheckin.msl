@@ -1,0 +1,94 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="CRMTHAILANDCHECKINModelStoreContainer" CdmEntityContainer="CRMTHAILANDCHECKINEntities">
+    <EntitySetMapping Name="CaseLogs">
+      <EntityTypeMapping TypeName="CRMTHAILANDCHECKINModel.CaseLogs">
+        <MappingFragment StoreEntitySet="CaseLogs">
+          <ScalarProperty Name="cslID" ColumnName="cslID" />
+          <ScalarProperty Name="casID" ColumnName="casID" />
+          <ScalarProperty Name="actID" ColumnName="actID" />
+          <ScalarProperty Name="cltID" ColumnName="cltID" />
+          <ScalarProperty Name="cslNote" ColumnName="cslNote" />
+          <ScalarProperty Name="cslDesc" ColumnName="cslDesc" />
+          <ScalarProperty Name="cslCreatedOn" ColumnName="cslCreatedOn" />
+          <ScalarProperty Name="cslCreatedBy" ColumnName="cslCreatedBy" />
+          <ScalarProperty Name="cslModifiedOn" ColumnName="cslModifiedOn" />
+          <ScalarProperty Name="cslModifiedBy" ColumnName="cslModifiedBy" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Cases">
+      <EntityTypeMapping TypeName="CRMTHAILANDCHECKINModel.Cases">
+        <MappingFragment StoreEntitySet="Cases">
+          <ScalarProperty Name="casID" ColumnName="casID" />
+          <ScalarProperty Name="actID" ColumnName="actID" />
+          <ScalarProperty Name="ctaID" ColumnName="ctaID" />
+          <ScalarProperty Name="casIDName" ColumnName="casIDName" />
+          <ScalarProperty Name="casParentID" ColumnName="casParentID" />
+          <ScalarProperty Name="casDuration" ColumnName="casDuration" />
+          <ScalarProperty Name="casDueDate" ColumnName="casDueDate" />
+          <ScalarProperty Name="casPrevDueDate" ColumnName="casPrevDueDate" />
+          <ScalarProperty Name="casIDLevel1" ColumnName="casIDLevel1" />
+          <ScalarProperty Name="casIDLevel2" ColumnName="casIDLevel2" />
+          <ScalarProperty Name="casIDLevel3" ColumnName="casIDLevel3" />
+          <ScalarProperty Name="casIDLevel4" ColumnName="casIDLevel4" />
+          <ScalarProperty Name="casIDLevel5" ColumnName="casIDLevel5" />
+          <ScalarProperty Name="casIDLevel6" ColumnName="casIDLevel6" />
+          <ScalarProperty Name="casIDLevel7" ColumnName="casIDLevel7" />
+          <ScalarProperty Name="casIDLevel8" ColumnName="casIDLevel8" />
+          <ScalarProperty Name="casLevel1" ColumnName="casLevel1" />
+          <ScalarProperty Name="casLevel2" ColumnName="casLevel2" />
+          <ScalarProperty Name="casLevel3" ColumnName="casLevel3" />
+          <ScalarProperty Name="casLevel4" ColumnName="casLevel4" />
+          <ScalarProperty Name="casLevel5" ColumnName="casLevel5" />
+          <ScalarProperty Name="casLevel6" ColumnName="casLevel6" />
+          <ScalarProperty Name="casLevel7" ColumnName="casLevel7" />
+          <ScalarProperty Name="casLevel8" ColumnName="casLevel8" />
+          <ScalarProperty Name="casIDSummary" ColumnName="casIDSummary" />
+          <ScalarProperty Name="casSummary" ColumnName="casSummary" />
+          <ScalarProperty Name="casNote" ColumnName="casNote" />
+          <ScalarProperty Name="cbtID" ColumnName="cbtID" />
+          <ScalarProperty Name="cbcID" ColumnName="cbcID" />
+          <ScalarProperty Name="CallbackInfo" ColumnName="CallbackInfo" />
+          <ScalarProperty Name="CallbackDT" ColumnName="CallbackDT" />
+          <ScalarProperty Name="casSLA" ColumnName="casSLA" />
+          <ScalarProperty Name="priID" ColumnName="priID" />
+          <ScalarProperty Name="cssID" ColumnName="cssID" />
+          <ScalarProperty Name="casEmo" ColumnName="casEmo" />
+          <ScalarProperty Name="casGroupID" ColumnName="casGroupID" />
+          <ScalarProperty Name="casOwnerID" ColumnName="casOwnerID" />
+          <ScalarProperty Name="casCreatedOn" ColumnName="casCreatedOn" />
+          <ScalarProperty Name="casCreatedBy" ColumnName="casCreatedBy" />
+          <ScalarProperty Name="casModifiedOn" ColumnName="casModifiedOn" />
+          <ScalarProperty Name="casModifiedBy" ColumnName="casModifiedBy" />
+          <ScalarProperty Name="casFav" ColumnName="casFav" />
+          <ScalarProperty Name="assignTo" ColumnName="assignTo" />
+          <ScalarProperty Name="casRemindID" ColumnName="casRemindID" />
+          <ScalarProperty Name="casRemindStatus" ColumnName="casRemindStatus" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TaskScheduleLog">
+      <EntityTypeMapping TypeName="CRMTHAILANDCHECKINModel.TaskScheduleLog">
+        <MappingFragment StoreEntitySet="TaskScheduleLog">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="TaskName" ColumnName="TaskName" />
+          <ScalarProperty Name="TaskStart" ColumnName="TaskStart" />
+          <ScalarProperty Name="TaskEnd" ColumnName="TaskEnd" />
+          <ScalarProperty Name="TaskStatus" ColumnName="TaskStatus" />
+          <ScalarProperty Name="TaskDesc" ColumnName="TaskDesc" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="sp_getCasesOverSLA" FunctionName="CRMTHAILANDCHECKINModel.Store.sp_getCasesOverSLA">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="CRMTHAILANDCHECKINModel.sp_getCasesOverSLA_Result">
+          <ScalarProperty Name="casID" ColumnName="casID" />
+          <ScalarProperty Name="casIDName" ColumnName="casIDName" />
+          <ScalarProperty Name="casSummary" ColumnName="casSummary" />
+          <ScalarProperty Name="casDueDate" ColumnName="casDueDate" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+  </EntityContainerMapping>
+</Mapping>

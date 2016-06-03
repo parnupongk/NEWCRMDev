@@ -1,0 +1,99 @@
+﻿@model NEWCRM.Models.ContactViewModel
+<form class="form" id="formFilter" accept-charset="utf-8" method="post">   
+    <div class="text-center">
+        <label class="checkbox-inline checkbox-styled checkbox-primary">
+            <input type="checkbox" value="cases" onclick="TimelineFilter(this)" checked><span class="text-primary">Cases&nbsp;<sup class="badge style-primary" data-toggle="tooltip" data-placement="top" data-original-title="Total">@Model.sum_timeline_case</sup></span>
+        </label>
+        <label class="checkbox-inline checkbox-styled checkbox-default-dark">
+            <input type="checkbox" value="events" onclick="TimelineFilter(this)" checked><span class="text-default">Events</span>
+        </label>
+    </div>
+    <br />
+</form>
+<hr class="no-margin" />
+<div class="card-body scroll style-default-bright" style="padding-top: 0; height: 450px;">
+<ul class="timeline collapse-lg timeline-hairline">
+    @foreach (var item in @Model.list_timeline)
+    {
+        string avatar = "/Images/contact_.png";
+        if (!string.IsNullOrEmpty(item.usrAvatar)) {
+            avatar = "/Images/users/" + item.usrAvatar;
+        }
+        
+        if (item.LogType.Equals("Contact"))
+        {
+            if (item.cltName.Equals("Created Contact"))
+            {
+        <li class="timeline-inverted">
+            <div class="timeline-circ circ-lg">
+                <span class="glyphicon glyphicon-plus-sign"></span>
+            </div>
+            <div class="timeline-entry">
+                <div class="card style-default-dark">
+                    <div class="card-body small-padding">
+                        <img class="img-circle img-responsive pull-left width-1" src="@avatar" style="margin-top: 3px" alt="" />
+                        <span class="text-medium">@item.cltName</span><br />
+                        <span class="text-warning">@item.Lognote</span><br />
+                        <span style="padding-left:51px">by @item.Owner @item.Created.ToShortDateString() @item.Created.ToShortTimeString()</span>
+                    </div>
+                </div>
+            </div>
+        </li>
+            }
+            else
+            {
+        <li class="timeline-inverted tl_events">
+            <div class="timeline-circ style-default-dark"></div>
+            <div class="timeline-entry">
+                <div class="card style-default-dark">
+                    <div class="card-body small-padding">
+                        <img class="img-circle img-responsive pull-left width-1" src="@avatar" style="margin-top: 3px" alt="" />
+                        <span class="text-medium">@item.cltName</span><br />
+                        <span class="text-warning">@item.Lognote</span><br />
+                        <span style="padding-left:51px">by @item.Owner @item.Created.ToShortDateString() @item.Created.ToShortTimeString()</span>
+                    </div>
+                </div>
+            </div>
+        </li>
+            }
+        }
+        else if (item.LogType.Equals("Case"))
+        {
+        <li class="timeline-inverted tl_cases">
+            <div class="timeline-circ style-primary"></div>
+            <div class="timeline-entry">
+                <div class="card style-default">
+                    <div class="card-body small-padding">
+                        <img class="img-circle img-responsive pull-left width-1" src="@avatar" style="margin-top: 3px" alt="" />
+                        <span><a class="text-primary text-bold" href="@Url.Action("CaseDetail", "Case")/@item.casID">@item.casIDName</a></span>
+                        @if(item.casDueDate.HasValue) {  
+                            <span class="text-danger">&nbsp;&nbsp;<i class="fa fa-clock-o fa-fw" style="margin-right:5px"></i>Due Date @item.casDueDate</span>
+                        }
+                        <br />
+                        <span class="text-default">@item.Lognote</span><br />
+                        <span style="padding-left:51px">by @item.Owner @item.Created.ToShortDateString() @item.Created.ToShortTimeString()</span>
+                        <div class="stick-top-right small-padding">
+                            @if (item.cbtID.HasValue && item.cbtID > 0)
+                            {
+                                <a href="javascript:;"><i class="md md-phone-forwarded" data-toggle="tooltip" data-placement="top" data-original-title="Call Back"></i></a>
+                            }
+                            @if (item.cssID == 2 || item.cssID == 4 || item.cssID == 5)
+                            {
+                                @*<a href="javascript:;"><i class="md md-brightness-1 text-warning" data-toggle="tooltip" data-placement="top" data-original-title="Status is opened"></i></a>*@
+                                <a href="javascript:;"><i class="md md-lock-open"></i></a>
+                            }
+                            else
+                            {
+                                @*<a href="javascript:;"><i class="md md-brightness-1 text-success" data-toggle="tooltip" data-placement="top" data-original-title="Status is closed"></i></a>*@
+                                <a href="javascript:;"><i class="md md-lock"></i></a>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </li>                                                                                        
+        }
+    }
+</ul>
+</div>
+<script src="~/Content/js/core/source/AppVendor.js"></script>

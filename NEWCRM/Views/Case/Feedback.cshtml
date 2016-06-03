@@ -1,0 +1,24 @@
+﻿@{
+    ViewBag.Title = "Feedback";
+    Layout = null;
+}
+<div class="form-group">
+    <input type="text" class="form-control" name="fedBy" id="fedBy" value="" >
+    <label for="fedBy">Feedback By</label>
+</div>
+<div class="form-group">
+    <textarea name="fedDesc" id="fedDesc" class="form-control" rows="3" placeholder=""></textarea>
+    <label for="txtAddNote">Description</label>
+</div>
+<div class="form-group">
+    <input type="text" class="form-control" name="fedDate" id="fedDate" data-inputmask="'alias': 'date'" />
+    <label for="fedBy">Date</label>
+</div>
+<div class="form-group">
+    <input type="text" class="form-control time-mask" name="Arrived" id="Arrived" value="" />
+    <label for="fedBy">Arrived</label>
+</div>
+<div class="form-group">
+    <input type="text" class="form-control time-mask" name="Leaved" id="Leaved" value="" />
+    <label for="fedBy">Leaved</label>
+</div>

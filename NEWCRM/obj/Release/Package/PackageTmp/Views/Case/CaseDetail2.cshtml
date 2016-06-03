@@ -1,0 +1,561 @@
+﻿@{
+    ViewBag.Title = "CaseDetail";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@using NEWCRM.Models
+@model CaseModels
+
+<style type="text/css">
+    .modal-body
+    {
+        max-height: 800px;
+    }
+</style>
+
+@section Scripts {
+
+
+    <script type="text/javascript">
+        var chat = $.connection.hubMessage;
+
+
+        $('#aAddnote').click(function () {
+            $('#formModal').modal({ /*closable: false */backdrop: 'static' });
+            $('#formModal').find('.modal-title').text('Add Note');
+            $('.modal-dialog').removeClass('modal-lg');
+
+            $('#frmcontent').load('@Url.Action("AddNote", "Case")', function () {
+                $('#formModal').modal('show');
+                $('#btnSave').unbind('click');
+                $('#btnSave').click(function () {
+                    $.ajax({
+                        type: "POST",
+                        cache: false,
+                        url: '@Url.Action("DoSaveNote", "Case")',
+                        data: {
+                            CaseId: '@Model.CaseDetails.CASID',
+                            Remark: $.trim($('#txtAddNote').val())
+                        },
+                        success: function (result) {
+                            $.msgbox("Save Success", { type: "info" });
+
+
+                            //$.msgbox("Are you sure that you want to permanently delete the selected element?", {
+                            //    type: "confirm",
+                            //    buttons: [
+                            //      { type: "submit", value: "Yes" },
+                            //      { type: "submit", value: "No" },
+                            //      { type: "cancel", value: "Cancel" }
+                            //    ]
+                            //}, function (result) {
+                            //    // $("#result2").text(result);
+
+                            //    alert(result);
+
+                            //});
+
+                        }
+                    });
+                });
+            });
+        });
+
+
+        $('#aChangeStatus').click(function () {
+            $('#formModal').modal({ /*closable: false */backdrop: 'static' });
+            $('#formModal').find('.modal-title').text('Change Status');
+            $('.modal-dialog').removeClass('modal-lg');
+            $('#frmcontent').load('@Url.Action("ChangeStatus", "Case")', function () {
+                $('#formModal').modal('show');
+                $('#btnSave').unbind('click');
+                $('#btnSave').click(function () {
+                    //  alert('ChangeStatus');
+
+
+                    $.ajax({
+                        type: "POST",
+                        cache: false,
+                        url: '@Url.Action("DoSaveStatus", "Case")',
+                        data: {
+                            CaseId: '@Model.CaseDetails.CASID',
+                            StatusId: $('#ddlStatus').val(),
+                            Remark: $.trim($('#txtRemark').val())
+                        },
+                        success: function (result) {
+                            $.msgbox("Save Success", { type: "info" });
+
+                        }
+                    });
+                });
+            });
+
+        });
+
+        $('#aCloseCase').click(function () {
+            $('#formModal').modal({ /*closable: false */backdrop: 'static' });
+            $('#formModal').find('.modal-title').text('Close Case');
+            $('.modal-dialog').removeClass('modal-lg');
+            //$('.modal-body').css('height', $(window).height() * 0.8);
+            $('#frmcontent').load('@Url.Action("CloseCase", "Case")', function () {
+                $('#formModal').modal('show');
+                $('#btnSave').unbind('click');
+                $('#btnSave').click(function () {
+                    $.ajax({
+                        type: "POST",
+                        cache: false,
+                        url: '@Url.Action("DoSaveCloseCase", "Case")',
+                        data: {
+                            CaseId: '@Model.CaseDetails.CASID',
+                            StatusId: $('#ddlStatus').val(),
+                            Remark: $.trim($('#txtRemark').val())
+                        },
+                        success: function (result) {
+
+                            $.msgbox("Save Success", { type: "info" });
+
+                        }
+                    });
+                });
+            });
+        });
+
+        $('#aDispatch').click(function () {
+            $('#formModal').modal({ /*closable: false */backdrop: 'static' });
+            $('#formModal').find('.modal-title').text('Dispatch');
+            //$('.modal-body').css('height', $(window).height() * 0.8);
+            $('.modal-dialog').removeClass('modal-lg');
+            $('#frmcontent').load('@Url.Action("Dispatch", "Case")', function () {
+                //$('#optgroup').multiSelect({ selectableOptgroup: true });  DoSaveDispatch
+                $('#formModal').modal('show');
+                $('#btnSave').unbind('click');
+                $('#btnSave').click(function () {
+                    $.ajax({
+                        type: "POST",
+                        cache: false,
+                        url: '@Url.Action("DoSaveDispatch", "Case")',
+                        data: {
+                            CaseId: '@Model.CaseDetails.CASID',
+                            GroupId: $('#selectDispatch').val(),
+                            Remark: $.trim($('#txtRemark').val())
+                        },
+                        success: function (result) {
+                            $.msgbox("Save Success", { type: "info" });
+
+                        }
+                    });
+                });
+
+            });
+
+        });
+
+
+        $('#aAssign').click(function () {
+            $('#formModal').modal({ /*closable: false */backdrop: 'static' });
+            $('#formModal').find('.modal-title').text('Assign');
+
+            $('.modal-dialog').removeClass('modal-lg');
+            //$('.modal-body').css('height', $(window).height() * 0.8);
+            $('#frmcontent').load('@Url.Action("AssignCase", "Case")', function () {
+                //$('#optgroup').multiSelect({ selectableOptgroup: true });
+                $('#formModal').modal('show');
+                $('#btnSave').unbind('click');
+                $('#btnSave').click(function () {
+                    $.ajax({
+                        type: "POST",
+                        cache: false,
+                        url: '@Url.Action("DoSaveAssign", "Case")',
+                        data: {
+                            CaseId: '@Model.CaseDetails.CASID',
+                            UserId: $('#ddlUsers').val(),
+                            Remark: $.trim($('#txtRemark').val())
+                        },
+                        success: function (result) {
+                            chat.server.createGroup($('#ddlUsers').val(), 'Assign Case');
+                            $.msgbox("Save Success", { type: "info" });
+                        }
+                    });
+                });
+            });
+        });
+
+
+        $('#aAccept').click(function () {
+            $.ajax({
+                type: "POST",
+                cache: false,
+                url: '@Url.Action("DoSaveAccept", "Case")',
+                data: {
+                    CaseId: '@Model.CaseDetails.CASID'
+                },
+                success: function (result) {
+                    $.msgbox("Save Success", { type: "info" });
+
+                }
+            });
+        });
+
+
+        $('#aReject').click(function () {
+
+            $.ajax({
+                type: "POST",
+                cache: false,
+                url: '@Url.Action("DoSaveReject", "Case")',
+                data: {
+                    CaseId: '@Model.CaseDetails.CASID'
+                },
+                success: function (result) {
+                    $.msgbox("Save Success", { type: "info" });
+
+                }
+            });
+
+        });
+
+
+
+
+
+        $('#aSendEmail').click(function () {
+            $('.modal-dialog').addClass('modal-lg');
+            //csscontent
+            //$('.modal-content').height(500);
+            //$('.modal-content').width(1200);
+            $('#formModal').modal({ /*closable: false */backdrop: 'static' });
+            $('#formModal').find('.modal-title').text('Send E-Mail');
+            // $('.csscontent').css({ 'height': $(window).height() * 0.8 });
+
+
+            $('#frmcontent').load('@Url.Action("SendEmail", "Case")', function () {
+                var myDropzone;
+                $("#uploadDemo").dropzone({
+                    url: '@Url.Action("SaveUploadedFile", "Case")',
+                    maxFilesize: 100000000,
+                    paramName: "httpFileCollection",
+                    autoProcessQueue: true,
+                    //previewsContainer: "#showhere",
+                    //clickable: "#showhere",
+                    uploadMultiple: false,
+                    maxThumbnailFilesize: 5,
+                    init: function () {
+                        myDropzone = this; //closure
+                        this.on('success', function (file, json) {
+                        });
+
+                        this.on('addedfile', function (file) {
+                            // Create the remove button
+
+                            var removeButton = Dropzone.createElement('<button type="button" class="btn ink-reaction btn-floating-action btn-xs btn-danger" style="margin-top:-295px;margin-left:95px"><i class="fa fa-trash-o"></i></button>');
+                            // Capture the Dropzone instance as closure.
+                            var _this = this;
+
+                            $(removeButton).click(function (e) {
+
+                                e.preventDefault();
+                                e.stopPropagation();
+                                $.ajax({
+                                    type: "POST",
+                                    cache: false,
+                                    url: '@Url.Action("UploadRemoveFile", "Case")',
+                                   data: {
+                                       FileName: file.name
+                                   },
+                                   success: function (result) {
+                                       _this.removeFile(file);
+                                   }
+                               });
+                           });
+                           file.previewElement.appendChild(removeButton);
+
+                       });
+
+                       this.on('drop', function (file) {
+                           // alert('file');
+                       });
+                   }
+
+                });
+
+                $('#summernote').summernote({
+                    height: 300,
+                    toolbar: [
+                        ['style', ['style']],
+                       ['style', ['bold', 'italic', 'underline', 'clear']],
+                       ['font', ['strikethrough', 'superscript', 'subscript']],
+                       ['fontsize', ['fontsize']],
+                       ['color', ['color']],
+                       ['para', ['ul', 'ol', 'paragraph']],
+                       ['height', ['height']]
+                    ],
+                    fontsize: '18px',
+                });
+                $('#formModal').modal('show');
+                $('#btnSave').unbind('click');
+                $('#btnSave').click(function () {
+                    $.ajax({
+                        type: "POST",
+                        cache: false,
+                        url: '@Url.Action("SendMail", "Case")',
+
+                        data: {
+                            MailTo: $('#MailTo').val(),
+                            MailCc: $('#Mailcc').val(),
+                            MailBcc: $('#MailBcc').val(),
+                            MailSubject: $('#Subject').val(),
+                            MailDetail: encodeURIComponent($('.note-editable').html())
+                        },
+                        success: function (result) {
+                            $.each(myDropzone.files, function (i, o) {
+                                myDropzone.removeFile(o);
+                            });
+                            if (result.strSuccess != '') {
+                                $.msgbox("Send Mail Success", { type: "info" });
+                                return;
+                            }
+                            if (result.strError != '') {
+                                $.msgbox("Send Mail Success", { type: "error" });
+                                return;
+                            }
+                        }
+                    });
+
+
+                });
+            });
+        });
+
+
+
+
+        // $('#optgroup').multiSelect({ selectableOptgroup: true });
+    </script>
+}
+<div class="section-header">
+    <ol class="breadcrumb">
+        <li class="active">Case Detail</li>
+    </ol>
+</div>
+<div class="section-body">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-head">
+                        <div class="col-lg-12">
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <strong class="text-xl"><i class="fa fa-whatsapp fa-fw"></i>@Html.DisplayFor(m => m.CaseDetails.CASEIDNO)</strong>
+                                </div>
+                                <div class="col-lg-6">
+                                    <strong class="text-xl"><i class="fa fa-phone fa-fw"></i>Inbound</strong>
+                                </div>
+                            </div>
+                        </div>
+                        @* <div class="tools">
+                            <div class="btn-group">
+                                <div class="btn-group">
+                                    <a href="#" class="btn btn-icon-toggle dropdown-toggle" data-toggle="dropdown"><i class="md md-menu"></i></a>
+                                    <ul class="dropdown-menu animation-dock pull-right" role="menu" style="text-align: left;">
+                                        @if (NEWCRM.Common.AppUtils.Session.Userrolepermission.HasAction(NEWCRM.Models.EnumType.ActionName.ADD_NOTE))
+                                        {
+                                            <li><a href="javascript:void(0);" id="aAddnote"><i class="fa fa-edit fa-fw"></i>Add Note</a></li>
+                                        }
+                                        @if (NEWCRM.Common.AppUtils.Session.Userrolepermission.HasAction(NEWCRM.Models.EnumType.ActionName.CHANGE_STATUS))
+                                        {
+                                            <li><a href="javascript:void(0);" id="aChangeStatus"><i class="fa fa-retweet fa-fw"></i>Change Status</a></li>
+                                        }
+                                        @if (NEWCRM.Common.AppUtils.Session.Userrolepermission.HasAction(NEWCRM.Models.EnumType.ActionName.CLOSED_CASE))
+                                        {
+                                            <li><a href="javascript:void(0);" id="aCloseCase"><i class="fa fa-lock fa-fw"></i>Closed Case</a></li>
+                                        }
+                                        @if (NEWCRM.Common.AppUtils.Session.Userrolepermission.HasAction(NEWCRM.Models.EnumType.ActionName.DISPATCH))
+                                        {
+                                            <li><a href="javascript:void(0);" id="aDispatch"><i class="fa fa-mail-reply-all fa-fw"></i>Dispatch</a></li>
+                                        }
+                                        @if (NEWCRM.Common.AppUtils.Session.Userrolepermission.HasAction(NEWCRM.Models.EnumType.ActionName.ASSIGN))
+                                        {
+                                            <li><a href="javascript:void(0);" id="aAssign"><i class="fa fa-mail-reply fa-fw"></i>Assign</a></li>
+                                        }
+                                        @if (NEWCRM.Common.AppUtils.Session.Userrolepermission.HasAction(NEWCRM.Models.EnumType.ActionName.ACCEPT))
+                                        {
+                                            <li><a href="javascript:void(0);" id="aAccept"><i class="fa fa-check-circle-o fa-fw"></i>Accept</a></li>
+                                        }
+                                        @if (NEWCRM.Common.AppUtils.Session.Userrolepermission.HasAction(NEWCRM.Models.EnumType.ActionName.REJECT))
+                                        {
+                                            <li><a href="javascript:void(0);" id="aReject"><i class="fa fa-undo fa-fw"></i>Reject</a></li>
+                                        }
+                                        @if (NEWCRM.Common.AppUtils.Session.Userrolepermission.HasAction(NEWCRM.Models.EnumType.ActionName.SEND_EMAIL))
+                                        {
+                                            <li><a href="javascript:void(0);" id="aSendEmail"><i class="fa fa-envelope-o fa-fw"></i>Send E-mail</a></li>  
+                                        }
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>*@
+                        @*  <header>
+                            <strong class="text-xl"><i class="fa fa-whatsapp fa-fw"></i>@Html.DisplayFor(m => m.CaseDetails.CASEIDNO)</strong>
+                            <strong class="text-xl" style="padding-left: 358px;"><i class="fa fa-phone fa-fw"></i>Inbound</strong>
+                        </header>*@
+                    </div>
+                    <!--end .card-head -->
+                    <div class="card-body style-default-bright" style="padding-top: 20px">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <span class="text-xl"><i class="fa fa-child fa-fw"></i>Contact Info</span>
+                                <div class="row" style="margin-bottom: 10px; margin-top: 10px;">
+                                    <div class="col-lg-2">
+                                        <img class="img-circle img-responsive pull-left" src="~/Images/contact_.png" alt="" />
+                                    </div>
+                                    <a href="@Url.Action("Detail", "Contact")/@Model.CaseDetails.ctaID">
+                                        <div class="col-lg-10">
+                                            <h1 class="text-light no-margin">@(string.IsNullOrWhiteSpace(Model.CaseDetails.CTAFULLNAME) ? "-" : Model.CaseDetails.CTAFULLNAME)</h1>
+                                            <span class="text-lg text-medium">@(string.IsNullOrWhiteSpace(Model.CaseDetails.CONTACTCODE) ? "-" : Model.CaseDetails.CONTACTCODE)</span>
+                                        </div>
+                                    </a>
+                                </div>
+                                @*   <div class="row" style="margin-bottom: 10px; margin-top: 10px;">
+                                    <div class="col-lg-12">
+                                        <img src="~/Content/theme-oto/imgs/emo32-4.png" />
+                                        <img src="~/Content/theme-oto/imgs/emo32-3.png" />
+                                        <img src="~/Content/theme-oto/imgs/emo32-3.png" />
+                                    </div>
+                                </div>*@
+                                <div class="col-lg-12" style="padding-left: 0">
+                                    <div class="clearfix opacity-75 text-lg">
+                                        <div class="col-md-12 no-padding">
+                                            <p class="fa fa-phone fa-fw"></p>
+                                            &nbsp;@(string.IsNullOrWhiteSpace(Model.CaseDetails.PHONES) ? "-" : Model.CaseDetails.PHONES)
+                                        </div>
+                                        <div class="col-md-12 no-padding">
+                                            <p class="fa fa-envelope fa-fw"></p>
+                                            &nbsp;@(string.IsNullOrWhiteSpace(Model.CaseDetails.CTAEMAIL) ? "-" : Model.CaseDetails.CTAEMAIL)
+                                        </div>
+                                        <div class="col-md-12 no-padding">
+                                            <p class="fa fa-facebook-official fa-fw"></p>
+                                            &nbsp;@(string.IsNullOrWhiteSpace(Model.CaseDetails.CTAFACEBOOK) ? "-" : Model.CaseDetails.CTAFACEBOOK)
+                                        </div>
+                                        <div class="col-md-12 no-padding">
+                                            <p class="fa fa-twitter fa-fw"></p>
+                                            &nbsp;@(string.IsNullOrWhiteSpace(Model.CaseDetails.CTATWITTER) ? "-" : Model.CaseDetails.CTATWITTER)
+                                        </div>
+                                        <div class="col-lg-12 no-padding">
+                                            <span class="opacity-75"><span class="fa fa-home fa-fw"></span>&nbsp; @(string.IsNullOrWhiteSpace(Model.CaseDetails.ADDRESS) ? "-" : Model.CaseDetails.ADDRESS)</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <p><span class="text-xl"><i class="fa fa-comment fa-fw"></i>Case Info</span></p>
+                                <div class="col-lg-12 hbox-xs">
+                                    <div class="row">
+                                        <form class="form">
+                                            <div class="col-lg-12">
+                                                <div class="form-group">
+                                                    <label>Subject</label>
+                                                    <p class="form-control-static">@(string.IsNullOrWhiteSpace(Model.CaseDetails.CASSUMMARY) ? "-" : Model.CaseDetails.CASSUMMARY)</p>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <div class="form-group">
+                                                    <label>Status</label>
+                                                    <p class="form-control-static">@(string.IsNullOrWhiteSpace(Model.CaseDetails.CASESTATUS) ? "-" : Model.CaseDetails.CASESTATUS)</p>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <div class="form-group">
+                                                    <label>Talk Time</label>
+                                                    <p class="form-control-static">@(string.IsNullOrWhiteSpace(Model.CaseDetails.TALKTIME) ? "-" : Model.CaseDetails.TALKTIME)</p>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <div class="form-group">
+                                                    <label>Call Back Type</label>
+                                                    <p class="form-control-static">@(string.IsNullOrWhiteSpace(Model.CaseDetails.CALLBACKTYPE) ? "-" : Model.CaseDetails.CALLBACKTYPE)</p>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <div class="form-group">
+                                                    <label>Call Back Number</label>
+                                                    <p class="form-control-static">@(string.IsNullOrWhiteSpace(Model.CaseDetails.CALLBACKNUMBER) ? "-" : Model.CaseDetails.CALLBACKNUMBER)</p>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <div class="form-group">
+                                                    <label>Created By</label>
+                                                    <p class="form-control-static">@(string.IsNullOrWhiteSpace(Model.CaseDetails.CREATEBY) ? "-" : Model.CaseDetails.CREATEBY)</p>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <div class="form-group">
+                                                    <label>Created Date</label>
+                                                    <p class="form-control-static">@Html.DisplayFor(m => m.CaseDetails.CREATEDATE)</p>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <div class="form-group">
+                                                    <label>Modified By</label>
+                                                    <p class="form-control-static">@(string.IsNullOrWhiteSpace(Model.CaseDetails.MODIFIEDBY) ? "-" : Model.CaseDetails.MODIFIEDBY)</p>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <div class="form-group">
+                                                    <label>Modified Date</label>
+                                                    <p class="form-control-static">@Html.DisplayFor(m => m.CaseDetails.MODIFIEDDATE)</p>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <div class="form-group">
+                                                    <label>Closed Date</label>
+                                                    <p class="form-control-static">@(!Model.CaseDetails.CLOSEDATE.HasValue ? "-" : Model.CaseDetails.CLOSEDATE.Value.ToString("dd/MM/yyyy hh:mm:ss"))</p>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <div class="form-group">
+                                                    <label>Due Date</label>
+                                                    <p class="form-control-static">@(!Model.CaseDetails.DUEDATE.HasValue ? "-" : Model.CaseDetails.DUEDATE.Value.ToString("dd/MM/yyyy hh:mm:ss"))</p>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-12">
+                                                <div class="form-group">
+                                                    <label>Recomment</label>
+                                                    <p class="form-control-static">@(string.IsNullOrWhiteSpace(Model.CaseDetails.REMARK) ? "-" : Model.CaseDetails.REMARK)</p>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--end .card-body -->
+                </div>
+                <!--end .card -->
+            </div>
+        </div>
+    </div>
+
+<!-- BEGIN FORM MODAL MARKUP -->
+<div class="modal fade" id="formModal" tabindex="-1" role="dialog" aria-labelledby="formModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="formModalLabel">Login to continue</h4>
+            </div>
+            @*   <div class="card-body">*@
+
+            <div class="card-body">
+                <form class="form" role="form" id="frmcontent">
+                </form>
+                <div class="form-group floating-label">
+                    <div class="modal-footer" style="border-top: none;">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                        <button type="button" class="btn btn-primary" id="btnSave">Save</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>

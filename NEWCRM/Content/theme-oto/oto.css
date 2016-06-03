@@ -1,0 +1,53 @@
+.mg-right-8 {
+  margin-right: 8px;
+}
+.facebook-bg {
+  background-color: #3f51b5;
+}
+.facebook-fg {
+  color: #3f51b5;
+}
+.twitter-fg {
+  color: #55acee;
+}
+.pantip-fg {
+  color: #3c3963;
+}
+.card-actionbar-no-padding-bottom {
+  padding-bottom: 0px;
+}
+.alert-social-impact {
+  padding: 0px;
+  margin-bottom: 0px;
+}
+.alert.alert-callout-oto:before {
+  width: 21px;
+}
+.form-group > label,
+.form-group .control-label {
+  font-size: 14px;
+}
+.card-body-sm {
+  padding: 10px;
+}
+.list.divider-full-bleed li {
+  height:6em; line-height:6em;
+}
+
+.font-white {
+  color: #ffffff;
+}
+/*.menubar-inverse .gui-controls > li ul > li > a:active,
+.menubar-inverse .gui-controls > li ul > li > a.active {
+  background-color: #ff5722;
+}
+.menubar-inverse .gui-controls > li ul > li > a:hover,
+.menubar-inverse .gui-controls > li ul > li > a:focus {
+  background-color: #ffad94;
+}
+.expanded-menu-item-markup .menubar-inverse .gui-controls > li:not(.gui-folder) > a:hover {
+  background-color: #ffad94;
+}
+.expanded-menu-item-markup .menubar-inverse .gui-controls > li.active:not(.gui-folder) > a {
+  background-color: #ff5722;
+}*/

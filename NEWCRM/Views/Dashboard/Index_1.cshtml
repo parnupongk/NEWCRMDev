@@ -1,0 +1,732 @@
+﻿@{   
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using CRMAubonpain.Models
+@model DashBordModels
+<style type="text/css">
+    div.optWrapper
+    {
+        line-height: 30px;
+    }
+
+    .btn-bottom
+    {
+        position: fixed;
+        right: 10px;
+        bottom: 10px;
+    }
+</style>
+
+@section Scripts {
+    <script src="~/Content/js/libs/flot/jquery.flot.min.js"></script>
+    <script src="~/Content/js/libs/flot/jquery.flot.time.min.js"></script>
+    <script src="~/Content/js/libs/flot/jquery.flot.resize.min.js"></script>
+    <script src="~/Content/js/libs/flot/jquery.flot.orderBars.js"></script>
+    <script src="~/Content/js/libs/flot/jquery.flot.pie.js"></script>
+    <script src="~/Content/js/libs/flot/curvedLines.js"></script>
+    <script src="~/Content/js/libs/jquery-knob/jquery.knob.min.js"></script>
+    <script src="~/Content/js/libs/sparkline/jquery.sparkline.min.js"></script>
+    <script src="~/Content/js/libs/raphael/raphael-min.js"></script>
+    <script src="~/Content/js/libs/morris.js/morris.min.js"></script>
+    <script src="~/Content/js/libs/d3/d3.min.js"></script>
+    <script src="~/Content/js/libs/d3/d3.v3.js"></script>
+    <script src="~/Content/js/libs/rickshaw/rickshaw.min.js"></script>
+    <script src="~/Content/js/libs/canvas1.7.0/jquery.canvasjs.min.js"></script>
+    <script src="~/Content/js/core/demo/DemoCharts.js"></script>
+
+    @*    <script src="~/Scripts/jquery.signalR-2.0.3.min.js"></script>
+     <script src="signalr/hubs" type="text/javascript"></script>*@
+    <!-- END JAVASCRIPT -->
+
+    <script type="text/javascript">
+
+        function generate(type, text) {
+
+            var n = noty({
+                text: text,
+                type: type,
+                dismissQueue: true,
+                layout: 'topLeft',
+                closeWith: ['click'],
+                theme: 'relax',
+                maxVisible: 10,
+                animation: {
+                    open: 'animated bounceInLeft',
+                    close: 'animated bounceOutLeft',
+                    easing: 'swing',
+                    speed: 500
+                }
+            });
+            console.log('html: ' + n.options.id);
+        }
+
+        function generateAll() {
+            generate('warning', notification_html[0]);
+            generate('error', notification_html[1]);
+            generate('information', notification_html[2]);
+            generate('success', notification_html[3]);
+            //            generate('notification');
+            //            generate('success');
+        }
+
+        $(document).ready(function () {
+
+            //return;
+            $("#scr_top").hide();
+
+            $(window).scroll(function (event) {
+                var scroll = $(window).scrollTop();
+                $("#scr_pos").html(scroll);
+
+                if (scroll <= 200) {
+                    $("#scr_todo").fadeIn();
+                } else {
+                    $("#scr_todo").fadeOut();
+                }
+
+                if (scroll >= 700) {
+                    $("#scr_top").fadeIn();
+                } else {
+                    $("#scr_top").fadeOut();
+                }
+            });
+
+            var catTopPosition = jQuery('#anchr_todolist').offset().top;
+
+            // When #scroll is clicked
+            jQuery('#scr_todo').click(function () {
+                // Scroll down to 'catTopPosition'
+                jQuery('html, body').animate({ scrollTop: (catTopPosition - 80) }, 'slow');
+                // Stop the link from acting like a normal anchor link
+                return false;
+            });
+
+            jQuery('#scr_top').click(function () {
+                // Scroll down to 'catTopPosition'
+                jQuery('html, body').animate({ scrollTop: 0 }, 'slow');
+                // Stop the link from acting like a normal anchor link
+                return false;
+            });
+
+            getPieCaseStatus();
+            getPendingCases();
+
+            //setInterval(function () {
+            // , 10000);
+
+
+            $('#divCaseList').load('@Url.Action("CaseList", "Todolist")?WorkType=MyWork&Pages=Dasbord', function () { });
+
+            window.testSelAll2 = $('.SelUserGroup').SumoSelect({ selectAll: true, placeholder: 'Plese Select Users' });
+
+
+            $('#formgropuser').hide();
+
+            $('#ddlWork').change(function (e) {
+                var worktype = $(this).val();
+                //alert($(this).val());
+                _table.ajax.type = 'POST';
+                _table.ajax.data = function (d) {                    
+                    d.IsOpen = (($('#IcbOpen').length == 0) ? false : $('#IcbOpen').is(':checked'));
+                    d.IsClosed = (($('#IcbClosed').length == 0) ? false : $('#IcbClosed').is(':checked'));
+                    d.IsCancel = (($('#IcbCancel').length == 0) ? false : $('#IcbCancel').is(':checked'));
+                    d.StartDate = (($('#txtStartdate').length == 0) ? '' : $('#txtStartdate').val());
+                    d.EndDate = (($('#txtEnddate').length == 0) ? '' : $('#txtEnddate').val());
+                    d.strIsDate = ($('input:radio[name=inlineRadioOptions]:checked').length == 0) ? '' : $('input:radio[name=inlineRadioOptions]:checked').val();
+                    d.WorkType = worktype;
+                    d.Pages = 'Dasbord';
+                };
+
+                if(worktype == "MyWork") {
+                    $('#divCaseList').load('@Url.Action("CaseList", "Todolist")?WorkType=MyWork&Pages=Dasbord', function () { });
+                } else {
+                    $('#divCaseList').load('@Url.Action("CaseList", "Todolist")?WorkType=MyGroup&Pages=Dasbord', function () { });
+                }
+
+                @*_table.ajax.url('@Url.Action("DoloadCaseData", "Todolist")').load();*@
+
+                if ($(this).val() == 'MyWork') {
+
+                    $('#formgropuser').fadeOut(700);
+                } else {
+                    $('#formgropuser').fadeIn(700);
+                    _table.columns(function () {
+                        $('.SelUserGroup').change(function () {
+
+                            if ($(this).val() != null) {
+                                _table.columns(6).search($(this).val().toString().split(',').join('|'), true).draw();
+                            } else {
+                                var opt = new Array();
+
+                                $(".SelUserGroup option").each(function () {
+                                    opt.push($(this).val());
+                                });
+                                _table.columns(6).search(opt.join('|'), true).draw();
+                            }
+                        });
+                    });
+
+                }
+            });
+
+            //var Dashbord = $.connection.hubMessage;
+            //var groupname = '';
+
+            //Dashbord.client.addCountAnsWer = function (c) {
+            //    $('#canswer').html(c);
+
+            //};
+
+            //Dashbord.client.setChatWindow = function (strGroupName, m) {
+            //    groupname = strGroupName;
+            //    Dashbord.server.send(m, strGroupName);
+            //};
+            
+            //Dashbord.client.addCountPending = function (c) {
+            //    $('#casepending').html(c);
+            //};
+
+            //Dashbord.client.addCountAHT = function (v) {
+            //    $('#cAHT').html(v);
+            //};
+
+            //Dashbord.client.addNotReady = function (v) {
+            //    $('#NotReady').html(v);
+            //};
+
+            //Dashbord.client.genPiecasestatusByAgeint = function (o) {
+
+            //    var chart = new CanvasJS.Chart("chartContainer", {
+            //        title: {
+            //            text: ""
+            //        },
+            //        animationEnabled: false,
+            //        theme: "theme1",
+            //        interactivityEnabled: true,
+            //        showInLegend: true,
+            //        legendMarkerColor: "grey",
+            //        //colorSet: "colorSet2",
+            //        data: [//array of dataSeries              
+            //            { //dataSeries object
+
+            //                /*** Change type "column" to "bar", "area", "line" or "pie"***/
+            //                type: "column",
+            //                dataPoints: [
+            //                    { label: "Within SLA", y: o.INOVERSLA },
+            //                    { label: "Over SLA", y: o.OVERSLA },
+            //                ]
+            //            }
+            //        ]
+            //    });
+
+            //    chart.render();
+
+            //};
+
+            //Dashbord.client.genPiecasestatus = function (o) {
+            //    //alert('Today Case Status')
+            //    var charta = new CanvasJS.Chart("chartContainers",
+            //    {
+            //        title: {
+            //            text: "",
+            //            //verticalAlign: "center",
+            //            //horizontalAlign: "right",
+            //        },
+            //        exportFileName: "Pie Chart",
+            //        exportEnabled: false,
+            //        animationEnabled: false,
+            //        theme: "theme1",
+            //        colorSet: "colorSet2",
+            //        legend: {
+            //            verticalAlign: "center",
+            //            horizontalAlign: "right",
+            //            fontSize: 15,
+            //        },
+            //        data: [
+            //            {
+            //                type: "pie",
+            //                showInLegend: true,
+            //                toolTipContent: "{legendText}: <strong>{y}%</strong>",
+            //                indexLabel: "{label} {y}%",
+            //                dataPoints: [
+            //                    { y: o.OPENS, legendText: "Open", exploded: true, label: " Open" },
+            //                    { y: o.OVERSLA, legendText: "Over SLA", label: " Over SLA" },
+            //                    { y: o.CLOSES, legendText: "Close", label: " Close" },
+            //                ]
+            //            }
+            //        ]
+            //    });
+            //    charta.render();
+            //};
+
+            //$.connection.hub.start().done(function () {                
+                //Dashbord.server.countAnswer('0');
+                //Dashbord.server.countAnswer('@CRMAubonpain.Common.AppUtils.Session.User.usrID');
+                @*if ('@Html.ViewContext.Controller.ToString()'.indexOf('Dashboard') > -1);*@
+                //Dashbord.server.countAnswer($('#canswer').html());
+                // chat.server.createGroup($('#hdnUserId').val(), $(this).attr('data-userid'));
+            //}).fail(function (error) {
+            //    console.log('Invocation of start failed. Error: ' + error)
+            //});
+
+
+            //var n = noty({
+            //    text: '<div class="activity-item"> <i class="fa fa-tasks text-warning"></i> <div class="activity"> There are <a href="#">xxxxxxx</span> </div> </div>',
+            //    type: 'success',
+            //    theme: 'relax',
+            //    dismissQueue: true,
+            //    layout: "topRight",
+            //    timeout: true,
+            //    killer: true,
+            //    closeButton: false,
+            //    //closeWith:['backdrop'],
+            //    animation: {
+            //        open: 'animated flipInX', //+ window.anim.open,
+            //        close: 'animated flipOutX', // + window.anim.close
+            //        speed: 500,
+            //        easing: 'swing',
+            //    },
+            //    callback: {
+            //        onShow: function () {
+            //        },
+            //        afterShow: function () {
+
+
+            //            //setTimeout(function () {
+            //            //    n.close();
+            //            //}, 2000);
+            //        },
+            //        onClose: function () {
+            //        },
+            //        afterClose: function () {
+            //        },
+            //        onCloseClick: function () {
+            //        },
+            //    },
+            //});
+
+            $.ajaxSetup({
+                //Turnoff browser catche
+                cache: false,
+                //Default Error handling
+                error: function (jqXHR, textStatus, errorThrown) {
+                    //release any existing ui blocks
+                    $.unblockUI;
+                    // show message
+                },
+            });
+
+            $(document)
+             .ajaxStart(function () {
+                 NProgress.start();
+                 $(".block-ui-blockarea").block({
+                     //css: {
+                     //    border: 'none',
+                     //    padding: '15px',
+                     //    backgroundColor: '#FA8072',
+                     //    '-webkit-border-radius': '10px',
+                     //    '-moz-border-radius': '10px',
+                     //    opacity: .6,
+                     //    color: '#fff'
+                     //},
+
+                     message: null
+                 });
+             })
+             .ajaxStop(function () { $(".block-ui-blockarea").unblock(); NProgress.done(); $('.fade').removeClass('out'); })
+             .ajaxSend(function (event, xhr, settings) {
+                @*    $.ajax({
+                type: "POST",
+                url: '@Url.Action("IsAuthenticated", "Login")',
+                global: false,
+                async: false
+                }).done(function (msg) {
+                if (!msg) {
+                location.reload(true);
+                }
+                });*@
+
+             })
+                .ajaxSuccess(function (event, xhr, settings) {
+                });
+
+        });  // end $(document).ready..
+
+        function setFav(id) {
+            var url = '@Url.Action("updateFavourite", "Case")?id=' + id + '&isFav=false';            
+            $.post(url, function () {
+                var url = '@Url.Action("Favourite","Dashboard")';
+                $("#fav").load(url);
+            });
+        }
+
+        function getPieCaseStatus() {
+            $.ajax({
+                type: "POST",
+                url: "@Url.Action("getPieCaseStatus", "Dashboard")",
+                dataType: "json",
+                success: function (o) {
+                    if (o != null) {
+                        var charta = new CanvasJS.Chart("chartContainers",
+                        {
+                            title: {
+                                text: "",
+                                //verticalAlign: "center",
+                                //horizontalAlign: "right",
+                            },
+                            exportFileName: "Pie Chart",
+                            exportEnabled: false,
+                            animationEnabled: false,
+                            theme: "theme1",
+                            colorSet: "colorSet2",
+                            legend: {
+                                verticalAlign: "center",
+                                horizontalAlign: "right",
+                                fontSize: 15,
+                            },
+                            data: [
+                                {
+                                    type: "pie",
+                                    showInLegend: true,
+                                    toolTipContent: "{legendText}: <strong>{y}%</strong>",
+                                    indexLabel: "{label} {y}%",
+                                    dataPoints: [
+                                        { y: o.INITIATE, legendText: "Initiate", exploded: true, label: " Initiate" },
+                                        { y: o.OPENS, legendText: "Open", exploded: true, label: " Open" },
+                                        { y: o.CLOSED, legendText: "Close", label: " Close" },
+                                        { y: o.CANCEL, legendText: "Cancel", label: " Cancel" },
+                                        { y: o.NEUTRALIZED, legendText: "Neutralized", exploded: true, label: " Neutralized" },
+                                        { y: o.JOBCANCEL, legendText: "Job Cancel", exploded: true, label: " Job Cancel" },
+                                        { y: o.FAILED, legendText: "Failed", exploded: true, label: " Failed" }
+                                    ]
+                                }
+                            ]
+                        });
+                        charta.render();
+                    }
+                }
+            });
+        }
+
+        @*function getPieCaseStatus()
+        {
+            $.ajax({
+                type: "POST",
+                url: "@Url.Action("getPieCaseStatus", "Dashboard")",                
+                dataType: "json",
+                success: function (o) {
+                    if (o != null) {
+                        var charta = new CanvasJS.Chart("chartContainers",
+                        {
+                            title: {
+                                text: "",
+                                //verticalAlign: "center",
+                                //horizontalAlign: "right",
+                            },
+                            exportFileName: "Pie Chart",
+                            exportEnabled: false,
+                            animationEnabled: false,
+                            theme: "theme1",
+                            colorSet: "colorSet2",
+                            legend: {
+                                verticalAlign: "center",
+                                horizontalAlign: "right",
+                                fontSize: 15,
+                            },
+                            data: [
+                                {
+                                    type: "pie",
+                                    showInLegend: true,
+                                    toolTipContent: "{legendText}: <strong>{y}%</strong>",
+                                    indexLabel: "{label} {y}%",
+                                    dataPoints: [                                        
+                                        //{ y: o.INITIATE, legendText: "Pending", exploded: true, label: " Pending" },
+                                        //{ y: o.OPENS, legendText: "Open", exploded: true, label: " Open" },                           
+                                        //{ y: o.CLOSED, legendText: "Close", label: " Close" },
+                                        //{ y: o.CANCEL, legendText: "Cancel", label: " Cancel" }
+                                        { y: o.INITIATE, legendText: "Initiate", exploded: true, label: " Initiate" },
+                                        { y: o.OPENS, legendText: "Open", exploded: true, label: " Open" },
+                                        { y: o.CLOSED, legendText: "Close", label: " Close" },
+                                        { y: o.CANCEL, legendText: "Cancel", label: " Cancel" },
+                                        { y: o.NEUTRALIZED, legendText: "Neutralized", exploded: true, label: " Neutralized" },
+                                        { y: o.JOBCANCEL, legendText: "Job Cancel", exploded: true, label: " Job Cancel" },
+                                        { y: o.FAILED, legendText: "Failed", exploded: true, label: " Failed" }
+                                    ]
+                                }
+                            ]
+                        });
+                        charta.render();
+                    }
+                }
+            });
+        }*@
+
+        function getPendingCases() {
+            $.ajax({
+                type: "POST",
+                url: "@Url.Action("getPendingCases", "Dashboard")",
+                dataType: "json",
+                success: function (o) {
+                    if (o != null) {
+                        var chart = new CanvasJS.Chart("chartContainer", {
+                        title: {
+                            text: ""
+                        },
+                        animationEnabled: false,
+                        theme: "theme1",
+                        interactivityEnabled: true,
+                        showInLegend: true,
+                        legendMarkerColor: "grey",
+                        //colorSet: "colorSet2",
+                        data: [//array of dataSeries              
+                                { //dataSeries object
+
+                                    /*** Change type "column" to "bar", "area", "line" or "pie"***/
+                                    type: "column",
+                                    dataPoints: [
+                                        { label: "Within SLA", y: o.INOVERSLA },
+                                        { label: "Over SLA", y: o.OVERSLA },
+                                    ]
+                                }]
+                        });
+                        chart.render();
+                    }
+                }
+            });
+        }
+    </script>
+}
+<div class="section-body">
+    <br />
+    @*<div class="row">
+        <!-- BEGIN ALERT - REVENUE -->
+        <div class="col-md-3 col-sm-6">
+            <div class="card">
+                <div class="card-body no-padding">
+                    <div class="alert alert-callout alert-info no-margin">
+                        <h1 class="pull-right text-info">
+                            <i class="md md-call"></i>
+                        </h1>
+                        <strong class="text-xl" id="canswer">0</strong><br />
+                        <span class="opacity-50">Answer</span>
+                        <div class="stick-bottom-left-right">
+                            <div class="height-2 sparkline-revenue" data-line-color="#bdc1c1"></div>
+                        </div>
+                    </div>
+                </div>
+                <!--end .card-body -->
+            </div>
+            <!--end .card -->
+        </div>
+        <!--end .col -->
+        <!-- END ALERT - REVENUE -->
+        <!-- BEGIN ALERT - VISITS -->
+        <div class="col-md-3 col-sm-6">
+            <div class="card">
+                <div class="card-body no-padding">
+                    <div class="alert alert-callout alert-danger no-margin">
+                        <h1 class="pull-right text-danger">
+                            <i class="md md-phone-in-talk"></i>
+                        </h1>
+                        <strong class="text-xl" id="cAHT">0 นาที 0 วินาที</strong><br />
+                        <span class="opacity-50">AHT</span>
+                        <div class="stick-bottom-right">
+                            <div class="height-1 sparkline-visits" data-bar-color="#e5e6e6"></div>
+                        </div>
+                    </div>
+                </div>
+                <!--end .card-body -->
+            </div>
+            <!--end .card -->
+        </div>
+        <!--end .col -->
+        <!-- END ALERT - VISITS -->
+        <!-- BEGIN ALERT - BOUNCE RATES -->
+        <div class="col-md-3 col-sm-6">
+            <div class="card">
+                <div class="card-body no-padding">
+                    <div class="alert alert-callout alert-warning  no-margin">
+                        <h1 class="pull-right text-success">
+                            <i class="md md-phone-missed"></i>
+                        </h1>
+                        <strong class="text-xl" id="NotReady">0 นาที 0 วินาที</strong><br />
+                        <span class="opacity-50">Not Ready Times</span>
+                        <div class="stick-bottom-left-right">
+                            <!--<div class="progress progress-hairline no-margin">
+                                    <div class="progress-bar progress-bar-danger" style="width:43%"></div>
+                                </div>-->
+                        </div>
+                    </div>
+                </div>
+                <!--end .card-body -->
+            </div>
+            <!--end .card -->
+        </div>
+        <!--end .col -->
+        <!-- END ALERT - BOUNCE RATES -->
+        <!-- BEGIN ALERT - TIME ON SITE -->
+        <div class="col-md-3 col-sm-6">
+            <div class="card">
+                <div class="card-body no-padding">
+                    <div class="alert alert-callout alert-danger no-margin">
+                        <h1 class="pull-right text-danger">
+                            <i class="md md-warning"></i>
+                        </h1>
+                        <strong class="text-xl" id="casepending">0</strong><br />
+                        <span class="opacity-50">Cases Pending</span>
+                    </div>
+                </div>
+                <!--end .card-body -->
+            </div>
+            <!--end .card -->
+        </div>
+        <!--end .col -->
+        <!-- END ALERT - TIME ON SITE -->
+    </div>*@
+    <!--end .row-->    
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="card">
+                <div class="card-body no-padding">
+                    <!--<div class="no-padding height-1">-->
+                    <div class="alert alert-callout alert-info no-margin">
+                        <marquee><strong class="text-xl">@Model.annoucement</strong></marquee>
+                        <!--</div>-->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- BEGIN MORRIS - GROUPED BAR CHART -->
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-head">
+                    <header>Today Case Status</header>
+                   @* <div class="tools">
+                        <a class="btn btn-icon-toggle btn-refresh"><i class="md md-refresh"></i></a>
+                    </div>*@
+                </div>
+                <div class="card-body">
+                    <div class="no-padding height-8">
+                        <div id="chartContainers" style="height: 300px; width: 100%;">
+                           Please Wait...
+                        </div>
+                    </div>                   
+                </div>
+                <!--end .card-body -->
+            </div>
+            <!--end .card -->
+        </div>
+        <!--end .row -->
+
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-head">
+                    <header>
+                       All Pending Cases
+                       @* <a href="javascript:void(0);" class="btn">
+                            <sup class="badge style-danger" style="top: -13px; left: -17px; font-size: 80%;">47</sup>
+                        </a>*@
+                    </header>
+                   @* <div class="tools">
+                        <a class="btn btn-icon-toggle btn-refresh"><i class="md md-refresh"></i></a>
+                    </div>*@
+                </div>
+                <div class="card-body">
+                    <div class="no-padding height-8">
+                        <div id="chartContainer" style="height: 300px; width: 100%;">
+                            Please Wait...
+                        </div>
+                    </div>
+                </div>
+                <!--end .card-body -->
+            </div>
+            <!--end .card -->
+            <!--<em class="text-caption">Grouped bar chart</em>-->
+        </div>
+        <!--end .col -->
+    </div>
+    <!--end .row -->
+    <div class="row">
+        <!-- BEGIN MORRIS - STACKED BAR CHART -->
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-head">
+                    <header>My Favorite Cases</header>
+                </div>
+                <div id="fav" class="card-body scroll" style="height: 340px; padding-top: 5px">
+                  @{ Html.RenderAction("Favourite", "Dashboard"); }
+                </div>
+            </div>
+            <!--end #card -->
+        </div>
+        <!--end .col-md-6 -->
+
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-head">
+                    <header>Task Calendar</header>
+                    <div class="stick-top-right text-default-light" style="margin-right: 30px"><a href="@Url.Action("Index","Calendar")">View All</a></div>
+                </div>
+                <div id="taskcalendar" class="card-body scroll" style="height: 340px; padding-top: 5px">
+                    @{ Html.RenderAction("TaskCalendar", "Dashboard"); }
+                </div>
+                <!--end .card-body -->
+            </div>
+            <!--end #card -->
+        </div>
+        <!--end .col-md-6 -->
+    </div>
+    <!--end .row -->
+    <!-- END MORRIS - STACKED BAR CHART -->
+
+    <div class="row">
+        <!-- BEGIN MORRIS - STACKED BAR CHART -->
+        <div class="col-md-12">
+            <div class="card">
+                <div id="anchr_todolist" class="card-head">
+                    <header>To Do List</header>
+                    @*<div class="tools">
+                        <a class="btn btn-icon-toggle btn-refresh"><i class="md md-refresh"></i></a>
+                    </div>*@
+                    <div class="col-md-4 pull-right" style="padding-top: 6px">
+                        <div class="form-group">
+                            <select id="ddlWork" name="select1" class="form-control">
+                                <option value="MyWork" selected="selected">My Work</option>
+                                <option value="MyGroup">My Group</option>
+                            </select>
+                            <label for="ddlWork" style="top: -15px"></label>
+                        </div>
+                        <div class="form-group" id="formgropuser">
+                            <select multiple="multiple" id="ddlGroupUser" class="testSelAll form-control SelUserGroup">
+                                @foreach (var Item in Model.UserGroup)
+                                { 
+                                    <option value='@Item.usrID'>@Item.FullName</option>
+                                }
+                            </select>
+                            <label for="ddlGroupUser" style=""></label>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="col-md-8">
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12" id="divCaseList">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="pull-right opacity-75">
+    <button id="scr_todo" type="button" class="btn ink-reaction btn-primary btn-bottom"><i class="fa fa-arrow-down fa-fw"></i>&nbsp;To Do List</button>
+</div>
+<div class="pull-right opacity-75">
+    <button id="scr_top" type="button" class="btn ink-reaction btn-info btn-bottom"><i class="fa fa-arrow-up fa-fw"></i>&nbsp;Back To Top</button>
+</div>

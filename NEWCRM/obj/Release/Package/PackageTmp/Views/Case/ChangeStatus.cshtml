@@ -1,0 +1,25 @@
+﻿@{
+    ViewBag.Title = "ChangeStatus";
+    Layout = null;
+}
+
+@using NEWCRM.Models
+@model CaseModels
+<div class="form-group">
+    <select id="ddlStatus" class="form-control">
+        @foreach (var Item in Model.CaseStatus)
+        { 
+         <option value="@Item.cssID">@Item.cssName</option>
+        }
+@*        <option value="">&nbsp;</option>
+        <option value="30">Close</option>
+        <option value="40">Open</option>
+        <option value="50">Initiate</option>
+        <option value="60">Cancel</option>*@
+    </select>
+    <label for="ddlStatus">Status</label>
+</div>
+<div class="form-group">
+    <textarea  id="txtRemark" class="form-control" rows="3" placeholder=""></textarea>
+    <label for="txtRemark">Remark</label>
+</div>
