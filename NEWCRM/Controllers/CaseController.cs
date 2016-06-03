@@ -30,12 +30,17 @@ namespace NEWCRM.Controllers
         [HttpPost]
         public JsonResult CaseURLAccAuto(string Prefix,string casIDLevel3)
         {
-
-            var list = new CaseRepository().GetGroupURLAccount();
-            var accName = (from N in list
-                            where N.casLevel6.Contains(Prefix) && (N.casIDLevel2 == int.Parse(casIDLevel3))
-                           select new { N.casLevel6,N.casID });
-            return Json(accName, JsonRequestBehavior.AllowGet);
+            try {
+                var list = new CaseRepository().GetGroupURLAccount();
+                var accName = (from N in list
+                               where N.casLevel6.Contains(Prefix) && (N.casIDLevel2 == int.Parse(casIDLevel3))
+                               select new { N.casLevel6, N.casID });
+                return Json(accName, JsonRequestBehavior.AllowGet);
+            }
+            catch(Exception ex)
+            {
+                return null;
+            }
         }
         #endregion
 
@@ -72,6 +77,7 @@ namespace NEWCRM.Controllers
                 model.paymentType = ConfigurationManager.AppSettings["CASE_Payment_Type"].ToString().Split('|').ToList();
                 model.valueRange = ConfigurationManager.AppSettings["CASE_Value_Range"].ToString().Split('|').ToList();
                 model.conversationChannel = ConfigurationManager.AppSettings["CASE_Conversation_Channel"].ToString().Split('|').ToList();
+                model.list_status_reason = ConfigurationManager.AppSettings["CASE_Status_Reason"].ToString().Split('|').ToList();
             }
             catch (Exception err)
             {
@@ -109,71 +115,6 @@ namespace NEWCRM.Controllers
                 AppUtils.Session.Activity.chnID = chnID;
             }
         }
-
-        //public ActionResult NewCaseSave(NewCaseModel model)
-        //{
-        //    if (model != null)
-        //    {
-        //        try
-        //        {
-        //            if (string.IsNullOrEmpty(model.casNote))
-        //            {
-        //                throw new Exception("Case Note is empty");
-        //            }
-
-        //            List<NewCaseModel> newcase_list = new List<NewCaseModel>();
-        //            if (AppUtils.Session.NewCase != null)
-        //            {
-        //                newcase_list = AppUtils.Session.NewCase;
-        //            }
-
-        //            model.id = Convert.ToInt64(DateTime.Now.ToString("yyyyMMddHHmmssfff"));                    
-        //            model.casSummary = string.Empty;
-        //            if (model.casIDLevel1.HasValue)
-        //            {
-        //                model.casSummary = string.Format("{0}", model.casLevel1);
-        //                model.casIDSummary = model.casIDLevel1;
-        //            }
-        //            if (model.casIDLevel2.HasValue)
-        //            {
-        //                model.casSummary += string.Format(" > {0}", model.casLevel2);
-        //                model.casIDSummary = model.casIDLevel2;
-        //            }
-
-        //            var CreatedDate = DateTime.Now;
-        //            model.casCreatedOn = CreatedDate;
-        //            if (model.casSLA.HasValue && model.casSLA > 0)
-        //            {
-        //                model.casDueDate = CreatedDate.AddMinutes((double)model.casSLA);
-        //            }
-        //            model.casCreatedBy = AppUtils.Session.User.usrID;
-        //            model.casCreatedByName = AppUtils.Session.User.usrUsername;
-        //            model.casOwnerID = AppUtils.Session.User.usrID;
-        //            if (model.cbcID.HasValue)
-        //            {
-        //                if (model.cbcID == 1) {
-        //                    model.cbcName = "Phone";
-        //                } else if (model.cbcID == 2)
-        //                {
-        //                    model.cbcName = "Fax";
-        //                } else if (model.cbcID == 3)
-        //                {
-        //                    model.cbcName = "Email";
-        //                }
-        //            }
-
-        //            newcase_list.Add(model);
-        //            AppUtils.Session.NewCase = newcase_list;                    
-        //        }
-        //        catch (Exception ex)
-        //        {
-        //            Response.StatusCode = 500;
-        //            return Content(ex.Message, "text/html");
-        //        }
-        //    }
-
-        //    return PartialView("NewCaseList");
-        //}
 
         public ContentResult NewCaseSave(NewCaseModel model)
         {
@@ -263,17 +204,18 @@ namespace NEWCRM.Controllers
                         casSLA = model.casSLA,
                         casFav = model.casFav,
                         casDueDate = model.casDueDate,
-                        
+
                         cascommerceType = model.commerceType,
-                    casproductCategory = model.productCategory,
-                    casserviceCategory = model.serviceCategory,
-                    casdeliveryType = model.deliveryType,
-                    casvalueRange = model.valueRange,
-                    casconversationChannel = model.conversationChannel,
-                    casreferenceDetail = model.txtRefDetail,
-                    casdetail = model.txtDetail,
-                    //casGroupID = AppUtils.Session.User.grpID
-                };
+                        casproductCategory = model.productCategory,
+                        casserviceCategory = model.serviceCategory,
+                        casdeliveryType = model.deliveryType,
+                        casvalueRange = model.valueRange,
+                        casconversationChannel = model.conversationChannel,
+                        casreferenceDetail = model.txtRefDetail,
+                        casdetail = model.txtDetail,
+                        casstatusReason = model.cssStatusReason,
+                        //casGroupID = AppUtils.Session.User.grpID
+                    };
 
                     if (new CaseRepository().AddByEntity(data) < 1)
                     {

@@ -575,7 +575,7 @@ namespace NEWCRM.Models
         public string conversationChannel { get; set; }
         public string txtRefDetail { get; set; }
         public string txtDetail { get; set; }
-
+        public string cssStatusReason { get; set; }
     }
 
     public class CaseViewModelLocalization
@@ -587,6 +587,7 @@ namespace NEWCRM.Models
         public List<sp_GetStatus_Result> list_status { get; set; }
         public List<sp_getCaseQuery_Result> list_query { get; set; }
         public List<sp_GetCaseDetailTimeline_Result> list_timeline { get; set; }
+        public List<string> list_status_reason { get; set; }
 
         // group case 1
         public List<string> commerceType { get; set; }

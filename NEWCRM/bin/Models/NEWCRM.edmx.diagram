@@ -81,6 +81,7 @@
         <AssociationConnector Association="NEWCRMModel.Titles_Titles_Locale_FK1" ManuallyRouted="false" />
         <EntityTypeShape EntityType="NEWCRMModel.DNIS" Width="1.5" PointX="3.6339290438377905" PointY="5.7804348495697768" />
         <EntityTypeShape EntityType="NEWCRMModel.TaskScheduleLog" Width="1.5" PointX="6.375" PointY="23.75" />
+        <EntityTypeShape EntityType="NEWCRMModel.sysdiagram" Width="1.5" PointX="21.375" PointY="21.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

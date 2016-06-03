@@ -528,6 +528,9 @@
       <DependentUpon>NEWCRM.tt</DependentUpon>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
+    <Compile Include="Models\sysdiagram.cs">
+      <DependentUpon>NEWCRM.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\TaskScheduleLog.cs">
       <DependentUpon>NEWCRM.tt</DependentUpon>
     </Compile>

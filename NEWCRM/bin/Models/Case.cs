@@ -67,5 +67,6 @@ namespace NEWCRM.Models
         public string casconversationChannel { get; set; }
         public string casreferenceDetail { get; set; }
         public string casdetail { get; set; }
+        public string casstatusReason { get; set; }
     }
 }

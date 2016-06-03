@@ -322,6 +322,7 @@
       <Parameter Name="STARTDATE" Mode="In" Type="String" />
       <Parameter Name="ENDDATE" Mode="In" Type="String" />
     </FunctionImport>
+    <EntitySet Name="sysdiagrams" EntityType="NEWCRMModel.sysdiagram" />
   </EntityContainer>
   <EntityType Name="Activities">
     <Key>
@@ -596,6 +597,7 @@
     <Property Name="casconversationChannel" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
     <Property Name="casreferenceDetail" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="casdetail" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="casstatusReason" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
   </EntityType>
   <EntityType Name="CaseStatu">
     <Key>
@@ -1837,4 +1839,14 @@
     <Property Type="String" Name="casreferenceDetail" Nullable="true" MaxLength="Max" />
     <Property Type="String" Name="casdetail" Nullable="true" MaxLength="Max" />
   </ComplexType>
+  <EntityType Name="sysdiagram">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
 </Schema>

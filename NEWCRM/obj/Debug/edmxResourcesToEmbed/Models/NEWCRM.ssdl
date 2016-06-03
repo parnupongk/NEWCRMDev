@@ -270,6 +270,7 @@
     <Property Name="casconversationChannel" Type="nvarchar" MaxLength="100" />
     <Property Name="casreferenceDetail" Type="ntext" />
     <Property Name="casdetail" Type="ntext" />
+    <Property Name="casstatusReason" Type="nvarchar" MaxLength="100" />
   </EntityType>
   <EntityType Name="CaseStatus">
     <Key>
@@ -665,6 +666,16 @@
     <Property Name="pvnID" Type="int" Nullable="false" />
     <Property Name="sdtModifiedOn" Type="datetime" Nullable="false" />
     <Property Name="sdtModifiedBy" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
   </EntityType>
   <EntityType Name="TaskScheduleLog">
     <Key>
@@ -1166,6 +1177,7 @@
     <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="SubDistrict" EntityType="Self.SubDistrict" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="SubDistrict_Locale" EntityType="Self.SubDistrict_Locale" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TaskScheduleLog" EntityType="Self.TaskScheduleLog" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Titles" EntityType="Self.Titles" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Titles_Locale" EntityType="Self.Titles_Locale" Schema="dbo" store:Type="Tables" />

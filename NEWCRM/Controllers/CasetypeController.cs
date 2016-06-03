@@ -41,11 +41,11 @@ namespace NEWCRM.Controllers
             {
                 if (model.list_node[0].catParrentID > 0)
                 {
-                    ViewData["node_label"] = "Sub Type";
+                    ViewData["node_label"] = "ประเภทเรื่องรอง";
                 }
                 else
                 {
-                    ViewData["node_label"] = "Case Type";
+                    ViewData["node_label"] = "ประเภทเรื่องหลัก";
                 }
 
                 ViewData["ct_level"] = model.list_node[0].catLevel;
@@ -73,14 +73,14 @@ namespace NEWCRM.Controllers
             model.selectedID = selectedID;
 
             if (model.list_node.Count() > 0)
-            {                
+            {
                 if (model.list_node[0].catParrentID > 0)
-                {                    
-                    ViewData["node_label"] = "Sub Type";                    
+                {
+                    ViewData["node_label"] = "ประเภทเรื่องรอง";
                 }
                 else
                 {
-                    ViewData["node_label"] = "Case Type";
+                    ViewData["node_label"] = "ประเภทเรื่องหลัก";
                 }
 
                 ViewData["ct_level"] = model.list_node[0].catLevel;
