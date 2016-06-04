@@ -12,10 +12,7 @@ namespace NEWCRM.Controllers
     {
 
         #region bom
-        public ActionResult GetCaseGroup1(CaseViewModelLocalization model)
-        {
-            return PartialView("CaseGroup1", model);
-        }
+
 
         public ActionResult GetSourceType()
         {

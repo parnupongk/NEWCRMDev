@@ -13,13 +13,101 @@ namespace NEWCRM.Controllers
     {
         //
         // GET: /RepCase/
-
+        public string sDate;
+        public string eDate;
+        public string parentId;
         public ActionResult Index()
         {
-            ListRepCaseModel model = new ListRepCaseModel();
-            model.currDate = DateTime.Today;
+            
+            //ListRepCaseModel model = new ListRepCaseModel();
+            //model.currDate = DateTime.Today;
 
-            return View(model);
+            //return View(model);
+            return View();
+        }
+
+        public ActionResult repSummary(string startdate,string enddate,string catparentid)
+        {
+            Session["sDate"] = startdate;
+            Session["eDate"] = enddate;
+            Session["parentId"] = catparentid;
+
+            DateTime startDate = DateTime.ParseExact(startdate, "dd/MM/yyyy", null);
+            DateTime endDate = DateTime.ParseExact(enddate, "dd/MM/yyyy", null);
+            DataTable dt = new CaseRepository().GetCaseSummaryReport(startDate.ToString("yyyy-MM-dd"), endDate.ToString("yyyy-MM-dd"), int.Parse(catparentid));
+            ListRepCaseModel rptListCase = new ListRepCaseModel();
+            List<RepCaseSummary> rptCase = new List<RepCaseSummary>();
+            rptCase = (from DataRow dr in dt.Rows
+                       select new RepCaseSummary()
+                       {
+                           catID = dr["catID"].ToString(),
+                           catName = dr["catName"].ToString(),
+                           catParrentID = dr["catParrentID"].ToString(),
+                           counts = Convert.ToInt32(dr["counts"].ToString() == "" ?"0": dr["counts"].ToString()),
+                           Percents = Convert.ToInt32(dr["Percents"].ToString()==""?"0": dr["Percents"].ToString()),
+                           startDate = startdate,
+                           endDate = enddate
+                       }).ToList();
+
+
+            rptListCase.list_repcasesum = rptCase;
+
+            return View(rptListCase);
+        }
+
+        public ActionResult repSummaryChild(string startdate, string enddate, string catparentid)
+        {
+            DateTime startDate = DateTime.ParseExact(startdate, "dd/MM/yyyy", null);
+            DateTime endDate = DateTime.ParseExact(enddate, "dd/MM/yyyy", null);
+            DataTable dt = new CaseRepository().GetCaseSummaryReport(startDate.ToString("yyyy-MM-dd"), endDate.ToString("yyyy-MM-dd"), int.Parse(catparentid));
+            ListRepCaseModel rptListCase = new ListRepCaseModel();
+            List<RepCaseSummary> rptCase = new List<RepCaseSummary>();
+            rptCase = (from DataRow dr in dt.Rows
+                       select new RepCaseSummary()
+                       {
+                           catID = dr["catID"].ToString(),
+                           catName = dr["catName"].ToString(),
+                           catParrentID = dr["catParrentID"].ToString(),
+                           counts = Convert.ToInt32(dr["counts"].ToString() == "" ? "0" : dr["counts"].ToString()),
+                           Percents = Convert.ToInt32(dr["Percents"].ToString() == "" ? "0" : dr["Percents"].ToString()),
+                           startDate = startdate,
+                           endDate = enddate
+                       }).ToList();
+
+
+            rptListCase.list_repcasesum = rptCase;
+
+            return View(rptListCase);
+        }
+
+        public ActionResult RepCaseSummaryExport(string startdate, string enddate, string catparentid)
+        {
+            catparentid = Session["parentId"] ==null ? "0" : Session["parentId"].ToString();
+            startdate =  Session["sDate"] ==null ? "20/05/2016" : Session["sDate"].ToString();
+            enddate = Session["eDate"] ==null ? DateTime.Now.ToString("dd/MM/yyyy"): Session["eDate"].ToString();
+            DateTime startDate = DateTime.ParseExact(startdate, "dd/MM/yyyy", null);
+            DateTime endDate = DateTime.ParseExact(enddate, "dd/MM/yyyy", null);
+            DataTable dt = new CaseRepository().GetCaseSummaryReport(startDate.ToString("yyyy-MM-dd"), endDate.ToString("yyyy-MM-dd"), int.Parse(catparentid));
+            ListRepCaseModel rptListCase = new ListRepCaseModel();
+            List<RepCaseSummary> rptCase = new List<RepCaseSummary>();
+            rptCase = (from DataRow dr in dt.Rows
+                       select new RepCaseSummary()
+                       {
+                           catID = dr["catID"].ToString(),
+                           catName = dr["catName"].ToString(),
+                           catParrentID = dr["catParrentID"].ToString(),
+                           counts = Convert.ToInt32(dr["counts"].ToString() == "" ? "0" : dr["counts"].ToString()),
+                           Percents = Convert.ToInt32(dr["Percents"].ToString() == "" ? "0" : dr["Percents"].ToString()),
+                           startDate = startdate,
+                           endDate = enddate
+                       }).ToList();
+
+
+            rptListCase.list_repcasesum = rptCase;
+
+            Response.AddHeader("Content-Type", "application/vnd.ms-excel");
+            Response.AddHeader("Content-Disposition", "attachment;filename = ExcelFile.xls");
+            return View("repSummary", rptListCase);
         }
 
         [HttpPost]

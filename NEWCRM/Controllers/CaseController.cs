@@ -679,6 +679,8 @@ namespace NEWCRM.Controllers
                     ViewBag.ChangeStatus = true;
                 }
             }
+
+            if (cas.casParentID != null) ViewBag.Email = false;
                     
             return PartialView(d);
         }
@@ -1163,26 +1165,38 @@ namespace NEWCRM.Controllers
             CaseModels d = new CaseModels();
             d.MailContents = new MailContent();
             d.MailContents.MailSubject = subject;
-            d.MailContents.MailTo = getMailTo();
-            d.MailContents.MailCc = ConfigurationManager.AppSettings["CASE_MAIL_CC"];
-            d.MailContents.MailAttachments = new CaseAttachFilesRepository().getFiles(Convert.ToInt32(id));   
-                        
+            d.MailContents.MailTo = getMailTo(cas.casIDLevel2);
+            d.MailContents.MailCc = getMailCC(cas.casIDLevel2);
+            d.MailContents.MailAttachments = new CaseAttachFilesRepository().getFiles(Convert.ToInt32(id));
+
             string body = "CASE ID :" + cas.casIDName + "</br>"
                         + "CASE :" + cas.casSummary + "</br>"
                         + "CONTACT :" + contactname + "</br>"
                         + "PHONE :" + phone + "</br>"
                         + "DATE :" + cas.casCreatedOn + "</br>"
                         + "AGENT :" + user.usrFirstName + " " + user.usrLastName + "</br>"
-                        + "DUE DATE :" + cas.casDueDate + "</br>"
-                        + "NOTE :" + cas.casNote + "</br></br>";
+                        + "DUE DATE :" + cas.casDueDate + "</br>";
+                        
 
             // Add wording to end of body in this cases below
             if(cas.casIDLevel1 == 1) // สอบถามข้อมูลที่วไป
             {
+                body += "Commerce Type :" + cas.cascommerceType + "</br>";
+                body += "Product Category :" + cas.casproductCategory + "</br>";
+                body += "Service Category :" + cas.casserviceCategory + "</br>";
+                body += "Delivery Type :" + cas.casdeliveryType + "</br>";
+                body += "Value Range :" + cas.casvalueRange + "</br>";
+                body += "Conversation Channel :" + cas.casconversationChannel + "</br>";
+                body += "Reference Detail :" + cas.casreferenceDetail + "</br>";
+                body += "Detail :" + cas.casdetail + "</br>";
+                body += "NOTE :" + cas.casNote + "</br></br>";
                 body += "รบกวนผู้เกี่ยวข้อง กรุณา Feedback ผลหรือสถานะการดำเนินการ ให้ Call Center ทราบภายใน 3 วัน นับจากวันที่ได้รับเรื่อง";
             }
             if (cas.casIDLevel1 == 2 || cas.casIDLevel1 == 3) // ร้องเรียน / บริการ
             {
+                body += "Reference Detail :" + cas.casreferenceDetail + "</br>";
+                body += "Detail :" + cas.casdetail + "</br>";
+                body += "NOTE :" + cas.casNote + "</br></br>";
                 body += "รบกวนผู้เกี่ยวข้อง กรุณา Feedback ผลหรือสถานะการดำเนินการ ให้ Call Center ทราบภายใน 1 วัน นับจากวันที่ได้รับเรื่อง";
             }
 
@@ -1191,18 +1205,44 @@ namespace NEWCRM.Controllers
             return View("SendEmail", d);
         }
 
-        private string getMailTo()
+        private string getMailTo(int? casIDLevel2)
         {
-            //var now = DateTime.Now;
-            //var es = new EngineerSupportRepository().getByCurrentDateTime(now);
-            //if (es != null)
-            //{
-            //    return es.espEmail;
+            string mail = ConfigurationManager.AppSettings["CASE_Email_ETDA_To"];
+            if (casIDLevel2 > 140 && casIDLevel2 < 153)
+            {
+                if (casIDLevel2 == 141 || casIDLevel2 == 143 || casIDLevel2 == 144) mail = ConfigurationManager.AppSettings["CASE_Email_PACC_To"];
+                else if (casIDLevel2 == 142) mail = ConfigurationManager.AppSettings["CASE_Email_PACC_To"] + "," + ConfigurationManager.AppSettings["CASE_Email_TCSD_To"];
+                else if (casIDLevel2 == 145 || casIDLevel2 == 147 || casIDLevel2 == 149 || casIDLevel2 == 150) mail = ConfigurationManager.AppSettings["CASE_Email_TCSD_To"];
+                else if (casIDLevel2 == 145 || casIDLevel2 == 147 || casIDLevel2 == 149 || casIDLevel2 == 150) mail = ConfigurationManager.AppSettings["CASE_Email_TCSD_To"];
+                else if (casIDLevel2 == 146 || casIDLevel2 == 148 || casIDLevel2 == 149 || casIDLevel2 == 150) mail = ConfigurationManager.AppSettings["CASE_Email_TCSD_To"] + "," + ConfigurationManager.AppSettings["CASE_Email_FDA_To"];
+                else if (casIDLevel2 == 151) mail = ConfigurationManager.AppSettings["CASE_Email_FDA_To"];
+                //else mail = ConfigurationManager.AppSettings["CASE_Email_ETDA_To"];
+            }
+            else if (casIDLevel2 > 152 && casIDLevel2 < 162) mail =  ConfigurationManager.AppSettings["CASE_Email_ThaiCERT_To"];
+            //else if (casIDLevel2 > 161 && casIDLevel2 < 174) return ConfigurationManager.AppSettings["CASE_Email_ETDA_To"];
+            else if (casIDLevel2 > 173) mail =  ConfigurationManager.AppSettings["CASE_Email_OTO _To"];
+
+            return mail;
             //}
-            //else
-            //{
-                return ConfigurationManager.AppSettings["CASE_MAIL_TO"];
-            //}
+        }
+        private string getMailCC(int? casIDLevel2)
+        {
+            string mail = ConfigurationManager.AppSettings["CASE_Email_ETDA_CC"];
+            if (casIDLevel2 > 140 && casIDLevel2 < 153)
+            {
+                if (casIDLevel2 == 141 || casIDLevel2 == 143 || casIDLevel2 == 144) mail = ConfigurationManager.AppSettings["CASE_Email_PACC_CC"];
+                else if (casIDLevel2 == 142) mail = ConfigurationManager.AppSettings["CASE_Email_PACC_CC"] + "," + ConfigurationManager.AppSettings["CASE_Email_TCSD_CC"];
+                else if (casIDLevel2 == 145 || casIDLevel2 == 147 || casIDLevel2 == 149 || casIDLevel2 == 150) mail = ConfigurationManager.AppSettings["CASE_Email_TCSD_CC"];
+                else if (casIDLevel2 == 145 || casIDLevel2 == 147 || casIDLevel2 == 149 || casIDLevel2 == 150) mail = ConfigurationManager.AppSettings["CASE_Email_TCSD_CC"];
+                else if (casIDLevel2 == 146 || casIDLevel2 == 148 || casIDLevel2 == 149 || casIDLevel2 == 150) mail = ConfigurationManager.AppSettings["CASE_Email_TCSD_CC"] + "," + ConfigurationManager.AppSettings["CASE_Email_FDA_CC"];
+                else if (casIDLevel2 == 151) mail = ConfigurationManager.AppSettings["CASE_Email_FDA_CC"];
+                //else mail = ConfigurationManager.AppSettings["CASE_Email_ETDA_CC"];
+            }
+            else if (casIDLevel2 > 152 && casIDLevel2 < 162) mail = ConfigurationManager.AppSettings["CASE_Email_ThaiCERT_CC"];
+            //else if (casIDLevel2 > 161 && casIDLevel2 < 174) return ConfigurationManager.AppSettings["CASE_Email_ETDA_CC"];
+            else if (casIDLevel2 > 173) mail = ConfigurationManager.AppSettings["CASE_Email_OTO _CC"];
+
+            return mail;
         }
 
         //[HttpPost]

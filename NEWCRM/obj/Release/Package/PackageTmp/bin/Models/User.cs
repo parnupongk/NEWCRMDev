@@ -27,5 +27,6 @@ namespace NEWCRM.Models
         public int usrCreatedBy { get; set; }
         public System.DateTime usrModifiedOn { get; set; }
         public int usrModifiedBy { get; set; }
+        public Nullable<int> ACD { get; set; }
     }
 }

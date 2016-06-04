@@ -500,9 +500,15 @@
       <DependentUpon>NEWCRM.tt</DependentUpon>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
+    <Compile Include="Models\sp_helpdiagramdefinition1_Result.cs">
+      <DependentUpon>NEWCRM.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\sp_helpdiagramdefinition_Result.cs">
       <DependentUpon>NEWCRM.tt</DependentUpon>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Models\sp_helpdiagrams1_Result.cs">
+      <DependentUpon>NEWCRM.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\sp_helpdiagrams_Result.cs">
       <DependentUpon>NEWCRM.tt</DependentUpon>
@@ -566,6 +572,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
     <Compile Include="Models\uspReportCaseLevel_Result.cs">
+      <DependentUpon>NEWCRM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\uspReportCaseSummaryByDate_Result.cs">
       <DependentUpon>NEWCRM.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\uspReportCaseSummary_Result.cs">
@@ -2163,6 +2172,8 @@
     <Content Include="Views\Case\CaseGroup1.cshtml" />
     <Content Include="Views\Case\CaseGroup2.cshtml" />
     <Content Include="Views\Case\_CaseGroup.cshtml" />
+    <Content Include="Views\RepCase\repSummary.cshtml" />
+    <Content Include="Views\RepCase\repSummaryChild.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

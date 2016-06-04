@@ -51,14 +51,11 @@
     <EntitySet Name="Roles" EntityType="NEWCRMModel.Role" />
     <EntitySet Name="SubDistricts" EntityType="NEWCRMModel.SubDistrict" />
     <EntitySet Name="SubDistrict_Locale" EntityType="NEWCRMModel.SubDistrict_Locale" />
-    <EntitySet Name="sysdiagrams" EntityType="NEWCRMModel.sysdiagram" />
     <EntitySet Name="Titles" EntityType="NEWCRMModel.Title" />
     <EntitySet Name="Titles_Locale" EntityType="NEWCRMModel.Titles_Locale" />
     <EntitySet Name="User_Group" EntityType="NEWCRMModel.User_Group" />
     <EntitySet Name="User_Role" EntityType="NEWCRMModel.User_Role" />
     <EntitySet Name="Users" EntityType="NEWCRMModel.User" />
-    <EntitySet Name="tblViewContacts" EntityType="NEWCRMModel.tblViewContact" />
-    <EntitySet Name="View_QueryReport_SalesContactDetail" EntityType="NEWCRMModel.View_QueryReport_SalesContactDetail" />
     <AssociationSet Name="ActivityStatus_ActivityStatus_Locale_FK1" Association="NEWCRMModel.ActivityStatus_ActivityStatus_Locale_FK1">
       <End Role="ActivityStatus" EntitySet="ActivityStatus1" />
       <End Role="ActivityStatus_Locale" EntitySet="ActivityStatus_Locale" />
@@ -315,6 +312,17 @@
       <Parameter Name="usrID" Mode="In" Type="Int32" />
     </FunctionImport>
     <EntitySet Name="DNIS" EntityType="NEWCRMModel.DNIS" />
+    <EntitySet Name="TaskScheduleLogs" EntityType="NEWCRMModel.TaskScheduleLog" />
+    <FunctionImport Name="SP_Contact_Detail_RP" ReturnType="Collection(NEWCRMModel.SP_Contact_Detail_RP_Result)">
+      <Parameter Name="STARTDATE" Mode="In" Type="String" />
+      <Parameter Name="ENDDATE" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_GetGroupCaseOnlineAcc" ReturnType="Collection(String)" />
+    <FunctionImport Name="uspReportCaseLevel" ReturnType="Collection(NEWCRMModel.uspReportCaseLevel_Result)">
+      <Parameter Name="STARTDATE" Mode="In" Type="String" />
+      <Parameter Name="ENDDATE" Mode="In" Type="String" />
+    </FunctionImport>
+    <EntitySet Name="sysdiagrams" EntityType="NEWCRMModel.sysdiagram" />
   </EntityContainer>
   <EntityType Name="Activities">
     <Key>
@@ -581,6 +589,15 @@
     <Property Name="assignTo" Type="Int32" />
     <Property Name="casRemindID" Type="Int32" />
     <Property Name="casRemindStatus" Type="String" MaxLength="1" Unicode="false" FixedLength="true" />
+    <Property Name="cascommerceType" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="casproductCategory" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="casserviceCategory" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="casdeliveryType" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="casvalueRange" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="casconversationChannel" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="casreferenceDetail" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="casdetail" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="casstatusReason" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
   </EntityType>
   <EntityType Name="CaseStatu">
     <Key>
@@ -1000,16 +1017,6 @@
     <NavigationProperty Name="Locale" Relationship="NEWCRMModel.Locale_SubDistrict_Locale_FK1" FromRole="SubDistrict_Locale" ToRole="Locale" />
     <NavigationProperty Name="SubDistrict" Relationship="NEWCRMModel.SubDistrict_SubDistrict_Locale_FK1" FromRole="SubDistrict_Locale" ToRole="SubDistrict" />
   </EntityType>
-  <EntityType Name="sysdiagram">
-    <Key>
-      <PropertyRef Name="diagram_id" />
-    </Key>
-    <Property Name="name" Type="String" Nullable="false" MaxLength="128" Unicode="true" FixedLength="false" />
-    <Property Name="principal_id" Type="Int32" Nullable="false" />
-    <Property Name="diagram_id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
-    <Property Name="version" Type="Int32" />
-    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
-  </EntityType>
   <EntityType Name="Title">
     <Key>
       <PropertyRef Name="ttlID" />
@@ -1075,74 +1082,7 @@
     <Property Name="usrCreatedBy" Type="Int32" Nullable="false" />
     <Property Name="usrModifiedOn" Type="DateTime" Nullable="false" Precision="3" />
     <Property Name="usrModifiedBy" Type="Int32" Nullable="false" />
-  </EntityType>
-  <EntityType Name="tblViewContact">
-    <Key>
-      <PropertyRef Name="ctaID" />
-      <PropertyRef Name="ctyID" />
-      <PropertyRef Name="ctaDoNotEmail" />
-      <PropertyRef Name="ctaDoNotPhone" />
-      <PropertyRef Name="ctaDoNotFax" />
-      <PropertyRef Name="ctaDoNotPostalMail" />
-      <PropertyRef Name="ctaCreatedOn" />
-      <PropertyRef Name="ctaCreatedBy" />
-      <PropertyRef Name="ctaModifiedOn" />
-      <PropertyRef Name="ctaModifiedBy" />
-      <PropertyRef Name="phnNumber" />
-    </Key>
-    <Property Name="ctaID" Type="Int32" Nullable="false" />
-    <Property Name="ctyID" Type="Int32" Nullable="false" />
-    <Property Name="ctaFullName" Type="String" MaxLength="400" Unicode="true" FixedLength="false" />
-    <Property Name="ctaFirstName" Type="String" MaxLength="200" Unicode="true" FixedLength="false" />
-    <Property Name="ctaLastName" Type="String" MaxLength="200" Unicode="true" FixedLength="false" />
-    <Property Name="ctaAvatar" Type="String" MaxLength="2000" Unicode="true" FixedLength="false" />
-    <Property Name="ttlID" Type="Int32" />
-    <Property Name="ctaDOB" Type="DateTime" Precision="3" />
-    <Property Name="gndID" Type="Int32" />
-    <Property Name="marID" Type="Int32" />
-    <Property Name="ctaNote" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
-    <Property Name="ctaRating" Type="Int16" />
-    <Property Name="ctaEmail" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
-    <Property Name="ctaWebSite" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
-    <Property Name="ctaFacebook" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
-    <Property Name="ctaTwitter" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
-    <Property Name="ctaDoNotEmail" Type="Boolean" Nullable="false" />
-    <Property Name="ctaDoNotPhone" Type="Boolean" Nullable="false" />
-    <Property Name="ctaDoNotFax" Type="Boolean" Nullable="false" />
-    <Property Name="ctaDoNotPostalMail" Type="Boolean" Nullable="false" />
-    <Property Name="ctaCareer" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
-    <Property Name="ctaEmo1" Type="Int32" />
-    <Property Name="ctaEmo2" Type="Int32" />
-    <Property Name="ctaEmo3" Type="Int32" />
-    <Property Name="ctaCreatedOn" Type="DateTime" Nullable="false" Precision="3" />
-    <Property Name="ctaCreatedBy" Type="Int32" Nullable="false" />
-    <Property Name="ctaModifiedOn" Type="DateTime" Nullable="false" Precision="3" />
-    <Property Name="ctaModifiedBy" Type="Int32" Nullable="false" />
-    <Property Name="phnNumber" Type="String" Nullable="false" MaxLength="100" Unicode="true" FixedLength="false" />
-    <Property Name="adrSummary" Type="String" MaxLength="2000" Unicode="true" FixedLength="false" />
-  </EntityType>
-  <EntityType Name="View_QueryReport_SalesContactDetail">
-    <Key>
-      <PropertyRef Name="casCreatedOn" />
-      <PropertyRef Name="chnName" />
-      <PropertyRef Name="SubCategory2" />
-      <PropertyRef Name="cssName" />
-      <PropertyRef Name="AGENTNAME" />
-    </Key>
-    <Property Name="casIDName" Type="String" MaxLength="12" Unicode="true" FixedLength="false" />
-    <Property Name="casCreatedOn" Type="DateTime" Nullable="false" Precision="3" />
-    <Property Name="chnName" Type="String" Nullable="false" MaxLength="100" Unicode="true" FixedLength="false" />
-    <Property Name="ctaFullName" Type="String" MaxLength="400" Unicode="true" FixedLength="false" />
-    <Property Name="actChannelData" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
-    <Property Name="adrSummary" Type="String" MaxLength="2000" Unicode="true" FixedLength="false" />
-    <Property Name="DEPARTMENT" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
-    <Property Name="CATEGORY" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
-    <Property Name="SubCategory1" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
-    <Property Name="SubCategory2" Type="String" Nullable="false" MaxLength="255" Unicode="true" FixedLength="false" />
-    <Property Name="DETAIL" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
-    <Property Name="cssName" Type="String" Nullable="false" MaxLength="100" Unicode="true" FixedLength="false" />
-    <Property Name="ClosedDate" Type="DateTime" Precision="3" />
-    <Property Name="AGENTNAME" Type="String" Nullable="false" MaxLength="511" Unicode="true" FixedLength="false" />
+    <Property Name="ACD" Type="Int32" />
   </EntityType>
   <Association Name="ActivityStatus_ActivityStatus_Locale_FK1">
     <End Role="ActivityStatus" Type="NEWCRMModel.ActivityStatus" Multiplicity="1" />
@@ -1812,5 +1752,101 @@
     <Property Type="Int32" Name="objID" Nullable="false" />
     <Property Type="String" Name="DNIS_Name" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Type="Int32" Name="Is_Active" />
+  </EntityType>
+  <EntityType Name="TaskScheduleLog">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TaskName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="TaskStart" Type="DateTime" Precision="3" />
+    <Property Name="TaskEnd" Type="DateTime" Precision="3" />
+    <Property Name="TaskStatus" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+    <Property Name="TaskDesc" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <ComplexType Name="SP_Contact_Detail_RP_Result">
+    <Property Type="Int32" Name="CAS_ID" Nullable="false" />
+    <Property Type="String" Name="CASE_ID" Nullable="true" MaxLength="12" />
+    <Property Type="String" Name="CREATEDATE" Nullable="true" MaxLength="10" />
+    <Property Type="String" Name="CREATETIME" Nullable="true" MaxLength="10" />
+    <Property Type="String" Name="CHANEL" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="PHONE_NUMBER" Nullable="true" MaxLength="255" />
+    <Property Type="String" Name="CONT_NAME" Nullable="true" MaxLength="400" />
+    <Property Type="String" Name="CASE_SUMMARY" Nullable="true" MaxLength="255" />
+    <Property Type="String" Name="NOTE" Nullable="true" MaxLength="Max" />
+    <Property Type="String" Name="CASE_STATUS" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="CREATEBY" Nullable="false" MaxLength="511" />
+    <Property Type="DateTime" Name="CASMODIFIEDON" Nullable="false" Precision="23" />
+    <Property Type="String" Name="MODIFIEDBY" Nullable="true" MaxLength="511" />
+    <Property Type="String" Name="CLOSEDATE" Nullable="true" MaxLength="21" />
+  </ComplexType>
+  <ComplexType Name="uspReportCaseLevel_Result">
+    <Property Type="String" Name="chnID" Nullable="false" MaxLength="2" />
+    <Property Type="String" Name="cssName" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="casCreatedByName" Nullable="false" MaxLength="511" />
+    <Property Type="String" Name="casOwnerByName" Nullable="false" MaxLength="511" />
+    <Property Type="Int32" Name="casID" Nullable="false" />
+    <Property Type="Int32" Name="actID" Nullable="false" />
+    <Property Type="Int32" Name="ctaID" Nullable="false" />
+    <Property Type="String" Name="casIDName" Nullable="true" MaxLength="12" />
+    <Property Type="Int32" Name="casParentID" Nullable="true" />
+    <Property Type="Int32" Name="casDuration" Nullable="true" />
+    <Property Type="DateTime" Name="casDueDate" Nullable="true" Precision="23" />
+    <Property Type="DateTime" Name="casPrevDueDate" Nullable="true" Precision="23" />
+    <Property Type="Int32" Name="casIDLevel1" Nullable="true" />
+    <Property Type="Int32" Name="casIDLevel2" Nullable="true" />
+    <Property Type="Int32" Name="casIDLevel3" Nullable="true" />
+    <Property Type="Int32" Name="casIDLevel4" Nullable="true" />
+    <Property Type="Int32" Name="casIDLevel5" Nullable="true" />
+    <Property Type="Int32" Name="casIDLevel6" Nullable="true" />
+    <Property Type="Int32" Name="casIDLevel7" Nullable="true" />
+    <Property Type="Int32" Name="casIDLevel8" Nullable="true" />
+    <Property Type="String" Name="casLevel1" Nullable="true" MaxLength="255" />
+    <Property Type="String" Name="casLevel2" Nullable="true" MaxLength="255" />
+    <Property Type="String" Name="casLevel3" Nullable="true" MaxLength="255" />
+    <Property Type="String" Name="casLevel4" Nullable="true" MaxLength="255" />
+    <Property Type="String" Name="casLevel5" Nullable="true" MaxLength="255" />
+    <Property Type="String" Name="casLevel6" Nullable="true" MaxLength="255" />
+    <Property Type="String" Name="casLevel7" Nullable="true" MaxLength="255" />
+    <Property Type="String" Name="casLevel8" Nullable="true" MaxLength="255" />
+    <Property Type="Int32" Name="casIDSummary" Nullable="false" />
+    <Property Type="String" Name="casSummary" Nullable="true" MaxLength="255" />
+    <Property Type="String" Name="casNote" Nullable="true" MaxLength="Max" />
+    <Property Type="Int32" Name="cbtID" Nullable="true" />
+    <Property Type="Int32" Name="cbcID" Nullable="true" />
+    <Property Type="String" Name="CallbackInfo" Nullable="true" MaxLength="255" />
+    <Property Type="DateTime" Name="CallbackDT" Nullable="true" Precision="23" />
+    <Property Type="Int32" Name="casSLA" Nullable="true" />
+    <Property Type="Int32" Name="priID" Nullable="false" />
+    <Property Type="Int32" Name="cssID" Nullable="false" />
+    <Property Type="Int32" Name="casEmo" Nullable="true" />
+    <Property Type="Int32" Name="casGroupID" Nullable="true" />
+    <Property Type="Int32" Name="casOwnerID" Nullable="true" />
+    <Property Type="DateTime" Name="casCreatedOn" Nullable="false" Precision="23" />
+    <Property Type="Int32" Name="casCreatedBy" Nullable="false" />
+    <Property Type="DateTime" Name="casModifiedOn" Nullable="false" Precision="23" />
+    <Property Type="Int32" Name="casModifiedBy" Nullable="false" />
+    <Property Type="Boolean" Name="casFav" Nullable="false" />
+    <Property Type="Int32" Name="assignTo" Nullable="true" />
+    <Property Type="Int32" Name="casRemindID" Nullable="true" />
+    <Property Type="String" Name="casRemindStatus" Nullable="true" MaxLength="1" />
+    <Property Type="String" Name="cascommerceType" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="casproductCategory" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="casserviceCategory" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="casdeliveryType" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="casvalueRange" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="casconversationChannel" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="casreferenceDetail" Nullable="true" MaxLength="Max" />
+    <Property Type="String" Name="casdetail" Nullable="true" MaxLength="Max" />
+  </ComplexType>
+  <EntityType Name="sysdiagram">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
   </EntityType>
 </Schema>

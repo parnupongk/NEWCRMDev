@@ -78,15 +78,14 @@ namespace NEWCRM.Models
         public DbSet<Role> Roles { get; set; }
         public DbSet<SubDistrict> SubDistricts { get; set; }
         public DbSet<SubDistrict_Locale> SubDistrict_Locale { get; set; }
-        public DbSet<sysdiagram> sysdiagrams { get; set; }
         public DbSet<Title> Titles { get; set; }
         public DbSet<Titles_Locale> Titles_Locale { get; set; }
         public DbSet<User_Group> User_Group { get; set; }
         public DbSet<User_Role> User_Role { get; set; }
         public DbSet<User> Users { get; set; }
-        public DbSet<tblViewContact> tblViewContacts { get; set; }
-        public DbSet<View_QueryReport_SalesContactDetail> View_QueryReport_SalesContactDetail { get; set; }
         public DbSet<DNIS> DNIS { get; set; }
+        public DbSet<TaskScheduleLog> TaskScheduleLogs { get; set; }
+        public DbSet<sysdiagram> sysdiagrams { get; set; }
     
         public virtual ObjectResult<sp_ActivityChannelSummary_Result> sp_ActivityChannelSummary()
         {
@@ -675,6 +674,37 @@ namespace NEWCRM.Models
                 new ObjectParameter("usrID", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_getTotalTodolistByChannel_Result>("sp_getTotalTodolistByChannel", usrIDParameter);
+        }
+    
+        public virtual ObjectResult<SP_Contact_Detail_RP_Result> SP_Contact_Detail_RP(string sTARTDATE, string eNDDATE)
+        {
+            var sTARTDATEParameter = sTARTDATE != null ?
+                new ObjectParameter("STARTDATE", sTARTDATE) :
+                new ObjectParameter("STARTDATE", typeof(string));
+    
+            var eNDDATEParameter = eNDDATE != null ?
+                new ObjectParameter("ENDDATE", eNDDATE) :
+                new ObjectParameter("ENDDATE", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_Contact_Detail_RP_Result>("SP_Contact_Detail_RP", sTARTDATEParameter, eNDDATEParameter);
+        }
+    
+        public virtual ObjectResult<string> sp_GetGroupCaseOnlineAcc()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("sp_GetGroupCaseOnlineAcc");
+        }
+    
+        public virtual ObjectResult<uspReportCaseLevel_Result> uspReportCaseLevel(string sTARTDATE, string eNDDATE)
+        {
+            var sTARTDATEParameter = sTARTDATE != null ?
+                new ObjectParameter("STARTDATE", sTARTDATE) :
+                new ObjectParameter("STARTDATE", typeof(string));
+    
+            var eNDDATEParameter = eNDDATE != null ?
+                new ObjectParameter("ENDDATE", eNDDATE) :
+                new ObjectParameter("ENDDATE", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<uspReportCaseLevel_Result>("uspReportCaseLevel", sTARTDATEParameter, eNDDATEParameter);
         }
     }
 }

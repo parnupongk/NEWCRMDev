@@ -59,5 +59,14 @@ namespace NEWCRM.Models
         public Nullable<int> assignTo { get; set; }
         public Nullable<int> casRemindID { get; set; }
         public string casRemindStatus { get; set; }
+        public string cascommerceType { get; set; }
+        public string casproductCategory { get; set; }
+        public string casserviceCategory { get; set; }
+        public string casdeliveryType { get; set; }
+        public string casvalueRange { get; set; }
+        public string casconversationChannel { get; set; }
+        public string casreferenceDetail { get; set; }
+        public string casdetail { get; set; }
+        public string casstatusReason { get; set; }
     }
 }
