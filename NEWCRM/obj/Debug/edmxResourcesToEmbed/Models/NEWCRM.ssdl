@@ -1005,6 +1005,10 @@
     <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
     <Parameter Name="owner_id" Type="int" Mode="In" />
   </Function>
+  <Function Name="sp_Get_CaseDetailById" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="CASEID" Type="decimal" Mode="In" />
+    <Parameter Name="LANG" Type="nvarchar" Mode="In" />
+  </Function>
   <Function Name="sp_Get_Casepending" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="p_Now" Type="nvarchar" Mode="In" />
   </Function>

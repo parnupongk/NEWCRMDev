@@ -826,5 +826,31 @@ namespace NEWCRM.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<uspReportCaseSummaryByDate_Result>("uspReportCaseSummaryByDate", sTARTDATEParameter, eNDDATEParameter, catParrentIDParameter);
         }
+    
+        public virtual ObjectResult<sp_GetCaseDetailById1_Result> sp_GetCaseDetailById1(Nullable<decimal> cASEID, string lANG)
+        {
+            var cASEIDParameter = cASEID.HasValue ?
+                new ObjectParameter("CASEID", cASEID) :
+                new ObjectParameter("CASEID", typeof(decimal));
+    
+            var lANGParameter = lANG != null ?
+                new ObjectParameter("LANG", lANG) :
+                new ObjectParameter("LANG", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_GetCaseDetailById1_Result>("sp_GetCaseDetailById1", cASEIDParameter, lANGParameter);
+        }
+    
+        public virtual ObjectResult<sp_Get_CaseDetailById_Result> sp_Get_CaseDetailById(Nullable<decimal> cASEID, string lANG)
+        {
+            var cASEIDParameter = cASEID.HasValue ?
+                new ObjectParameter("CASEID", cASEID) :
+                new ObjectParameter("CASEID", typeof(decimal));
+    
+            var lANGParameter = lANG != null ?
+                new ObjectParameter("LANG", lANG) :
+                new ObjectParameter("LANG", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_Get_CaseDetailById_Result>("sp_Get_CaseDetailById", cASEIDParameter, lANGParameter);
+        }
     }
 }

@@ -404,6 +404,9 @@
     <Compile Include="Models\SP_Contact_Detail_RP_Result.cs">
       <DependentUpon>NEWCRM.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\sp_GetCaseDetailById1_Result.cs">
+      <DependentUpon>NEWCRM.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\sp_GetCaseDetailById_Result.cs">
       <DependentUpon>NEWCRM.tt</DependentUpon>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -491,6 +494,9 @@
     <Compile Include="Models\sp_GetUser_Result.cs">
       <DependentUpon>NEWCRM.tt</DependentUpon>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Models\sp_Get_CaseDetailById_Result.cs">
+      <DependentUpon>NEWCRM.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\sp_Get_Casepending_ByAgent_Result.cs">
       <DependentUpon>NEWCRM.tt</DependentUpon>
