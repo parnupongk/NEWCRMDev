@@ -1,160 +1,162 @@
-﻿@model NEWCRM.Models.ListRepCaseModel
-@{
-    Layout = "~/Views/Shared/_Layout.cshtml";
-}
-
-@section Scripts {
-    <script type="text/javascript">
-        $(document).ready(function () {
-            $('.field-date').datepicker({ autoclose: true, todayHighlight: true, format: "dd/mm/yyyy" });
-
-            var today = new Date();
-            var dd = today.getDate();
-            var mm = today.getMonth() + 1; //January is 0!
-
-            var yyyy = today.getFullYear();
-            if (dd < 10) {
-                dd = '0' + dd
-            }
-            if (mm < 10) {
-                mm = '0' + mm
-            }
-            var today = dd + '/' + mm + '/' + yyyy;
-            $("#startdate").val(today);
-            $("#enddate").val(today);
-        });
+﻿@*
 
 
-        function nextctnode(ref) {
-            var message = $(ref).find(':selected').attr('data-dialogue');
-            var sla = $(ref).find(':selected').attr('data-sla');
-            var slaid = $(ref).find(':selected').attr('data-slaid');
-            var current_divnode = $(ref).parents().eq(1).attr("id");
-            var current_lv = current_divnode.split("_")[1];
-            var next_lv = parseInt(current_lv) + 1;
 
-            //alert(current_lv);
+        @section Scripts {
+            <script type="text/javascript">
+                $(document).ready(function () {
+                    $('.field-date').datepicker({ autoclose: true, todayHighlight: true, format: "dd/mm/yyyy" });
 
-            if ($(ref).val() === "") {
-                // Show - Hide another div
-                if (current_lv == 1) {
-                    $("#ctdiv_2").empty().hide();
-                    $("#ctdiv_3").empty().hide();
-                    $("#ctdiv_4").empty().hide();
-                    $("#ctdiv_5").empty().hide();
-                }
-                if (current_lv == 2) {
-                    $("#ctdiv_3").empty().hide();
-                    $("#ctdiv_4").empty().hide();
-                    $("#ctdiv_5").empty().hide();
-                }
-                if (current_lv == 3) {
-                    $("#ctdiv_4").empty().hide();
-                    $("#ctdiv_5").empty().hide();
-                }
-                if (current_lv == 4) {
-                    $("#ctdiv_5").empty().hide();
-                }
-                $("#ctdiv_opt").hide();
-                $("#casSLA").val('');
-            } else {
-                if (current_lv == 1) {
-                    $("#ctdiv_2").empty().hide();
-                    $("#ctdiv_3").empty().hide();
-                    $("#ctdiv_4").empty().hide();
-                    $("#ctdiv_5").empty().hide();
-                    $("#ctdiv_6").hide();
-                    $("#ctdiv_opt").hide();
-                    $("#casSLA").val('');
-                }
-                if (current_lv == 2) {
-                    $("#ctdiv_3").empty().hide();
-                    $("#ctdiv_4").empty().hide();
-                    $("#ctdiv_5").empty().hide();
-                    $("#ctdiv_opt").hide();
-                }
-                if (current_lv == 3) {
-                    $("#ctdiv_4").empty().hide();
-                    $("#ctdiv_5").empty().hide();
-                    $("#ctdiv_opt").hide();
-                }
-                if (current_lv == 4) {
-                    $("#ctdiv_5").empty().hide();
-                    $("#ctdiv_opt").hide();
+                    var today = new Date();
+                    var dd = today.getDate();
+                    var mm = today.getMonth() + 1; //January is 0!
+
+                    var yyyy = today.getFullYear();
+                    if (dd < 10) {
+                        dd = '0' + dd
+                    }
+                    if (mm < 10) {
+                        mm = '0' + mm
+                    }
+                    var today = dd + '/' + mm + '/' + yyyy;
+                    $("#startdate").val(today);
+                    $("#enddate").val(today);
+                });
+
+
+                function nextctnode(ref) {
+                    var message = $(ref).find(':selected').attr('data-dialogue');
+                    var sla = $(ref).find(':selected').attr('data-sla');
+                    var slaid = $(ref).find(':selected').attr('data-slaid');
+                    var current_divnode = $(ref).parents().eq(1).attr("id");
+                    var current_lv = current_divnode.split("_")[1];
+                    var next_lv = parseInt(current_lv) + 1;
+
+                    //alert(current_lv);
+
+                    if ($(ref).val() === "") {
+                        // Show - Hide another div
+                        if (current_lv == 1) {
+                            $("#ctdiv_2").empty().hide();
+                            $("#ctdiv_3").empty().hide();
+                            $("#ctdiv_4").empty().hide();
+                            $("#ctdiv_5").empty().hide();
+                        }
+                        if (current_lv == 2) {
+                            $("#ctdiv_3").empty().hide();
+                            $("#ctdiv_4").empty().hide();
+                            $("#ctdiv_5").empty().hide();
+                        }
+                        if (current_lv == 3) {
+                            $("#ctdiv_4").empty().hide();
+                            $("#ctdiv_5").empty().hide();
+                        }
+                        if (current_lv == 4) {
+                            $("#ctdiv_5").empty().hide();
+                        }
+                        $("#ctdiv_opt").hide();
+                        $("#casSLA").val('');
+                    } else {
+                        if (current_lv == 1) {
+                            $("#ctdiv_2").empty().hide();
+                            $("#ctdiv_3").empty().hide();
+                            $("#ctdiv_4").empty().hide();
+                            $("#ctdiv_5").empty().hide();
+                            $("#ctdiv_6").hide();
+                            $("#ctdiv_opt").hide();
+                            $("#casSLA").val('');
+                        }
+                        if (current_lv == 2) {
+                            $("#ctdiv_3").empty().hide();
+                            $("#ctdiv_4").empty().hide();
+                            $("#ctdiv_5").empty().hide();
+                            $("#ctdiv_opt").hide();
+                        }
+                        if (current_lv == 3) {
+                            $("#ctdiv_4").empty().hide();
+                            $("#ctdiv_5").empty().hide();
+                            $("#ctdiv_opt").hide();
+                        }
+                        if (current_lv == 4) {
+                            $("#ctdiv_5").empty().hide();
+                            $("#ctdiv_opt").hide();
+                        }
+
+                        // Set casLevel
+                        $("#casLevel" + current_lv).val($(ref).find("option:selected").text());
+                        // Show Next Node
+                        //if($(ref).find("option:selected").val() === '2') {
+                        //alert($("#casLevel" + current_lv).text);
+                        //alert(sla);
+                        if (sla === '' || typeof sla == 'undefined') {
+                            //alert(lv_current.attr("id"));
+                            $("#ctdiv_" + next_lv).html('<div class="col-sm-3">&nbsp;</div><div class="col-sm-9 text-warning text-medium">Loading...</div>').slideDown(200);
+                            var id = $(ref).val();
+                            //alert(id);
+                            var url = '@Url.Action("getCaseTypeNodeSelectionRepCase", "Casetype")/' + id;
+                            $.post(url, function (data) {
+                                $("#ctdiv_" + next_lv).html(data);
+                            });
+
+                            if (id > 137) {
+                                //alert(id);
+                                $("#ctdiv_6").show();
+                                $("#casURLAccount").focus();
+                            }
+                        } else {
+
+                            //$("#casURLAccount").focus();
+                            //$("#casNote").focus();
+                            $("#sla").text(sla);
+                            $("#casSLA").val(sla);
+                            $("#slaID").val(slaid);
+                            $("#ctdiv_opt").show();
+                        }
+                    }
+
+                    if (jQuery.trim(message).length > 0) {
+                        openInfoDialog(message);
+                    } else {
+                        toastr.clear();
+                    }
                 }
 
-                // Set casLevel
-                $("#casLevel" + current_lv).val($(ref).find("option:selected").text());
-                // Show Next Node
-                //if($(ref).find("option:selected").val() === '2') {
-                //alert($("#casLevel" + current_lv).text);
-                //alert(sla);
-                if (sla === '' || typeof sla == 'undefined') {
-                    //alert(lv_current.attr("id"));
-                    $("#ctdiv_" + next_lv).html('<div class="col-sm-3">&nbsp;</div><div class="col-sm-9 text-warning text-medium">Loading...</div>').slideDown(200);
-                    var id = $(ref).val();
-                    //alert(id);
-                    var url = '@Url.Action("getCaseTypeNodeSelectionRepCase", "Casetype")/' + id;
-                    $.post(url, function (data) {
-                        $("#ctdiv_" + next_lv).html(data);
+                function beginQuery() {
+                    $(".fv").each(function () {
+                        var v = $(this).val();
+                        if (v == '') {
+                            $(this).focus();
+                        }
                     });
 
-                    if (id > 137) {
-                        //alert(id);
-                        $("#ctdiv_6").show();
-                        $("#casURLAccount").focus();
-                    }
-                } else {
-
-                    //$("#casURLAccount").focus();
-                    //$("#casNote").focus();
-                    $("#sla").text(sla);
-                    $("#casSLA").val(sla);
-                    $("#slaID").val(slaid);
-                    $("#ctdiv_opt").show();
+                    $("#getQuery").fadeOut(300);
                 }
-            }
 
-            if (jQuery.trim(message).length > 0) {
-                openInfoDialog(message);
-            } else {
-                toastr.clear();
-            }
-        }
-
-        function beginQuery() {
-            $(".fv").each(function () {
-                var v = $(this).val();
-                if (v == '') {
-                    $(this).focus();
+                function successQuery() {
+                    $('#datatable1').DataTable({
+                        "dom": 'lCfrtip',
+                        "order": [[0, "asc"]],
+                        "language": {
+                            "lengthMenu": '_MENU_ entries per page',
+                            "search": '<i class="fa fa-search"></i>',
+                            "paginate": {
+                                "previous": '<i class="fa fa-angle-left"></i>',
+                                "next": '<i class="fa fa-angle-right"></i>'
+                            }
+                        }
+                    });
+                    $("#getQuery").fadeIn(300);
                 }
-            });
 
-            $("#getQuery").fadeOut(300);
-        }
-
-        function successQuery() {
-            $('#datatable1').DataTable({
-                "dom": 'lCfrtip',
-                "order": [[0, "asc"]],
-                "language": {
-                    "lengthMenu": '_MENU_ entries per page',
-                    "search": '<i class="fa fa-search"></i>',
-                    "paginate": {
-                        "previous": '<i class="fa fa-angle-left"></i>',
-                        "next": '<i class="fa fa-angle-right"></i>'
-                    }
+                function failureQuery(data) {
+                    openErrorDialog(data.responseText);
                 }
-            });
-            $("#getQuery").fadeIn(300);
+            </script>
         }
+*@
 
-        function failureQuery(data) {
-            openErrorDialog(data.responseText);
-        }
-    </script>
-}
-
+@Html.Partial("repSummary");
+@*
 <div class="section-body">
     <div class="card">
         <div class="card-head style-primary">
@@ -271,4 +273,4 @@
         <div id="getQuery" class="col-lg-12"></div>
 
     </div>
-</div>
+</div>*@
