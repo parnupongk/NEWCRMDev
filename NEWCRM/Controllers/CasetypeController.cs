@@ -62,7 +62,7 @@ namespace NEWCRM.Controllers
             var list_casetype = Common.AppUtils.Session.CaseTypes;
             var nodes = from ct in list_casetype
                        where ct.catParrentID == id
-                       orderby ct.catName
+                       orderby ct.catOrder
                        select ct;
 
             var model = new CasetypeViewModel();

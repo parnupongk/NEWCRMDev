@@ -1,7 +1,7 @@
 ﻿
-<div class="row bg-warning">
+<div class="row">
     <label class="col-sm-3 control-label">ประเภทการซื้อขาย</label>
-    <div class="col-sm-9 margin-bottom-xl">
+    <div class="col-sm-9 margin-bottom-xl bg-warning">
         <select id="commerceType" name="commerceType" class="form-control">
 
             @foreach (var item in Model.commerceType)
@@ -12,7 +12,7 @@
     </div>
     <br />
     <label class="col-sm-3 control-label">ประเภทสินค้า </label>
-    <div class="col-sm-9 margin-bottom-xl">
+    <div class="col-sm-9 margin-bottom-xl bg-warning">
         <select id="productCategory" name="productCategory" class="form-control">
 
             @foreach (var item in Model.productCategory)
@@ -24,7 +24,7 @@
     </div>
     <br />
     <label class="col-sm-3 control-label">ประเภทบริการ</label>
-    <div class="col-sm-9 margin-bottom-xl">
+    <div class="col-sm-9 margin-bottom-xl bg-warning">
         <select id="serviceCategory" name="serviceCategory" class="form-control">
 
             @foreach (var item in Model.serviceCategory)
@@ -35,7 +35,7 @@
     </div>
     <br />
     <label class="col-sm-3 control-label">วิธีการส่งสินค้า </label>
-    <div class="col-sm-9 margin-bottom-xl">
+    <div class="col-sm-9 margin-bottom-xl bg-warning">
         <select id="deliveryType" name="deliveryType" class="form-control">
 
             @foreach (var item in Model.deliveryType)
@@ -46,7 +46,7 @@
     </div>
     <br />
     <label class="col-sm-3 control-label">มลูค่าการซื้อขาย </label>
-    <div class="col-sm-9 margin-bottom-xl">
+    <div class="col-sm-9 margin-bottom-xl bg-warning">
         <select id="valueRange" name="valueRange" class="form-control">
 
             @foreach (var item in Model.valueRange)
@@ -57,7 +57,7 @@
     </div>
     <br />
     <label class="col-sm-3 control-label">ช่องทางการติดต่อ</label>
-    <div class="col-sm-9 margin-bottom-xl">
+    <div class="col-sm-9 margin-bottom-xl bg-warning">
         <select id="conversationChannel" name="conversationChannel" class="form-control">
 
             @foreach (var item in Model.conversationChannel)

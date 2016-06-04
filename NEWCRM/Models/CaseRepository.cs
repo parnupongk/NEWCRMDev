@@ -238,7 +238,7 @@ namespace NEWCRM.Models
 
                 };
 
-                var result = this.ExecStoredProcedure<sp_Get_CaseDetailById_Result>("sp_GetCaseDetailById", ps);
+                var result = this.ExecStoredProcedure<sp_Get_CaseDetailById_Result>("sp_Get_CaseDetailById", ps);
                 if (result.Count > 0)
                     return result[0];
                 return new sp_Get_CaseDetailById_Result();

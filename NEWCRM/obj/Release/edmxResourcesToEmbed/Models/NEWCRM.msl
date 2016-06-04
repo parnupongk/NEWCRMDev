@@ -797,47 +797,6 @@
       </ResultMapping>
     </FunctionImportMapping>
     <FunctionImportMapping FunctionImportName="sp_GetAssetBySerialNo" FunctionName="CRMABPModel.Store.sp_GetAssetBySerialNo" />
-    <FunctionImportMapping FunctionImportName="sp_GetCaseDetailById" FunctionName="CRMABPModel.Store.sp_GetCaseDetailById">
-      <ResultMapping>
-        <ComplexTypeMapping TypeName="NEWCRMModel.sp_GetCaseDetailById_Result">
-          <ScalarProperty Name="CASID" ColumnName="CASID" />
-          <ScalarProperty Name="CONTACTID" ColumnName="CONTACTID" />
-          <ScalarProperty Name="CONTACTCODE" ColumnName="CONTACTCODE" />
-          <ScalarProperty Name="CASEIDNO" ColumnName="CASEIDNO" />
-          <ScalarProperty Name="ctaID" ColumnName="ctaID" />
-          <ScalarProperty Name="CTAFULLNAME" ColumnName="CTAFULLNAME" />
-          <ScalarProperty Name="CTAEMO1" ColumnName="CTAEMO1" />
-          <ScalarProperty Name="CTAEMO2" ColumnName="CTAEMO2" />
-          <ScalarProperty Name="CTAEMO3" ColumnName="CTAEMO3" />
-          <ScalarProperty Name="PHONES" ColumnName="PHONES" />
-          <ScalarProperty Name="CTAEMAIL" ColumnName="CTAEMAIL" />
-          <ScalarProperty Name="CTAFACEBOOK" ColumnName="CTAFACEBOOK" />
-          <ScalarProperty Name="CTATWITTER" ColumnName="CTATWITTER" />
-          <ScalarProperty Name="ADDRESS" ColumnName="ADDRESS" />
-          <ScalarProperty Name="CASSUMMARY" ColumnName="CASSUMMARY" />
-          <ScalarProperty Name="CASESTATUS" ColumnName="CASESTATUS" />
-          <ScalarProperty Name="TALKTIME" ColumnName="TALKTIME" />
-          <ScalarProperty Name="CALLBACKTYPE" ColumnName="CALLBACKTYPE" />
-          <ScalarProperty Name="CALLBACKNUMBER" ColumnName="CALLBACKNUMBER" />
-          <ScalarProperty Name="CREATEBY" ColumnName="CREATEBY" />
-          <ScalarProperty Name="CREATEDATE" ColumnName="CREATEDATE" />
-          <ScalarProperty Name="MODIFIEDBY" ColumnName="MODIFIEDBY" />
-          <ScalarProperty Name="MODIFIEDDATE" ColumnName="MODIFIEDDATE" />
-          <ScalarProperty Name="CLOSEDATE" ColumnName="CLOSEDATE" />
-          <ScalarProperty Name="DUEDATE" ColumnName="DUEDATE" />
-          <ScalarProperty Name="REMARK" ColumnName="REMARK" />
-          <ScalarProperty Name="casFav" ColumnName="casFav" />
-          <ScalarProperty Name="casOwnerID" ColumnName="casOwnerID" />
-          <ScalarProperty Name="casCreatedBy" ColumnName="casCreatedBy" />
-          <ScalarProperty Name="assignTo" ColumnName="assignTo" />
-          <ScalarProperty Name="dispatchTo" ColumnName="dispatchTo" />
-          <ScalarProperty Name="casDueDate" ColumnName="casDueDate" />
-          <ScalarProperty Name="OWNERNAME" ColumnName="OWNERNAME" />
-          <ScalarProperty Name="chnName" ColumnName="chnName" />
-          <ScalarProperty Name="casIDLevel1" ColumnName="casIDLevel1" />
-        </ComplexTypeMapping>
-      </ResultMapping>
-    </FunctionImportMapping>
     <FunctionImportMapping FunctionImportName="sp_GetCaseDetailTimeline" FunctionName="CRMABPModel.Store.sp_GetCaseDetailTimeline">
       <ResultMapping>
         <ComplexTypeMapping TypeName="NEWCRMModel.sp_GetCaseDetailTimeline_Result">
@@ -1422,5 +1381,138 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="sp_alterdiagram1" FunctionName="CRMABPModel.Store.sp_alterdiagram" />
+    <FunctionImportMapping FunctionImportName="sp_creatediagram1" FunctionName="CRMABPModel.Store.sp_creatediagram" />
+    <FunctionImportMapping FunctionImportName="sp_dropdiagram1" FunctionName="CRMABPModel.Store.sp_dropdiagram" />
+    <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition1" FunctionName="CRMABPModel.Store.sp_helpdiagramdefinition">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="NEWCRMModel.sp_helpdiagramdefinition1_Result">
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="definition" ColumnName="definition" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_helpdiagrams1" FunctionName="CRMABPModel.Store.sp_helpdiagrams">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="NEWCRMModel.sp_helpdiagrams1_Result">
+          <ScalarProperty Name="Database" ColumnName="Database" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Owner" ColumnName="Owner" />
+          <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_renamediagram1" FunctionName="CRMABPModel.Store.sp_renamediagram" />
+    <FunctionImportMapping FunctionImportName="sp_upgraddiagrams1" FunctionName="CRMABPModel.Store.sp_upgraddiagrams" />
+    <FunctionImportMapping FunctionImportName="uspReportCaseSummaryByDate" FunctionName="CRMABPModel.Store.uspReportCaseSummaryByDate">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="NEWCRMModel.uspReportCaseSummaryByDate_Result">
+          <ScalarProperty Name="catID" ColumnName="catID" />
+          <ScalarProperty Name="catName" ColumnName="catName" />
+          <ScalarProperty Name="catParrentID" ColumnName="catParrentID" />
+          <ScalarProperty Name="counts" ColumnName="counts" />
+          <ScalarProperty Name="Percents" ColumnName="Percents" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_GetCaseDetailById1" FunctionName="CRMABPModel.Store.sp_GetCaseDetailById">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="NEWCRMModel.sp_GetCaseDetailById1_Result">
+          <ScalarProperty Name="CASID" ColumnName="CASID" />
+          <ScalarProperty Name="CONTACTID" ColumnName="CONTACTID" />
+          <ScalarProperty Name="CONTACTCODE" ColumnName="CONTACTCODE" />
+          <ScalarProperty Name="CASEIDNO" ColumnName="CASEIDNO" />
+          <ScalarProperty Name="ctaID" ColumnName="ctaID" />
+          <ScalarProperty Name="CTAFULLNAME" ColumnName="CTAFULLNAME" />
+          <ScalarProperty Name="CTAEMO1" ColumnName="CTAEMO1" />
+          <ScalarProperty Name="CTAEMO2" ColumnName="CTAEMO2" />
+          <ScalarProperty Name="CTAEMO3" ColumnName="CTAEMO3" />
+          <ScalarProperty Name="PHONES" ColumnName="PHONES" />
+          <ScalarProperty Name="CTAEMAIL" ColumnName="CTAEMAIL" />
+          <ScalarProperty Name="CTAFACEBOOK" ColumnName="CTAFACEBOOK" />
+          <ScalarProperty Name="CTATWITTER" ColumnName="CTATWITTER" />
+          <ScalarProperty Name="ADDRESS" ColumnName="ADDRESS" />
+          <ScalarProperty Name="CASSUMMARY" ColumnName="CASSUMMARY" />
+          <ScalarProperty Name="CASESTATUS" ColumnName="CASESTATUS" />
+          <ScalarProperty Name="TALKTIME" ColumnName="TALKTIME" />
+          <ScalarProperty Name="CALLBACKTYPE" ColumnName="CALLBACKTYPE" />
+          <ScalarProperty Name="CALLBACKNUMBER" ColumnName="CALLBACKNUMBER" />
+          <ScalarProperty Name="CREATEBY" ColumnName="CREATEBY" />
+          <ScalarProperty Name="CREATEDATE" ColumnName="CREATEDATE" />
+          <ScalarProperty Name="MODIFIEDBY" ColumnName="MODIFIEDBY" />
+          <ScalarProperty Name="MODIFIEDDATE" ColumnName="MODIFIEDDATE" />
+          <ScalarProperty Name="CLOSEDATE" ColumnName="CLOSEDATE" />
+          <ScalarProperty Name="DUEDATE" ColumnName="DUEDATE" />
+          <ScalarProperty Name="REMARK" ColumnName="REMARK" />
+          <ScalarProperty Name="casFav" ColumnName="casFav" />
+          <ScalarProperty Name="casOwnerID" ColumnName="casOwnerID" />
+          <ScalarProperty Name="casCreatedBy" ColumnName="casCreatedBy" />
+          <ScalarProperty Name="assignTo" ColumnName="assignTo" />
+          <ScalarProperty Name="dispatchTo" ColumnName="dispatchTo" />
+          <ScalarProperty Name="casDueDate" ColumnName="casDueDate" />
+          <ScalarProperty Name="OWNERNAME" ColumnName="OWNERNAME" />
+          <ScalarProperty Name="chnName" ColumnName="chnName" />
+          <ScalarProperty Name="casIDLevel1" ColumnName="casIDLevel1" />
+          <ScalarProperty Name="cascommerceType" ColumnName="cascommerceType" />
+          <ScalarProperty Name="casproductCategory" ColumnName="casproductCategory" />
+          <ScalarProperty Name="casserviceCategory" ColumnName="casserviceCategory" />
+          <ScalarProperty Name="casdeliveryType" ColumnName="casdeliveryType" />
+          <ScalarProperty Name="casvalueRange" ColumnName="casvalueRange" />
+          <ScalarProperty Name="casconversationChannel" ColumnName="casconversationChannel" />
+          <ScalarProperty Name="casreferenceDetail" ColumnName="casreferenceDetail" />
+          <ScalarProperty Name="casdetail" ColumnName="casdetail" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_Get_CaseDetailById" FunctionName="CRMABPModel.Store.sp_Get_CaseDetailById">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="NEWCRMModel.sp_Get_CaseDetailById_Result">
+          <ScalarProperty Name="CASID" ColumnName="CASID" />
+          <ScalarProperty Name="CONTACTID" ColumnName="CONTACTID" />
+          <ScalarProperty Name="CONTACTCODE" ColumnName="CONTACTCODE" />
+          <ScalarProperty Name="CASEIDNO" ColumnName="CASEIDNO" />
+          <ScalarProperty Name="ctaID" ColumnName="ctaID" />
+          <ScalarProperty Name="CTAFULLNAME" ColumnName="CTAFULLNAME" />
+          <ScalarProperty Name="CTAEMO1" ColumnName="CTAEMO1" />
+          <ScalarProperty Name="CTAEMO2" ColumnName="CTAEMO2" />
+          <ScalarProperty Name="CTAEMO3" ColumnName="CTAEMO3" />
+          <ScalarProperty Name="PHONES" ColumnName="PHONES" />
+          <ScalarProperty Name="CTAEMAIL" ColumnName="CTAEMAIL" />
+          <ScalarProperty Name="CTAFACEBOOK" ColumnName="CTAFACEBOOK" />
+          <ScalarProperty Name="CTATWITTER" ColumnName="CTATWITTER" />
+          <ScalarProperty Name="ADDRESS" ColumnName="ADDRESS" />
+          <ScalarProperty Name="CASSUMMARY" ColumnName="CASSUMMARY" />
+          <ScalarProperty Name="CASESTATUS" ColumnName="CASESTATUS" />
+          <ScalarProperty Name="TALKTIME" ColumnName="TALKTIME" />
+          <ScalarProperty Name="CALLBACKTYPE" ColumnName="CALLBACKTYPE" />
+          <ScalarProperty Name="CALLBACKNUMBER" ColumnName="CALLBACKNUMBER" />
+          <ScalarProperty Name="CREATEBY" ColumnName="CREATEBY" />
+          <ScalarProperty Name="CREATEDATE" ColumnName="CREATEDATE" />
+          <ScalarProperty Name="MODIFIEDBY" ColumnName="MODIFIEDBY" />
+          <ScalarProperty Name="MODIFIEDDATE" ColumnName="MODIFIEDDATE" />
+          <ScalarProperty Name="CLOSEDATE" ColumnName="CLOSEDATE" />
+          <ScalarProperty Name="DUEDATE" ColumnName="DUEDATE" />
+          <ScalarProperty Name="REMARK" ColumnName="REMARK" />
+          <ScalarProperty Name="casFav" ColumnName="casFav" />
+          <ScalarProperty Name="casOwnerID" ColumnName="casOwnerID" />
+          <ScalarProperty Name="casCreatedBy" ColumnName="casCreatedBy" />
+          <ScalarProperty Name="assignTo" ColumnName="assignTo" />
+          <ScalarProperty Name="dispatchTo" ColumnName="dispatchTo" />
+          <ScalarProperty Name="casDueDate" ColumnName="casDueDate" />
+          <ScalarProperty Name="OWNERNAME" ColumnName="OWNERNAME" />
+          <ScalarProperty Name="chnName" ColumnName="chnName" />
+          <ScalarProperty Name="casIDLevel1" ColumnName="casIDLevel1" />
+          <ScalarProperty Name="cascommerceType" ColumnName="cascommerceType" />
+          <ScalarProperty Name="casproductCategory" ColumnName="casproductCategory" />
+          <ScalarProperty Name="casserviceCategory" ColumnName="casserviceCategory" />
+          <ScalarProperty Name="casdeliveryType" ColumnName="casdeliveryType" />
+          <ScalarProperty Name="casvalueRange" ColumnName="casvalueRange" />
+          <ScalarProperty Name="casconversationChannel" ColumnName="casconversationChannel" />
+          <ScalarProperty Name="casreferenceDetail" ColumnName="casreferenceDetail" />
+          <ScalarProperty Name="casdetail" ColumnName="casdetail" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
   </EntityContainerMapping>
 </Mapping>
