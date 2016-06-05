@@ -1,0 +1,31 @@
+﻿@model NEWCRM.Models.ListRepCaseModel
+@{
+    Layout = "";
+}
+
+    <a href="@Url.Action("RepCaseSummaryExport", "RepCase")">
+        <button type="button" class="btn ink-reaction btn-flat" data-toggle="tooltip" data-placement="top" data-original-title="Add new case with no contact"><i class="md md-add-circle"></i> New Case</button>
+    </a>
+
+<table id="datatable1" class="table table-striped table-hover">
+    <thead>
+        <tr>
+            <th>Case Type</th>
+            <th>Number of Case</th>
+            <th>%</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.list_repcasesum)
+        {
+            <tr class="gradeX">
+                <td>@item.catName</td>
+                <td>@item.counts</td>
+                <td>@item.Percents</td>
+            </tr>
+
+            Html.RenderAction("repSummaryChild", "RepCase", new { startdate = @item.startDate, enddate = @item.endDate, catparentid = @item.catID });
+
+        }
+    </tbody>
+</table>
