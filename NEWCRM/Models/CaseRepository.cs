@@ -653,6 +653,7 @@ namespace NEWCRM.Models
         public string casLevel3 { get; set; }
         public string casLevel4 { get; set; }
         public string casLevel5 { get; set; }
+        public string casLevel6 { get; set; }
         public int? casIDSummary { get; set; }
         public string casSummary { get; set; }
         public string casURLAccount { get; set; }
@@ -669,5 +670,15 @@ namespace NEWCRM.Models
         public string casFollowDesc { get; set; }
         public DateTime? casModifiedOn { get; set; }
         public int? casModifiedBy { get; set; }
+        public string cascommerceType { get; set; }
+        public string casproductCategory { get; set; }
+        public string casserviceCategory { get; set; }
+        public string casdeliveryType { get; set; }
+        public string casvalueRange { get; set; }
+        public string casconversationChannel { get; set; }
+        public string casreferenceDetail { get; set; }
+        public string casdetail { get; set; }
+        public string casstatusReason { get; set; }
+        
     }
 }
