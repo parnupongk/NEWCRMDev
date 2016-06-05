@@ -2179,6 +2179,7 @@
     <Content Include="Views\Case\CaseGroup2.cshtml" />
     <Content Include="Views\Case\_CaseGroup.cshtml" />
 <<<<<<< HEAD
+<<<<<<< HEAD
     <Content Include="Views\RepCase\rptCallHour.cshtml" />
     <Content Include="Views\RepCase\rptCallDay.cshtml" />
     <Content Include="Views\RepCase\rptCaseRep.cshtml" />
@@ -2189,6 +2190,10 @@
     <Content Include="Views\RepCase\repSummary.cshtml" />
     <Content Include="Views\RepCase\repSummaryChild.cshtml" />
 >>>>>>> origin/master
+=======
+    <Content Include="Views\RepCase\repSummary.cshtml" />
+    <Content Include="Views\RepCase\repSummaryChild.cshtml" />
+>>>>>>> 7a1aa824db19930bbf7e463016e43ab59d28e280
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
