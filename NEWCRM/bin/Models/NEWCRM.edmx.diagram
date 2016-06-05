@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="445aa94da7e54b919d5730dee912938e" Name="Diagram1" ZoomLevel="71">
+        <EntityTypeShape EntityType="NEWCRMModel.Activities" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="NEWCRMModel.ActivityStatus" Width="1.5" PointX="0.75" PointY="15.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="NEWCRMModel.ActivityStatus_Locale" Width="1.5" PointX="3" PointY="11.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="NEWCRMModel.Address" Width="1.5" PointX="11.75" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="NEWCRMModel.Announcement" Width="1.5" PointX="13.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="NEWCRMModel.AuthenLog" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="NEWCRMModel.Calendar" Width="1.5" PointX="13.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="NEWCRMModel.Callback" Width="1.5" PointX="13.75" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="NEWCRMModel.CallbackCause" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="NEWCRMModel.CallbackCause_Locale" Width="1.5" PointX="13.75" PointY="12.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="NEWCRMModel.CallBackChannel" Width="1.5" PointX="8.75" PointY="14.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="NEWCRMModel.CallbackType" Width="1.5" PointX="15.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="NEWCRMModel.CallbackType_Locale" Width="1.5" PointX="15.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="NEWCRMModel.CaseAttachFile" Width="1.5" PointX="15.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="NEWCRMModel.CaseLog" Width="1.5" PointX="15.75" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="NEWCRMModel.CaseLogType" Width="1.5" PointX="15.75" PointY="13.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="NEWCRMModel.CaseRemindFlow" Width="1.5" PointX="10.75" PointY="16.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="NEWCRMModel.Case" Width="1.5" PointX="12.75" PointY="16.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="NEWCRMModel.CaseStatu" Width="1.5" PointX="14.75" PointY="16.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="NEWCRMModel.CaseStatus_Locale" Width="1.5" PointX="16.75" PointY="16.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="NEWCRMModel.CaseType" Width="1.5" PointX="17.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="NEWCRMModel.Channel" Width="1.5" PointX="17.75" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="NEWCRMModel.ContactLog" Width="1.5" PointX="17.75" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="NEWCRMModel.Contact" Width="1.5" PointX="18.75" PointY="12.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="NEWCRMModel.ContactType" Width="1.5" PointX="19.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="NEWCRMModel.ContactType_Locale" Width="1.5" PointX="19.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="NEWCRMModel.ContactViewLog" Width="1.5" PointX="5.75" PointY="19.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="NEWCRMModel.District" Width="1.5" PointX="3.75" PointY="19.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="NEWCRMModel.District_Locale" Width="1.5" PointX="6" PointY="11.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="NEWCRMModel.Function" Width="1.5" PointX="7.75" PointY="19.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="NEWCRMModel.Gender" Width="1.5" PointX="0.75" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="NEWCRMModel.Genders_Locale" Width="1.5" PointX="3" PointY="7.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="NEWCRMModel.Group_Role" Width="1.5" PointX="11" PointY="2.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="NEWCRMModel.Group" Width="1.5" PointX="8.75" PointY="2.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="NEWCRMModel.Locale" Width="1.5" PointX="0.75" PointY="11" IsExpanded="true" />
+        <EntityTypeShape EntityType="NEWCRMModel.MailLog" Width="1.5" PointX="9.75" PointY="19.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="NEWCRMModel.Notification" Width="1.5" PointX="14.75" PointY="19.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="NEWCRMModel.NotificationType" Width="1.5" PointX="20.75" PointY="10.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="NEWCRMModel.Phone" Width="1.5" PointX="20.75" PointY="13.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="NEWCRMModel.PhoneType" Width="1.5" PointX="0.75" PointY="18.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="NEWCRMModel.PhoneType_Locale" Width="1.5" PointX="3" PointY="15.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="NEWCRMModel.Priority" Width="1.5" PointX="16.75" PointY="20.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="NEWCRMModel.Priority_Locale" Width="1.5" PointX="20.75" PointY="18.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="NEWCRMModel.Province" Width="1.5" PointX="3.75" PointY="3.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="NEWCRMModel.Province_Locale" Width="1.5" PointX="6" PointY="7.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="NEWCRMModel.Province_Zone" Width="1.5" PointX="21.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="NEWCRMModel.Role_Functions" Width="1.5" PointX="0.75" PointY="21.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="NEWCRMModel.Role" Width="1.5" PointX="8.75" PointY="7.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="NEWCRMModel.SubDistrict" Width="1.5" PointX="3.75" PointY="23.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="NEWCRMModel.SubDistrict_Locale" Width="1.5" PointX="6" PointY="15.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="NEWCRMModel.Title" Width="1.5" PointX="6.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="NEWCRMModel.Titles_Locale" Width="1.5" PointX="9" PointY="11.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="NEWCRMModel.User_Group" Width="1.5" PointX="11" PointY="6.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="NEWCRMModel.User_Role" Width="1.5" PointX="21.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="NEWCRMModel.User" Width="1.5" PointX="18.75" PointY="21.75" IsExpanded="true" />
+        <AssociationConnector Association="NEWCRMModel.ActivityStatus_ActivityStatus_Locale_FK1" ManuallyRouted="false" />
+        <AssociationConnector Association="NEWCRMModel.Locale_ActivityStatus_Locale_FK1" ManuallyRouted="false" />
+        <AssociationConnector Association="NEWCRMModel.District_District_Locale_FK1" ManuallyRouted="false" />
+        <AssociationConnector Association="NEWCRMModel.District_SubDistrict_FK1" ManuallyRouted="false" />
+        <AssociationConnector Association="NEWCRMModel.Province_District_FK1" ManuallyRouted="false" />
+        <AssociationConnector Association="NEWCRMModel.Locale_District_Locale_FK1" ManuallyRouted="false" />
+        <AssociationConnector Association="NEWCRMModel.Genders_Genders_Locale_FK1" ManuallyRouted="false" />
+        <AssociationConnector Association="NEWCRMModel.Locale_Genders_Locale_FK1" ManuallyRouted="false" />
+        <AssociationConnector Association="NEWCRMModel.Groups_Group_Role_FK1" ManuallyRouted="false" />
+        <AssociationConnector Association="NEWCRMModel.Roles_Group_Role_FK1" ManuallyRouted="false" />
+        <AssociationConnector Association="NEWCRMModel.Groups_User_Group_FK1" ManuallyRouted="false" />
+        <AssociationConnector Association="NEWCRMModel.Locale_PhoneType_Locale_FK1" ManuallyRouted="false" />
+        <AssociationConnector Association="NEWCRMModel.Locale_Province_Locale_FK1" ManuallyRouted="false" />
+        <AssociationConnector Association="NEWCRMModel.Locale_SubDistrict_Locale_FK1" ManuallyRouted="false" />
+        <AssociationConnector Association="NEWCRMModel.Locale_Titles_Locale_FK1" ManuallyRouted="false" />
+        <AssociationConnector Association="NEWCRMModel.PhoneType_PhoneType_Locale_FK1" ManuallyRouted="false" />
+        <AssociationConnector Association="NEWCRMModel.Province_Province_Locale_FK1" ManuallyRouted="false" />
+        <AssociationConnector Association="NEWCRMModel.SubDistrict_SubDistrict_Locale_FK1" ManuallyRouted="false" />
+        <AssociationConnector Association="NEWCRMModel.Titles_Titles_Locale_FK1" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="NEWCRMModel.DNIS" Width="1.5" PointX="3.6339290438377905" PointY="5.7804348495697768" />
+        <EntityTypeShape EntityType="NEWCRMModel.TaskScheduleLog" Width="1.5" PointX="6.375" PointY="23.75" />
+        <EntityTypeShape EntityType="NEWCRMModel.sysdiagram" Width="1.5" PointX="21.375" PointY="21.75" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
