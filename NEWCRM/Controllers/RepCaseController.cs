@@ -126,7 +126,7 @@ namespace NEWCRM.Controllers
             else if (Request.Form["reptype"].ToString() == "4") { return RedirectToAction("rptCaseOnl", new { startDate = startDate, endDate = endDate, caseIDLevel1 = 1, caseIDLevel2 = caseIDLevel2, caseIDLevel3 = caseIDLevel3, caseIDLevel4 = caseIDLevel4 }); }
             else if (Request.Form["reptype"].ToString() == "5") { return RedirectToAction("rptCaseRaw", new { startDate = startDate, endDate = endDate, caseIDLevel1 = 2, caseIDLevel2 = caseIDLevel2, caseIDLevel3 = caseIDLevel3, caseIDLevel4 = caseIDLevel4 }); }
             else if (Request.Form["reptype"].ToString() == "6") { return RedirectToAction("rptCaseCyb", new { startDate = startDate, endDate = endDate, caseIDLevel1 = 3, caseIDLevel2 = caseIDLevel2, caseIDLevel3 = caseIDLevel3, caseIDLevel4 = caseIDLevel4 }); }
-            else if (Request.Form["reptype"].ToString() == "7") { return RedirectToAction("repSummary", new { startDate = Request.Form["startdate"], endDate = Request.Form["enddate"], caseIDLevel1 = caseIDLevel1 }); }
+            else if (Request.Form["reptype"].ToString() == "7") { return RedirectToAction("repSummary", new { startDate = Request.Form["startdate"], endDate = Request.Form["enddate"], catparentid = caseIDLevel1 }); }
             else { return RedirectToAction("getQuery", new { startDate = startDate, endDate = endDate, caseIDLevel1 = caseIDLevel1, caseIDLevel2 = caseIDLevel2, caseIDLevel3 = caseIDLevel3, caseIDLevel4 = caseIDLevel4 }); }
         }
 
@@ -149,7 +149,7 @@ namespace NEWCRM.Controllers
                        }).ToList();
 
 
-            rptListCase.list_repcase = rptCase;
+            //rptListCase.list_repcase = rptCase;
             return PartialView(rptListCase);
         }
 

@@ -26,102 +26,6 @@
             });
 
 
-            function nextctnode(ref) {
-                var message = $(ref).find(':selected').attr('data-dialogue');
-                var sla = $(ref).find(':selected').attr('data-sla');
-                var slaid = $(ref).find(':selected').attr('data-slaid');
-                var current_divnode = $(ref).parents().eq(1).attr("id");
-                var current_lv = current_divnode.split("_")[1];
-                var next_lv = parseInt(current_lv) + 1;
-
-                //alert(current_lv);
-
-                if ($(ref).val() === "") {
-                    // Show - Hide another div
-                    if (current_lv == 1) {
-                        $("#ctdiv_2").empty().hide();
-                        $("#ctdiv_3").empty().hide();
-                        $("#ctdiv_4").empty().hide();
-                        $("#ctdiv_5").empty().hide();
-                    }
-                    if (current_lv == 2) {
-                        $("#ctdiv_3").empty().hide();
-                        $("#ctdiv_4").empty().hide();
-                        $("#ctdiv_5").empty().hide();
-                    }
-                    if (current_lv == 3) {
-                        $("#ctdiv_4").empty().hide();
-                        $("#ctdiv_5").empty().hide();
-                    }
-                    if (current_lv == 4) {
-                        $("#ctdiv_5").empty().hide();
-                    }
-                    $("#ctdiv_opt").hide();
-                    $("#casSLA").val('');
-                } else {
-                    if (current_lv == 1) {
-                        $("#ctdiv_2").empty().hide();
-                        $("#ctdiv_3").empty().hide();
-                        $("#ctdiv_4").empty().hide();
-                        $("#ctdiv_5").empty().hide();
-                        $("#ctdiv_6").hide();
-                        $("#ctdiv_opt").hide();
-                        $("#casSLA").val('');
-                    }
-                    if (current_lv == 2) {
-                        $("#ctdiv_3").empty().hide();
-                        $("#ctdiv_4").empty().hide();
-                        $("#ctdiv_5").empty().hide();
-                        $("#ctdiv_opt").hide();
-                    }
-                    if (current_lv == 3) {
-                        $("#ctdiv_4").empty().hide();
-                        $("#ctdiv_5").empty().hide();
-                        $("#ctdiv_opt").hide();
-                    }
-                    if (current_lv == 4) {
-                        $("#ctdiv_5").empty().hide();
-                        $("#ctdiv_opt").hide();
-                    }
-
-                    // Set casLevel
-                    $("#casLevel" + current_lv).val($(ref).find("option:selected").text());
-                    // Show Next Node
-                    //if($(ref).find("option:selected").val() === '2') {
-                    //alert($("#casLevel" + current_lv).text);
-                    //alert(sla);
-                    if (sla === '' || typeof sla == 'undefined') {
-                        //alert(lv_current.attr("id"));
-                        $("#ctdiv_" + next_lv).html('<div class="col-sm-3">&nbsp;</div><div class="col-sm-9 text-warning text-medium">Loading...</div>').slideDown(200);
-                        var id = $(ref).val();
-                        //alert(id);
-                        var url = '@Url.Action("getCaseTypeNodeSelectionRepCase", "Casetype")/' + id;
-                        $.post(url, function (data) {
-                            $("#ctdiv_" + next_lv).html(data);
-                        });
-
-                        if (id > 137) {
-                            //alert(id);
-                            $("#ctdiv_6").show();
-                            $("#casURLAccount").focus();
-                        }
-                    } else {
-
-                        //$("#casURLAccount").focus();
-                        //$("#casNote").focus();
-                        $("#sla").text(sla);
-                        $("#casSLA").val(sla);
-                        $("#slaID").val(slaid);
-                        $("#ctdiv_opt").show();
-                    }
-                }
-
-                if (jQuery.trim(message).length > 0) {
-                    openInfoDialog(message);
-                } else {
-                    toastr.clear();
-                }
-            }
 
             function beginQuery() {
                 $(".fv").each(function () {
@@ -137,7 +41,7 @@
             function successQuery() {
                 $('#datatable1').DataTable({
                     "dom": 'lCfrtip',
-                    "order": [[0, "asc"]],
+                    "order": [],
                     "language": {
                         "lengthMenu": '_MENU_ entries per page',
                         "search": '<i class="fa fa-search"></i>',
@@ -217,10 +121,7 @@
                         </div>
                     </div>
                 </div>
-<<<<<<< HEAD
 
-=======
->>>>>>> e5f6ee4ae48c636c2f4f06bc0029e3f2bc686ae3
                 @using (Ajax.BeginForm("getReport", "RepCase",
                                             new AjaxOptions { UpdateTargetId = "getQuery", HttpMethod = "post", OnBegin = "return beginQuery()", OnSuccess = "successQuery", OnFailure = "failureQuery" },
                                             new { id = "frm-casequery", @class = "form", autocomplete = "off" }))
@@ -237,7 +138,7 @@
                                 </!--div-->
                                 <div id="ctdiv_1" class="form-group no-padding">
                                     <div class="col-sm-9 margin-bottom-xl">
-                                        <select name="reptype" class="form-control">
+                                        <select name="reptype" id="reptype" class="form-control">
                                             <option></option>
                                             <option value="1">CALL PERFORMANCE REPORT BY HOUR (DAILY)</option>
                                             <option value="2">CALL PERFORMANCE REPORT BY DAY</option>
