@@ -23,3 +23,9 @@ E:\my Build\one2one\CRM2015\Code_CRMOrigin\NEWCRMDev\OverSLAJob\bin\Debug\OverSL
 E:\my Build\one2one\CRM2015\Code_CRMOrigin\NEWCRMDev\OverSLAJob\obj\Debug\OverSLAJob.csprojResolveAssemblyReference.cache
 E:\my Build\one2one\CRM2015\Code_CRMOrigin\NEWCRMDev\OverSLAJob\obj\Debug\OverSLAJob.exe
 E:\my Build\one2one\CRM2015\Code_CRMOrigin\NEWCRMDev\OverSLAJob\obj\Debug\OverSLAJob.pdb
+C:\Users\pee_t\Desktop\Git ETDA\NEWCRMDev\OverSLAJob\bin\Debug\OverSLAJob.exe.config
+C:\Users\pee_t\Desktop\Git ETDA\NEWCRMDev\OverSLAJob\bin\Debug\OverSLAJob.exe
+C:\Users\pee_t\Desktop\Git ETDA\NEWCRMDev\OverSLAJob\bin\Debug\OverSLAJob.pdb
+C:\Users\pee_t\Desktop\Git ETDA\NEWCRMDev\OverSLAJob\obj\Debug\OverSLAJob.csprojResolveAssemblyReference.cache
+C:\Users\pee_t\Desktop\Git ETDA\NEWCRMDev\OverSLAJob\obj\Debug\OverSLAJob.exe
+C:\Users\pee_t\Desktop\Git ETDA\NEWCRMDev\OverSLAJob\obj\Debug\OverSLAJob.pdb

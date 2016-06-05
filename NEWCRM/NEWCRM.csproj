@@ -2163,6 +2163,12 @@
     <Content Include="Views\Case\CaseGroup1.cshtml" />
     <Content Include="Views\Case\CaseGroup2.cshtml" />
     <Content Include="Views\Case\_CaseGroup.cshtml" />
+    <Content Include="Views\RepCase\rptCallHour.cshtml" />
+    <Content Include="Views\RepCase\rptCallDay.cshtml" />
+    <Content Include="Views\RepCase\rptCaseRep.cshtml" />
+    <Content Include="Views\RepCase\rptCaseOnl.cshtml" />
+    <Content Include="Views\RepCase\rptCaseRaw.cshtml" />
+    <Content Include="Views\RepCase\rptCaseCyb.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
