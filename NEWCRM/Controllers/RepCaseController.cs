@@ -21,7 +21,6 @@ namespace NEWCRM.Controllers
             
             //ListRepCaseModel model = new ListRepCaseModel();
             //model.currDate = DateTime.Today;
-<<<<<<< HEAD
 
             //return View(model);
             return View();
@@ -106,8 +105,6 @@ namespace NEWCRM.Controllers
 
             rptListCase.list_repcasesum = rptCase;
 
-=======
-
             //return View(model);
             return View();
         }
@@ -191,7 +188,6 @@ namespace NEWCRM.Controllers
 
             rptListCase.list_repcasesum = rptCase;
 
->>>>>>> 7a1aa824db19930bbf7e463016e43ab59d28e280
             Response.AddHeader("Content-Type", "application/vnd.ms-excel");
             Response.AddHeader("Content-Disposition", "attachment;filename = ExcelFile.xls");
             return View("repSummary", rptListCase);
