@@ -88,18 +88,12 @@
                         </div>
                     </div>
                 </div>
-<<<<<<< HEAD
-<<<<<<< HEAD
+
                 @using (Ajax.BeginForm("getReport", "RepCase",
                                             new AjaxOptions { UpdateTargetId = "getQuery", HttpMethod = "post", OnBegin = "return beginQuery()", OnSuccess = "successQuery", OnFailure = "failureQuery" },
                                             new { id = "frm-casequery", @class = "form", autocomplete = "off" }))
                 {
-=======
-  
->>>>>>> origin/master
-=======
-  
->>>>>>> 7a1aa824db19930bbf7e463016e43ab59d28e280
+
                     <div id="filterList"></div>
 
                         <input type="hidden" id="data-type-<%=index%>" name="data-type-<%=index%>" value="text" />
@@ -149,9 +143,11 @@
                             <button type="submit" class="btn ink-reaction btn-primary" onclick="loadReport()"><i class="fa fa-search fa-fw"></i>&nbsp;Search</button>
                         </div>
                     </div>
-
+                }
                 <hr class="ruler-xl">
             </div>
+
+                
         </div>
         <br />
         <div id="getQuery" class="col-lg-12"></div>
