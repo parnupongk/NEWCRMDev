@@ -151,7 +151,7 @@ namespace NEWCRM.Controllers
                     }
                     if (model.casIDLevel3.HasValue)
                     {
-                        model.casSummary += string.Format(" > {0}", model.casLevel3);
+                        //model.casSummary += string.Format(" > {0}", model.casLevel3);
                         model.casIDSummary = model.casIDLevel3;
                     }
                     if (model.casIDLevel4.HasValue)
@@ -164,10 +164,10 @@ namespace NEWCRM.Controllers
                         model.casSummary += string.Format(" > {0}", model.casLevel5);
                         model.casIDSummary = model.casIDLevel5;
                     }
-                    if (!string.IsNullOrEmpty(model.casURLAccount))
-                    {
-                        model.casSummary += string.Format(" > {0}", model.casURLAccount);
-                    }
+                    //if (!string.IsNullOrEmpty(model.casURLAccount))
+                    //{
+                        //model.casSummary += string.Format(" > {0}", model.casURLAccount);
+                    //}
                     if (model.casSLA.HasValue && model.casSLA > 0)
                     {
                         model.casDueDate = _CreatedDate.AddMinutes((double)model.casSLA);
@@ -1287,9 +1287,9 @@ namespace NEWCRM.Controllers
                     mail.From = new MailAddress(AppUtils.AppConfig.SMTPMAILFROM, "CRM ORIGIN");
                     mail.To.Add(m.MailTo.Trim().Replace(";", ","));
 
-                    if (!string.IsNullOrWhiteSpace(m.MailCc))
+                    //if (!string.IsNullOrWhiteSpace(m.MailCc))
                         mail.CC.Add(m.MailCc.Trim().Replace(";", ","));
-                    if (!string.IsNullOrWhiteSpace(m.MailBcc))
+                    //if (!string.IsNullOrWhiteSpace(m.MailBcc))
                         mail.Bcc.Add(m.MailBcc.Trim().Replace(";", ","));
                     //set the content
                     mail.Subject = m.MailSubject;
