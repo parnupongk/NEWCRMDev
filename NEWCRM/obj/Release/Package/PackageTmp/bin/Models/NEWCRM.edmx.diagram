@@ -55,14 +55,11 @@
         <EntityTypeShape EntityType="NEWCRMModel.Role" Width="1.5" PointX="8.75" PointY="7.625" IsExpanded="true" />
         <EntityTypeShape EntityType="NEWCRMModel.SubDistrict" Width="1.5" PointX="3.75" PointY="23.5" IsExpanded="true" />
         <EntityTypeShape EntityType="NEWCRMModel.SubDistrict_Locale" Width="1.5" PointX="6" PointY="15.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="NEWCRMModel.sysdiagram" Width="1.5" PointX="21.75" PointY="3.75" IsExpanded="true" />
         <EntityTypeShape EntityType="NEWCRMModel.Title" Width="1.5" PointX="6.75" PointY="3.75" IsExpanded="true" />
         <EntityTypeShape EntityType="NEWCRMModel.Titles_Locale" Width="1.5" PointX="9" PointY="11.5" IsExpanded="true" />
         <EntityTypeShape EntityType="NEWCRMModel.User_Group" Width="1.5" PointX="11" PointY="6.125" IsExpanded="true" />
         <EntityTypeShape EntityType="NEWCRMModel.User_Role" Width="1.5" PointX="21.75" PointY="6.75" IsExpanded="true" />
         <EntityTypeShape EntityType="NEWCRMModel.User" Width="1.5" PointX="18.75" PointY="21.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="NEWCRMModel.tblViewContact" Width="1.5" PointX="20.75" PointY="21.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="NEWCRMModel.View_QueryReport_SalesContactDetail" Width="1.5" PointX="22.75" PointY="10.75" IsExpanded="true" />
         <AssociationConnector Association="NEWCRMModel.ActivityStatus_ActivityStatus_Locale_FK1" ManuallyRouted="false" />
         <AssociationConnector Association="NEWCRMModel.Locale_ActivityStatus_Locale_FK1" ManuallyRouted="false" />
         <AssociationConnector Association="NEWCRMModel.District_District_Locale_FK1" ManuallyRouted="false" />
@@ -83,6 +80,8 @@
         <AssociationConnector Association="NEWCRMModel.SubDistrict_SubDistrict_Locale_FK1" ManuallyRouted="false" />
         <AssociationConnector Association="NEWCRMModel.Titles_Titles_Locale_FK1" ManuallyRouted="false" />
         <EntityTypeShape EntityType="NEWCRMModel.DNIS" Width="1.5" PointX="3.6339290438377905" PointY="5.7804348495697768" />
+        <EntityTypeShape EntityType="NEWCRMModel.TaskScheduleLog" Width="1.5" PointX="6.375" PointY="23.75" />
+        <EntityTypeShape EntityType="NEWCRMModel.sysdiagram" Width="1.5" PointX="21.375" PointY="21.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

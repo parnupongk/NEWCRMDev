@@ -13,6 +13,23 @@ namespace NEWCRM.Models
     {
 
         #region bom
+        public DataTable GetCaseSummaryReport(string startDate, string endDate,int catParrentID)
+        {
+            try
+            {
+                DataSet ds = SqlHelper.ExecuteDataset(ConfigurationManager.ConnectionStrings["DefaultConnection"].ToString(), "uspReportCaseSummaryByDate"
+                            , new SqlParameter[] {
+                            new SqlParameter("@STARTDATE",startDate)
+                            ,new SqlParameter("@ENDDATE",endDate)
+                            ,new SqlParameter("@catParrentID",catParrentID)});
+                return ds.Tables[0];
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
         public DataTable GetCaseReport(int? casIDLevel1, int? casIDLevel2, int? casIDLevel3, int? casIDLevel4, string startDate,string endDate)
         {
             try
@@ -211,7 +228,7 @@ namespace NEWCRM.Models
 
         #region Aood
 
-        public sp_GetCaseDetailById_Result GetCaseDetailById(decimal Id, string Lang)
+        public sp_Get_CaseDetailById_Result GetCaseDetailById(decimal Id, string Lang)
         {
             using (var db = this.GetDBContext())
             {
@@ -221,10 +238,10 @@ namespace NEWCRM.Models
 
                 };
 
-                var result = this.ExecStoredProcedure<sp_GetCaseDetailById_Result>("sp_GetCaseDetailById", ps);
+                var result = this.ExecStoredProcedure<sp_Get_CaseDetailById_Result>("sp_Get_CaseDetailById", ps);
                 if (result.Count > 0)
                     return result[0];
-                return new sp_GetCaseDetailById_Result();
+                return new sp_Get_CaseDetailById_Result();
             }
         }
 
@@ -603,8 +620,21 @@ namespace NEWCRM.Models
     {
         public DateTime currDate { get; set; }
         public List<RepCaseModel> list_repcase { get; set; }
+        public List<RepCaseSummary> list_repcasesum { get; set; }
     }
-    public class RepCaseModel
+
+    public class RepCaseSummary
+    {
+        public string catID { get; set; }
+        public string catName { get; set; }
+        public string catParrentID { get; set; }
+        public int counts { get; set; }
+        public int Percents { get; set; }
+        public string startDate { get; set; }
+        public string endDate { get; set; }
+    }
+
+        public class RepCaseModel
     {
         public string chnID { get; set; }
         public string cssName { get; set; }

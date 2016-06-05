@@ -1,0 +1,81 @@
+﻿
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+# On branch master
+# Your branch and 'origin/master' have diverged,
+# and have 1 and 4 different commits each, respectively.
+#   (use "git pull" to merge the remote branch into yours)
+#
+# Changes to be committed:
+#	modified:   NEWCRM/Controllers/CaseController.cs
+#	modified:   NEWCRM/Controllers/CasetypeController.cs
+#	modified:   NEWCRM/Controllers/RepCaseController.cs
+#	modified:   NEWCRM/Models/CaseModels.cs
+#	modified:   NEWCRM/Models/CaseRepository.cs
+#	modified:   NEWCRM/Models/NEWCRM.Context.cs
+#	modified:   NEWCRM/Models/NEWCRM.edmx
+#	modified:   NEWCRM/NEWCRM.csproj
+#	modified:   NEWCRM/Properties/PublishProfiles/parnupongk.pubxml
+#	modified:   NEWCRM/Views/Case/CaseGroup1.cshtml
+#	modified:   NEWCRM/Views/Case/CaseGroup2.cshtml
+#	modified:   NEWCRM/Views/Case/CaseInfo.cshtml
+#	modified:   NEWCRM/Views/RepCase/Index.cshtml
+#	modified:   NEWCRM/Views/RepCase/getQuery.cshtml
+#	modified:   NEWCRM/Web.config
+#	modified:   NEWCRM/bin/Models/NEWCRM.Context.cs
+#	modified:   NEWCRM/bin/NEWCRM.dll.config
+#	modified:   NEWCRM/bin/Web.config
+#	modified:   NEWCRM/obj/Debug/TempPE/Models.NEWCRM.Designer.cs.dll
+#	modified:   NEWCRM/obj/Debug/TempPE/Models.NEWCRM.cs.dll
+#	modified:   NEWCRM/obj/Debug/edmxResourcesToEmbed/Models/NEWCRM.csdl
+#	modified:   NEWCRM/obj/Debug/edmxResourcesToEmbed/Models/NEWCRM.msl
+#	modified:   NEWCRM/obj/Debug/edmxResourcesToEmbed/Models/NEWCRM.ssdl
+#	modified:   NEWCRM/obj/Release/CSAutoParameterize.parameters.xml
+#	modified:   NEWCRM/obj/Release/CSAutoParameterize/original/Web.config
+#	modified:   NEWCRM/obj/Release/CSAutoParameterize/original/bin/Web.config
+#	modified:   NEWCRM/obj/Release/CSAutoParameterize/transformed/Web.config
+#	modified:   NEWCRM/obj/Release/CSAutoParameterize/transformed/bin/Web.config
+#	modified:   NEWCRM/obj/Release/DesignTimeResolveAssemblyReferencesInput.cache
+#	modified:   NEWCRM/obj/Release/NEWCRM.csproj.FileListAbsolute.txt
+#	modified:   NEWCRM/obj/Release/NEWCRM.dll
+#	modified:   NEWCRM/obj/Release/NEWCRM.pdb
+#	modified:   NEWCRM/obj/Release/Package/NEWCRM.SourceManifest.xml
+#	modified:   NEWCRM/obj/Release/Package/PackageTmp/Models/NEWCRM.edmx.diagram
+#	modified:   NEWCRM/obj/Release/Package/PackageTmp/Views/Case/CaseInfo.cshtml
+#	modified:   NEWCRM/obj/Release/Package/PackageTmp/Views/Case/CaseParent.cshtml
+#	modified:   NEWCRM/obj/Release/Package/PackageTmp/Views/Case/NewCase.cshtml
+#	modified:   NEWCRM/obj/Release/Package/PackageTmp/Views/RepCase/Index.cshtml
+#	modified:   NEWCRM/obj/Release/Package/PackageTmp/Views/RepCase/getQuery.cshtml
+#	modified:   NEWCRM/obj/Release/Package/PackageTmp/Web.config
+#	modified:   NEWCRM/obj/Release/Package/PackageTmp/bin/Models/Case.cs
+#	modified:   NEWCRM/obj/Release/Package/PackageTmp/bin/Models/NEWCRM.Context.cs
+#	modified:   NEWCRM/obj/Release/Package/PackageTmp/bin/Models/NEWCRM.Designer.cs
+#	modified:   NEWCRM/obj/Release/Package/PackageTmp/bin/Models/NEWCRM.edmx.diagram
+#	modified:   NEWCRM/obj/Release/Package/PackageTmp/bin/Models/User.cs
+#	deleted:    NEWCRM/obj/Release/Package/PackageTmp/bin/Models/View_QueryReport_SalesContactDetail.cs
+#	deleted:    NEWCRM/obj/Release/Package/PackageTmp/bin/Models/sysdiagram.cs
+#	deleted:    NEWCRM/obj/Release/Package/PackageTmp/bin/Models/tblViewContact.cs
+#	modified:   NEWCRM/obj/Release/Package/PackageTmp/bin/NEWCRM.dll
+#	modified:   NEWCRM/obj/Release/Package/PackageTmp/bin/Web.config
+#	modified:   NEWCRM/obj/Release/TempPE/Models.NEWCRM.Designer.cs.dll
+#	modified:   NEWCRM/obj/Release/TempPE/Models.NEWCRM.cs.dll
+#	modified:   NEWCRM/obj/Release/TransformWebConfig/original/Web.config
+#	modified:   NEWCRM/obj/Release/TransformWebConfig/original/bin/Web.config
+#	modified:   NEWCRM/obj/Release/TransformWebConfig/transformed/Web.config
+#	modified:   NEWCRM/obj/Release/TransformWebConfig/transformed/bin/Web.config
+#	modified:   NEWCRM/obj/Release/_WPPLastBuildInfo.txt
+#	modified:   NEWCRM/obj/Release/edmxResourcesToEmbed/Models/NEWCRM.csdl
+#	modified:   NEWCRM/obj/Release/edmxResourcesToEmbed/Models/NEWCRM.msl
+#	modified:   NEWCRM/obj/Release/edmxResourcesToEmbed/Models/NEWCRM.ssdl
+#	modified:   OverSLAJob/obj/Release/DesignTimeResolveAssemblyReferencesInput.cache
+#
+# Untracked files:
+#	NEWCRM/Models/sp_GetCaseDetailById1_Result.cs
+#	NEWCRM/Models/sp_Get_CaseDetailById_Result.cs
+#	NEWCRM/Models/sp_helpdiagramdefinition1_Result.cs
+#	NEWCRM/Models/sp_helpdiagrams1_Result.cs
+#	NEWCRM/Models/uspReportCaseSummaryByDate_Result.cs
+#	NEWCRM/Views/RepCase/repSummary.cshtml
+#	NEWCRM/Views/RepCase/repSummaryChild.cshtml
+#
+

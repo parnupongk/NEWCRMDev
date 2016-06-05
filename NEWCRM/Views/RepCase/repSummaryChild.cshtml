@@ -1,0 +1,14 @@
+﻿
+@{
+    Layout = "";
+}
+
+@foreach (var item in Model.list_repcasesum)
+{
+    <tr class="gradeX">
+        <td style="padding-left:50px;">@item.catName</td>
+        <td>@item.counts</td>
+        <td>@item.Percents</td>
+    </tr>
+
+}

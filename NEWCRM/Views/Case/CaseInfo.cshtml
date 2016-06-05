@@ -81,6 +81,60 @@
                     <p class="form-control-static">@(string.IsNullOrWhiteSpace(Model.CaseDetails.CASSUMMARY) ? "-" : Model.CaseDetails.CASSUMMARY)</p>
                 </div>
             </div>
+
+            @if (Model.CaseDetails.casIDLevel1 == 1)
+            {
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        <label>ประเภทการซื้อขาย</label>
+                        <p class="form-control-static">@(string.IsNullOrWhiteSpace(Model.CaseDetails.cascommerceType) ? "-" : Model.CaseDetails.cascommerceType)</p>
+                    </div>
+                </div>
+                <div class="col-lg-8">
+                    <div class="form-group">
+                        <label>ประเภทสินค้า </label>
+                        <p class="form-control-static">@(string.IsNullOrWhiteSpace(Model.CaseDetails.casproductCategory) ? "-" : Model.CaseDetails.casproductCategory)</p>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        <label>ประเภทบริการ</label>
+                        <p class="form-control-static">@(string.IsNullOrWhiteSpace(Model.CaseDetails.casserviceCategory) ? "-" : Model.CaseDetails.casserviceCategory)</p>
+                    </div>
+                </div>
+                <div class="col-lg-8">
+                    <div class="form-group">
+                        <label>วิธีการส่งสินค้า </label>
+                        <p class="form-control-static">@(string.IsNullOrWhiteSpace(Model.CaseDetails.casdeliveryType) ? "-" : Model.CaseDetails.casdeliveryType)</p>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        <label>มลูค่าการซื้อขาย </label>
+                        <p class="form-control-static">@(string.IsNullOrWhiteSpace(Model.CaseDetails.casvalueRange) ? "-" : Model.CaseDetails.casvalueRange)</p>
+                    </div>
+                </div>
+                <div class="col-lg-8">
+                    <div class="form-group">
+                        <label>ช่องทางการติดต่อ </label>
+                        <p class="form-control-static">@(string.IsNullOrWhiteSpace(Model.CaseDetails.casconversationChannel) ? "-" : Model.CaseDetails.casconversationChannel)</p>
+                    </div>
+                </div>
+            }
+
+            <div class="col-lg-4">
+                <div class="form-group">
+                    <label>หลักฐานประกอบ</label>
+                    <p class="form-control-static">@(string.IsNullOrWhiteSpace(Model.CaseDetails.casreferenceDetail) ? "-" : Model.CaseDetails.casreferenceDetail)</p>
+                </div>
+            </div>
+            <div class="col-lg-8">
+                <div class="form-group">
+                    <label>รายละเอียดร้องเรียน</label>
+                    <p class="form-control-static">@Model.CaseDetails.casdetail</p>
+                </div>
+            </div>
+
             <div class="col-lg-4">
                 <div class="form-group">
                     <label>Status</label>
@@ -129,6 +183,7 @@
                     <p class="form-control-static">@(string.IsNullOrWhiteSpace(Model.CaseDetails.CALLBACKNUMBER) ? "-" : Model.CaseDetails.CALLBACKNUMBER)</p>
                 </div>
             </div>
+            
             <div class="col-lg-12">
                 <div class="form-group">
                     <label>Recomment</label>

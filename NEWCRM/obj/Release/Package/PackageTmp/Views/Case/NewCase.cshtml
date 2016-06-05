@@ -36,17 +36,37 @@
     <script src="~/Scripts/NewCase.js"></script>
     <script type="text/javascript">
 
+        function resetValueGroup()
+        {
+            //--load Status
+            $("#cssID").val('1');
+            $("#commerceType").val('1');
+            $("#productCategory").val('1');
+            $("#serviceCategory").val('1');
+            $("#deliveryType").val('1');
+            $("#valueRange").val('1');
+            $("#conversationChannel").val('1');
+            $("#txtRefDetail").val('');
+            $("#txtDetail").val('');
+        }
+
+        function resetGroup()
+        {
+            $("#CaseGroup1").hide();
+            $("#CaseGroup2").hide();
+            $("#ctdiv_statusreason").hide();
+            resetValueGroup();
+        }
 
         $(document).ready(function () {
             $("#ctdiv_7").hide();
             $("#casIDLevel1").focus();
             $("#cdt").hide();
             $("#dv-callback").hide();
-            $("#ctdiv_6").hide();
+            $("#ctdiv_4").hide();
             $("#ctcaseparent").hide();
-
-            //--load Status
-            $("#cssID").val('1');
+            resetGroup();
+            
 
             $("#casURLAccount").autocomplete({
                 source: function (request, response) {
@@ -54,7 +74,7 @@
                         url: "/Case/CaseURLAccAuto",
                         type: "POST",
                         dataType: "json",
-                        data: { Prefix: request.term, casIDLevel3: $("#casIDLevel3").val() },
+                        data: { Prefix: request.term, casIDLevel3: $("#casIDLevel2").val() },
                         success: function (data) {
                             response($.map(data, function (item) {
                                 return { value:item.casID, label: item.casLevel6 };
@@ -94,6 +114,7 @@
                 }
             });
 
+            
             $("input[name='cssID']").click(function () {
                 if ($(this).val() === '4') {
                     $("#dv-callback").slideDown(300);
@@ -132,15 +153,17 @@
             $('#newcase-list').fadeIn();
             $("#frm-newcase").get(0).reset();
             $("#casSLA").val('');
-            //$("#priID").val('2');
-            $("#cssID").val('2');
+            $("#ctcaseparent").val('');
+            $("#ctdiv_3").hide();
             $("#ctdiv_2").hide();
-            $("#ctdiv_6").hide();
+            $("#ctdiv_4").hide();
+            $("#ctdiv_statusreason").hide();
             $("#ctdiv_opt").hide();
             $("#dv-callback").hide();
             openSuccessDialog('Save new case success');            
             getNewCaseList();
             $("#btnsavenewcase").removeAttr("disabled");
+            resetGroup();
         }
 
         function getNewCaseList()
@@ -192,6 +215,20 @@
             $("#cd").toggle(300);
         }
 
+        function statuschange(ref)
+        {
+
+            if( $(ref).val()=="4" )
+            {
+                $("#ctdiv_statusreason").show();
+            }
+            else
+            {
+                $("#ctdiv_statusreason").hide();
+                $("#cssStatusReason").val('');
+            }
+        }
+
         function nextctnode(ref) {
             var message = $(ref).find(':selected').attr('data-dialogue');
             var sla = $(ref).find(':selected').attr('data-sla');
@@ -200,23 +237,23 @@
             var current_lv = current_divnode.split("_")[1];
             var next_lv = parseInt(current_lv) + 1;
 
-            //alert(current_lv);
+            
 
             if ($(ref).val() === "") {
                 // Show - Hide another div
                 if (current_lv == 1) {
                     $("#ctdiv_2").empty().hide();
                     $("#ctdiv_3").empty().hide();
-                    $("#ctdiv_4").empty().hide();
+                    $("#ctdiv_4").hide();
                     $("#ctdiv_5").empty().hide();
                 }
                 if (current_lv == 2) {
-                    $("#ctdiv_3").empty().hide();
-                    $("#ctdiv_4").empty().hide();
+                    //$("#ctdiv_3").empty().hide();
+                    $("#ctdiv_4").hide();
                     $("#ctdiv_5").empty().hide();
                 }
                 if (current_lv == 3) {
-                    $("#ctdiv_4").empty().hide();
+                    //$("#ctdiv_4").empty().hide();
                     $("#ctdiv_5").empty().hide();
                 }
                 if (current_lv == 4) {
@@ -228,20 +265,30 @@
                 if (current_lv == 1) {
                     $("#ctdiv_2").empty().hide();
                     $("#ctdiv_3").empty().hide();
-                    $("#ctdiv_4").empty().hide();
+                    $("#ctdiv_4").hide();
                     $("#ctdiv_5").empty().hide();
-                    $("#ctdiv_6").hide();
+                    $("#ctdiv_3").hide();
                     $("#ctdiv_opt").hide();
                     $("#casSLA").val('');
+                    if( $(ref).val()=="1" )
+                    {
+                        $("#CaseGroup1").show();
+                        $("#CaseGroup2").show();
+                    }
+                    else {
+                        resetValueGroup();
+                        $("#CaseGroup1").hide();
+                        $("#CaseGroup2").show();
+                    }
                 }
                 if (current_lv == 2) {
-                    $("#ctdiv_3").empty().hide();
-                    $("#ctdiv_4").empty().hide();
+                    //$("#ctdiv_3").empty().hide();
+                    $("#ctdiv_4").hide();
                     $("#ctdiv_5").empty().hide();
                     $("#ctdiv_opt").hide();
                 }
                 if (current_lv == 3) {
-                    $("#ctdiv_4").empty().hide();
+                    //$("#ctdiv_4").empty().hide();
                     $("#ctdiv_5").empty().hide();
                     $("#ctdiv_opt").hide();
                 }
@@ -255,7 +302,6 @@
                 // Show Next Node
                 //if($(ref).find("option:selected").val() === '2') {
                 //alert($("#casLevel" + current_lv).text);
-                //alert(sla);
                 if (sla === '' || typeof sla == 'undefined') {
                     //alert(lv_current.attr("id"));
                     $("#ctdiv_" + next_lv).html('<div class="col-sm-3">&nbsp;</div><div class="col-sm-9 text-warning text-medium">Loading...</div>').slideDown(200);
@@ -267,20 +313,25 @@
                         $("#ctdiv_" + next_lv).html(data);
                     });
                     
-                    if (next_lv > 3)
-                    {
-                        //alert(id);
-                        $("#ctdiv_6").show();
-                        $("#casURLAccount").focus();
-                    }
+                    
                 } else {
 
-                    $("#casURLAccount").focus();
+                    if (current_lv == 2) {
+                        //alert(id);
+                        var url = '@Url.Action("GetSourceType", "Casetype")';
+                        $.post(url, function (data) {
+                            $("#ctdiv_3").html(data);
+                        });
+                        $("#ctdiv_3").show();
+                        $("#ctdiv_opt").show();
+                        //$("#casURLAccount").focus();
+                    }
+                    //$("#casURLAccount").focus();
                     //$("#casNote").focus();                    
                     $("#sla").text(sla);                  
                     $("#casSLA").val(sla);
                     $("#slaID").val(slaid);
-                    $("#ctdiv_opt").show();
+                    
                 }
             }
             
@@ -289,6 +340,12 @@
             } else {
                 toastr.clear();
             }
+        }
+
+        function onSourceTypeChange(ref) {
+            $("#ctdiv_4").show();
+            $("#casLevel3").val($(ref).find("option:selected").text());
+
         }
 
         function getCommonDetail()
@@ -420,12 +477,21 @@
                                 Html.RenderAction("ContactInfo", "Contact");
                             }
                             </div>
+
+ 
+                            
+
+
+
+
+
+
                             @if(NEWCRM.Common.AppUtils.Session.Activity.ctaID.HasValue)
                             {
                                 using (Ajax.BeginForm("NewCaseSave", "Case",
                                         new AjaxOptions { HttpMethod = "post", OnBegin = "beginSaveNewCase", OnSuccess = "successSaveNewCase", OnFailure = "failureSaveNewCase" },
                                         new { id = "frm-newcase", @class = "form-horizontal form-validate", novalidate = "novalidate", autocomplete = "off" }))
-                                {       
+                                {
                                     <input type="hidden" id="pvnID" name="pvnID" value="" />
                                     <div class="row" style="margin-top: 10px">
                                     <div class="col-lg-10">
@@ -434,65 +500,82 @@
                                                 Html.RenderAction("getCaseTypeNodeSelection", "Casetype", new { id = 0 });
                                             }
                                         </div>
-                                        <div id="ctdiv_2" class="form-group"></div>                                
-                                        <div id="ctdiv_3" class="form-group"></div>   
-                                        <div id="ctdiv_4" class="form-group"></div> 
-                                        <div id="ctdiv_5" class="form-group"></div>      
-                                        <div id="ctdiv_6" class="form-group" >
-                                            <label for="casenote" class="col-sm-3 control-label">Add URL/Account</label>
+                                        <div id="ctdiv_2" class="form-group"></div>
+                                        <div id="ctdiv_3" class="form-group"></div>
+                                        <div id="ctdiv_4" class="form-group" >
+                                            <label for="casenote" class="col-sm-3 control-label">รายละเอียดช่องทางซื้อขาย</label>
                                             <div class="col-sm-8 margin-bottom-xl">
                                                 <input type="text" class="form-control" id="casURLAccount" name="casURLAccount" required />
                                             </div>
                                             <div id="ctdiv_7" class="col-sm-1 margin-bottom-xl">
-                                                <h><span class="label label-warning">Child Cas</span></h>
+                                                <h><span class="label label-warning">Child Case</span></h>
                                                     <input type="hidden" class="form-control" id="casParentID" name="casParentID" value="" />
                                             </div>
                                             <div id="ctcaseparent" class="col-sm-12 margin-bottom-xl">
 
                                             </div>
                                         </div>
+
+                                        <div id="CaseGroup1" class="form-group">
+                                            @{
+                                                Html.RenderPartial("CaseGroup1");
+                                            }
+
+                                        </div>
+
+                                        <div id="CaseGroup2" class="form-group">
+                                            @{
+                                                Html.RenderPartial("CaseGroup2");
+                                            }
+                                        </div>
+
+                                        <div id="ctdiv_5" class="form-group"></div>      
                                         <div class="form-group">
                                             <label for="casenote" class="col-sm-3 control-label">Add Note</label>
                                             <div class="col-sm-9 margin-bottom-xl">
                                                 <textarea id="casNote" name="casNote" class="form-control" rows="6" required data-rule-minlength="1"></textarea>
                                             </div>
                                         </div>
+                                        
+
                                         <div id="ctdiv_opt" class="form-group">
-                                            <label class="col-sm-3 control-label">Status</label>
-                                            <div class="col-sm-9 margin-bottom-xl">
-                                                <select id="cssID" name="cssID" class="form-control">
-                                                     
-                                                    @foreach (var item in Model.list_status)
-                                                    { 
-                                                        <option value="@item.cssID">@item.cssName</option>
-                                                    }
-                                                </select>
-                                               @* <label class="radio-inline radio-styled radio-warning">
-                                                    <input type="radio" name="cssID" value="4"><span>Opened</span>
-                                                </label>
-                                                <label class="radio-inline radio-styled">
-                                                    <input type="radio" name="cssID" value="1" checked="checked"><span>Closed</span>
-                                                </label>*@
+                                            <div class="form-group">
+                                                <label class="col-sm-3 control-label">Status</label>
+                                                <div class="col-sm-9 margin-bottom-xl">
+                                                    <select id="cssID" name="cssID" class="form-control" onchange="statuschange(this)">
+
+                                                        @foreach (var item in Model.list_status)
+                                                        {
+                                                            <option value="@item.cssID">@item.cssName</option>
+                                                        }
+                                                    </select>
+                                                </div>
+                                                </div>
+
+                                                <div id="ctdiv_statusreason" class="form-group">
+                                                    <label class="col-sm-3 control-label">Status Reason</label>
+                                                    <div class="col-sm-9 margin-bottom-xl">
+                                                        <select id="cssStatusReason" name="cssStatusReason" class="form-control">
+
+                                                            @foreach (var item in Model.list_status_reason)
+                                                            {
+                                                                <option value="@item">@item</option>
+                                                            }
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <br />
+                                                <label class="col-sm-3 control-label">Case SLA</label>
+                                                <div class="col-sm-9">
+                                                    <p class="text-l">
+                                                        <h4><i class="fa fa-clock-o fa-fw"></i>&nbsp;<span id="sla">-</span>&nbsp;Minutes</h4>
+                                                        <input type="hidden" name="casSLA" id="casSLA" />
+                                                        <input type="hidden" name="slaID" id="slaID" />
+                                                    </p>
+                                                </div>
                                             </div>
-                                           @* <label for="priID" class="col-sm-3 control-label">Priority</label>
-                                            <div class="col-sm-9 margin-bottom-xl">
-                                                <select id="priID" name="priID" class="form-control">
-                                                    @foreach (var item in Model.list_priority)
-                                                    { 
-                                                        <option value="@item.priID">@item.priName</option>
-                                                    }
-                                                </select>
-                                            </div>*@
-                                            <br />
-                                            <label class="col-sm-3 control-label">Case SLA</label>
-                                            <div class="col-sm-9">
-                                                <p class="text-l">
-                                                    <h4><i class="fa fa-clock-o fa-fw"></i>&nbsp;<span id="sla">-</span>&nbsp;Minutes</h4>
-                                                    <input type="hidden" name="casSLA" id="casSLA" />
-                                                    <input type="hidden" name="slaID" id="slaID" />
-                                                </p>
-                                            </div>
-                                        </div>
+
+
                                         <div id="dv-callback" class="form-group">
                                             @*<hr />
                                             <div class="card-head">

@@ -404,6 +404,9 @@
     <Compile Include="Models\SP_Contact_Detail_RP_Result.cs">
       <DependentUpon>NEWCRM.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\sp_GetCaseDetailById1_Result.cs">
+      <DependentUpon>NEWCRM.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\sp_GetCaseDetailById_Result.cs">
       <DependentUpon>NEWCRM.tt</DependentUpon>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -492,6 +495,9 @@
       <DependentUpon>NEWCRM.tt</DependentUpon>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
+    <Compile Include="Models\sp_Get_CaseDetailById_Result.cs">
+      <DependentUpon>NEWCRM.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\sp_Get_Casepending_ByAgent_Result.cs">
       <DependentUpon>NEWCRM.tt</DependentUpon>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -500,9 +506,15 @@
       <DependentUpon>NEWCRM.tt</DependentUpon>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
+    <Compile Include="Models\sp_helpdiagramdefinition1_Result.cs">
+      <DependentUpon>NEWCRM.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\sp_helpdiagramdefinition_Result.cs">
       <DependentUpon>NEWCRM.tt</DependentUpon>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Models\sp_helpdiagrams1_Result.cs">
+      <DependentUpon>NEWCRM.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\sp_helpdiagrams_Result.cs">
       <DependentUpon>NEWCRM.tt</DependentUpon>
@@ -566,6 +578,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
     <Compile Include="Models\uspReportCaseLevel_Result.cs">
+      <DependentUpon>NEWCRM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\uspReportCaseSummaryByDate_Result.cs">
       <DependentUpon>NEWCRM.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\uspReportCaseSummary_Result.cs">
@@ -2163,12 +2178,17 @@
     <Content Include="Views\Case\CaseGroup1.cshtml" />
     <Content Include="Views\Case\CaseGroup2.cshtml" />
     <Content Include="Views\Case\_CaseGroup.cshtml" />
+<<<<<<< HEAD
     <Content Include="Views\RepCase\rptCallHour.cshtml" />
     <Content Include="Views\RepCase\rptCallDay.cshtml" />
     <Content Include="Views\RepCase\rptCaseRep.cshtml" />
     <Content Include="Views\RepCase\rptCaseOnl.cshtml" />
     <Content Include="Views\RepCase\rptCaseRaw.cshtml" />
     <Content Include="Views\RepCase\rptCaseCyb.cshtml" />
+=======
+    <Content Include="Views\RepCase\repSummary.cshtml" />
+    <Content Include="Views\RepCase\repSummaryChild.cshtml" />
+>>>>>>> origin/master
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

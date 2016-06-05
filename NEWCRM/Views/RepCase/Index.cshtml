@@ -1,159 +1,56 @@
 ﻿@model NEWCRM.Models.ListRepCaseModel
+
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-@section Scripts {
-    <script type="text/javascript">
-        $(document).ready(function () {
-            $('.field-date').datepicker({ autoclose: true, todayHighlight: true, format: "dd/mm/yyyy" });
+    @section Scripts {
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $('.field-date').datepicker({ autoclose: true, todayHighlight: true, format: "dd/mm/yyyy" });
 
-            var today = new Date();
-            var dd = today.getDate();
-            var mm = today.getMonth() + 1; //January is 0!
+                var today = new Date();
+                var dd = today.getDate();
+                var mm = today.getMonth() + 1; //January is 0!
 
-            var yyyy = today.getFullYear();
-            if (dd < 10) {
-                dd = '0' + dd
-            }
-            if (mm < 10) {
-                mm = '0' + mm
-            }
-            var today = dd + '/' + mm + '/' + yyyy;
-            $("#startdate").val(today);
-            $("#enddate").val(today);
-        });
-
-
-        function nextctnode(ref) {
-            var message = $(ref).find(':selected').attr('data-dialogue');
-            var sla = $(ref).find(':selected').attr('data-sla');
-            var slaid = $(ref).find(':selected').attr('data-slaid');
-            var current_divnode = $(ref).parents().eq(1).attr("id");
-            var current_lv = current_divnode.split("_")[1];
-            var next_lv = parseInt(current_lv) + 1;
-
-            //alert(current_lv);
-
-            if ($(ref).val() === "") {
-                // Show - Hide another div
-                if (current_lv == 1) {
-                    $("#ctdiv_2").empty().hide();
-                    $("#ctdiv_3").empty().hide();
-                    $("#ctdiv_4").empty().hide();
-                    $("#ctdiv_5").empty().hide();
+                var yyyy = today.getFullYear();
+                if (dd < 10) {
+                    dd = '0' + dd
                 }
-                if (current_lv == 2) {
-                    $("#ctdiv_3").empty().hide();
-                    $("#ctdiv_4").empty().hide();
-                    $("#ctdiv_5").empty().hide();
+                if (mm < 10) {
+                    mm = '0' + mm
                 }
-                if (current_lv == 3) {
-                    $("#ctdiv_4").empty().hide();
-                    $("#ctdiv_5").empty().hide();
-                }
-                if (current_lv == 4) {
-                    $("#ctdiv_5").empty().hide();
-                }
-                $("#ctdiv_opt").hide();
-                $("#casSLA").val('');
-            } else {
-                if (current_lv == 1) {
-                    $("#ctdiv_2").empty().hide();
-                    $("#ctdiv_3").empty().hide();
-                    $("#ctdiv_4").empty().hide();
-                    $("#ctdiv_5").empty().hide();
-                    $("#ctdiv_6").hide();
-                    $("#ctdiv_opt").hide();
-                    $("#casSLA").val('');
-                }
-                if (current_lv == 2) {
-                    $("#ctdiv_3").empty().hide();
-                    $("#ctdiv_4").empty().hide();
-                    $("#ctdiv_5").empty().hide();
-                    $("#ctdiv_opt").hide();
-                }
-                if (current_lv == 3) {
-                    $("#ctdiv_4").empty().hide();
-                    $("#ctdiv_5").empty().hide();
-                    $("#ctdiv_opt").hide();
-                }
-                if (current_lv == 4) {
-                    $("#ctdiv_5").empty().hide();
-                    $("#ctdiv_opt").hide();
-                }
-
-                // Set casLevel
-                $("#casLevel" + current_lv).val($(ref).find("option:selected").text());
-                // Show Next Node
-                //if($(ref).find("option:selected").val() === '2') {
-                //alert($("#casLevel" + current_lv).text);
-                //alert(sla);
-                if (sla === '' || typeof sla == 'undefined') {
-                    //alert(lv_current.attr("id"));
-                    $("#ctdiv_" + next_lv).html('<div class="col-sm-3">&nbsp;</div><div class="col-sm-9 text-warning text-medium">Loading...</div>').slideDown(200);
-                    var id = $(ref).val();
-                    //alert(id);
-                    var url = '@Url.Action("getCaseTypeNodeSelectionRepCase", "Casetype")/' + id;
-                    $.post(url, function (data) {
-                        $("#ctdiv_" + next_lv).html(data);
-                    });
-
-                    if (id > 137) {
-                        //alert(id);
-                        $("#ctdiv_6").show();
-                        $("#casURLAccount").focus();
-                    }
-                } else {
-
-                    //$("#casURLAccount").focus();
-                    //$("#casNote").focus();
-                    $("#sla").text(sla);
-                    $("#casSLA").val(sla);
-                    $("#slaID").val(slaid);
-                    $("#ctdiv_opt").show();
-                }
-            }
-
-            if (jQuery.trim(message).length > 0) {
-                openInfoDialog(message);
-            } else {
-                toastr.clear();
-            }
-        }
-
-        function beginQuery() {
-            $(".fv").each(function () {
-                var v = $(this).val();
-                if (v == '') {
-                    $(this).focus();
-                }
+                var today = dd + '/' + mm + '/' + yyyy;
+                $("#startdate").val(today);
+                $("#enddate").val(today);
             });
 
-            $("#getQuery").fadeOut(300);
-        }
-
-        function successQuery() {
-            $('#datatable1').DataTable({
-                "dom": 'lCfrtip',
-                "order": [[0, "asc"]],
-                "language": {
-                    "lengthMenu": '_MENU_ entries per page',
-                    "search": '<i class="fa fa-search"></i>',
-                    "paginate": {
-                        "previous": '<i class="fa fa-angle-left"></i>',
-                        "next": '<i class="fa fa-angle-right"></i>'
+            function loadReport()
+            {
+                var start = $("#startdate").val();
+                var url = '@Url.Action("repSummary", "RepCase")';
+                jQuery.ajax({
+                    url: url,
+                    type: 'POST',
+                    data: {
+                        'startdate': start,
+                        'enddate': $("#enddate").val(),
+                        'catparentid': '0'
+                    },
+                    success: function (data) {
+                        //console.log('Returned data is: ' + data);
+                        $("#getQuery").html(data);
+                        
                     }
-                }
-            });
-            $("#getQuery").fadeIn(300);
-        }
+                });
 
-        function failureQuery(data) {
-            openErrorDialog(data.responseText);
-        }
-    </script>
-}
+            }
+
+
+        </script>
+    }
+
+
 
 <div class="section-body">
     <div class="card">
@@ -191,10 +88,14 @@
                         </div>
                     </div>
                 </div>
+<<<<<<< HEAD
                 @using (Ajax.BeginForm("getReport", "RepCase",
                                             new AjaxOptions { UpdateTargetId = "getQuery", HttpMethod = "post", OnBegin = "return beginQuery()", OnSuccess = "successQuery", OnFailure = "failureQuery" },
                                             new { id = "frm-casequery", @class = "form", autocomplete = "off" }))
                 {
+=======
+  
+>>>>>>> origin/master
                     <div id="filterList"></div>
 
                         <input type="hidden" id="data-type-<%=index%>" name="data-type-<%=index%>" value="text" />
@@ -206,35 +107,16 @@
 
                                 </!--div-->
                                 <div id="ctdiv_1" class="form-group no-padding">
-                                    @{
-                                        Html.RenderAction("getCaseTypeNodeSelectionRepCase", "Casetype", new { id = 0 });
-                                    }
+                                    <div class="col-sm-9 margin-bottom-xl">
+                                        <select name="reptype" class="form-control">
+                                            <option></option>
+                                            <option value="1">report summary</option>
+                                            <option value="0">Nothing</option>
+                                            <option value="2">By Himself</option>
+                                        </select>
+                                    </div>
                                 </div>
-                                <div id="ctdiv_2" class="form-group"></div>
-                                <div id="ctdiv_3" class="form-group"></div>
-                                <div id="ctdiv_4" class="form-group"></div>
-                                <div id="ctdiv_5" class="form-group"></div>  
                             </div>
-                            <!--div class="col-lg-2">
-                                <div class="form-group no-padding">
-                                    <select id="condition-text-<%=index%>" name="condition-text-<%=index%>" class="form-control">
-                                        <option value="={0}" title="==">Equal</option>
-                                        <option value="<>{0}" title="!=">Not Equal</option>
-                                        <option value="like $%{0}%$" title="..N..">Contain</option>
-                                        <option value="like ${0}%$" title="N...">Begin With</option>
-                                        <option value="like $%{0}$" title="...N">End With</option>
-                                    </select>
-                                    <select id="condition-date-<%=index%>" name="condition-date-<%=index%>" class="form-control" style="display: none">
-                                        <option value="={0}" title="Is">==</option>
-                                        <option value=">={0}" title="More than or equal">>=</option>
-                                        <option value="<={0}" title="Less than or equal"><=</option>
-                                    </select>
-                                    <select id="condition-status-<%=index%>" name="condition-status-<%=index%>" class="form-control" style="display: none">
-                                        <option value="={0}" title="Is">==</option>
-                                        <option value="<>{0}" title="Is Not">!=</option>
-                                    </select>
-                                </div>
-                            </!--div -->
                             <div class="col-lg-3">
                                 <div class="form-group no-padding">
                                     <div id="value-date-<%=index%>" class="input-group date field-date" >
@@ -260,10 +142,10 @@
                     <div class="row" style="margin: 10px">
                         <div class="card-actionbar-row col-lg-12" style="padding-right: 80px">
 
-                            <button type="submit" class="btn ink-reaction btn-primary"><i class="fa fa-search fa-fw"></i>&nbsp;Search</button>
+                            <button type="submit" class="btn ink-reaction btn-primary" onclick="loadReport()"><i class="fa fa-search fa-fw"></i>&nbsp;Search</button>
                         </div>
                     </div>
-                }
+
                 <hr class="ruler-xl">
             </div>
         </div>

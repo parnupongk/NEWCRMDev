@@ -12,10 +12,7 @@ namespace NEWCRM.Controllers
     {
 
         #region bom
-        public ActionResult GetCaseGroup1(CaseViewModelLocalization model)
-        {
-            return PartialView("CaseGroup1", model);
-        }
+
 
         public ActionResult GetSourceType()
         {
@@ -65,7 +62,7 @@ namespace NEWCRM.Controllers
             var list_casetype = Common.AppUtils.Session.CaseTypes;
             var nodes = from ct in list_casetype
                        where ct.catParrentID == id
-                       orderby ct.catName
+                       orderby ct.catOrder
                        select ct;
 
             var model = new CasetypeViewModel();

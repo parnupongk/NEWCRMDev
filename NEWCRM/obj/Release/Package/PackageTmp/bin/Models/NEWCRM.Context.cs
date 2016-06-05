@@ -78,15 +78,14 @@ namespace NEWCRM.Models
         public DbSet<Role> Roles { get; set; }
         public DbSet<SubDistrict> SubDistricts { get; set; }
         public DbSet<SubDistrict_Locale> SubDistrict_Locale { get; set; }
-        public DbSet<sysdiagram> sysdiagrams { get; set; }
         public DbSet<Title> Titles { get; set; }
         public DbSet<Titles_Locale> Titles_Locale { get; set; }
         public DbSet<User_Group> User_Group { get; set; }
         public DbSet<User_Role> User_Role { get; set; }
         public DbSet<User> Users { get; set; }
-        public DbSet<tblViewContact> tblViewContacts { get; set; }
-        public DbSet<View_QueryReport_SalesContactDetail> View_QueryReport_SalesContactDetail { get; set; }
         public DbSet<DNIS> DNIS { get; set; }
+        public DbSet<TaskScheduleLog> TaskScheduleLogs { get; set; }
+        public DbSet<sysdiagram> sysdiagrams { get; set; }
     
         public virtual ObjectResult<sp_ActivityChannelSummary_Result> sp_ActivityChannelSummary()
         {
@@ -675,6 +674,183 @@ namespace NEWCRM.Models
                 new ObjectParameter("usrID", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_getTotalTodolistByChannel_Result>("sp_getTotalTodolistByChannel", usrIDParameter);
+        }
+    
+        public virtual ObjectResult<SP_Contact_Detail_RP_Result> SP_Contact_Detail_RP(string sTARTDATE, string eNDDATE)
+        {
+            var sTARTDATEParameter = sTARTDATE != null ?
+                new ObjectParameter("STARTDATE", sTARTDATE) :
+                new ObjectParameter("STARTDATE", typeof(string));
+    
+            var eNDDATEParameter = eNDDATE != null ?
+                new ObjectParameter("ENDDATE", eNDDATE) :
+                new ObjectParameter("ENDDATE", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_Contact_Detail_RP_Result>("SP_Contact_Detail_RP", sTARTDATEParameter, eNDDATEParameter);
+        }
+    
+        public virtual ObjectResult<string> sp_GetGroupCaseOnlineAcc()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("sp_GetGroupCaseOnlineAcc");
+        }
+    
+        public virtual ObjectResult<uspReportCaseLevel_Result> uspReportCaseLevel(string sTARTDATE, string eNDDATE)
+        {
+            var sTARTDATEParameter = sTARTDATE != null ?
+                new ObjectParameter("STARTDATE", sTARTDATE) :
+                new ObjectParameter("STARTDATE", typeof(string));
+    
+            var eNDDATEParameter = eNDDATE != null ?
+                new ObjectParameter("ENDDATE", eNDDATE) :
+                new ObjectParameter("ENDDATE", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<uspReportCaseLevel_Result>("uspReportCaseLevel", sTARTDATEParameter, eNDDATEParameter);
+        }
+    
+        public virtual int sp_alterdiagram1(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)
+        {
+            var diagramnameParameter = diagramname != null ?
+                new ObjectParameter("diagramname", diagramname) :
+                new ObjectParameter("diagramname", typeof(string));
+    
+            var owner_idParameter = owner_id.HasValue ?
+                new ObjectParameter("owner_id", owner_id) :
+                new ObjectParameter("owner_id", typeof(int));
+    
+            var versionParameter = version.HasValue ?
+                new ObjectParameter("version", version) :
+                new ObjectParameter("version", typeof(int));
+    
+            var definitionParameter = definition != null ?
+                new ObjectParameter("definition", definition) :
+                new ObjectParameter("definition", typeof(byte[]));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_alterdiagram1", diagramnameParameter, owner_idParameter, versionParameter, definitionParameter);
+        }
+    
+        public virtual int sp_creatediagram1(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)
+        {
+            var diagramnameParameter = diagramname != null ?
+                new ObjectParameter("diagramname", diagramname) :
+                new ObjectParameter("diagramname", typeof(string));
+    
+            var owner_idParameter = owner_id.HasValue ?
+                new ObjectParameter("owner_id", owner_id) :
+                new ObjectParameter("owner_id", typeof(int));
+    
+            var versionParameter = version.HasValue ?
+                new ObjectParameter("version", version) :
+                new ObjectParameter("version", typeof(int));
+    
+            var definitionParameter = definition != null ?
+                new ObjectParameter("definition", definition) :
+                new ObjectParameter("definition", typeof(byte[]));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_creatediagram1", diagramnameParameter, owner_idParameter, versionParameter, definitionParameter);
+        }
+    
+        public virtual int sp_dropdiagram1(string diagramname, Nullable<int> owner_id)
+        {
+            var diagramnameParameter = diagramname != null ?
+                new ObjectParameter("diagramname", diagramname) :
+                new ObjectParameter("diagramname", typeof(string));
+    
+            var owner_idParameter = owner_id.HasValue ?
+                new ObjectParameter("owner_id", owner_id) :
+                new ObjectParameter("owner_id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_dropdiagram1", diagramnameParameter, owner_idParameter);
+        }
+    
+        public virtual ObjectResult<sp_helpdiagramdefinition1_Result> sp_helpdiagramdefinition1(string diagramname, Nullable<int> owner_id)
+        {
+            var diagramnameParameter = diagramname != null ?
+                new ObjectParameter("diagramname", diagramname) :
+                new ObjectParameter("diagramname", typeof(string));
+    
+            var owner_idParameter = owner_id.HasValue ?
+                new ObjectParameter("owner_id", owner_id) :
+                new ObjectParameter("owner_id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_helpdiagramdefinition1_Result>("sp_helpdiagramdefinition1", diagramnameParameter, owner_idParameter);
+        }
+    
+        public virtual ObjectResult<sp_helpdiagrams1_Result> sp_helpdiagrams1(string diagramname, Nullable<int> owner_id)
+        {
+            var diagramnameParameter = diagramname != null ?
+                new ObjectParameter("diagramname", diagramname) :
+                new ObjectParameter("diagramname", typeof(string));
+    
+            var owner_idParameter = owner_id.HasValue ?
+                new ObjectParameter("owner_id", owner_id) :
+                new ObjectParameter("owner_id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_helpdiagrams1_Result>("sp_helpdiagrams1", diagramnameParameter, owner_idParameter);
+        }
+    
+        public virtual int sp_renamediagram1(string diagramname, Nullable<int> owner_id, string new_diagramname)
+        {
+            var diagramnameParameter = diagramname != null ?
+                new ObjectParameter("diagramname", diagramname) :
+                new ObjectParameter("diagramname", typeof(string));
+    
+            var owner_idParameter = owner_id.HasValue ?
+                new ObjectParameter("owner_id", owner_id) :
+                new ObjectParameter("owner_id", typeof(int));
+    
+            var new_diagramnameParameter = new_diagramname != null ?
+                new ObjectParameter("new_diagramname", new_diagramname) :
+                new ObjectParameter("new_diagramname", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_renamediagram1", diagramnameParameter, owner_idParameter, new_diagramnameParameter);
+        }
+    
+        public virtual int sp_upgraddiagrams1()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_upgraddiagrams1");
+        }
+    
+        public virtual ObjectResult<uspReportCaseSummaryByDate_Result> uspReportCaseSummaryByDate(string sTARTDATE, string eNDDATE, Nullable<int> catParrentID)
+        {
+            var sTARTDATEParameter = sTARTDATE != null ?
+                new ObjectParameter("STARTDATE", sTARTDATE) :
+                new ObjectParameter("STARTDATE", typeof(string));
+    
+            var eNDDATEParameter = eNDDATE != null ?
+                new ObjectParameter("ENDDATE", eNDDATE) :
+                new ObjectParameter("ENDDATE", typeof(string));
+    
+            var catParrentIDParameter = catParrentID.HasValue ?
+                new ObjectParameter("catParrentID", catParrentID) :
+                new ObjectParameter("catParrentID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<uspReportCaseSummaryByDate_Result>("uspReportCaseSummaryByDate", sTARTDATEParameter, eNDDATEParameter, catParrentIDParameter);
+        }
+    
+        public virtual ObjectResult<sp_GetCaseDetailById1_Result> sp_GetCaseDetailById1(Nullable<decimal> cASEID, string lANG)
+        {
+            var cASEIDParameter = cASEID.HasValue ?
+                new ObjectParameter("CASEID", cASEID) :
+                new ObjectParameter("CASEID", typeof(decimal));
+    
+            var lANGParameter = lANG != null ?
+                new ObjectParameter("LANG", lANG) :
+                new ObjectParameter("LANG", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_GetCaseDetailById1_Result>("sp_GetCaseDetailById1", cASEIDParameter, lANGParameter);
+        }
+    
+        public virtual ObjectResult<sp_Get_CaseDetailById_Result> sp_Get_CaseDetailById(Nullable<decimal> cASEID, string lANG)
+        {
+            var cASEIDParameter = cASEID.HasValue ?
+                new ObjectParameter("CASEID", cASEID) :
+                new ObjectParameter("CASEID", typeof(decimal));
+    
+            var lANGParameter = lANG != null ?
+                new ObjectParameter("LANG", lANG) :
+                new ObjectParameter("LANG", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_Get_CaseDetailById_Result>("sp_Get_CaseDetailById", cASEIDParameter, lANGParameter);
         }
     }
 }
