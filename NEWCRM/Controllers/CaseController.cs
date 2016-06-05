@@ -226,8 +226,6 @@ namespace NEWCRM.Controllers
                         string casIDName = string.Format("C-{0}", data.casID.ToString().PadLeft(8, '0'));
                         new CaseRepository().UpdatedCaseIDName(casIDName, data.casID);
 
-                        //send email
-                        SendEmail(data.casID);
                     }
 
                     #endregion
