@@ -107,9 +107,9 @@ namespace NEWCRM.Controllers
             rptListCase.list_repcasesum = rptCase;*/
 
             Response.AddHeader("Content-Type", "application/vnd.ms-excel");
-            Response.AddHeader("Content-Disposition", "attachment;filename = ExcelFile.xls");
+            Response.AddHeader("Content-Disposition", "attachment;filename=CaseSummaryReport_" + DateTime.Now.ToString("yyyyMMdd") + ".xls");
 
-            Response.Write("<tablewidth=\"100%\"> <thead> <trclass=\"gradeX\"> <thcolspan=\"2\"> <h3>ETDAACallCenter</h3> <h4>CaseStatisticReport</h4> </th> <thcolspan=\"2\"></th> <th> <divclass=\"form-groupno-paddingpull-right\"> <img  src='http://parnupongk.azurewebsites.net/images/logo.png' /> </div> </th> </tr> </thead> </table><table border=\"1\"><thead><tr><th style=\"background-color:#0000ff;color:#ffffff;font-weight:bold;\">Case Type</th><th style=\"background-color:#0000ff;color:#ffffff;font-weight:bold;\">Number of Case</th><th style=\"background-color:#0000ff;color:#ffffff;font-weight:bold;\">%</th></tr></thead>");
+            Response.Write("<table cellpadding=\"5\" width=\"100%\" align=\"center\"><tr><td align=\"left\" style=\"font-size:20pt;font-weight:bold;vertical-align:middle;height:50px;\">ETDA Call Center</td><td align=\"right\"><img src=\"http://www.hostwebdd.com/logo_in_excel.jpg\" /></td></tr><tr><td colspan=\"2\" align=\"left\" style=\"font-size:16pt;font-weight:bold;vertical-align:middle;height:40px;\">Case Summary Report</td></tr><tr><td colspan=\"2\" align=\"left\" style=\"vertical-align:middle;height:30px;\">Report of " + startDate.ToString("dd MMM yyy") + " to " + endDate.ToString("dd MMM yyy") + " </td></tr><tr><td colspan=\"2\"><table border=\"1\" width=\"100%\" cellpadding=\"5\"><thead><tr><th style=\"background-color:#366092;color:#ffffff;font-weight:bold;\">Case Type</th><th style=\"background-color:#366092;color:#ffffff;font-weight:bold;\">Number of Case</th><th style=\"background-color:#366092;color:#ffffff;font-weight:bold;\">%</th></tr></thead>");
 
             foreach( DataRow dr in dt.Rows )
             {
@@ -131,7 +131,7 @@ namespace NEWCRM.Controllers
                 }
             }
 
-            Response.Write("</tbody></table>");
+            Response.Write("</tbody></table></td></tr></table>");
 
             //return View("repSummary", rptListCase);
         }
@@ -147,7 +147,7 @@ namespace NEWCRM.Controllers
             int caseIDLevel4 = 0;
             if (Request.Form["reptype"].ToString() == "1") { return RedirectToAction("rptCallHour", new{startDate = startDate,endDate = endDate, caseIDLevel1 = caseIDLevel1, caseIDLevel2 = caseIDLevel2, caseIDLevel3 = caseIDLevel3, caseIDLevel4 = caseIDLevel4 });}
             else if (Request.Form["reptype"].ToString() == "2") { return RedirectToAction("rptCallDay", new { startDate = startDate, endDate = endDate, caseIDLevel1 = caseIDLevel1, caseIDLevel2 = caseIDLevel2, caseIDLevel3 = caseIDLevel3, caseIDLevel4 = caseIDLevel4 });}
-            else if (Request.Form["reptype"].ToString() == "3") { return RedirectToAction("rptCaseRep", new { startDate = startDate, endDate = endDate, caseIDLevel1 = caseIDLevel1, caseIDLevel2 = caseIDLevel2, caseIDLevel3 = caseIDLevel3, caseIDLevel4 = caseIDLevel4 }); }
+            else if (Request.Form["reptype"].ToString() == "3") { return RedirectToAction("rptCaseRep", new { startDate = startDate, endDate = endDate, caseIDLevel1 = 999, caseIDLevel2 = caseIDLevel2, caseIDLevel3 = caseIDLevel3, caseIDLevel4 = caseIDLevel4 }); }
             else if (Request.Form["reptype"].ToString() == "4") { return RedirectToAction("rptCaseOnl", new { startDate = startDate, endDate = endDate, caseIDLevel1 = 1, caseIDLevel2 = caseIDLevel2, caseIDLevel3 = caseIDLevel3, caseIDLevel4 = caseIDLevel4 }); }
             else if (Request.Form["reptype"].ToString() == "5") { return RedirectToAction("rptCaseRaw", new { startDate = startDate, endDate = endDate, caseIDLevel1 = 2, caseIDLevel2 = caseIDLevel2, caseIDLevel3 = caseIDLevel3, caseIDLevel4 = caseIDLevel4 }); }
             else if (Request.Form["reptype"].ToString() == "6") { return RedirectToAction("rptCaseCyb", new { startDate = startDate, endDate = endDate, caseIDLevel1 = 3, caseIDLevel2 = caseIDLevel2, caseIDLevel3 = caseIDLevel3, caseIDLevel4 = caseIDLevel4 }); }
@@ -203,11 +203,11 @@ namespace NEWCRM.Controllers
         public void excelCallHour()
         {
             Response.AddHeader("Content-Type", "application/vnd.ms-excel");
-            Response.AddHeader("Content-Disposition", "attachment;filename = ExcelFile.xls");
+            Response.AddHeader("Content-Disposition", "attachment;filename=CallPerformanceReportByHour_"+DateTime.Now.ToString("yyyyMMdd")+".xls");
 
 
-            Response.Write("<tablewidth=\"100%\"> <thead> <trclass=\"gradeX\"> <thcolspan=\"2\"> <h3>ETDAACallCenter</h3> <h4>CaseStatisticReport</h4> </th> <thcolspan=\"2\"></th> <th> <divclass=\"form-groupno-paddingpull-right\"> <imgwidth=\"190px\"height=\"100px\"src=\"http://parnupongk.azurewebsites.net/images/logo.png\"/> </div> </th> </tr> </thead> </table><table border=\"1\"><thead><tr><th style=\"background-color:#0000ff;color:#ffffff;font-weight:bold;\">Hour</th><th style=\"background-color:#0000ff;color:#ffffff;font-weight:bold;\">Incoming Call</th><th style=\"background-color:#0000ff;color:#ffffff;font-weight:bold;\">Transfer to Agent</th><th style=\"background-color:#0000ff;color:#ffffff;font-weight:bold;\">Answer Call</th><th style=\"background-color:#0000ff;color:#ffffff;font-weight:bold;\">Abandoned</th><th style=\"background-color:#0000ff;color:#ffffff;font-weight:bold;\">% Abandoned</th><th style=\"background-color:#0000ff;color:#ffffff;font-weight:bold;\">Average talk time</th><th style=\"background-color:#0000ff;color:#ffffff;font-weight:bold;\">Total talk time</th></tr></thead>");
-            Response.Write("</tbody></table>");
+            Response.Write("<table cellpadding=\"5\" width=\"100%\" align=\"center\"><tr><td align=\"left\" style=\"font-size:20pt;font-weight:bold;vertical-align:middle;height:50px;\">ETDA Call Center</td><td align=\"right\"><img src=\"http://www.hostwebdd.com/logo_in_excel.jpg\" /></td></tr><tr><td colspan=\"2\" align=\"left\" style=\"font-size:16pt;font-weight:bold;vertical-align:middle;height:40px;\">Call Performance Report By Hour (Daily)</td></tr><tr><td colspan=\"2\" align=\"left\" style=\"vertical-align:middle;height:30px;\">Report of </td></tr><tr><td colspan=\"2\"><table border=\"1\" width=\"100%\" cellpadding=\"5\"><thead><tr><th style=\"background-color:#366092;color:#ffffff;font-weight:bold;\">Date</th><th style=\"background-color:#366092;color:#ffffff;font-weight:bold;\">Incoming Call</th><th style=\"background-color:#366092;color:#ffffff;font-weight:bold;\">Transfer to Agent</th><th style=\"background-color:#366092;color:#ffffff;font-weight:bold;\">Answer Call</th><th style=\"background-color:#366092;color:#ffffff;font-weight:bold;\">Abandoned</th><th style=\"background-color:#366092;color:#ffffff;font-weight:bold;\">% Abandoned</th><th style=\"background-color:#366092;color:#ffffff;font-weight:bold;\">Average talk time</th><th style=\"background-color:#366092;color:#ffffff;font-weight:bold;\">Total talk time</th></tr></thead><tbody>");
+            Response.Write("</tbody></table></td></tr></table>");
             Response.End();
         }
 
@@ -236,11 +236,11 @@ namespace NEWCRM.Controllers
         public void excelCallDay()
         {
             Response.AddHeader("Content-Type", "application/vnd.ms-excel");
-            Response.AddHeader("Content-Disposition", "attachment;filename = ExcelFile.xls");
+            Response.AddHeader("Content-Disposition", "attachment;filename=CallPerformanceReportByDay_" + DateTime.Now.ToString("yyyyMMdd") + ".xls");
 
-            
-            Response.Write("<tablewidth=\"100%\"> <thead> <trclass=\"gradeX\"> <thcolspan=\"2\"> <h3>ETDAACallCenter</h3> <h4>CaseStatisticReport</h4> </th> <thcolspan=\"2\"></th> <th> <divclass=\"form-groupno-paddingpull-right\"> <imgwidth=\"190px\"height=\"100px\"src=\"http://parnupongk.azurewebsites.net/images/logo.png\"/> </div> </th> </tr> </thead> </table><table border=\"1\"><thead><tr><th style=\"background-color:#0000ff;color:#ffffff;font-weight:bold;\">Date</th><th style=\"background-color:#0000ff;color:#ffffff;font-weight:bold;\">Incoming Call</th><th style=\"background-color:#0000ff;color:#ffffff;font-weight:bold;\">Transfer to Agent</th><th style=\"background-color:#0000ff;color:#ffffff;font-weight:bold;\">Answer Call</th><th style=\"background-color:#0000ff;color:#ffffff;font-weight:bold;\">Abandoned</th><th style=\"background-color:#0000ff;color:#ffffff;font-weight:bold;\">% Abandoned</th><th style=\"background-color:#0000ff;color:#ffffff;font-weight:bold;\">Average talk time</th><th style=\"background-color:#0000ff;color:#ffffff;font-weight:bold;\">Total talk time</th></tr></thead>");        
-            Response.Write("</tbody></table>");
+
+            Response.Write("<table cellpadding=\"5\" width=\"100%\" align=\"center\"><tr><td align=\"left\" style=\"font-size:20pt;font-weight:bold;vertical-align:middle;height:50px;\">ETDA Call Center</td><td align=\"right\"><img src=\"http://www.hostwebdd.com/logo_in_excel.jpg\" /></td></tr><tr><td colspan=\"2\" align=\"left\" style=\"font-size:16pt;font-weight:bold;vertical-align:middle;height:40px;\">Call Performance Report By Day</td></tr><tr><td colspan=\"2\" align=\"left\" style=\"vertical-align:middle;height:30px;\">Report of </td></tr><tr><td colspan=\"2\"><table border=\"1\" width=\"100%\" cellpadding=\"5\"><thead><tr><th style=\"background-color:#366092;color:#ffffff;font-weight:bold;\">Date</th><th style=\"background-color:#366092;color:#ffffff;font-weight:bold;\">Incoming Call</th><th style=\"background-color:#366092;color:#ffffff;font-weight:bold;\">Transfer to Agent</th><th style=\"background-color:#366092;color:#ffffff;font-weight:bold;\">Answer Call</th><th style=\"background-color:#366092;color:#ffffff;font-weight:bold;\">Abandoned</th><th style=\"background-color:#366092;color:#ffffff;font-weight:bold;\">% Abandoned</th><th style=\"background-color:#366092;color:#ffffff;font-weight:bold;\">Average talk time</th><th style=\"background-color:#366092;color:#ffffff;font-weight:bold;\">Total talk time</th></tr></thead>");        
+            Response.Write("</tbody></table></td></tr></table>");
             Response.End();
         }
 
@@ -274,9 +274,9 @@ namespace NEWCRM.Controllers
         public void excelCaseRep(DateTime startDate, DateTime endDate, int caseIDLevel1, int caseIDLevel2, int caseIDLevel3, int caseIDLevel4)
         {
             Response.AddHeader("Content-Type", "application/vnd.ms-excel");
-            Response.AddHeader("Content-Disposition", "attachment;filename = ExcelFile.xls");
+            Response.AddHeader("Content-Disposition", "attachment;filename=CaseDetailReport_" + DateTime.Now.ToString("yyyyMMdd") + ".xls");
 
-            DataTable dt = new CaseRepository().GetCaseReport(0, 0, 0, 0, "2016-01-01", "2016-121-25");
+            DataTable dt = new CaseRepository().GetCaseReport(caseIDLevel1, caseIDLevel2, caseIDLevel3, caseIDLevel4, startDate.ToString("yyyy-MM-dd"), endDate.ToString("yyyy-MM-dd"));
             ListRepCaseModel rptListCase = new ListRepCaseModel();
             List<RepCaseModel> rptCase = new List<RepCaseModel>();
             rptCase = (from DataRow dr in dt.Rows
@@ -292,25 +292,25 @@ namespace NEWCRM.Controllers
                            casOwnerByName = dr["casOwnerByName"].ToString()
                        }).ToList();
 
-            Response.Write("<tablewidth=\"100%\"> <thead> <trclass=\"gradeX\"> <thcolspan=\"2\"> <h3>ETDAACallCenter</h3> <h4>CaseStatisticReport</h4> </th> <thcolspan=\"2\"></th> <th> <divclass=\"form-groupno-paddingpull-right\"> <imgwidth=\"190px\"height=\"100px\"src=\"http://parnupongk.azurewebsites.net/images/logo.png\"/> </div> </th> </tr> </thead> </table><table border=\"1\"><thead><tr><th style=\"background-color:#0000ff;color:#ffffff;font-weight:bold;\">No.</th><th style=\"background-color:#0000ff;color:#ffffff;font-weight:bold;\">CaseID</th><th style=\"background-color:#0000ff;color:#ffffff;font-weight:bold;\">CreatedDate</th><th style=\"background-color:#0000ff;color:#ffffff;font-weight:bold;\">Channel</th><th style=\"background-color:#0000ff;color:#ffffff;font-weight:bold;\">ContactName</th><th style=\"background-color:#0000ff;color:#ffffff;font-weight:bold;\">CaseType</th><th style=\"background-color:#0000ff;color:#ffffff;font-weight:bold;\">PhoneNumber</th><th style=\"background-color:#0000ff;color:#ffffff;font-weight:bold;\">Detail</th><th style=\"background-color:#0000ff;color:#ffffff;font-weight:bold;\">Status</th><th style=\"background-color:#0000ff;color:#ffffff;font-weight:bold;\">CreatedBy</th></tr></thead><tbody>");
+            Response.Write("<table cellpadding=\"5\" width=\"100%\" align=\"center\"><tr><td align=\"left\" style=\"font-size:20pt;font-weight:bold;vertical-align:middle;height:50px;\">ETDA Call Center</td><td align=\"right\"><img src=\"http://www.hostwebdd.com/logo_in_excel.jpg\" /></td></tr><tr><td colspan=\"2\" align=\"left\" style=\"font-size:16pt;font-weight:bold;vertical-align:middle;height:40px;\">Case Detail Report</td></tr><tr><td colspan=\"2\" align=\"left\" style=\"vertical-align:middle;height:30px;\">Report of " + startDate.ToString("dd MMM yyy") + " to " + endDate.ToString("dd MMM yyy") + " </td></tr><tr><td colspan=\"2\"><table border=\"1\" width=\"100%\" cellpadding=\"5\"><thead><tr><th style=\"background-color:#366092;color:#ffffff;font-weight:bold;\">No.</th><th style=\"background-color:#366092;color:#ffffff;font-weight:bold;\">CaseID</th><th style=\"background-color:#366092;color:#ffffff;font-weight:bold;\">CreatedDate</th><th style=\"background-color:#366092;color:#ffffff;font-weight:bold;\">Channel</th><th style=\"background-color:#366092;color:#ffffff;font-weight:bold;\">ContactName</th><th style=\"background-color:#366092;color:#ffffff;font-weight:bold;\">CaseType</th><th style=\"background-color:#366092;color:#ffffff;font-weight:bold;\">PhoneNumber</th><th style=\"background-color:#366092;color:#ffffff;font-weight:bold;\">Detail</th><th style=\"background-color:#366092;color:#ffffff;font-weight:bold;\">Status</th><th style=\"background-color:#366092;color:#ffffff;font-weight:bold;\">CreatedBy</th></tr></thead><tbody>");
             int irows = 0;
             foreach (var item in rptCase)
             {
                 irows++;
                 Response.Write("<tr>");
-                Response.Write("<td>" + irows + "</td>");
-                Response.Write("<td>" + item.casIDName + "</td>");
-                Response.Write("<td>" + item.casCreatedOn + "</td>");
-                Response.Write("<td>" + item.chnID + "</td>");
-                Response.Write("<td>" + item.casCreatedByName + "</td>");
-                Response.Write("<td>" + item.casSummary + "</td>");
-                Response.Write("<td>Phone Number</td>");
-                Response.Write("<td>" + item.casdetail + "</td>");
-                Response.Write("<td>" + item.casstatusReason + "</td>");
-                Response.Write("<td>" + item.casOwnerByName + "</td>");
+                Response.Write("<td style=\"text-align:center;vertical-align:top;\">" + irows + "</td>");
+                Response.Write("<td style=\"text-align:left;vertical-align:top;\">" + item.casIDName + "</td>");
+                Response.Write("<td style=\"text-align:left;vertical-align:top;\">" + item.casCreatedOn + "</td>");
+                Response.Write("<td style=\"text-align:left;vertical-align:top;\">" + item.chnID + "</td>");
+                Response.Write("<td style=\"text-align:left;vertical-align:top;\">" + item.casCreatedByName + "</td>");
+                Response.Write("<td style=\"text-align:left;vertical-align:top;\">" + item.casSummary + "</td>");
+                Response.Write("<td style=\"text-align:left;vertical-align:top;\">Phone Number</td>");
+                Response.Write("<td style=\"text-align:left;vertical-align:top;\">" + item.casdetail + "</td>");
+                Response.Write("<td style=\"text-align:left;vertical-align:top;\">" + item.casstatusReason + "</td>");
+                Response.Write("<td style=\"text-align:center;vertical-align:top;\">" + item.casOwnerByName + "</td>");
                 Response.Write("</tr>");
             }
-            Response.Write("</tbody></table>");
+            Response.Write("</tbody></table></td></tr></table>");
             Response.End();
         }
 
@@ -355,7 +355,7 @@ namespace NEWCRM.Controllers
         public void excelCaseOnl(DateTime startDate, DateTime endDate, int caseIDLevel1, int caseIDLevel2, int caseIDLevel3, int caseIDLevel4)
         {
             Response.AddHeader("Content-Type", "application/vnd.ms-excel");
-            Response.AddHeader("Content-Disposition", "attachment;filename = ExcelFile.xls");
+            Response.AddHeader("Content-Disposition", "attachment;filename=CaseDetailReportOnline_" + DateTime.Now.ToString("yyyyMMdd") + ".xls");
 
             DataTable dt = new CaseRepository().GetCaseReport(caseIDLevel1, caseIDLevel2, caseIDLevel3, caseIDLevel4, startDate.ToString("yyyy-MM-dd"), endDate.ToString("yyyy-MM-dd"));
             ListRepCaseModel rptListCase = new ListRepCaseModel();
@@ -382,36 +382,36 @@ namespace NEWCRM.Controllers
                            casstatusReason = dr["casstatusReason"].ToString()
                        }).ToList();
 
-            Response.Write("<tablewidth=\"100%\"> <thead> <trclass=\"gradeX\"> <thcolspan=\"2\"> <h3>ETDAACallCenter</h3> <h4>CaseStatisticReport</h4> </th> <thcolspan=\"2\"></th> <th> <divclass=\"form-groupno-paddingpull-right\"> <imgwidth=\"190px\"height=\"100px\"src=\"http://parnupongk.azurewebsites.net/images/logo.png\"/> </div> </th> </tr> </thead> </table><table border=\"1\"><thead><tr><th style=\"background-color:#0000ff;color:#ffffff;font-weight:bold;\">No.</th><th style=\"background-color:#0000ff;color:#ffffff;font-weight:bold;\">Case ID</th><th style=\"background-color:#0000ff;color:#ffffff;font-weight:bold;\">Created Date</th><th style=\"background-color:#0000ff;color:#ffffff;font-weight:bold;\">Channel</th><th style=\"background-color:#0000ff;color:#ffffff;font-weight:bold;\">Contact Name</th><th style=\"background-color:#0000ff;color:#ffffff;font-weight:bold;\">Transaction Date</th><th style=\"background-color:#0000ff;color:#ffffff;font-weight:bold;\">Phone Number</th><th style=\"background-color:#0000ff;color:#ffffff;font-weight:bold;\">Main Case Type</th><th style=\"background-color:#0000ff;color:#ffffff;font-weight:bold;\">Sub Case Type</th><th style=\"background-color:#0000ff;color:#ffffff;font-weight:bold;\">Commerce Type</th><th style=\"background-color:#0000ff;color:#ffffff;font-weight:bold;\">Commerce Channel</th><th style=\"background-color:#0000ff;color:#ffffff;font-weight:bold;\">Product Category</th><th style=\"background-color:#0000ff;color:#ffffff;font-weight:bold;\">Service Category</th><th style=\"background-color:#0000ff;color:#ffffff;font-weight:bold;\">Delivery Type</th><th style=\"background-color:#0000ff;color:#ffffff;font-weight:bold;\">Payment Type</th><th style=\"background-color:#0000ff;color:#ffffff;font-weight:bold;\">Value Range</th><th style=\"background-color:#0000ff;color:#ffffff;font-weight:bold;\">Conversation Channel</th><th style=\"background-color:#0000ff;color:#ffffff;font-weight:bold;\">Vendor ID</th><th style=\"background-color:#0000ff;color:#ffffff;font-weight:bold;\">Detail</th><th style=\"background-color:#0000ff;color:#ffffff;font-weight:bold;\">Reference</th><th style=\"background-color:#0000ff;color:#ffffff;font-weight:bold;\">Status</th></tr></thead><tbody>");
+            Response.Write("<table cellpadding=\"5\" width=\"100%\" align=\"center\"><tr><td align=\"left\" style=\"font-size:20pt;font-weight:bold;vertical-align:middle;height:50px;\">ETDA Call Center</td><td align=\"right\"><img src=\"http://www.hostwebdd.com/logo_in_excel.jpg\" /></td></tr><tr><td colspan=\"2\" align=\"left\" style=\"font-size:16pt;font-weight:bold;vertical-align:middle;height:40px;\">CASE DETAIL REPORT (ร้องเรียนซื้อ ขายออนไลน์)</td></tr><tr><td colspan=\"2\" align=\"left\" style=\"vertical-align:middle;height:30px;\">Report of " + startDate.ToString("dd MMM yyy") + " to " + endDate.ToString("dd MMM yyy") + " </td></tr><tr><td colspan=\"2\"><table border=\"1\" width=\"100%\" cellpadding=\"5\"><thead><tr><th style=\"background-color:#366092;color:#ffffff;font-weight:bold;\">No.</th><th style=\"background-color:#366092;color:#ffffff;font-weight:bold;\">Case ID</th><th style=\"background-color:#366092;color:#ffffff;font-weight:bold;\">Created Date</th><th style=\"background-color:#366092;color:#ffffff;font-weight:bold;\">Channel</th><th style=\"background-color:#366092;color:#ffffff;font-weight:bold;\">Contact Name</th><th style=\"background-color:#366092;color:#ffffff;font-weight:bold;\">Transaction Date</th><th style=\"background-color:#366092;color:#ffffff;font-weight:bold;\">Phone Number</th><th style=\"background-color:#366092;color:#ffffff;font-weight:bold;\">Main Case Type</th><th style=\"background-color:#366092;color:#ffffff;font-weight:bold;\">Sub Case Type</th><th style=\"background-color:#366092;color:#ffffff;font-weight:bold;\">Commerce Type</th><th style=\"background-color:#366092;color:#ffffff;font-weight:bold;\">Commerce Channel</th><th style=\"background-color:#366092;color:#ffffff;font-weight:bold;\">Product Category</th><th style=\"background-color:#366092;color:#ffffff;font-weight:bold;\">Service Category</th><th style=\"background-color:#366092;color:#ffffff;font-weight:bold;\">Delivery Type</th><th style=\"background-color:#366092;color:#ffffff;font-weight:bold;\">Payment Type</th><th style=\"background-color:#366092;color:#ffffff;font-weight:bold;\">Value Range</th><th style=\"background-color:#366092;color:#ffffff;font-weight:bold;\">Conversation Channel</th><th style=\"background-color:#366092;color:#ffffff;font-weight:bold;\">Vendor ID</th><th style=\"background-color:#366092;color:#ffffff;font-weight:bold;\">Detail</th><th style=\"background-color:#366092;color:#ffffff;font-weight:bold;\">Reference</th><th style=\"background-color:#366092;color:#ffffff;font-weight:bold;\">Status</th></tr></thead><tbody>");
             int irows = 0;
             foreach (var item in rptCase)
             {
                 irows++;
                 Response.Write("<tr>");
-                Response.Write("<td>" + irows + "</td>");
-                Response.Write("<td>" + item.casIDName + "</td>");
-                Response.Write("<td>" + item.casCreatedOn + "</td>");
-                Response.Write("<td>" + item.chnID + "</td>");
-                Response.Write("<td>" + item.casCreatedByName + "</td>");
-                Response.Write("<td>Transaction Date</td>");
-                Response.Write("<td>Phone Number</td>");
-                Response.Write("<td>" + item.casLevel1 + "</td>");
-                Response.Write("<td>" + item.casLevel2 + "</td>");
-                Response.Write("<td>" + item.cascommerceType + "</td>");
-                Response.Write("<td>" + item.casLevel6 + "</td>");
-                Response.Write("<td>" + item.casproductCategory + "</td>");
-                Response.Write("<td>" + item.casserviceCategory + "</td>");
-                Response.Write("<td>" + item.casdeliveryType + "</td>");
-                Response.Write("<td>Payment Type</td>");
-                Response.Write("<td>" + item.casvalueRange + "</td>");
-                Response.Write("<td>" + item.casconversationChannel + "</td>");
-                Response.Write("<td>Vendor ID</td>");
-                Response.Write("<td>" + item.casdetail + "</td>");
-                Response.Write("<td>" + item.casreferenceDetail + "</td>");
-                Response.Write("<td>" + item.casstatusReason + "</td>");
+                Response.Write("<td style=\"text-align:center;vertical-align:top;\">" + irows + "</td>");
+                Response.Write("<td style=\"text-align:left;vertical-align:top;\">" + item.casIDName + "</td>");
+                Response.Write("<td style=\"text-align:left;vertical-align:top;\">" + item.casCreatedOn + "</td>");
+                Response.Write("<td style=\"text-align:left;vertical-align:top;\">" + item.chnID + "</td>");
+                Response.Write("<td style=\"text-align:left;vertical-align:top;\">" + item.casCreatedByName + "</td>");
+                Response.Write("<td style=\"text-align:left;vertical-align:top;\">Transaction Date</td>");
+                Response.Write("<td style=\"text-align:left;vertical-align:top;\">Phone Number</td>");
+                Response.Write("<td style=\"text-align:left;vertical-align:top;\">" + item.casLevel1 + "</td>");
+                Response.Write("<td style=\"text-align:left;vertical-align:top;\">" + item.casLevel2 + "</td>");
+                Response.Write("<td style=\"text-align:center;vertical-align:top;\">" + item.cascommerceType + "</td>");
+                Response.Write("<td style=\"text-align:center;vertical-align:top;\">" + item.casLevel6 + "</td>");
+                Response.Write("<td style=\"text-align:center;vertical-align:top;\">" + item.casproductCategory + "</td>");
+                Response.Write("<td style=\"text-align:center;vertical-align:top;\">" + item.casserviceCategory + "</td>");
+                Response.Write("<td style=\"text-align:center;vertical-align:top;\">" + item.casdeliveryType + "</td>");
+                Response.Write("<td style=\"text-align:center;vertical-align:top;\">Payment Type</td>");
+                Response.Write("<td style=\"text-align:center;vertical-align:top;\">" + item.casvalueRange + "</td>");
+                Response.Write("<td style=\"text-align:center;vertical-align:top;\">" + item.casconversationChannel + "</td>");
+                Response.Write("<td style=\"text-align:center;vertical-align:top;\">Vendor ID</td>");
+                Response.Write("<td style=\"text-align:left;vertical-align:top;\">" + item.casdetail + "</td>");
+                Response.Write("<td style=\"text-align:left;vertical-align:top;\">" + item.casreferenceDetail + "</td>");
+                Response.Write("<td style=\"text-align:center;vertical-align:top;\">" + item.casstatusReason + "</td>");
                 Response.Write("</tr>");
             }
-            Response.Write("</tbody></table>");
+            Response.Write("</tbody></table></td></tr></table>");
             Response.End();
         }
 
@@ -449,7 +449,7 @@ namespace NEWCRM.Controllers
         public void excelCaseLaw(DateTime startDate, DateTime endDate, int caseIDLevel1, int caseIDLevel2, int caseIDLevel3, int caseIDLevel4)
         {
             Response.AddHeader("Content-Type", "application/vnd.ms-excel");
-            Response.AddHeader("Content-Disposition", "attachment;filename = ExcelFile.xls");
+            Response.AddHeader("Content-Disposition", "attachment;filename=CaseDetailReportLaw_" + DateTime.Now.ToString("yyyyMMdd") + ".xls");
 
             DataTable dt = new CaseRepository().GetCaseReport(caseIDLevel1, caseIDLevel2, caseIDLevel3, caseIDLevel4, startDate.ToString("yyyy-MM-dd"), endDate.ToString("yyyy-MM-dd"));
             ListRepCaseModel rptListCase = new ListRepCaseModel();
@@ -469,29 +469,29 @@ namespace NEWCRM.Controllers
                            casdetail = dr["casdetail"].ToString()
                        }).ToList();
 
-            Response.Write("<tablewidth=\"100%\"> <thead> <trclass=\"gradeX\"> <thcolspan=\"2\"> <h3>ETDAACallCenter</h3> <h4>CaseStatisticReport</h4> </th> <thcolspan=\"2\"></th> <th> <divclass=\"form-groupno-paddingpull-right\"> <imgwidth=\"190px\"height=\"100px\"src=\"http://parnupongk.azurewebsites.net/images/logo.png\"/> </div> </th> </tr> </thead> </table><table border=\"1\"><thead><tr><th style=\"background-color:#0000ff;color:#ffffff;font-weight:bold;\">No.</th><th style=\"background-color:#0000ff;color:#ffffff;font-weight:bold;\">Created Date</th><th style=\"background-color:#0000ff;color:#ffffff;font-weight:bold;\">Event Date</th><th style=\"background-color:#0000ff;color:#ffffff;font-weight:bold;\">Case ID</th><th style=\"background-color:#0000ff;color:#ffffff;font-weight:bold;\">Channel</th><th style=\"background-color:#0000ff;color:#ffffff;font-weight:bold;\">Sub Case Type</th><th style=\"background-color:#0000ff;color:#ffffff;font-weight:bold;\">Contact Name</th><th style=\"background-color:#0000ff;color:#ffffff;font-weight:bold;\">Contact Type</th><th style=\"background-color:#0000ff;color:#ffffff;font-weight:bold;\">Contact email</th><th style=\"background-color:#0000ff;color:#ffffff;font-weight:bold;\">Phone Number</th><th style=\"background-color:#0000ff;color:#ffffff;font-weight:bold;\">Source Type</th><th style=\"background-color:#0000ff;color:#ffffff;font-weight:bold;\">Reference ID</th><th style=\"background-color:#0000ff;color:#ffffff;font-weight:bold;\">Reference Detail</th><th style=\"background-color:#0000ff;color:#ffffff;font-weight:bold;\">Detail</th></tr></thead><tbody>");
+            Response.Write("<table cellpadding=\"5\" width=\"100%\" align=\"center\"><tr><td align=\"left\" style=\"font-size:20pt;font-weight:bold;vertical-align:middle;height:50px;\">ETDA Call Center</td><td align=\"right\"><img src=\"http://www.hostwebdd.com/logo_in_excel.jpg\" /></td></tr><tr><td colspan=\"2\" align=\"left\" style=\"font-size:16pt;font-weight:bold;vertical-align:middle;height:40px;\">Case Detail Report (ร้องเรียนกระทาผิด พรบ/ เว็บไซต์ผิดกฎหมาย)</td></tr><tr><td colspan=\"2\" align=\"left\" style=\"vertical-align:middle;height:30px;\">Report of " + startDate.ToString("dd MMM yyy") + " to " + endDate.ToString("dd MMM yyy") + " </td></tr><tr><td colspan=\"2\"><table border=\"1\" width=\"100%\" cellpadding=\"5\"><thead><tr><th style=\"background-color:#366092;color:#ffffff;font-weight:bold;\" rowspan=\"2\">No.</th><th style=\"background-color:#366092;color:#ffffff;font-weight:bold;\" rowspan=\"2\">Created Date</th><th style=\"background-color:#366092;color:#ffffff;font-weight:bold;\" rowspan=\"2\">Event Date</th><th style=\"background-color:#366092;color:#ffffff;font-weight:bold;\" rowspan=\"2\">Case ID</th><th style=\"background-color:#366092;color:#ffffff;font-weight:bold;\" rowspan=\"2\">Channel</th><th style=\"background-color:#366092;color:#ffffff;font-weight:bold;\" rowspan=\"2\">Case Type</th><th style=\"background-color:#366092;color:#ffffff;font-weight:bold;\" colspan=\"4\">Contact Info</th><th style=\"background-color:#366092;color:#ffffff;font-weight:bold;\" colspan=\"3\">Reference Content</th><th style=\"background-color:#366092;color:#ffffff;font-weight:bold;\" rowspan=\"2\">Detail</th></tr><tr><th style=\"background-color:#366092;color:#ffffff;font-weight:bold;\">Contact Name</th><th style=\"background-color:#366092;color:#ffffff;font-weight:bold;\">Contact Type</th><th style=\"background-color:#366092;color:#ffffff;font-weight:bold;\">Contact email</th><th style=\"background-color:#366092;color:#ffffff;font-weight:bold;\">Phone Number</th><th style=\"background-color:#366092;color:#ffffff;font-weight:bold;\">Source Type</th><th style=\"background-color:#366092;color:#ffffff;font-weight:bold;\">Reference ID</th><th style=\"background-color:#366092;color:#ffffff;font-weight:bold;\">Reference Detail</th></tr></thead><tbody>");
             int irows = 0;
             foreach (var item in rptCase)
             {
                 irows++;
                 Response.Write("<tr>");
-                Response.Write("<td>" + irows + "</td>");
-                Response.Write("<td>" + item.casCreatedOn + "</td>");
-                Response.Write("<td>Event Date</td>");
-                Response.Write("<td>" + item.casIDName + "</td>");
-                Response.Write("<td>" + item.chnID + "</td>");
-                Response.Write("<td>" + item.casLevel2 + "</td>");
-                Response.Write("<td>" + item.casCreatedByName + "</td>");
-                Response.Write("<td>Contact Type</td>");
-                Response.Write("<td>Contact email</td>");
-                Response.Write("<td>Phone Number</td>");
-                Response.Write("<td>" + item.casLevel3 + "</td>");
-                Response.Write("<td>" + item.casLevel6 + "</td>");
-                Response.Write("<td>" + item.casreferenceDetail + "</td>");
-                Response.Write("<td>" + item.casdetail + "</td>");
+                Response.Write("<td style=\"text-align:center;vertical-align:top;\">" + irows + "</td>");
+                Response.Write("<td style=\"text-align:left;vertical-align:top;\">" + item.casCreatedOn + "</td>");
+                Response.Write("<td style=\"text-align:center;vertical-align:top;\">Event Date</td>");
+                Response.Write("<td style=\"text-align:left;vertical-align:top;\">" + item.casIDName + "</td>");
+                Response.Write("<td style=\"text-align:left;vertical-align:top;\">" + item.chnID + "</td>");
+                Response.Write("<td style=\"text-align:left;vertical-align:top;\">" + item.casLevel2 + "</td>");
+                Response.Write("<td style=\"text-align:left;vertical-align:top;\">" + item.casCreatedByName + "</td>");
+                Response.Write("<td style=\"text-align:center;vertical-align:top;\">Contact Type</td>");
+                Response.Write("<td style=\"text-align:center;vertical-align:top;\">Contact email</td>");
+                Response.Write("<td style=\"text-align:left;vertical-align:top;\">Phone Number</td>");
+                Response.Write("<td style=\"text-align:left;vertical-align:top;\">" + item.casLevel3 + "</td>");
+                Response.Write("<td style=\"text-align:left;vertical-align:top;\">" + item.casLevel6 + "</td>");
+                Response.Write("<td style=\"text-align:left;vertical-align:top;\">" + item.casreferenceDetail + "</td>");
+                Response.Write("<td style=\"text-align:left;vertical-align:top;\">" + item.casdetail + "</td>");
                 Response.Write("</tr>");
             }
-            Response.Write("</tbody></table>");
+            Response.Write("</tbody></table></td></tr></table>");
             Response.End();
         }
 
@@ -529,7 +529,7 @@ namespace NEWCRM.Controllers
         public void excelCaseCyb(DateTime startDate, DateTime endDate, int caseIDLevel1, int caseIDLevel2, int caseIDLevel3, int caseIDLevel4)
         {
             Response.AddHeader("Content-Type", "application/vnd.ms-excel");
-            Response.AddHeader("Content-Disposition", "attachment;filename = ExcelFile.xls");
+            Response.AddHeader("Content-Disposition", "attachment;filename=CaseDetailReportCyber_" + DateTime.Now.ToString("yyyyMMdd") + ".xls");
 
             DataTable dt = new CaseRepository().GetCaseReport(caseIDLevel1, caseIDLevel2, caseIDLevel3, caseIDLevel4, startDate.ToString("yyyy-MM-dd"), endDate.ToString("yyyy-MM-dd"));
             ListRepCaseModel rptListCase = new ListRepCaseModel();
@@ -549,7 +549,7 @@ namespace NEWCRM.Controllers
                            casdetail = dr["casdetail"].ToString()
                        }).ToList();
 
-            Response.Write("<tablewidth=\"100%\"> <thead> <trclass=\"gradeX\"> <thcolspan=\"2\"> <h3>ETDAACallCenter</h3> <h4>CaseStatisticReport</h4> </th> <thcolspan=\"2\"></th> <th> <divclass=\"form-groupno-paddingpull-right\"> <imgwidth=\"190px\"height=\"100px\"src=\"http://parnupongk.azurewebsites.net/images/logo.png\"/> </div> </th> </tr> </thead> </table><table border=\"1\"><thead><tr><th style=\"background-color:#0000ff;color:#ffffff;font-weight:bold;\">No.</th><th style=\"background-color:#0000ff;color:#ffffff;font-weight:bold;\">Created Date</th><th style=\"background-color:#0000ff;color:#ffffff;font-weight:bold;\">Event Date</th><th style=\"background-color:#0000ff;color:#ffffff;font-weight:bold;\">Case ID</th><th style=\"background-color:#0000ff;color:#ffffff;font-weight:bold;\">Channel</th><th style=\"background-color:#0000ff;color:#ffffff;font-weight:bold;\">Contact Name</th><th style=\"background-color:#0000ff;color:#ffffff;font-weight:bold;\">Contact Type</th><th style=\"background-color:#0000ff;color:#ffffff;font-weight:bold;\">Contact email</th><th style=\"background-color:#0000ff;color:#ffffff;font-weight:bold;\">Phone Number</th><th style=\"background-color:#0000ff;color:#ffffff;font-weight:bold;\">Sub Case Type</th><th style=\"background-color:#0000ff;color:#ffffff;font-weight:bold;\">Source Type</th><th style=\"background-color:#0000ff;color:#ffffff;font-weight:bold;\">Reference ID</th><th style=\"background-color:#0000ff;color:#ffffff;font-weight:bold;\">Reference Detail</th><th style=\"background-color:#0000ff;color:#ffffff;font-weight:bold;\">Attach file</th><th style=\"background-color:#0000ff;color:#ffffff;font-weight:bold;\">Detail</th></tr></thead><tbody>");
+            Response.Write("<table cellpadding=\"5\" width=\"100%\" align=\"center\"><tr><td align=\"left\" style=\"font-size:20pt;font-weight:bold;vertical-align:middle;height:50px;\">ETDA Call Center</td><td align=\"right\"><img src=\"http://www.hostwebdd.com/logo_in_excel.jpg\" /></td></tr><tr><td colspan=\"2\" align=\"left\" style=\"font-size:16pt;font-weight:bold;vertical-align:middle;height:40px;\">Case Detail Report (ร้องเรียนภัยคุกคาม CYBER)</td></tr><tr><td colspan=\"2\" align=\"left\" style=\"vertical-align:middle;height:30px;\">Report of " + startDate.ToString("dd MMM yyy") + " to " + endDate.ToString("dd MMM yyy") + " </td></tr><tr><td colspan=\"2\"><table border=\"1\" width=\"100%\" cellpadding=\"5\"><thead><tr><th style=\"background-color:#366092;color:#ffffff;font-weight:bold;\" rowspan=\"2\">No.</th><th style=\"background-color:#366092;color:#ffffff;font-weight:bold;\" rowspan=\"2\">Created Date</th><th style=\"background-color:#366092;color:#ffffff;font-weight:bold;\" rowspan=\"2\">Event Date</th><th style=\"background-color:#366092;color:#ffffff;font-weight:bold;\" rowspan=\"2\">Case ID</th><th style=\"background-color:#366092;color:#ffffff;font-weight:bold;\" rowspan=\"2\">Channel</th><th style=\"background-color:#366092;color:#ffffff;font-weight:bold;\" colspan=\"4\">Contact Info</th><th style=\"background-color:#366092;color:#ffffff;font-weight:bold;\" rowspan=\"2\">Case Type</th><th style=\"background-color:#366092;color:#ffffff;font-weight:bold;\" colspan=\"4\">Reference Content</th><th style=\"background-color:#366092;color:#ffffff;font-weight:bold;\" rowspan=\"2\">Detail</th></tr><tr><th style=\"background-color:#366092;color:#ffffff;font-weight:bold;\">Contact Name</th><th style=\"background-color:#366092;color:#ffffff;font-weight:bold;\">Contact Type</th><th style=\"background-color:#366092;color:#ffffff;font-weight:bold;\">Contact email</th><th style=\"background-color:#366092;color:#ffffff;font-weight:bold;\">Phone Number</th><th style=\"background-color:#366092;color:#ffffff;font-weight:bold;\">Source Type</th><th style=\"background-color:#366092;color:#ffffff;font-weight:bold;\">Reference ID</th><th style=\"background-color:#366092;color:#ffffff;font-weight:bold;\">Reference Detail</th><th style=\"background-color:#366092;color:#ffffff;font-weight:bold;\">Attach file</th></tr></thead><tbody>");
             int irows = 0;
             foreach (var item in rptCase)
             {
@@ -572,7 +572,7 @@ namespace NEWCRM.Controllers
                 Response.Write("<td>" + item.casdetail + "</td>");
                 Response.Write("</tr>");
             }
-            Response.Write("</tbody></table>");
+            Response.Write("</tbody></table></td></tr></table>");
             Response.End();
         }
     }
