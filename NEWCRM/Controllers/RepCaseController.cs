@@ -81,7 +81,7 @@ namespace NEWCRM.Controllers
         }
         
 
-        public ActionResult RepCaseSummaryExport(string startdate, string enddate, string catparentid)
+        public void RepCaseSummaryExport(string startdate, string enddate, string catparentid)
         {
             catparentid = Session["parentId"] ==null ? "0" : Session["parentId"].ToString();
             startdate =  Session["sDate"] ==null ? "20/05/2016" : Session["sDate"].ToString();
@@ -89,7 +89,7 @@ namespace NEWCRM.Controllers
             DateTime startDate = DateTime.ParseExact(startdate, "dd/MM/yyyy", null);
             DateTime endDate = DateTime.ParseExact(enddate, "dd/MM/yyyy", null);
             DataTable dt = new CaseRepository().GetCaseSummaryReport(startDate.ToString("yyyy-MM-dd"), endDate.ToString("yyyy-MM-dd"), int.Parse(catparentid));
-            ListRepCaseModel rptListCase = new ListRepCaseModel();
+            /*ListRepCaseModel rptListCase = new ListRepCaseModel();
             List<RepCaseSummary> rptCase = new List<RepCaseSummary>();
             rptCase = (from DataRow dr in dt.Rows
                        select new RepCaseSummary()
@@ -104,11 +104,36 @@ namespace NEWCRM.Controllers
                        }).ToList();
 
 
-            rptListCase.list_repcasesum = rptCase;
+            rptListCase.list_repcasesum = rptCase;*/
 
             Response.AddHeader("Content-Type", "application/vnd.ms-excel");
             Response.AddHeader("Content-Disposition", "attachment;filename = ExcelFile.xls");
-            return View("repSummary", rptListCase);
+
+            Response.Write("<tablewidth=\"100%\"> <thead> <trclass=\"gradeX\"> <thcolspan=\"2\"> <h3>ETDAACallCenter</h3> <h4>CaseStatisticReport</h4> </th> <thcolspan=\"2\"></th> <th> <divclass=\"form-groupno-paddingpull-right\"> <img  src='http://parnupongk.azurewebsites.net/images/logo.png' /> </div> </th> </tr> </thead> </table><table border=\"1\"><thead><tr><th style=\"background-color:#0000ff;color:#ffffff;font-weight:bold;\">Case Type</th><th style=\"background-color:#0000ff;color:#ffffff;font-weight:bold;\">Number of Case</th><th style=\"background-color:#0000ff;color:#ffffff;font-weight:bold;\">%</th></tr></thead>");
+
+            foreach( DataRow dr in dt.Rows )
+            {
+                Response.Write("<tr>");
+                Response.Write("<td>" + dr["catName"].ToString() + "</td>");
+                Response.Write("<td>" + dr["counts"].ToString() + "</td>");
+                Response.Write("<td>" + dr["Percents"].ToString() + "</td>");
+                Response.Write("</tr>");
+
+                DataTable dtDetail = new CaseRepository().GetCaseSummaryReport(startDate.ToString("yyyy-MM-dd"), endDate.ToString("yyyy-MM-dd"), int.Parse(dr["catParrentID"].ToString()));
+                int row = 1;
+                foreach(DataRow drDetail in dtDetail.Rows)
+                {
+                    Response.Write("<tr>");
+                    Response.Write("<td style=\"padding - left:50px; \">" + row.ToString() +" " + drDetail["catName"].ToString() + "</td>");
+                    Response.Write("<td>" + drDetail["counts"].ToString() + "</td>");
+                    Response.Write("<td>" + drDetail["Percents"].ToString() + "</td>");
+                    Response.Write("</tr>");
+                }
+            }
+
+            Response.Write("</tbody></table>");
+
+            //return View("repSummary", rptListCase);
         }
 
         [HttpPost]
