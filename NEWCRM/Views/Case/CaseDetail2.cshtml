@@ -106,7 +106,7 @@
                         url: '@Url.Action("DoSaveCloseCase", "Case")',
                         data: {
                             CaseId: '@Model.CaseDetails.CASID',
-                            StatusId: $('#ddlStatus').val(),
+                            Status: $('#ddlStatus').val(),
                             Remark: $.trim($('#txtRemark').val())
                         },
                         success: function (result) {
