@@ -25,6 +25,39 @@
                 $("#enddate").val(today);
             });
 
+
+
+            function beginQuery() {
+                $(".fv").each(function () {
+                    var v = $(this).val();
+                    if (v == '') {
+                        $(this).focus();
+                    }
+                });
+
+                $("#getQuery").fadeOut(300);
+            }
+
+            function successQuery() {
+                $('#datatable1').DataTable({
+                    "dom": 'lCfrtip',
+                    "order": [],
+                    "language": {
+                        "lengthMenu": '_MENU_ entries per page',
+                        "search": '<i class="fa fa-search"></i>',
+                        "paginate": {
+                            "previous": '<i class="fa fa-angle-left"></i>',
+                            "next": '<i class="fa fa-angle-right"></i>'
+                        }
+                    }
+                });
+                $("#getQuery").fadeIn(300);
+            }
+
+            function failureQuery(data) {
+                openErrorDialog(data.responseText);
+            }
+
             function loadReport()
             {
                 var start = $("#startdate").val();
@@ -88,7 +121,11 @@
                         </div>
                     </div>
                 </div>
-  
+
+                @using (Ajax.BeginForm("getReport", "RepCase",
+                                            new AjaxOptions { UpdateTargetId = "getQuery", HttpMethod = "post", OnBegin = "return beginQuery()", OnSuccess = "successQuery", OnFailure = "failureQuery" },
+                                            new { id = "frm-casequery", @class = "form", autocomplete = "off" }))
+                {
                     <div id="filterList"></div>
 
                         <input type="hidden" id="data-type-<%=index%>" name="data-type-<%=index%>" value="text" />
@@ -101,11 +138,15 @@
                                 </!--div-->
                                 <div id="ctdiv_1" class="form-group no-padding">
                                     <div class="col-sm-9 margin-bottom-xl">
-                                        <select name="reptype" class="form-control">
+                                        <select name="reptype" id="reptype" class="form-control">
                                             <option></option>
-                                            <option value="1">report summary</option>
-                                            <option value="0">Nothing</option>
-                                            <option value="2">By Himself</option>
+                                            <option value="1">CALL PERFORMANCE REPORT BY HOUR (DAILY)</option>
+                                            <option value="2">CALL PERFORMANCE REPORT BY DAY</option>
+                                            <option value="3">CASE DETAIL REPORT</option>
+                                            <option value="4">CASE DETAIL REPORT (ร้องเรียนซื้อ ขายออนไลน์)</option>
+                                            <option value="5">CASE DETAIL REPORT (ร้องเรียนกระทาผิด พรบ/ เว็บไซต์ผิดกฎหมาย)</option>
+                                            <option value="6">CASE DETAIL REPORT (ร้องเรียนภัยคุกคาม CYBER)</option>
+                                            <option value="7">CASE SUMMARY REPORT</option>
                                         </select>
                                     </div>
                                 </div>
@@ -135,12 +176,14 @@
                     <div class="row" style="margin: 10px">
                         <div class="card-actionbar-row col-lg-12" style="padding-right: 80px">
 
-                            <button type="submit" class="btn ink-reaction btn-primary" onclick="loadReport()"><i class="fa fa-search fa-fw"></i>&nbsp;Search</button>
+                            <button type="submit" class="btn ink-reaction btn-primary" ><i class="fa fa-search fa-fw"></i>&nbsp;Search</button>
                         </div>
                     </div>
-
+                }
                 <hr class="ruler-xl">
             </div>
+
+                
         </div>
         <br />
         <div id="getQuery" class="col-lg-12"></div>

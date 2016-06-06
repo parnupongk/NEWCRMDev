@@ -223,9 +223,9 @@
             //$('.modal-content').height(500);
             //$('.modal-content').width(1200);
             $('#formModal').modal({ /*closable: false */backdrop: 'static' });
-            $('#formModal').find('.modal-title').text('Send E-Mail');
+            //$('#formModal').find('.modal-title').text('Send E-Mail');
             // $('.csscontent').css({ 'height': $(window).height() * 0.8 });
-
+            console.log("send email");
 
             $('#frmcontent').load('@Url.Action("SendEmail", "Case")', function () {
                 var myDropzone;

@@ -12,12 +12,12 @@
 
 <form class="form">
     <div class="form-group">
-        <input type="email" class="form-control" id="MailTo" >
+        <input type="email" class="form-control" id="MailTo" value="@Model.MailContents.MailTo" >
         <label for="MailTo">To</label>
     </div>
     <!--end .form-group -->
     <div class="form-group">
-        <input type="email" class="form-control" id="Mailcc" >
+        <input type="email" class="form-control" id="Mailcc" value="@Model.MailContents.MailCc" >
         <label for="Mailcc">CC</label>
         <a class="link-default pull-right" href="#emailOptions" data-toggle="collapse">More</a>
     </div>
