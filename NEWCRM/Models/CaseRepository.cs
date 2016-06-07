@@ -720,6 +720,6 @@ namespace NEWCRM.Models
         public string casreferenceDetail { get; set; }
         public string casdetail { get; set; }
         public string casstatusReason { get; set; }
-        
+        public string ctaEmail { get; set; }
     }
 }

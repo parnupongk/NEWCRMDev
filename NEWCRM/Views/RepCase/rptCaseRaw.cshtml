@@ -10,11 +10,8 @@
                 <thead>
                     <tr class="gradeX">
                         <th colspan="2">
-                            <h3>ETDAA Call Center</h3>
-                            <h4>Case Statistic Report</h4>
-                            
-
-
+                            <h3>ETDA Call Center</h3>
+                            <h4>Case Detail Report (ร้องเรียนกระทาผิด พรบ/ เว็บไซต์ผิดกฎหมาย)</h4>
                         </th>
                         <th colspan="2"></th>
                         <th>
@@ -33,7 +30,7 @@
                         <th>Event Date</th>
                         <th>Case ID</th>
                         <th>Channel</th>
-                        <th>Sub Case Type</th>
+                        <th>Case Type</th>
                         <th>Contact Name</th>
                         <th>Contact Type</th>
                         <th>Contact email</th>
@@ -50,14 +47,14 @@
                         <tr class="gradeX">
                             <td></td>
                             <td>@item.casCreatedOn</td>
-                            <td>Event Date</td>
+                            <td>@item.casCreatedOn</td>
                             <td>@item.casIDName</td>
                             <td>@item.chnID</td>
                             <td>@item.casLevel2</td>
                             <td>@item.casCreatedByName</td>
-                            <td>Contact Type</td>
-                            <td>Contact email</td>
-                            <td>Phone Number</td>
+                            <td>@item.cascommerceType</td>
+                            <td>@item.ctaEmail</td>
+                            <td></td>
                             <td>@item.casLevel3</td>
                             <td>@item.casLevel6</td>
                             <td>@item.casreferenceDetail</td>
