@@ -200,12 +200,10 @@ namespace NEWCRM.Models
         #region Aood
         public static class CaseStatus
         {
-            public static string Open = "Open non lead";
-            public static string Closed = "Close non lead";
+            public static string Open = "Open";
+            public static string Closed = "Close";
             public static string Cancel = "Cancel";
             public static string Pending = "Pending";
-            public static string Open_Lead = "Open Lead";
-            public static string Close_Lead = "Close Lead";
         }
         #endregion
     }

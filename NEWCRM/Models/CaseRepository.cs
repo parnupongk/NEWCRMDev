@@ -439,7 +439,7 @@ namespace NEWCRM.Models
             return true;
         }
 
-        public bool DoSaveClosed(int CaseId, int StatusId, string Remark, int cltId, int CreateBy, int ModifiedBy)
+        public bool DoSaveClosed(int CaseId, string Status, string Remark, int cltId, int CreateBy, int ModifiedBy)
         {
             using (var db = this.GetDBContext())
             {
@@ -448,7 +448,8 @@ namespace NEWCRM.Models
                          select ca).FirstOrDefault();
                 if (c != null)
                 {
-                    c.cssID = StatusId;
+                    c.cssID = 4;
+                    c.casstatusReason = Status;
                     c.casModifiedBy = ModifiedBy;
                     c.casModifiedOn = DateTime.Now;
                     db.SaveChanges();
@@ -679,6 +680,6 @@ namespace NEWCRM.Models
         public string casreferenceDetail { get; set; }
         public string casdetail { get; set; }
         public string casstatusReason { get; set; }
-        
+        public string ctaEmail { get; set; }
     }
 }

@@ -135,7 +135,7 @@ namespace NEWCRM.Controllers
                     }
 
                     #region Add Case
-
+                    var casGroup = NEWCRM.Common.AppUtils.Session.User.grpID;
                     var _CreatedDate = DateTime.Now;
                     var _CreatedBy = AppUtils.Session.User.usrID;
                     model.casSummary = string.Empty;
@@ -172,6 +172,7 @@ namespace NEWCRM.Controllers
                     {
                         model.casDueDate = _CreatedDate.AddMinutes((double)model.casSLA);
                     }
+                    if (model.cssID != 1) casGroup = 0;
                     Case data = new Case()
                     {
                         actID = act_data.actID,
@@ -204,7 +205,7 @@ namespace NEWCRM.Controllers
                         casSLA = model.casSLA,
                         casFav = model.casFav,
                         casDueDate = model.casDueDate,
-
+                        casGroupID= casGroup,
                         cascommerceType = model.commerceType,
                         casproductCategory = model.productCategory,
                         casserviceCategory = model.serviceCategory,
@@ -508,17 +509,19 @@ namespace NEWCRM.Controllers
 
             if (role == 1 || role == 2)
             {
+                ViewBag.Favourite = true;
+                ViewBag.Edit = true;
+                ViewBag.AddNote = true;
+                ViewBag.Dispatch = true;
+                ViewBag.Assign = true;
+                ViewBag.Closed = true;
+                ViewBag.ChangeStatus = true;
+                ViewBag.Email = true;
+
                 #region Admin or Supervisor 
                 if (!cas.assignTo.HasValue && !cas.casGroupID.HasValue)
                 {
-                    ViewBag.Favourite = true;
-                    ViewBag.Edit = true;
-                    ViewBag.AddNote = true;
-                    ViewBag.Dispatch = true;
-                    ViewBag.Assign = true;
-                    ViewBag.Closed = true;
-                    ViewBag.ChangeStatus = true;
-                    ViewBag.Email = true;
+                    
                 } else {
                     if (cas.casGroupID.HasValue)
                     {
@@ -551,62 +554,6 @@ namespace NEWCRM.Controllers
                         }
                     }
                 }
-                // Normal Case
-                //if (!cas.assignTo.HasValue && !cas.casGroupID.HasValue)
-                //{
-                //    // If Owner
-                //    if (cas.casOwnerID == AppUtils.Session.User.usrID)
-                //    {
-                //        ViewBag.Favourite = true;
-                //        ViewBag.Edit = true;
-                //        ViewBag.AddNote = true;
-                //        ViewBag.Dispatch = true;
-                //        ViewBag.Assign = true;
-                //        ViewBag.Closed = true;
-                //        ViewBag.ChangeStatus = true;
-                //        ViewBag.Email = true;
-                //    }
-                //    else
-                //    {
-                //        ViewBag.Favourite = true;
-                //        ViewBag.AddNote = true;
-                //        ViewBag.Dispatch = true;
-                //        ViewBag.Assign = true;
-                //    }
-                //}
-                //else
-                //{
-                //    if (cas.casGroupID.HasValue)
-                //    {
-                //        if (cas.casGroupID == AppUtils.Session.User.grpID)
-                //        {
-                //            ViewBag.Favourite = true;
-                //            ViewBag.AddNote = true;
-                //            ViewBag.Accept = true;
-                //        }
-                //        else
-                //        {
-                //            ViewBag.Favourite = true;
-                //            ViewBag.AddNote = true;
-                //            ViewBag.Reject = true;
-                //        }
-                //    }
-                //    if (cas.assignTo.HasValue)
-                //    {
-                //        if (cas.assignTo == AppUtils.Session.User.usrID)
-                //        {
-                //            ViewBag.Favourite = true;
-                //            ViewBag.AddNote = true;
-                //            ViewBag.Accept = true;
-                //        }
-                //        else
-                //        {
-                //            ViewBag.Favourite = true;
-                //            ViewBag.AddNote = true;
-                //            ViewBag.Reject = true;
-                //        }
-                //    }
-                //}
                 #endregion
             }
             else
@@ -666,7 +613,7 @@ namespace NEWCRM.Controllers
                 #endregion
             }
 
-            if (cas.cssID == 1 || cas.cssID == 3 || cas.cssID == 6)
+            if ( cas.cssID == 3 || cas.cssID == 4) // close or cancel
             {
                 ViewBag.Edit = false;
                 ViewBag.Closed = false;
@@ -1080,12 +1027,14 @@ namespace NEWCRM.Controllers
         public ActionResult CloseCase()
         {
 
-            return View("CloseCase");
+            var model = new CaseViewModelLocalization();
+            model.list_status_reason = ConfigurationManager.AppSettings["CASE_Status_Reason"].ToString().Split('|').ToList();
+            return View("CloseCase",model);
         }
 
-        public JsonResult DoSaveCloseCase(int CaseId, int StatusId, string Remark)
+        public JsonResult DoSaveCloseCase(int CaseId, string Status, string Remark)
         {
-            new CaseRepository().DoSaveClosed(CaseId, StatusId, Remark, 11, AppUtils.Session.User.usrID, AppUtils.Session.User.usrID);
+            new CaseRepository().DoSaveClosed(CaseId, Status, Remark, 11, AppUtils.Session.User.usrID, AppUtils.Session.User.usrID);
             return Json(new { }, 0);
         }
 
@@ -1173,11 +1122,13 @@ namespace NEWCRM.Controllers
                         + "PHONE :" + phone + "</br>"
                         + "DATE :" + cas.casCreatedOn + "</br>"
                         + "AGENT :" + user.usrFirstName + " " + user.usrLastName + "</br>"
-                        + "DUE DATE :" + cas.casDueDate + "</br>";
-                        
+                        + "DUE DATE :" + cas.casDueDate + "</br>"
+                        + "Channel :" + cas.casLevel3 + "</br>"
+                        +"Channel :" + cas.casLevel6 + "</br>";
+
 
             // Add wording to end of body in this cases below
-            if(cas.casIDLevel1 == 1) // สอบถามข้อมูลที่วไป
+            if (cas.casIDLevel1 == 1) // สอบถามข้อมูลที่วไป
             {
                 body += "Commerce Type :" + cas.cascommerceType + "</br>";
                 body += "Product Category :" + cas.casproductCategory + "</br>";
@@ -1190,7 +1141,7 @@ namespace NEWCRM.Controllers
                 body += "NOTE :" + cas.casNote + "</br></br>";
                 body += "รบกวนผู้เกี่ยวข้อง กรุณา Feedback ผลหรือสถานะการดำเนินการ ให้ Call Center ทราบภายใน 3 วัน นับจากวันที่ได้รับเรื่อง";
             }
-            if (cas.casIDLevel1 == 2 || cas.casIDLevel1 == 3) // ร้องเรียน / บริการ
+            else //if (cas.casIDLevel1 == 2 || cas.casIDLevel1 == 3) // ร้องเรียน / บริการ
             {
                 body += "Reference Detail :" + cas.casreferenceDetail + "</br>";
                 body += "Detail :" + cas.casdetail + "</br>";
