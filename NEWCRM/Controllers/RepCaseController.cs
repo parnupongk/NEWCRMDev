@@ -107,9 +107,9 @@ namespace NEWCRM.Controllers
             rptListCase.list_repcasesum = rptCase;*/
 
             Response.AddHeader("Content-Type", "application/vnd.ms-excel");
-            Response.AddHeader("Content-Disposition", "attachment;filename = ExcelFile.xls");
+            Response.AddHeader("Content-Disposition", "attachment;filename = CaseSummaryReport_"+DateTime.Now.ToString("yyyyMMdd")+".xls");
 
-            Response.Write("<tablewidth=\"100%\"> <thead> <trclass=\"gradeX\"> <thcolspan=\"2\"> <h3>ETDAACallCenter</h3> <h4>CaseStatisticReport</h4> </th> <thcolspan=\"2\"></th> <th> <divclass=\"form-groupno-paddingpull-right\"> <img  src='http://parnupongk.azurewebsites.net/images/logo.png' /> </div> </th> </tr> </thead> </table><table border=\"1\"><thead><tr><th style=\"background-color:#0000ff;color:#ffffff;font-weight:bold;\">Case Type</th><th style=\"background-color:#0000ff;color:#ffffff;font-weight:bold;\">Number of Case</th><th style=\"background-color:#0000ff;color:#ffffff;font-weight:bold;\">%</th></tr></thead>");
+            Response.Write("<tablewidth=\"100%\"> <thead> <tr class=\"gradeX\"> <th colspan=\"2\"> <h3>ETDAACallCenter</h3> <h4>CaseStatisticReport</h4> <p>Report of "+ startdate +" of " + endDate + "</p></th> <th colspan=\"2\"></th> <th> <div class=\"form-groupno-paddingpull-right\"> <img  src='http://parnupongk.azurewebsites.net/images/logo.png' /> </div> </th> </tr> </thead> </table><table border=\"1\"><thead><tr><th style=\"background-color:#0000ff;color:#ffffff;font-weight:bold;\">Case Type</th><th style=\"background-color:#0000ff;color:#ffffff;font-weight:bold;\">Number of Case</th><th style=\"background-color:#0000ff;color:#ffffff;font-weight:bold;\">%</th></tr></thead>");
 
             foreach( DataRow dr in dt.Rows )
             {
@@ -119,7 +119,7 @@ namespace NEWCRM.Controllers
                 Response.Write("<td>" + dr["Percents"].ToString() + "</td>");
                 Response.Write("</tr>");
 
-                DataTable dtDetail = new CaseRepository().GetCaseSummaryReport(startDate.ToString("yyyy-MM-dd"), endDate.ToString("yyyy-MM-dd"), int.Parse(dr["catParrentID"].ToString()));
+                DataTable dtDetail = new CaseRepository().GetCaseSummaryReport(startDate.ToString("yyyy-MM-dd"), endDate.ToString("yyyy-MM-dd"), int.Parse(dr["catID"].ToString()));
                 int row = 1;
                 foreach(DataRow drDetail in dtDetail.Rows)
                 {
@@ -128,6 +128,7 @@ namespace NEWCRM.Controllers
                     Response.Write("<td>" + drDetail["counts"].ToString() + "</td>");
                     Response.Write("<td>" + drDetail["Percents"].ToString() + "</td>");
                     Response.Write("</tr>");
+                    row++;
                 }
             }
 
