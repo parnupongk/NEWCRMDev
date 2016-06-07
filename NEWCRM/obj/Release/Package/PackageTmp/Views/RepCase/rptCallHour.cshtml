@@ -1,7 +1,7 @@
 ﻿@model NEWCRM.Models.ListRepCaseModel
 
 <div class="row">
-    <div class="col-lg2" style="padding: 0 30px 10px 30px;"><a href="@Url.Action("excelCallDay", "RepCase")" class="btn ink-reaction btn-success"><i class="fa fa-file-excel-o"></i>&nbsp;Export To Excel</a></div>
+    <div class="col-lg2" style="padding: 0 30px 10px 30px;"><a href="@Url.Action("excelCallHour", "RepCase")" class="btn ink-reaction btn-success"><i class="fa fa-file-excel-o"></i>&nbsp;Export To Excel</a></div>
 </div>
 <div class="row">
     <div class="col-lg-12" style="padding: 0 30px 10px 30px;">
@@ -10,7 +10,7 @@
                 <thead>
                     <tr class="gradeX">
                         <th colspan="2">
-                            <h3>ETDA Call Center</h3>
+                            <h3>ETDAA Call Center</h3>
                             <h4>Case Statistic Report</h4>
                             
 
@@ -27,17 +27,18 @@
             </table>
             <table id="datatable1" class="table table-striped table-hover">
                 <thead>
-                    <tr style="background-color:#2B5D95;color:#ffffff;">
-                        <th>period</th>
-                        <th>entered</th>
-                        <th>transfer</th>
-                        <th>accepted agent</th>
-                        <th>abandoned</th>
-                        <th>avg engage time</th>
-                        <th>engage time</th>
+                    <tr>
+                        <th>Hour</th>
+                        <th>Incoming Call</th>
+                        <th>Transfer to Agent</th>
+                        <th>Answer Call</th>
+                        <th>Abandoned</th>
+                        <th>% Abandoned</th>
+                        <th>Average talk time</th>
+                        <th>Total talk time</th>
                     </tr>
                 </thead>
-
+               
             </table>
         </div>
     </div>
