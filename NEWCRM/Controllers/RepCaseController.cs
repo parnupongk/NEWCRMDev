@@ -145,9 +145,15 @@ namespace NEWCRM.Controllers
             int caseIDLevel2 = 0;
             int caseIDLevel3 = 0;
             int caseIDLevel4 = 0;
+<<<<<<< HEAD
             if (Request.Form["reptype"].ToString() == "1") { return RedirectToAction("rptCallHour", new{startDate = startDate,endDate = endDate, caseIDLevel1 = caseIDLevel1, caseIDLevel2 = caseIDLevel2, caseIDLevel3 = caseIDLevel3, caseIDLevel4 = caseIDLevel4 });}
             else if (Request.Form["reptype"].ToString() == "2") { return RedirectToAction("rptCallDay", new { startDate = startDate, endDate = endDate, caseIDLevel1 = caseIDLevel1, caseIDLevel2 = caseIDLevel2, caseIDLevel3 = caseIDLevel3, caseIDLevel4 = caseIDLevel4 });}
             else if (Request.Form["reptype"].ToString() == "3") { return RedirectToAction("rptCaseRep", new { startDate = startDate, endDate = endDate, caseIDLevel1 = 999, caseIDLevel2 = caseIDLevel2, caseIDLevel3 = caseIDLevel3, caseIDLevel4 = caseIDLevel4 }); }
+=======
+            if (Request.Form["reptype"].ToString() == "1") { return RedirectToAction("rptCallHour", new{startDate = startDate,endDate = endDate });}
+            else if (Request.Form["reptype"].ToString() == "2") { return RedirectToAction("rptCallDay", new { startDate = startDate });}
+            else if (Request.Form["reptype"].ToString() == "3") { return RedirectToAction("rptCaseRep", new { startDate = startDate, endDate = endDate, caseIDLevel1 = caseIDLevel1, caseIDLevel2 = caseIDLevel2, caseIDLevel3 = caseIDLevel3, caseIDLevel4 = caseIDLevel4 }); }
+>>>>>>> 1a66e2c20bc2ae7bdc08f68de6b1ca94e878db98
             else if (Request.Form["reptype"].ToString() == "4") { return RedirectToAction("rptCaseOnl", new { startDate = startDate, endDate = endDate, caseIDLevel1 = 1, caseIDLevel2 = caseIDLevel2, caseIDLevel3 = caseIDLevel3, caseIDLevel4 = caseIDLevel4 }); }
             else if (Request.Form["reptype"].ToString() == "5") { return RedirectToAction("rptCaseRaw", new { startDate = startDate, endDate = endDate, caseIDLevel1 = 2, caseIDLevel2 = caseIDLevel2, caseIDLevel3 = caseIDLevel3, caseIDLevel4 = caseIDLevel4 }); }
             else if (Request.Form["reptype"].ToString() == "6") { return RedirectToAction("rptCaseCyb", new { startDate = startDate, endDate = endDate, caseIDLevel1 = 3, caseIDLevel2 = caseIDLevel2, caseIDLevel3 = caseIDLevel3, caseIDLevel4 = caseIDLevel4 }); }
@@ -178,69 +184,152 @@ namespace NEWCRM.Controllers
             return PartialView(rptListCase);
         }
 
-        public ActionResult rptCallHour(DateTime startDate, DateTime endDate, int caseIDLevel1, int caseIDLevel2, int caseIDLevel3, int caseIDLevel4)
+        public ActionResult rptCallHour(DateTime startDate, DateTime endDate)
         {
-            DataTable dt = new CaseRepository().GetCaseReport(caseIDLevel1, caseIDLevel2, caseIDLevel3, caseIDLevel4, startDate.ToString("yyyy-MM-dd"), endDate.ToString("yyyy-MM-dd"));
+            DataTable dt = new CaseRepository().GetCaseReport_CALLPERHOUR(startDate.ToString("yyyy-MM-dd"), endDate.ToString("yyyy-MM-dd"));
             ListRepCaseModel rptListCase = new ListRepCaseModel();
-            List<RepCaseModel> rptCase = new List<RepCaseModel>();
-            rptCase = (from DataRow dr in dt.Rows
-                       select new RepCaseModel()
-                       {
-                           casID = Convert.ToInt32(dr["casID"]),
-                           chnID = dr["chnID"].ToString(),
-                           casIDName = dr["casIDName"].ToString(),
-                           casSummary = dr["casSummary"].ToString(),
-                           cssName = dr["cssName"].ToString(),
-                           casCreatedOn = Convert.ToDateTime(dr["casCreatedOn"].ToString()),
-                           casCreatedByName = dr["casCreatedByName"].ToString(),
-                           casOwnerByName = dr["casOwnerByName"].ToString()
-                       }).ToList();
+            List<CALLPERHOUR> call = new List<CALLPERHOUR>();
 
+            call = (from DataRow dr in dt.Rows
+               select new CALLPERHOUR()
+               {
+                   period = dr["period"].ToString(),
+                   entered = Convert.ToInt32( dr["entered"].ToString()),
+                   transfer = Convert.ToInt32(dr["transfer"].ToString()),
+                   accepted_agent = Convert.ToInt32(dr["accepted_agent"].ToString()),
+                   abandoned = Convert.ToInt32(dr["abandoned"].ToString()),
+                   avg_engage_time = dr["avg_engage_time"].ToString(),
+                   engage_time = dr["engage_time"].ToString()
+               }).ToList();
 
-            rptListCase.list_repcase = rptCase;
+            rptListCase.list_call = call;
             return PartialView(rptListCase);
         }
-        public void excelCallHour()
+        public void excelCallHour(DateTime startDate, DateTime endDate)
         {
             Response.AddHeader("Content-Type", "application/vnd.ms-excel");
+<<<<<<< HEAD
             Response.AddHeader("Content-Disposition", "attachment;filename=CallPerformanceReportByHour_"+DateTime.Now.ToString("yyyyMMdd")+".xls");
 
 
             Response.Write("<table cellpadding=\"5\" width=\"100%\" align=\"center\"><tr><td align=\"left\" style=\"font-size:20pt;font-weight:bold;vertical-align:middle;height:50px;\">ETDA Call Center</td><td align=\"right\"><img src=\"http://www.hostwebdd.com/logo_in_excel.jpg\" /></td></tr><tr><td colspan=\"2\" align=\"left\" style=\"font-size:16pt;font-weight:bold;vertical-align:middle;height:40px;\">Call Performance Report By Hour (Daily)</td></tr><tr><td colspan=\"2\" align=\"left\" style=\"vertical-align:middle;height:30px;\">Report of </td></tr><tr><td colspan=\"2\"><table border=\"1\" width=\"100%\" cellpadding=\"5\"><thead><tr><th style=\"background-color:#366092;color:#ffffff;font-weight:bold;\">Date</th><th style=\"background-color:#366092;color:#ffffff;font-weight:bold;\">Incoming Call</th><th style=\"background-color:#366092;color:#ffffff;font-weight:bold;\">Transfer to Agent</th><th style=\"background-color:#366092;color:#ffffff;font-weight:bold;\">Answer Call</th><th style=\"background-color:#366092;color:#ffffff;font-weight:bold;\">Abandoned</th><th style=\"background-color:#366092;color:#ffffff;font-weight:bold;\">% Abandoned</th><th style=\"background-color:#366092;color:#ffffff;font-weight:bold;\">Average talk time</th><th style=\"background-color:#366092;color:#ffffff;font-weight:bold;\">Total talk time</th></tr></thead><tbody>");
             Response.Write("</tbody></table></td></tr></table>");
+=======
+            Response.AddHeader("Content-Disposition", "attachment;filename = report_CallHour_"+DateTime.Now.ToString("yyyyMMdd")+".xls");
+
+
+            Response.Write("<tablewidth=\"100%\"> <thead> <trclass=\"gradeX\"> <thcolspan=\"2\"> <h3>ETDAACallCenter</h3> <h4>CaseStatisticReport</h4> </th> <thcolspan=\"2\"></th> <th> <divclass=\"form-groupno-paddingpull-right\"> <imgwidth=\"190px\"height=\"100px\"src=\"http://parnupongk.azurewebsites.net/images/logo.png\"/> </div> </th> </tr> </thead> </table><table border=\"1\"><thead><tr><th style=\"background-color:#0000ff;color:#ffffff;font-weight:bold;\">Hour</th><th style=\"background-color:#0000ff;color:#ffffff;font-weight:bold;\">Incoming Call</th><th style=\"background-color:#0000ff;color:#ffffff;font-weight:bold;\">Transfer to Agent</th><th style=\"background-color:#0000ff;color:#ffffff;font-weight:bold;\">Answer Call</th><th style=\"background-color:#0000ff;color:#ffffff;font-weight:bold;\">Abandoned</th><th style=\"background-color:#0000ff;color:#ffffff;font-weight:bold;\">% Abandoned</th><th style=\"background-color:#0000ff;color:#ffffff;font-weight:bold;\">Average talk time</th><th style=\"background-color:#0000ff;color:#ffffff;font-weight:bold;\">Total talk time</th></tr></thead>");
+
+            DataTable dt = new CaseRepository().GetCaseReport_CALLPERHOUR(startDate.ToString("yyyy-MM-dd"), endDate.ToString("yyyy-MM-dd"));
+            ListRepCaseModel rptListCase = new ListRepCaseModel();
+            List<CALLPERHOUR> call = new List<CALLPERHOUR>();
+
+            call = (from DataRow dr in dt.Rows
+                    select new CALLPERHOUR()
+                    {
+                        period = dr["period"].ToString(),
+                        entered = Convert.ToInt32(dr["entered"].ToString()),
+                        transfer = Convert.ToInt32(dr["transfer"].ToString()),
+                        accepted_agent = Convert.ToInt32(dr["accepted_agent"].ToString()),
+                        abandoned = Convert.ToInt32(dr["abandoned"].ToString()),
+                        avg_engage_time = dr["avg_engage_time"].ToString(),
+                        engage_time = dr["engage_time"].ToString()
+                    }).ToList();
+            int irows = 0;
+            foreach (var item in call)
+            {
+                irows++;
+                Response.Write("<tr>");
+                Response.Write("<td>" + irows + "</td>");
+                Response.Write("<td>" + item.period + "</td>");
+                Response.Write("<td>" + item.entered + "</td>");
+                Response.Write("<td>" + item.transfer + "</td>");
+                Response.Write("<td>" + item.accepted_agent + "</td>");
+                Response.Write("<td>" + item.abandoned + "</td>");
+                Response.Write("<td>" + item.avg_engage_time + "</td>");
+                Response.Write("<td>" + item.engage_time + "</td>");
+                Response.Write("</tr>");
+            }
+
+            Response.Write("</tbody></table>");
+>>>>>>> 1a66e2c20bc2ae7bdc08f68de6b1ca94e878db98
             Response.End();
         }
 
-        public ActionResult rptCallDay(DateTime startDate, DateTime endDate, int caseIDLevel1, int caseIDLevel2, int caseIDLevel3, int caseIDLevel4)
+        public ActionResult rptCallDay(DateTime startDate)
         {
-            DataTable dt = new CaseRepository().GetCaseReport(caseIDLevel1, caseIDLevel2, caseIDLevel3, caseIDLevel4, startDate.ToString("yyyy-MM-dd"), endDate.ToString("yyyy-MM-dd"));
+
+            //DateTime startDate = DateTime.ParseExact(Request.Form["startdate"], "dd/MM/yyyy", null);
+            DataTable dt = new CaseRepository().GetCaseReport_CALLPERDAY(startDate.Month.ToString("00"), startDate.Year.ToString());
             ListRepCaseModel rptListCase = new ListRepCaseModel();
-            List<RepCaseModel> rptCase = new List<RepCaseModel>();
-            rptCase = (from DataRow dr in dt.Rows
-                       select new RepCaseModel()
-                       {
-                           casID = Convert.ToInt32(dr["casID"]),
-                           chnID = dr["chnID"].ToString(),
-                           casIDName = dr["casIDName"].ToString(),
-                           casSummary = dr["casSummary"].ToString(),
-                           cssName = dr["cssName"].ToString(),
-                           casCreatedOn = Convert.ToDateTime(dr["casCreatedOn"].ToString()),
-                           casCreatedByName = dr["casCreatedByName"].ToString(),
-                           casOwnerByName = dr["casOwnerByName"].ToString()
-                       }).ToList();
+            List<CALLPERHOUR> call = new List<CALLPERHOUR>();
 
+            call = (from DataRow dr in dt.Rows
+                    select new CALLPERHOUR()
+                    {
+                        period = dr["period"].ToString(),
+                        entered = Convert.ToInt32(dr["entered"].ToString()),
+                        transfer = Convert.ToInt32(dr["transfer"].ToString()),
+                        accepted_agent = Convert.ToInt32(dr["accepted_agent"].ToString()),
+                        abandoned = Convert.ToInt32(dr["abandoned"].ToString()),
+                        avg_engage_time = dr["avg_engage_time"].ToString(),
+                        engage_time = dr["engage_time"].ToString()
+                    }).ToList();
 
-            rptListCase.list_repcase = rptCase;
+            rptListCase.list_call = call;
+
             return PartialView(rptListCase);
         }
-        public void excelCallDay()
+        public void excelCallDay(DateTime startDate)
         {
             Response.AddHeader("Content-Type", "application/vnd.ms-excel");
+<<<<<<< HEAD
             Response.AddHeader("Content-Disposition", "attachment;filename=CallPerformanceReportByDay_" + DateTime.Now.ToString("yyyyMMdd") + ".xls");
 
 
             Response.Write("<table cellpadding=\"5\" width=\"100%\" align=\"center\"><tr><td align=\"left\" style=\"font-size:20pt;font-weight:bold;vertical-align:middle;height:50px;\">ETDA Call Center</td><td align=\"right\"><img src=\"http://www.hostwebdd.com/logo_in_excel.jpg\" /></td></tr><tr><td colspan=\"2\" align=\"left\" style=\"font-size:16pt;font-weight:bold;vertical-align:middle;height:40px;\">Call Performance Report By Day</td></tr><tr><td colspan=\"2\" align=\"left\" style=\"vertical-align:middle;height:30px;\">Report of </td></tr><tr><td colspan=\"2\"><table border=\"1\" width=\"100%\" cellpadding=\"5\"><thead><tr><th style=\"background-color:#366092;color:#ffffff;font-weight:bold;\">Date</th><th style=\"background-color:#366092;color:#ffffff;font-weight:bold;\">Incoming Call</th><th style=\"background-color:#366092;color:#ffffff;font-weight:bold;\">Transfer to Agent</th><th style=\"background-color:#366092;color:#ffffff;font-weight:bold;\">Answer Call</th><th style=\"background-color:#366092;color:#ffffff;font-weight:bold;\">Abandoned</th><th style=\"background-color:#366092;color:#ffffff;font-weight:bold;\">% Abandoned</th><th style=\"background-color:#366092;color:#ffffff;font-weight:bold;\">Average talk time</th><th style=\"background-color:#366092;color:#ffffff;font-weight:bold;\">Total talk time</th></tr></thead>");        
             Response.Write("</tbody></table></td></tr></table>");
+=======
+            Response.AddHeader("Content-Disposition", "attachment;filename = report_CallDay_" + DateTime.Now.ToString("yyyyMMdd") + ".xls");
+
+
+            Response.Write("<tablewidth=\"100%\"> <thead> <trclass=\"gradeX\"> <thcolspan=\"2\"> <h3>ETDAACallCenter</h3> <h4>CaseStatisticReport</h4> </th> <thcolspan=\"2\"></th> <th> <divclass=\"form-groupno-paddingpull-right\"> <imgwidth=\"190px\"height=\"100px\"src=\"http://parnupongk.azurewebsites.net/images/logo.png\"/> </div> </th> </tr> </thead> </table><table border=\"1\"><thead><tr <tr style=\"background-color:#2B5D95;\">><th style=\"background-color:#0000ff;color:#ffffff;font-weight:bold;\">Date</th><th style=\"background-color:#0000ff;color:#ffffff;font-weight:bold;\">Incoming Call</th><th style=\"background-color:#0000ff;color:#ffffff;font-weight:bold;\">Transfer to Agent</th><th style=\"background-color:#0000ff;color:#ffffff;font-weight:bold;\">Answer Call</th><th style=\"background-color:#0000ff;color:#ffffff;font-weight:bold;\">Abandoned</th><th style=\"background-color:#0000ff;color:#ffffff;font-weight:bold;\">% Abandoned</th><th style=\"background-color:#0000ff;color:#ffffff;font-weight:bold;\">Average talk time</th><th style=\"background-color:#0000ff;color:#ffffff;font-weight:bold;\">Total talk time</th></tr></thead>");
+
+            DataTable dt = new CaseRepository().GetCaseReport_CALLPERDAY(startDate.Month.ToString("00"), startDate.Year.ToString());
+            List<CALLPERHOUR> call = new List<CALLPERHOUR>();
+
+            call = (from DataRow dr in dt.Rows
+                    select new CALLPERHOUR()
+                    {
+                        period = dr["period"].ToString(),
+                        entered = Convert.ToInt32(dr["entered"].ToString()),
+                        transfer = Convert.ToInt32(dr["transfer"].ToString()),
+                        accepted_agent = Convert.ToInt32(dr["accepted_agent"].ToString()),
+                        abandoned = Convert.ToInt32(dr["abandoned"].ToString()),
+                        avg_engage_time = dr["avg_engage_time"].ToString(),
+                        engage_time = dr["engage_time"].ToString()
+                    }).ToList();
+
+
+            int irows = 0;
+            foreach (var item in call)
+            {
+                irows++;
+                Response.Write("<tr>");
+                Response.Write("<td>" + irows + "</td>");
+                Response.Write("<td>" + item.period + "</td>");
+                Response.Write("<td>" + item.entered + "</td>");
+                Response.Write("<td>" + item.transfer + "</td>");
+                Response.Write("<td>" + item.accepted_agent + "</td>");
+                Response.Write("<td>" + item.abandoned + "</td>");
+                Response.Write("<td>" + item.avg_engage_time + "</td>");
+                Response.Write("<td>" + item.engage_time + "</td>");
+                Response.Write("</tr>");
+            }
+
+
+            Response.Write("</tbody></table>");
+>>>>>>> 1a66e2c20bc2ae7bdc08f68de6b1ca94e878db98
             Response.End();
         }
 

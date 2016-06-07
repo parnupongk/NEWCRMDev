@@ -30,6 +30,34 @@ namespace NEWCRM.Models
             }
         }
 
+        public DataTable GetCaseReport_CALLPERDAY(string mount, string year)
+        {
+            try
+            {
+                DataSet ds = SqlHelper.ExecuteDataset(ConfigurationManager.ConnectionStrings["IVRConnection"].ToString(), "SP_CALLPERDAY_ETDA"
+                            , new SqlParameter[] { new SqlParameter("@smount", mount), new SqlParameter("@syear", year) });
+                return ds.Tables[0];
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public DataTable GetCaseReport_CALLPERHOUR(string startDate, string endDate)
+        {
+            try
+            {
+                DataSet ds = SqlHelper.ExecuteDataset(ConfigurationManager.ConnectionStrings["IVRConnection"].ToString(), "SP_CALLPERHOUR_ETDA"
+                            , new SqlParameter[] {new SqlParameter("@startdate", startDate),new SqlParameter("@enddate", endDate)});
+                return ds.Tables[0];
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
         public DataTable GetCaseReport(int? casIDLevel1, int? casIDLevel2, int? casIDLevel3, int? casIDLevel4, string startDate,string endDate)
         {
             try
@@ -546,6 +574,17 @@ namespace NEWCRM.Models
         #endregion
     }
 
+    public class CALLPERHOUR
+    {
+        public string period { get; set; }
+        public int entered { get; set; }
+        public int transfer { get; set; }
+        public int accepted_agent { get; set; }
+        public int abandoned { get; set; }
+        public string avg_engage_time { get; set; }
+        public string engage_time { get; set; }
+    }
+
     public class NewCaseModel
     {
         public int? casID { get; set; }
@@ -622,6 +661,7 @@ namespace NEWCRM.Models
         public DateTime currDate { get; set; }
         public List<RepCaseModel> list_repcase { get; set; }
         public List<RepCaseSummary> list_repcasesum { get; set; }
+        public List<CALLPERHOUR> list_call { get; set; }
     }
 
     public class RepCaseSummary
