@@ -107,15 +107,9 @@ namespace NEWCRM.Controllers
             rptListCase.list_repcasesum = rptCase;*/
 
             Response.AddHeader("Content-Type", "application/vnd.ms-excel");
-<<<<<<< HEAD
-            Response.AddHeader("Content-Disposition", "attachment;filename = CaseSummaryReport_"+DateTime.Now.ToString("yyyyMMdd")+".xls");
-
-            Response.Write("<tablewidth=\"100%\"> <thead> <tr class=\"gradeX\"> <th colspan=\"2\"> <h3>ETDAACallCenter</h3> <h4>CaseStatisticReport</h4> <p>Report of "+ startdate +" of " + endDate + "</p></th> <th colspan=\"2\"></th> <th> <div class=\"form-groupno-paddingpull-right\"> <img  src='http://parnupongk.azurewebsites.net/images/logo.png' /> </div> </th> </tr> </thead> </table><table border=\"1\"><thead><tr><th style=\"background-color:#0000ff;color:#ffffff;font-weight:bold;\">Case Type</th><th style=\"background-color:#0000ff;color:#ffffff;font-weight:bold;\">Number of Case</th><th style=\"background-color:#0000ff;color:#ffffff;font-weight:bold;\">%</th></tr></thead>");
-=======
             Response.AddHeader("Content-Disposition", "attachment;filename=CaseSummaryReport_" + DateTime.Now.ToString("yyyyMMdd") + ".xls");
 
             Response.Write("<table cellpadding=\"5\" width=\"100%\" align=\"center\"><tr><td align=\"left\" style=\"font-size:20pt;font-weight:bold;vertical-align:middle;height:50px;\">ETDA Call Center</td><td align=\"right\"><img src=\"http://www.hostwebdd.com/logo_in_excel.jpg\" /></td></tr><tr><td colspan=\"2\" align=\"left\" style=\"font-size:16pt;font-weight:bold;vertical-align:middle;height:40px;\">Case Summary Report</td></tr><tr><td colspan=\"2\" align=\"left\" style=\"vertical-align:middle;height:30px;\">Report of " + startDate.ToString("dd MMM yyy") + " to " + endDate.ToString("dd MMM yyy") + " </td></tr><tr><td colspan=\"2\"><table border=\"1\" width=\"100%\" cellpadding=\"5\"><thead><tr><th style=\"background-color:#366092;color:#ffffff;font-weight:bold;\">Case Type</th><th style=\"background-color:#366092;color:#ffffff;font-weight:bold;\">Number of Case</th><th style=\"background-color:#366092;color:#ffffff;font-weight:bold;\">%</th></tr></thead>");
->>>>>>> 692304a54878fb21ed4db93f70d7b2f2a0040dab
 
             foreach( DataRow dr in dt.Rows )
             {
@@ -152,15 +146,10 @@ namespace NEWCRM.Controllers
             int caseIDLevel2 = 0;
             int caseIDLevel3 = 0;
             int caseIDLevel4 = 0;
-<<<<<<< HEAD
-            if (Request.Form["reptype"].ToString() == "1") { return RedirectToAction("rptCallHour", new{startDate = startDate,endDate = endDate, caseIDLevel1 = caseIDLevel1, caseIDLevel2 = caseIDLevel2, caseIDLevel3 = caseIDLevel3, caseIDLevel4 = caseIDLevel4 });}
-            else if (Request.Form["reptype"].ToString() == "2") { return RedirectToAction("rptCallDay", new { startDate = startDate, endDate = endDate, caseIDLevel1 = caseIDLevel1, caseIDLevel2 = caseIDLevel2, caseIDLevel3 = caseIDLevel3, caseIDLevel4 = caseIDLevel4 });}
-            else if (Request.Form["reptype"].ToString() == "3") { return RedirectToAction("rptCaseRep", new { startDate = startDate, endDate = endDate, caseIDLevel1 = 999, caseIDLevel2 = caseIDLevel2, caseIDLevel3 = caseIDLevel3, caseIDLevel4 = caseIDLevel4 }); }
-=======
+
             if (Request.Form["reptype"].ToString() == "1") { return RedirectToAction("rptCallHour", new{startDate = startDate,endDate = endDate });}
             else if (Request.Form["reptype"].ToString() == "2") { return RedirectToAction("rptCallDay", new { startDate = startDate });}
             else if (Request.Form["reptype"].ToString() == "3") { return RedirectToAction("rptCaseRep", new { startDate = startDate, endDate = endDate, caseIDLevel1 = caseIDLevel1, caseIDLevel2 = caseIDLevel2, caseIDLevel3 = caseIDLevel3, caseIDLevel4 = caseIDLevel4 }); }
->>>>>>> 1a66e2c20bc2ae7bdc08f68de6b1ca94e878db98
             else if (Request.Form["reptype"].ToString() == "4") { return RedirectToAction("rptCaseOnl", new { startDate = startDate, endDate = endDate, caseIDLevel1 = 1, caseIDLevel2 = caseIDLevel2, caseIDLevel3 = caseIDLevel3, caseIDLevel4 = caseIDLevel4 }); }
             else if (Request.Form["reptype"].ToString() == "5") { return RedirectToAction("rptCaseRaw", new { startDate = startDate, endDate = endDate, caseIDLevel1 = 2, caseIDLevel2 = caseIDLevel2, caseIDLevel3 = caseIDLevel3, caseIDLevel4 = caseIDLevel4 }); }
             else if (Request.Form["reptype"].ToString() == "6") { return RedirectToAction("rptCaseCyb", new { startDate = startDate, endDate = endDate, caseIDLevel1 = 3, caseIDLevel2 = caseIDLevel2, caseIDLevel3 = caseIDLevel3, caseIDLevel4 = caseIDLevel4 }); }
@@ -215,17 +204,12 @@ namespace NEWCRM.Controllers
         public void excelCallHour(DateTime startDate, DateTime endDate)
         {
             Response.AddHeader("Content-Type", "application/vnd.ms-excel");
-<<<<<<< HEAD
             Response.AddHeader("Content-Disposition", "attachment;filename=CallPerformanceReportByHour_"+DateTime.Now.ToString("yyyyMMdd")+".xls");
 
 
             Response.Write("<table cellpadding=\"5\" width=\"100%\" align=\"center\"><tr><td align=\"left\" style=\"font-size:20pt;font-weight:bold;vertical-align:middle;height:50px;\">ETDA Call Center</td><td align=\"right\"><img src=\"http://www.hostwebdd.com/logo_in_excel.jpg\" /></td></tr><tr><td colspan=\"2\" align=\"left\" style=\"font-size:16pt;font-weight:bold;vertical-align:middle;height:40px;\">Call Performance Report By Hour (Daily)</td></tr><tr><td colspan=\"2\" align=\"left\" style=\"vertical-align:middle;height:30px;\">Report of </td></tr><tr><td colspan=\"2\"><table border=\"1\" width=\"100%\" cellpadding=\"5\"><thead><tr><th style=\"background-color:#366092;color:#ffffff;font-weight:bold;\">Date</th><th style=\"background-color:#366092;color:#ffffff;font-weight:bold;\">Incoming Call</th><th style=\"background-color:#366092;color:#ffffff;font-weight:bold;\">Transfer to Agent</th><th style=\"background-color:#366092;color:#ffffff;font-weight:bold;\">Answer Call</th><th style=\"background-color:#366092;color:#ffffff;font-weight:bold;\">Abandoned</th><th style=\"background-color:#366092;color:#ffffff;font-weight:bold;\">% Abandoned</th><th style=\"background-color:#366092;color:#ffffff;font-weight:bold;\">Average talk time</th><th style=\"background-color:#366092;color:#ffffff;font-weight:bold;\">Total talk time</th></tr></thead><tbody>");
             Response.Write("</tbody></table></td></tr></table>");
-=======
-            Response.AddHeader("Content-Disposition", "attachment;filename = report_CallHour_"+DateTime.Now.ToString("yyyyMMdd")+".xls");
 
-
-            Response.Write("<tablewidth=\"100%\"> <thead> <trclass=\"gradeX\"> <thcolspan=\"2\"> <h3>ETDAACallCenter</h3> <h4>CaseStatisticReport</h4> </th> <thcolspan=\"2\"></th> <th> <divclass=\"form-groupno-paddingpull-right\"> <imgwidth=\"190px\"height=\"100px\"src=\"http://parnupongk.azurewebsites.net/images/logo.png\"/> </div> </th> </tr> </thead> </table><table border=\"1\"><thead><tr><th style=\"background-color:#0000ff;color:#ffffff;font-weight:bold;\">Hour</th><th style=\"background-color:#0000ff;color:#ffffff;font-weight:bold;\">Incoming Call</th><th style=\"background-color:#0000ff;color:#ffffff;font-weight:bold;\">Transfer to Agent</th><th style=\"background-color:#0000ff;color:#ffffff;font-weight:bold;\">Answer Call</th><th style=\"background-color:#0000ff;color:#ffffff;font-weight:bold;\">Abandoned</th><th style=\"background-color:#0000ff;color:#ffffff;font-weight:bold;\">% Abandoned</th><th style=\"background-color:#0000ff;color:#ffffff;font-weight:bold;\">Average talk time</th><th style=\"background-color:#0000ff;color:#ffffff;font-weight:bold;\">Total talk time</th></tr></thead>");
 
             DataTable dt = new CaseRepository().GetCaseReport_CALLPERHOUR(startDate.ToString("yyyy-MM-dd"), endDate.ToString("yyyy-MM-dd"));
             ListRepCaseModel rptListCase = new ListRepCaseModel();
@@ -259,7 +243,6 @@ namespace NEWCRM.Controllers
             }
 
             Response.Write("</tbody></table>");
->>>>>>> 1a66e2c20bc2ae7bdc08f68de6b1ca94e878db98
             Response.End();
         }
 
@@ -290,17 +273,11 @@ namespace NEWCRM.Controllers
         public void excelCallDay(DateTime startDate)
         {
             Response.AddHeader("Content-Type", "application/vnd.ms-excel");
-<<<<<<< HEAD
             Response.AddHeader("Content-Disposition", "attachment;filename=CallPerformanceReportByDay_" + DateTime.Now.ToString("yyyyMMdd") + ".xls");
 
 
             Response.Write("<table cellpadding=\"5\" width=\"100%\" align=\"center\"><tr><td align=\"left\" style=\"font-size:20pt;font-weight:bold;vertical-align:middle;height:50px;\">ETDA Call Center</td><td align=\"right\"><img src=\"http://www.hostwebdd.com/logo_in_excel.jpg\" /></td></tr><tr><td colspan=\"2\" align=\"left\" style=\"font-size:16pt;font-weight:bold;vertical-align:middle;height:40px;\">Call Performance Report By Day</td></tr><tr><td colspan=\"2\" align=\"left\" style=\"vertical-align:middle;height:30px;\">Report of </td></tr><tr><td colspan=\"2\"><table border=\"1\" width=\"100%\" cellpadding=\"5\"><thead><tr><th style=\"background-color:#366092;color:#ffffff;font-weight:bold;\">Date</th><th style=\"background-color:#366092;color:#ffffff;font-weight:bold;\">Incoming Call</th><th style=\"background-color:#366092;color:#ffffff;font-weight:bold;\">Transfer to Agent</th><th style=\"background-color:#366092;color:#ffffff;font-weight:bold;\">Answer Call</th><th style=\"background-color:#366092;color:#ffffff;font-weight:bold;\">Abandoned</th><th style=\"background-color:#366092;color:#ffffff;font-weight:bold;\">% Abandoned</th><th style=\"background-color:#366092;color:#ffffff;font-weight:bold;\">Average talk time</th><th style=\"background-color:#366092;color:#ffffff;font-weight:bold;\">Total talk time</th></tr></thead>");        
             Response.Write("</tbody></table></td></tr></table>");
-=======
-            Response.AddHeader("Content-Disposition", "attachment;filename = report_CallDay_" + DateTime.Now.ToString("yyyyMMdd") + ".xls");
-
-
-            Response.Write("<tablewidth=\"100%\"> <thead> <trclass=\"gradeX\"> <thcolspan=\"2\"> <h3>ETDAACallCenter</h3> <h4>CaseStatisticReport</h4> </th> <thcolspan=\"2\"></th> <th> <divclass=\"form-groupno-paddingpull-right\"> <imgwidth=\"190px\"height=\"100px\"src=\"http://parnupongk.azurewebsites.net/images/logo.png\"/> </div> </th> </tr> </thead> </table><table border=\"1\"><thead><tr <tr style=\"background-color:#2B5D95;\">><th style=\"background-color:#0000ff;color:#ffffff;font-weight:bold;\">Date</th><th style=\"background-color:#0000ff;color:#ffffff;font-weight:bold;\">Incoming Call</th><th style=\"background-color:#0000ff;color:#ffffff;font-weight:bold;\">Transfer to Agent</th><th style=\"background-color:#0000ff;color:#ffffff;font-weight:bold;\">Answer Call</th><th style=\"background-color:#0000ff;color:#ffffff;font-weight:bold;\">Abandoned</th><th style=\"background-color:#0000ff;color:#ffffff;font-weight:bold;\">% Abandoned</th><th style=\"background-color:#0000ff;color:#ffffff;font-weight:bold;\">Average talk time</th><th style=\"background-color:#0000ff;color:#ffffff;font-weight:bold;\">Total talk time</th></tr></thead>");
 
             DataTable dt = new CaseRepository().GetCaseReport_CALLPERDAY(startDate.Month.ToString("00"), startDate.Year.ToString());
             List<CALLPERHOUR> call = new List<CALLPERHOUR>();
@@ -336,7 +313,6 @@ namespace NEWCRM.Controllers
 
 
             Response.Write("</tbody></table>");
->>>>>>> 1a66e2c20bc2ae7bdc08f68de6b1ca94e878db98
             Response.End();
         }
 
