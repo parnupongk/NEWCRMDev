@@ -53,11 +53,11 @@
                     <tr class="gradeX">
                         <td></td>
                         <td><a href="@Url.Action("CaseDetail","Case")/@item.casID" class="text-medium" target="_blank">@Html.Raw((item.chnID.Equals("ob") ? "<i class='fa fa-arrow-circle-up fa-fw'></i>" : "<i class='fa fa-arrow-circle-down fa-fw'></i>")) @item.casIDName</a></td>
-                        <td>@item.casCreatedOn</td>                        
+                        <td>@item.casCreatedOn.Value.ToString("yyyy-MM-dd HH:mm:ss")</td>                        
                         <td>@item.chnID</td>
                         <td>@item.casCreatedByName</td>
-                        <td></td>
-                        <td></td>
+                        <td>@item.casCreatedOn.Value.ToString("yyyy-MM-dd HH:mm:ss")</td>
+                        <td>@item.ctaNumber</td>
                         <td>@item.casLevel1</td>
                         <td>@item.casLevel2</td>
                         <td>@item.cascommerceType</td>
