@@ -729,5 +729,10 @@ namespace NEWCRM.Models
         public string casstatusReason { get; set; }
         public string ctaEmail { get; set; }
         public string ctaNumber { get; set; }
+        public string caspaymentType { get; set; }
+        public string casvendorID { get; set; }
+        public string caseventDate { get; set; }
+        public string casAttachFile { get; set; }
+        
     }
 }
