@@ -318,7 +318,7 @@ namespace NEWCRM.Controllers
 
         public ActionResult rptCaseRep(DateTime startDate, DateTime endDate, int caseIDLevel1, int caseIDLevel2, int caseIDLevel3, int caseIDLevel4)
         {
-            DataTable dt = new CaseRepository().GetCaseReport(0, 0, 0, 0, startDate.ToString("yyyy-MM-dd"), endDate.ToString("yyyy-MM-dd"));
+            DataTable dt = new CaseRepository().GetCaseReport(999, 0, 0, 0, startDate.ToString("yyyy-MM-dd"), endDate.ToString("yyyy-MM-dd"));
             ListRepCaseModel rptListCase = new ListRepCaseModel();
             List<RepCaseModel> rptCase = new List<RepCaseModel>();
             rptCase = (from DataRow dr in dt.Rows
@@ -336,7 +336,7 @@ namespace NEWCRM.Controllers
             rptListCase.list_repcase = rptCase;
             ViewBag.startDate = startDate;
             ViewBag.endDate = endDate;
-            ViewBag.caseIDLevel1 = caseIDLevel1;
+            ViewBag.caseIDLevel1 = 999;
             ViewBag.caseIDLevel2 = caseIDLevel2;
             ViewBag.caseIDLevel3 = caseIDLevel3;
             ViewBag.caseIDLevel4 = caseIDLevel4;
@@ -372,7 +372,7 @@ namespace NEWCRM.Controllers
                 Response.Write("<tr>");
                 Response.Write("<td style=\"text-align:center;vertical-align:top;\">" + irows + "</td>");
                 Response.Write("<td style=\"text-align:left;vertical-align:top;\">" + item.casIDName + "</td>");
-                Response.Write("<td style=\"text-align:left;vertical-align:top;\">" + item.casCreatedOn + "</td>");
+                Response.Write("<td style=\"text-align:left;vertical-align:top;\">" + item.casCreatedOn.Value.ToString("yyyy-MM-dd HH:mm:ss") + "</td>");
                 Response.Write("<td style=\"text-align:left;vertical-align:top;\">" + item.chnID + "</td>");
                 Response.Write("<td style=\"text-align:left;vertical-align:top;\">" + item.casCreatedByName + "</td>");
                 Response.Write("<td style=\"text-align:left;vertical-align:top;\">" + item.casSummary + "</td>");
@@ -410,7 +410,8 @@ namespace NEWCRM.Controllers
                            casconversationChannel = dr["casconversationChannel"].ToString(),
                            casreferenceDetail = dr["casreferenceDetail"].ToString(),
                            casdetail = dr["casdetail"].ToString(),
-                           casstatusReason = dr["casstatusReason"].ToString()
+                           casstatusReason = dr["casstatusReason"].ToString(),
+                           ctaNumber = dr["phnNumber"].ToString()
                        }).ToList();
 
 
@@ -451,7 +452,8 @@ namespace NEWCRM.Controllers
                            casconversationChannel = dr["casconversationChannel"].ToString(),
                            casreferenceDetail = dr["casreferenceDetail"].ToString(),
                            casdetail = dr["casdetail"].ToString(),
-                           casstatusReason = dr["casstatusReason"].ToString()
+                           casstatusReason = dr["casstatusReason"].ToString(),
+                           ctaNumber = dr["phnNumber"].ToString()
                        }).ToList();
 
             Response.Write("<table cellpadding=\"5\" width=\"100%\" align=\"center\"><tr><td align=\"left\" style=\"font-size:20pt;font-weight:bold;vertical-align:middle;height:50px;\">ETDA Call Center</td><td align=\"right\"><img src=\"http://www.hostwebdd.com/logo_in_excel.jpg\" /></td></tr><tr><td colspan=\"2\" align=\"left\" style=\"font-size:16pt;font-weight:bold;vertical-align:middle;height:40px;\">CASE DETAIL REPORT (ร้องเรียนซื้อ ขายออนไลน์)</td></tr><tr><td colspan=\"2\" align=\"left\" style=\"vertical-align:middle;height:30px;\">Report of " + startDate.ToString("dd MMM yyy") + " to " + endDate.ToString("dd MMM yyy") + " </td></tr><tr><td colspan=\"2\"><table border=\"1\" width=\"100%\" cellpadding=\"5\"><thead><tr><th style=\"background-color:#366092;color:#ffffff;font-weight:bold;\">No.</th><th style=\"background-color:#366092;color:#ffffff;font-weight:bold;\">Case ID</th><th style=\"background-color:#366092;color:#ffffff;font-weight:bold;\">Created Date</th><th style=\"background-color:#366092;color:#ffffff;font-weight:bold;\">Channel</th><th style=\"background-color:#366092;color:#ffffff;font-weight:bold;\">Contact Name</th><th style=\"background-color:#366092;color:#ffffff;font-weight:bold;\">Transaction Date</th><th style=\"background-color:#366092;color:#ffffff;font-weight:bold;\">Phone Number</th><th style=\"background-color:#366092;color:#ffffff;font-weight:bold;\">Main Case Type</th><th style=\"background-color:#366092;color:#ffffff;font-weight:bold;\">Sub Case Type</th><th style=\"background-color:#366092;color:#ffffff;font-weight:bold;\">Commerce Type</th><th style=\"background-color:#366092;color:#ffffff;font-weight:bold;\">Commerce Channel</th><th style=\"background-color:#366092;color:#ffffff;font-weight:bold;\">Product Category</th><th style=\"background-color:#366092;color:#ffffff;font-weight:bold;\">Service Category</th><th style=\"background-color:#366092;color:#ffffff;font-weight:bold;\">Delivery Type</th><th style=\"background-color:#366092;color:#ffffff;font-weight:bold;\">Payment Type</th><th style=\"background-color:#366092;color:#ffffff;font-weight:bold;\">Value Range</th><th style=\"background-color:#366092;color:#ffffff;font-weight:bold;\">Conversation Channel</th><th style=\"background-color:#366092;color:#ffffff;font-weight:bold;\">Vendor ID</th><th style=\"background-color:#366092;color:#ffffff;font-weight:bold;\">Detail</th><th style=\"background-color:#366092;color:#ffffff;font-weight:bold;\">Reference</th><th style=\"background-color:#366092;color:#ffffff;font-weight:bold;\">Status</th></tr></thead><tbody>");
@@ -462,11 +464,11 @@ namespace NEWCRM.Controllers
                 Response.Write("<tr>");
                 Response.Write("<td style=\"text-align:center;vertical-align:top;\">" + irows + "</td>");
                 Response.Write("<td style=\"text-align:left;vertical-align:top;\">" + item.casIDName + "</td>");
-                Response.Write("<td style=\"text-align:left;vertical-align:top;\">" + item.casCreatedOn + "</td>");
+                Response.Write("<td style=\"text-align:left;vertical-align:top;\">" + item.casCreatedOn.Value.ToString("yyyy-MM-dd HH:mm:ss") + "</td>");
                 Response.Write("<td style=\"text-align:left;vertical-align:top;\">" + item.chnID + "</td>");
                 Response.Write("<td style=\"text-align:left;vertical-align:top;\">" + item.casCreatedByName + "</td>");
-                Response.Write("<td style=\"text-align:left;vertical-align:top;\"></td>");
-                Response.Write("<td style=\"text-align:left;vertical-align:top;\"></td>");
+                Response.Write("<td style=\"text-align:left;vertical-align:top;\">" + item.casCreatedOn.Value.ToString("yyyy-MM-dd HH:mm:ss") + "</td>");
+                Response.Write("<td style=\"text-align:left;vertical-align:top;\">" + item.ctaNumber + "</td>");
                 Response.Write("<td style=\"text-align:left;vertical-align:top;\">" + item.casLevel1 + "</td>");
                 Response.Write("<td style=\"text-align:left;vertical-align:top;\">" + item.casLevel2 + "</td>");
                 Response.Write("<td style=\"text-align:center;vertical-align:top;\">" + item.cascommerceType + "</td>");
@@ -506,7 +508,8 @@ namespace NEWCRM.Controllers
                            casLevel6 = dr["casLevel6"].ToString(),
                            casreferenceDetail = dr["casreferenceDetail"].ToString(),
                            casdetail = dr["casdetail"].ToString(),
-                           ctaEmail = dr["ctaEmail"].ToString()
+                           ctaEmail = dr["ctaEmail"].ToString(),
+                           ctaNumber = dr["phnNumber"].ToString()
                        }).ToList();
 
 
@@ -542,7 +545,8 @@ namespace NEWCRM.Controllers
                            casLevel6 = dr["casLevel6"].ToString(),
                            casreferenceDetail = dr["casreferenceDetail"].ToString(),
                            casdetail = dr["casdetail"].ToString(),
-                           ctaEmail = dr["ctaEmail"].ToString()
+                           ctaEmail = dr["ctaEmail"].ToString(),
+                           ctaNumber = dr["phnNumber"].ToString()
                        }).ToList();
 
             Response.Write("<table cellpadding=\"5\" width=\"100%\" align=\"center\"><tr><td align=\"left\" style=\"font-size:20pt;font-weight:bold;vertical-align:middle;height:50px;\">ETDA Call Center</td><td align=\"right\"><img src=\"http://www.hostwebdd.com/logo_in_excel.jpg\" /></td></tr><tr><td colspan=\"2\" align=\"left\" style=\"font-size:16pt;font-weight:bold;vertical-align:middle;height:40px;\">Case Detail Report (ร้องเรียนกระทาผิด พรบ/ เว็บไซต์ผิดกฎหมาย)</td></tr><tr><td colspan=\"2\" align=\"left\" style=\"vertical-align:middle;height:30px;\">Report of " + startDate.ToString("dd MMM yyy") + " to " + endDate.ToString("dd MMM yyy") + " </td></tr><tr><td colspan=\"2\"><table border=\"1\" width=\"100%\" cellpadding=\"5\"><thead><tr><th style=\"background-color:#366092;color:#ffffff;font-weight:bold;\" rowspan=\"2\">No.</th><th style=\"background-color:#366092;color:#ffffff;font-weight:bold;\" rowspan=\"2\">Created Date</th><th style=\"background-color:#366092;color:#ffffff;font-weight:bold;\" rowspan=\"2\">Event Date</th><th style=\"background-color:#366092;color:#ffffff;font-weight:bold;\" rowspan=\"2\">Case ID</th><th style=\"background-color:#366092;color:#ffffff;font-weight:bold;\" rowspan=\"2\">Channel</th><th style=\"background-color:#366092;color:#ffffff;font-weight:bold;\" rowspan=\"2\">Case Type</th><th style=\"background-color:#366092;color:#ffffff;font-weight:bold;\" colspan=\"4\">Contact Info</th><th style=\"background-color:#366092;color:#ffffff;font-weight:bold;\" colspan=\"3\">Reference Content</th><th style=\"background-color:#366092;color:#ffffff;font-weight:bold;\" rowspan=\"2\">Detail</th></tr><tr><th style=\"background-color:#366092;color:#ffffff;font-weight:bold;\">Contact Name</th><th style=\"background-color:#366092;color:#ffffff;font-weight:bold;\">Contact Type</th><th style=\"background-color:#366092;color:#ffffff;font-weight:bold;\">Contact email</th><th style=\"background-color:#366092;color:#ffffff;font-weight:bold;\">Phone Number</th><th style=\"background-color:#366092;color:#ffffff;font-weight:bold;\">Source Type</th><th style=\"background-color:#366092;color:#ffffff;font-weight:bold;\">Reference ID</th><th style=\"background-color:#366092;color:#ffffff;font-weight:bold;\">Reference Detail</th></tr></thead><tbody>");
@@ -552,15 +556,15 @@ namespace NEWCRM.Controllers
                 irows++;
                 Response.Write("<tr>");
                 Response.Write("<td style=\"text-align:center;vertical-align:top;\">" + irows + "</td>");
-                Response.Write("<td style=\"text-align:left;vertical-align:top;\">" + item.casCreatedOn + "</td>");
-                Response.Write("<td style=\"text-align:center;vertical-align:top;\">" + item.casCreatedOn + "</td>");
+                Response.Write("<td style=\"text-align:left;vertical-align:top;\">" + item.casCreatedOn.Value.ToString("yyyy-MM-dd HH:mm:ss") + "</td>");
+                Response.Write("<td style=\"text-align:center;vertical-align:top;\">" + item.casCreatedOn.Value.ToString("yyyy-MM-dd HH:mm:ss") + "</td>");
                 Response.Write("<td style=\"text-align:left;vertical-align:top;\">" + item.casIDName + "</td>");
                 Response.Write("<td style=\"text-align:left;vertical-align:top;\">" + item.chnID + "</td>");
                 Response.Write("<td style=\"text-align:left;vertical-align:top;\">" + item.casLevel2 + "</td>");
                 Response.Write("<td style=\"text-align:left;vertical-align:top;\">" + item.casCreatedByName + "</td>");
                 Response.Write("<td style=\"text-align:center;vertical-align:top;\">" + item.cascommerceType + "</td>");
                 Response.Write("<td style=\"text-align:center;vertical-align:top;\">" + item.ctaEmail + "</td>");
-                Response.Write("<td style=\"text-align:left;vertical-align:top;\"></td>");
+                Response.Write("<td style=\"text-align:left;vertical-align:top;\">" + item.ctaNumber + "</td>");
                 Response.Write("<td style=\"text-align:left;vertical-align:top;\">" + item.casLevel3 + "</td>");
                 Response.Write("<td style=\"text-align:left;vertical-align:top;\">" + item.casLevel6 + "</td>");
                 Response.Write("<td style=\"text-align:left;vertical-align:top;\">" + item.casreferenceDetail + "</td>");
@@ -589,7 +593,8 @@ namespace NEWCRM.Controllers
                            casLevel6 = dr["casLevel6"].ToString(),
                            casreferenceDetail = dr["casreferenceDetail"].ToString(),
                            casdetail = dr["casdetail"].ToString(),
-                           ctaEmail = dr["ctaEmail"].ToString()
+                           ctaEmail = dr["ctaEmail"].ToString(),
+                           ctaNumber = dr["phnNumber"].ToString()
                        }).ToList();
 
 
@@ -625,7 +630,8 @@ namespace NEWCRM.Controllers
                            casLevel6 = dr["casLevel6"].ToString(),
                            casreferenceDetail = dr["casreferenceDetail"].ToString(),
                            casdetail = dr["casdetail"].ToString(),
-                           ctaEmail = dr["ctaEmail"].ToString()
+                           ctaEmail = dr["ctaEmail"].ToString(),
+                           ctaNumber = dr["phnNumber"].ToString()
                        }).ToList();
 
             Response.Write("<table cellpadding=\"5\" width=\"100%\" align=\"center\"><tr><td align=\"left\" style=\"font-size:20pt;font-weight:bold;vertical-align:middle;height:50px;\">ETDA Call Center</td><td align=\"right\"><img src=\"http://www.hostwebdd.com/logo_in_excel.jpg\" /></td></tr><tr><td colspan=\"2\" align=\"left\" style=\"font-size:16pt;font-weight:bold;vertical-align:middle;height:40px;\">Case Detail Report (ร้องเรียนภัยคุกคาม CYBER)</td></tr><tr><td colspan=\"2\" align=\"left\" style=\"vertical-align:middle;height:30px;\">Report of " + startDate.ToString("dd MMM yyy") + " to " + endDate.ToString("dd MMM yyy") + " </td></tr><tr><td colspan=\"2\"><table border=\"1\" width=\"100%\" cellpadding=\"5\"><thead><tr><th style=\"background-color:#366092;color:#ffffff;font-weight:bold;\" rowspan=\"2\">No.</th><th style=\"background-color:#366092;color:#ffffff;font-weight:bold;\" rowspan=\"2\">Created Date</th><th style=\"background-color:#366092;color:#ffffff;font-weight:bold;\" rowspan=\"2\">Event Date</th><th style=\"background-color:#366092;color:#ffffff;font-weight:bold;\" rowspan=\"2\">Case ID</th><th style=\"background-color:#366092;color:#ffffff;font-weight:bold;\" rowspan=\"2\">Channel</th><th style=\"background-color:#366092;color:#ffffff;font-weight:bold;\" colspan=\"4\">Contact Info</th><th style=\"background-color:#366092;color:#ffffff;font-weight:bold;\" rowspan=\"2\">Case Type</th><th style=\"background-color:#366092;color:#ffffff;font-weight:bold;\" colspan=\"4\">Reference Content</th><th style=\"background-color:#366092;color:#ffffff;font-weight:bold;\" rowspan=\"2\">Detail</th></tr><tr><th style=\"background-color:#366092;color:#ffffff;font-weight:bold;\">Contact Name</th><th style=\"background-color:#366092;color:#ffffff;font-weight:bold;\">Contact Type</th><th style=\"background-color:#366092;color:#ffffff;font-weight:bold;\">Contact email</th><th style=\"background-color:#366092;color:#ffffff;font-weight:bold;\">Phone Number</th><th style=\"background-color:#366092;color:#ffffff;font-weight:bold;\">Source Type</th><th style=\"background-color:#366092;color:#ffffff;font-weight:bold;\">Reference ID</th><th style=\"background-color:#366092;color:#ffffff;font-weight:bold;\">Reference Detail</th><th style=\"background-color:#366092;color:#ffffff;font-weight:bold;\">Attach file</th></tr></thead><tbody>");
@@ -635,15 +641,15 @@ namespace NEWCRM.Controllers
                 irows++;
                 Response.Write("<tr>");
                 Response.Write("<td>" + irows + "</td>");
-                Response.Write("<td>" + item.casCreatedOn + "</td>");
-                Response.Write("<td>" + item.casCreatedOn + "</td>");
+                Response.Write("<td>" + item.casCreatedOn.Value.ToString("yyyy-MM-dd HH:mm:ss") + "</td>");
+                Response.Write("<td>" + item.casCreatedOn.Value.ToString("yyyy-MM-dd HH:mm:ss") + "</td>");
                 Response.Write("<td>" + item.casIDName + "</td>");
                 Response.Write("<td>" + item.chnID + "</td>");
                 Response.Write("<td>" + item.casLevel2 + "</td>");
                 Response.Write("<td>" + item.casCreatedByName + "</td>");
                 Response.Write("<td>" + item.cascommerceType + "</td>");
                 Response.Write("<td>" + item.ctaEmail + "</td>");
-                Response.Write("<td></td>");
+                Response.Write("<td>" + item.ctaNumber + "</td>");
                 Response.Write("<td>" + item.casLevel3 + "</td>");
                 Response.Write("<td>" + item.casLevel6 + "</td>");
                 Response.Write("<td>" + item.casreferenceDetail + "</td>");

@@ -721,5 +721,6 @@ namespace NEWCRM.Models
         public string casdetail { get; set; }
         public string casstatusReason { get; set; }
         public string ctaEmail { get; set; }
+        public string ctaNumber { get; set; }
     }
 }
