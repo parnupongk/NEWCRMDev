@@ -319,6 +319,10 @@
     </FunctionImport>
     <FunctionImport Name="sp_GetGroupCaseOnlineAcc" ReturnType="Collection(String)" />
     <FunctionImport Name="uspReportCaseLevel" ReturnType="Collection(NEWCRMModel.uspReportCaseLevel_Result)">
+      <Parameter Name="casIDLevel1" Mode="In" Type="Int32" />
+      <Parameter Name="casIDLevel2" Mode="In" Type="Int32" />
+      <Parameter Name="casIDLevel3" Mode="In" Type="Int32" />
+      <Parameter Name="casIDLevel4" Mode="In" Type="Int32" />
       <Parameter Name="STARTDATE" Mode="In" Type="String" />
       <Parameter Name="ENDDATE" Mode="In" Type="String" />
     </FunctionImport>
@@ -641,6 +645,10 @@
     <Property Name="casreferenceDetail" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="casdetail" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="casstatusReason" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="caspaymentType" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="casVendorID" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="caseventDate" Type="DateTime" Precision="3" />
+    <Property Name="casAttachFile" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
   </EntityType>
   <EntityType Name="CaseStatu">
     <Key>

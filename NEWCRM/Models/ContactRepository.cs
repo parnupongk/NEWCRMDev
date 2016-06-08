@@ -264,7 +264,7 @@ namespace NEWCRM.Models
         public int gndID { get; set; }
         public string ctaDOB { get; set; }
         public string ctaEmail { get; set; }
-
+        public string ctaCareer { get; set; }
         // Main Phones Fields
         public string phnMNumber { get; set; }
         

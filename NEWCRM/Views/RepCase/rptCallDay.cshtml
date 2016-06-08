@@ -1,7 +1,7 @@
 ﻿@model NEWCRM.Models.ListRepCaseModel
 
 <div class="row">
-    <div class="col-lg2" style="padding: 0 30px 10px 30px;"><a href="@Url.Action("excelCallDay", "RepCase")" class="btn ink-reaction btn-success"><i class="fa fa-file-excel-o"></i>&nbsp;Export To Excel</a></div>
+    <div class="col-lg2" style="padding: 0 30px 10px 30px;"><a href="@Url.Action("excelCallDay", "RepCase",new { startDate = @ViewBag.startDate})" class="btn ink-reaction btn-success"><i class="fa fa-file-excel-o"></i>&nbsp;Export To Excel</a></div>
 </div>
 <div class="row">
     <div class="col-lg-12" style="padding: 0 30px 10px 30px;">
@@ -11,14 +11,8 @@
                     <tr class="gradeX">
                         <th colspan="2">
                             <h3>ETDA Call Center</h3>
-<<<<<<< HEAD
                             <h4>Call Performance Report By Day</h4>                      
-=======
-                            <h4>Case Statistic Report</h4>
-                            
-
-
->>>>>>> 1a66e2c20bc2ae7bdc08f68de6b1ca94e878db98
+                            <h4>Case Statistic Report </h4>
                         </th>
                         <th colspan="2"></th>
                         <th>
@@ -41,7 +35,20 @@
                         <th>engage time</th>
                     </tr>
                 </thead>
-
+                <tbody>
+                    @foreach (var item in Model.list_call)
+                    {
+                        <tr class="gradeX">
+                            <td>@item.period</td>
+                            <td>@item.entered</td>
+                            <td>@item.transfer</td>
+                            <td>@item.accepted_agent</td>
+                            <td>@item.abandoned</td>
+                            <td>@item.avg_engage_time</td>
+                            <td>@item.engage_time</td>
+                        </tr>
+                    }
+                </tbody>
             </table>
         </div>
     </div>

@@ -271,6 +271,10 @@
     <Property Name="casreferenceDetail" Type="ntext" />
     <Property Name="casdetail" Type="ntext" />
     <Property Name="casstatusReason" Type="nvarchar" MaxLength="100" />
+    <Property Name="caspaymentType" Type="nvarchar" MaxLength="100" />
+    <Property Name="casVendorID" Type="nvarchar" MaxLength="500" />
+    <Property Name="caseventDate" Type="datetime" />
+    <Property Name="casAttachFile" Type="nvarchar" MaxLength="100" />
   </EntityType>
   <EntityType Name="CaseStatus">
     <Key>
@@ -1153,6 +1157,10 @@
     <Parameter Name="AGENTID" Type="bigint" Mode="In" />
   </Function>
   <Function Name="uspReportCaseLevel" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="casIDLevel1" Type="int" Mode="In" />
+    <Parameter Name="casIDLevel2" Type="int" Mode="In" />
+    <Parameter Name="casIDLevel3" Type="int" Mode="In" />
+    <Parameter Name="casIDLevel4" Type="int" Mode="In" />
     <Parameter Name="STARTDATE" Type="nvarchar" Mode="In" />
     <Parameter Name="ENDDATE" Type="nvarchar" Mode="In" />
   </Function>

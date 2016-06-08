@@ -276,6 +276,10 @@
           <Property Name="casreferenceDetail" Type="ntext" />
           <Property Name="casdetail" Type="ntext" />
           <Property Name="casstatusReason" Type="nvarchar" MaxLength="100" />
+          <Property Name="caspaymentType" Type="nvarchar" MaxLength="100" />
+          <Property Name="casVendorID" Type="nvarchar" MaxLength="500" />
+          <Property Name="caseventDate" Type="datetime" />
+          <Property Name="casAttachFile" Type="nvarchar" MaxLength="100" />
         </EntityType>
         <EntityType Name="CaseStatus">
           <Key>
@@ -1158,6 +1162,10 @@
           <Parameter Name="AGENTID" Type="bigint" Mode="In" />
         </Function>
         <Function Name="uspReportCaseLevel" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="casIDLevel1" Type="int" Mode="In" />
+          <Parameter Name="casIDLevel2" Type="int" Mode="In" />
+          <Parameter Name="casIDLevel3" Type="int" Mode="In" />
+          <Parameter Name="casIDLevel4" Type="int" Mode="In" />
           <Parameter Name="STARTDATE" Type="nvarchar" Mode="In" />
           <Parameter Name="ENDDATE" Type="nvarchar" Mode="In" />
         </Function>
@@ -1629,6 +1637,10 @@
           </FunctionImport>
           <FunctionImport Name="sp_GetGroupCaseOnlineAcc" ReturnType="Collection(String)" />
           <FunctionImport Name="uspReportCaseLevel" ReturnType="Collection(NEWCRMModel.uspReportCaseLevel_Result)">
+            <Parameter Name="casIDLevel1" Mode="In" Type="Int32" />
+            <Parameter Name="casIDLevel2" Mode="In" Type="Int32" />
+            <Parameter Name="casIDLevel3" Mode="In" Type="Int32" />
+            <Parameter Name="casIDLevel4" Mode="In" Type="Int32" />
             <Parameter Name="STARTDATE" Mode="In" Type="String" />
             <Parameter Name="ENDDATE" Mode="In" Type="String" />
           </FunctionImport>
@@ -1951,6 +1963,10 @@
           <Property Name="casreferenceDetail" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="casdetail" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="casstatusReason" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="caspaymentType" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="casVendorID" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="caseventDate" Type="DateTime" Precision="3" />
+          <Property Name="casAttachFile" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="CaseStatu">
           <Key>
@@ -3546,6 +3562,10 @@
           <EntitySetMapping Name="Cases">
             <EntityTypeMapping TypeName="NEWCRMModel.Case">
               <MappingFragment StoreEntitySet="Cases">
+                <ScalarProperty Name="casAttachFile" ColumnName="casAttachFile" />
+                <ScalarProperty Name="caseventDate" ColumnName="caseventDate" />
+                <ScalarProperty Name="casVendorID" ColumnName="casVendorID" />
+                <ScalarProperty Name="caspaymentType" ColumnName="caspaymentType" />
                 <ScalarProperty Name="casstatusReason" ColumnName="casstatusReason" />
                 <ScalarProperty Name="casdetail" ColumnName="casdetail" />
                 <ScalarProperty Name="casreferenceDetail" ColumnName="casreferenceDetail" />

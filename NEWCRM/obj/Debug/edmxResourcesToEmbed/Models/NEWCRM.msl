@@ -231,6 +231,10 @@
     <EntitySetMapping Name="Cases">
       <EntityTypeMapping TypeName="NEWCRMModel.Case">
         <MappingFragment StoreEntitySet="Cases">
+          <ScalarProperty Name="casAttachFile" ColumnName="casAttachFile" />
+          <ScalarProperty Name="caseventDate" ColumnName="caseventDate" />
+          <ScalarProperty Name="casVendorID" ColumnName="casVendorID" />
+          <ScalarProperty Name="caspaymentType" ColumnName="caspaymentType" />
           <ScalarProperty Name="casstatusReason" ColumnName="casstatusReason" />
           <ScalarProperty Name="casdetail" ColumnName="casdetail" />
           <ScalarProperty Name="casreferenceDetail" ColumnName="casreferenceDetail" />

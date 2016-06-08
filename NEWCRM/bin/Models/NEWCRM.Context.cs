@@ -694,8 +694,24 @@ namespace NEWCRM.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("sp_GetGroupCaseOnlineAcc");
         }
     
-        public virtual ObjectResult<uspReportCaseLevel_Result> uspReportCaseLevel(string sTARTDATE, string eNDDATE)
+        public virtual ObjectResult<uspReportCaseLevel_Result> uspReportCaseLevel(Nullable<int> casIDLevel1, Nullable<int> casIDLevel2, Nullable<int> casIDLevel3, Nullable<int> casIDLevel4, string sTARTDATE, string eNDDATE)
         {
+            var casIDLevel1Parameter = casIDLevel1.HasValue ?
+                new ObjectParameter("casIDLevel1", casIDLevel1) :
+                new ObjectParameter("casIDLevel1", typeof(int));
+    
+            var casIDLevel2Parameter = casIDLevel2.HasValue ?
+                new ObjectParameter("casIDLevel2", casIDLevel2) :
+                new ObjectParameter("casIDLevel2", typeof(int));
+    
+            var casIDLevel3Parameter = casIDLevel3.HasValue ?
+                new ObjectParameter("casIDLevel3", casIDLevel3) :
+                new ObjectParameter("casIDLevel3", typeof(int));
+    
+            var casIDLevel4Parameter = casIDLevel4.HasValue ?
+                new ObjectParameter("casIDLevel4", casIDLevel4) :
+                new ObjectParameter("casIDLevel4", typeof(int));
+    
             var sTARTDATEParameter = sTARTDATE != null ?
                 new ObjectParameter("STARTDATE", sTARTDATE) :
                 new ObjectParameter("STARTDATE", typeof(string));
@@ -704,7 +720,7 @@ namespace NEWCRM.Models
                 new ObjectParameter("ENDDATE", eNDDATE) :
                 new ObjectParameter("ENDDATE", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<uspReportCaseLevel_Result>("uspReportCaseLevel", sTARTDATEParameter, eNDDATEParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<uspReportCaseLevel_Result>("uspReportCaseLevel", casIDLevel1Parameter, casIDLevel2Parameter, casIDLevel3Parameter, casIDLevel4Parameter, sTARTDATEParameter, eNDDATEParameter);
         }
     
         public virtual int sp_alterdiagram1(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)

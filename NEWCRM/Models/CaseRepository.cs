@@ -49,7 +49,9 @@ namespace NEWCRM.Models
             try
             {
                 DataSet ds = SqlHelper.ExecuteDataset(ConfigurationManager.ConnectionStrings["IVRConnection"].ToString(), "SP_CALLPERHOUR_ETDA"
-                            , new SqlParameter[] {new SqlParameter("@startdate", startDate),new SqlParameter("@enddate", endDate)});
+                            , new SqlParameter[] {new SqlParameter("@startdate", startDate)
+                            ,new SqlParameter("@enddate", endDate)
+                            });
                 return ds.Tables[0];
             }
             catch (Exception ex)
@@ -628,11 +630,16 @@ namespace NEWCRM.Models
         public string productCategory { get; set; }
         public string serviceCategory { get; set; }
         public string deliveryType { get; set; }
+        public string deliveryTypeOther { get; set; }
         public string valueRange { get; set; }
         public string conversationChannel { get; set; }
         public string txtRefDetail { get; set; }
         public string txtDetail { get; set; }
         public string cssStatusReason { get; set; }
+        public string paymentType { get; set; }
+        public string paymentTypeOther { get; set; }
+        public string txtVendorID { get; set; }
+        public DateTime? eventDate { get; set; }
     }
 
     public class CaseViewModelLocalization

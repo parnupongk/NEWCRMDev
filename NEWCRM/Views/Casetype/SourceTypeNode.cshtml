@@ -2,8 +2,7 @@
 @if(Model.sourceType.Count() > 0) {
     var selected = string.Empty;
     
-<label for="sourceType" class="col-sm-3 control-label">ช่องทางการซื้อขาย</label>
-<div class="col-sm-9">
+
     <select id="casIDLevel3" name="casIDLevel3" class="form-control"  onchange="onSourceTypeChange(this)">
         <option></option>
         @foreach (var item in Model.sourceType)
@@ -13,5 +12,5 @@
         }
     </select>
     <input type="hidden" id="casLevel3" name="casLevel3" />
-</div>
+
 }

@@ -122,7 +122,7 @@ namespace NEWCRM.Controllers
             {
                 try
                 {
-                    if (string.IsNullOrEmpty(model.casNote))
+                    if ( model.casIDLevel1 >3 && string.IsNullOrEmpty(model.casNote))
                     {
                         throw new Exception("Case Note is empty");
                     }
@@ -205,11 +205,14 @@ namespace NEWCRM.Controllers
                         casSLA = model.casSLA,
                         casFav = model.casFav,
                         casDueDate = model.casDueDate,
-                        casGroupID= casGroup,
+                        casGroupID = 2,
                         cascommerceType = model.commerceType,
                         casproductCategory = model.productCategory,
                         casserviceCategory = model.serviceCategory,
-                        casdeliveryType = model.deliveryType,
+                        casdeliveryType = model.deliveryType + "/" + model.deliveryTypeOther,
+                        caspaymentType = model.paymentType + "/" + model.paymentTypeOther,
+                        casVendorID = model.txtVendorID,
+                        caseventDate = model.eventDate,
                         casvalueRange = model.valueRange,
                         casconversationChannel = model.conversationChannel,
                         casreferenceDetail = model.txtRefDetail,

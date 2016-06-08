@@ -544,7 +544,7 @@ namespace NEWCRM.Controllers
                     var rep_ctl = new ContactLogsRepository();
                     var rep_phn = new PhoneRepository();
                     var rep_adr = new AddressRepository();
-                 
+
                     #region Added Contact
                     Contact cta = new Contact()
                     {
@@ -559,6 +559,7 @@ namespace NEWCRM.Controllers
                         ctaDOB = (!string.IsNullOrEmpty(frm.ctaDOB)) ? Convert.ToDateTime(frm.ctaDOB) : (DateTime?)null,
                         gndID = frm.gndID,
                         ctaEmail = frm.ctaEmail,
+                        ctaCareer = frm.ctaCareer,
                         ctaCreatedOn = DateTime.Now,
                         ctaCreatedBy = AppUtils.Session.User.usrID,
                         ctaModifiedOn = DateTime.Now,
