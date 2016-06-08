@@ -1127,7 +1127,7 @@ namespace NEWCRM.Controllers
                         + "AGENT :" + user.usrFirstName + " " + user.usrLastName + "</br>"
                         + "DUE DATE :" + cas.casDueDate + "</br>"
                         + "Channel :" + cas.casLevel3 + "</br>"
-                        +"Channel :" + cas.casLevel6 + "</br>";
+                        +"Channel Ref:" + cas.casLevel6 + "</br>";
 
 
             // Add wording to end of body in this cases below
@@ -1137,6 +1137,7 @@ namespace NEWCRM.Controllers
                 body += "Product Category :" + cas.casproductCategory + "</br>";
                 body += "Service Category :" + cas.casserviceCategory + "</br>";
                 body += "Delivery Type :" + cas.casdeliveryType + "</br>";
+                body += "Payment Type : " + cas.caspaymentType + "<br/>";
                 body += "Value Range :" + cas.casvalueRange + "</br>";
                 body += "Conversation Channel :" + cas.casconversationChannel + "</br>";
                 body += "Reference Detail :" + cas.casreferenceDetail + "</br>";
@@ -1146,6 +1147,8 @@ namespace NEWCRM.Controllers
             }
             else //if (cas.casIDLevel1 == 2 || cas.casIDLevel1 == 3) // ร้องเรียน / บริการ
             {
+                body += "Vendor ID : " + cas.casVendorID + "<br/>";
+                body += "Event Type : " + cas.caseventDate + "<br/>";
                 body += "Reference Detail :" + cas.casreferenceDetail + "</br>";
                 body += "Detail :" + cas.casdetail + "</br>";
                 body += "NOTE :" + cas.casNote + "</br></br>";

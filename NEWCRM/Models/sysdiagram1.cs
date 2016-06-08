@@ -12,7 +12,7 @@ namespace NEWCRM.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class sysdiagram
+    public partial class sysdiagram1
     {
         public string name { get; set; }
         public int principal_id { get; set; }

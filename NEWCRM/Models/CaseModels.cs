@@ -9,7 +9,7 @@ namespace NEWCRM.Models
     {
         #region CaseDetail Aood
 
-            public sp_Get_CaseDetailById_Result CaseDetails { get; set; }
+            public sp_GetCase_DetailById_Result CaseDetails { get; set; }
 
             public List<sp_GetStatus_Result> CaseStatus { get; set; }     
 

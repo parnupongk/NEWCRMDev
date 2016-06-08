@@ -258,7 +258,7 @@ namespace NEWCRM.Models
 
         #region Aood
 
-        public sp_Get_CaseDetailById_Result GetCaseDetailById(decimal Id, string Lang)
+        public sp_GetCase_DetailById_Result GetCaseDetailById(decimal Id, string Lang)
         {
             using (var db = this.GetDBContext())
             {
@@ -268,10 +268,10 @@ namespace NEWCRM.Models
 
                 };
 
-                var result = this.ExecStoredProcedure<sp_Get_CaseDetailById_Result>("sp_Get_CaseDetailById", ps);
+                var result = this.ExecStoredProcedure<sp_GetCase_DetailById_Result>("sp_GetCase_DetailById", ps);
                 if (result.Count > 0)
                     return result[0];
-                return new sp_Get_CaseDetailById_Result();
+                return new sp_GetCase_DetailById_Result();
             }
         }
 

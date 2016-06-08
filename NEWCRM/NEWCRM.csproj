@@ -431,6 +431,9 @@
       <DependentUpon>NEWCRM.tt</DependentUpon>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
+    <Compile Include="Models\sp_GetCase_DetailById_Result.cs">
+      <DependentUpon>NEWCRM.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\sp_getContactCommonDetail_Result.cs">
       <DependentUpon>NEWCRM.tt</DependentUpon>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -506,7 +509,13 @@
       <DependentUpon>NEWCRM.tt</DependentUpon>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
+    <Compile Include="Models\sp_Ge_tCaseDetailById_Result.cs">
+      <DependentUpon>NEWCRM.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\sp_helpdiagramdefinition1_Result.cs">
+      <DependentUpon>NEWCRM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sp_helpdiagramdefinition2_Result.cs">
       <DependentUpon>NEWCRM.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\sp_helpdiagramdefinition_Result.cs">
@@ -514,6 +523,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
     <Compile Include="Models\sp_helpdiagrams1_Result.cs">
+      <DependentUpon>NEWCRM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sp_helpdiagrams2_Result.cs">
       <DependentUpon>NEWCRM.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\sp_helpdiagrams_Result.cs">
@@ -540,7 +552,7 @@
       <DependentUpon>NEWCRM.tt</DependentUpon>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
-    <Compile Include="Models\sysdiagram.cs">
+    <Compile Include="Models\sysdiagram1.cs">
       <DependentUpon>NEWCRM.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\TaskScheduleLog.cs">
