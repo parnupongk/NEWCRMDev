@@ -490,9 +490,9 @@ namespace NEWCRM.Controllers
                 Response.Write("<td style=\"text-align:center;vertical-align:top;\">" + item.caspaymentType + "</td>");
                 Response.Write("<td style=\"text-align:center;vertical-align:top;\">" + item.casvalueRange + "</td>");
                 Response.Write("<td style=\"text-align:center;vertical-align:top;\">" + item.casconversationChannel + "</td>");
-                Response.Write("<td style=\"text-align:center;vertical-align:top;\">" + item.casLevel6 + "</td>");
+                Response.Write("<td style=\"text-align:center;vertical-align:top;\">" + item.casvendorID + "</td>");
                 Response.Write("<td style=\"text-align:left;vertical-align:top;\">" + item.casdetail + "</td>");
-                Response.Write("<td style=\"text-align:left;vertical-align:top;\">" + item.casvendorID + "</td>");
+                Response.Write("<td style=\"text-align:left;vertical-align:top;\">" + item.casreferenceDetail + "</td>");
                 Response.Write("<td style=\"text-align:center;vertical-align:top;\">" + item.casstatusReason + "</td>");
                 Response.Write("</tr>");
             }
@@ -662,11 +662,11 @@ namespace NEWCRM.Controllers
                 Response.Write("<td>" + item.caseventDate + "</td>");
                 Response.Write("<td>" + item.casIDName + "</td>");
                 Response.Write("<td>" + item.chnID + "</td>");
-                Response.Write("<td>" + item.casLevel2 + "</td>");
                 Response.Write("<td>" + item.casCreatedByName + "</td>");
                 Response.Write("<td>" + item.cascommerceType + "</td>");
                 Response.Write("<td>" + item.ctaEmail + "</td>");
                 Response.Write("<td>" + item.ctaNumber + "</td>");
+                Response.Write("<td>" + item.casLevel2 + "</td>");
                 Response.Write("<td>" + item.casLevel3 + "</td>");
                 Response.Write("<td>" + item.casLevel6 + "</td>");
                 Response.Write("<td>" + item.casreferenceDetail + "</td>");
