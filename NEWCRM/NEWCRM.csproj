@@ -2073,6 +2073,7 @@
     </EntityDeploy>
     <Content Include="Images\logo-cafe.jpg" />
     <Content Include="Images\logo.png" />
+    <Content Include="Images\logo_in_excel.jpg" />
     <Content Include="Images\Origin_Logo.png" />
     <Content Include="Images\Origin_Logo_Home.png" />
     <Content Include="Images\upload.png" />

@@ -733,6 +733,8 @@ namespace NEWCRM.Models
         public string casvendorID { get; set; }
         public string caseventDate { get; set; }
         public string casAttachFile { get; set; }
-        
+        public string ctaFullName { get; set; }
+        public string chnName { get; set; }
+        public string ctaCareer { get; set; }
     }
 }
