@@ -34,6 +34,7 @@
     <script src="~/Content/js/libs/bootstrap-tagsinput/bootstrap-tagsinput.min.js"></script>
     <script src="~/Content/js/core/demo/DemoFormComponents.js"></script>
     <script src="~/Scripts/NewCase.js"></script>
+<script src="~/Content/js/libs/dropzone/dropzone.js"></script>
     <script type="text/javascript">
 
         function resetValueGroup()
@@ -67,6 +68,18 @@
             $("#ctcaseparent").hide();
             resetGroup();
             
+            Dropzone.autoDiscover = false;
+            $("#dropzone-avatar").dropzone({
+                url: "@Url.Action("uploadAvatar", "User")",
+                addRemoveLinks: false,
+            success: function (file, response) {
+                window.location.reload();
+            },
+            error: function (file, response) {
+                file.previewElement.classList.add("dz-error");
+            }
+        });
+
             $('.field-date').datepicker({ autoclose: true, todayHighlight: true, format: "dd/mm/yyyy" });
             $("#casURLAccount").autocomplete({
                 source: function (request, response) {
@@ -286,6 +299,8 @@
                         resetValueGroup();
                         $("#CaseGroup1").hide();
                         $("#CaseGroup2").hide();
+                        $("#lblSourceTypeRef").html("อ้างอิงระบุเจาะจงURLหรือID");
+                        $("#lblSourceType").html("ประเภทสื่อผิดกฎหมายที่อ้างอิง");
                     }
                 }
 

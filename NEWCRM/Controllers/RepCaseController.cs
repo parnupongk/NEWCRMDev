@@ -89,7 +89,7 @@ namespace NEWCRM.Controllers
             DateTime startDate = DateTime.ParseExact(startdate, "dd/MM/yyyy", null);
             DateTime endDate = DateTime.ParseExact(enddate, "dd/MM/yyyy", null);
             DataTable dt = new CaseRepository().GetCaseSummaryReport(startDate.ToString("yyyy-MM-dd"), endDate.ToString("yyyy-MM-dd"), int.Parse(catparentid));
-            /*ListRepCaseModel rptListCase = new ListRepCaseModel();
+            /*ListRepCaseModel rptListCase = new ListRepCaseModel();*/
             List<RepCaseSummary> rptCase = new List<RepCaseSummary>();
             rptCase = (from DataRow dr in dt.Rows
                        select new RepCaseSummary()
@@ -103,9 +103,6 @@ namespace NEWCRM.Controllers
                            endDate = enddate
                        }).ToList();
 
-
-            rptListCase.list_repcasesum = rptCase;*/
-
             Response.AddHeader("Content-Type", "application/vnd.ms-excel");
             Response.AddHeader("Content-Disposition", "attachment;filename=CaseSummaryReport_" + DateTime.Now.ToString("yyyyMMdd") + ".xls");
 
@@ -114,7 +111,7 @@ namespace NEWCRM.Controllers
             foreach( DataRow dr in dt.Rows )
             {
                 Response.Write("<tr>");
-                Response.Write("<td>" + dr["catName"].ToString() + "</td>");
+                Response.Write("<td style=\"font-weight:bold;vertical-align:middle;\">" + dr["catName"].ToString() + "</td>");
                 Response.Write("<td>" + dr["counts"].ToString() + "</td>");
                 Response.Write("<td>" + dr["Percents"].ToString() + "</td>");
                 Response.Write("</tr>");
@@ -124,13 +121,22 @@ namespace NEWCRM.Controllers
                 foreach(DataRow drDetail in dtDetail.Rows)
                 {
                     Response.Write("<tr>");
-                    Response.Write("<td style=\"padding - left:50px; \">" + row.ToString() +" " + drDetail["catName"].ToString() + "</td>");
+                    Response.Write("<td style=\"margin-left: 70px;\">" + row.ToString() +" " + drDetail["catName"].ToString() + "</td>");
                     Response.Write("<td>" + drDetail["counts"].ToString() + "</td>");
                     Response.Write("<td>" + drDetail["Percents"].ToString() + "</td>");
                     Response.Write("</tr>");
                     row++;
                 }
             }
+
+            var sumPercents = rptCase.Sum(x => x.Percents);
+            var sumCount = rptCase.Sum(x => x.counts);
+
+            Response.Write("<tr>");
+            Response.Write("<td style=\"background-color:#366092;color:#ffffff;font-weight:bold;\"> Total </td>");
+            Response.Write("<td style=\"background-color:#366092;color:#ffffff;font-weight:bold;\">" + sumCount + "</td>");
+            Response.Write("<td style=\"background-color:#366092;color:#ffffff;font-weight:bold;\">" + sumPercents + "</td>");
+            Response.Write("</tr>");
 
             Response.Write("</tbody></table></td></tr></table>");
 
