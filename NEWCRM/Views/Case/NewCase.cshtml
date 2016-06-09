@@ -68,16 +68,21 @@
             $("#ctcaseparent").hide();
             $("#divAttachFile").hide();
             resetGroup();
-            
+
             Dropzone.autoDiscover = false;
             $("#dropzone-avatar").dropzone({
                 url: "@Url.Action("uploadAttachFile", "Case")",
                 addRemoveLinks: false,
             success: function (file, response) {
                 //window.location.reload();
-                $("#aAttachFile").attr("href",@Session["case_attachfile_path"])
+                if (file != "")
+                {
+                    $("#aAttachFile").attr("href", file);
+                    $("#imgUpload").hide();
+                }
                 
-            },
+
+                },
             error: function (file, response) {
                 file.previewElement.classList.add("dz-error");
             }
@@ -130,7 +135,7 @@
                 }
             });
 
-            
+
             $("input[name='cssID']").click(function () {
                 if ($(this).val() === '4') {
                     $("#dv-callback").slideDown(300);
@@ -142,13 +147,13 @@
             $("#btnsavenewcase").click(function ()
             {
                 $(this).attr("disabled", "disabled");
-                if ($("#frm-newcase").valid()) {                    
-                    $("#frm-newcase").submit();                    
+                if ($("#frm-newcase").valid()) {
+                    $("#frm-newcase").submit();
                 } else {
                     $("#casNote").focus();
                     $(this).removeAttr("disabled");
                 }
-            });          
+            });
         });
 
         function channel_toggle(obj, id) {
@@ -160,7 +165,7 @@
         }
 
         function beginSaveNewCase(args) {
-            // Animate           
+            // Animate
             $('#newcase-list').hide();
         }
 
@@ -176,7 +181,8 @@
             $("#ctdiv_statusreason").hide();
             $("#ctdiv_opt").hide();
             $("#dv-callback").hide();
-            openSuccessDialog('Save new case success');            
+            $("#divAttachFile").hide();
+            openSuccessDialog('Save new case success');
             getNewCaseList();
             $("#btnsavenewcase").removeAttr("disabled");
             resetGroup();
@@ -253,7 +259,7 @@
             var current_lv = current_divnode.split("_")[1];
             var next_lv = parseInt(current_lv) + 1;
 
-        
+
 
             if ($(ref).val() === "") {
                 // Show - Hide another div
@@ -264,7 +270,7 @@
                     $("#ctdiv_5").empty().hide();
                 }
                 $("#ctdiv_opt").hide();
-                $("#casSLA").val('');                
+                $("#casSLA").val('');
             } else {
                 if (current_lv == 1) {
                     $("#ctdiv_2").empty().hide();
@@ -314,7 +320,7 @@
                     }
                 }
 
-                // Set casLevel                
+                // Set casLevel
                 $("#casLevel" + current_lv).val($(ref).find("option:selected").text());
                 // Show Next Node
                 //if($(ref).find("option:selected").val() === '2') {
@@ -328,20 +334,20 @@
                     $.post(url, function (data)
                     {
                         $("#ctdiv_" + next_lv).html(data);
-                    });                  
-                    
+                    });
+
                 } else {
 
 
                     //$("#casURLAccount").focus();
-                    //$("#casNote").focus();                    
-                    $("#sla").text(sla);                  
+                    //$("#casNote").focus();
+                    $("#sla").text(sla);
                     $("#casSLA").val(sla);
                     $("#slaID").val(slaid);
-                    
+
                 }
             }
-            
+
             if (jQuery.trim(message).length > 0) {
                 openInfoDialog(message);
             } else {
@@ -350,7 +356,7 @@
         }
 
         function onSourceTypeChange(ref) {
-            
+
             $("#casLevel3").val($(ref).find("option:selected").text());
 
         }
@@ -365,9 +371,9 @@
         }
 
         function successNewContact()
-        {                       
+        {
             window.location.reload();
-        }      
+        }
 
         function setTextDate(ref)
         {
@@ -432,7 +438,7 @@
         function EndCall() {
             var url = '@Url.Action("ClearSession", "Inbound")';
             $.post(url);
-        }       
+        }
     </script>
 
     @if (NEWCRM.Common.AppUtils.Session.Activity.ctaID.HasValue)
@@ -511,7 +517,7 @@
                                                 <input type="text" class="form-control" id="casURLAccount" name="casURLAccount" />
                                             </div>
                                             <div id="ctdiv_7" class="col-sm-1 margin-bottom-xl">
-                                                <h><span class="label label-warning">Child Case</span></h>
+                                                <h><span class="label label-warning">Repeated Case</span></h>
                                                     <input type="hidden" class="form-control" id="casParentID" name="casParentID" value="" />
                                             </div>
                                             <div id="ctcaseparent" class="col-sm-12 form-group margin-bottom-xl">
@@ -625,23 +631,29 @@
                                                 }
 
                                                 <div id="divAttachFile" class="form-group">
-                                                    <label id="lblAttachFile" name="lblAttachFile" class="col-sm-3 control-label">Attach File</label>
-                                                    <div class="col-lg-2">
-                                                        <form action="@Url.Action("uploadAttachFile", "Case")" class="dropzone" id="dropzone-avatar" style="min-height: 0; padding: 5px;">
-                                                            <div class="dz-message" style="margin: 0">
-                                                                <div class="pull-right">
-                                                                    @if (Session["case_attachfile_path"] != null && !string.IsNullOrEmpty(Session["case_attachfile_path"].ToString()))
-                                                                    {
-                                                                        <a  id="aAttachFile" href="@Session["case_attachfile_path"].ToString()">Donwload</a>
-                                                                    }
-                                                                    else
-                                                                    {
-                                                                        <img class="img-circle border-white border-xl img-responsive auto-width" src="~/Images/upload.png" />
-                                                                    }
+                                                    <form action="@Url.Action("uploadAttachFile", "Case")" class="dropzone form-horizontal form-validate" id="dropzone-avatar" style="min-height: 0;">
+                                                        <div class="row" style="margin-top: 10px">
+                                                            <div class="col-lg-10">
+                                                                <label id="lblAttachFile" for="dropzone-avatar" name="lblAttachFile" class="col-sm-3 control-label">Attach File</label>
+                                                                <div class="col-sm-2">
+
+                                                                    <div class="dz-message" style="margin: 0">
+                                                                        <div class="pull-right">
+                                                                            @if (Session["case_attachfile_path"] != null && !string.IsNullOrEmpty(Session["case_attachfile_path"].ToString()))
+                                                                            {
+                                                                                <a id="aAttachFile" href="@Session["case_attachfile_path"].ToString()">Donwload</a>
+                                                                            }
+                                                                            else
+                                                                            {
+                                                                                <img id="imgUpload" class="img-circle border-white border-xl img-responsive auto-width" src="~/Images/upload.png" />
+                                                                            }
+                                                                        </div>
+                                                                    </div>
+
                                                                 </div>
                                                             </div>
-                                                        </form>
-                                                    </div>
+                                                            </div>
+                                                    </form>
                                                 </div>
 
                                 <div class="row">

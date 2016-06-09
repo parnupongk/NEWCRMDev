@@ -8,6 +8,7 @@
                     <tr>
                         <th>Case Id</th>
                         <th>Case Type</th>                        
+                        <!--th>Contact Name</!--th-->           
                         <th>Case Status</th>
                         <th>Create Date</th>
                         <!--<th class="sort-numeric">Case Status</th>
@@ -20,7 +21,8 @@
                     @foreach(var item in Model.list_query) {
                     <tr class="gradeX">
                         <td><a href="@Url.Action("CaseDetail","Case")/@item.casID" class="text-medium" target="_blank">@Html.Raw((item.chnID.Equals("ob") ? "<i class='fa fa-arrow-circle-up fa-fw'></i>" : "<i class='fa fa-arrow-circle-down fa-fw'></i>")) @item.casIDName</a></td>
-                        <td>@item.casSummary</td>                        
+                        <td>@item.casSummary</td>  
+                        <!--td>item.ctafullname</!--td-->                      
                         <td>@item.cssName</td>
                         <td>@item.casCreatedOn</td>
                         <td>@item.casCreatedByName</td>

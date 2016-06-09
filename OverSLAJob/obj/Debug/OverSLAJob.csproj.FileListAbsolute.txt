@@ -32,3 +32,6 @@ C:\Users\pee_t\Desktop\Git ETDA\NEWCRMDev\OverSLAJob\obj\Debug\OverSLAJob.pdb
 E:\my Build\one2one\sourcecontrol\NEWCRMDev\OverSLAJob\bin\Debug\OverSLAJob.exe.config
 E:\my Build\one2one\sourcecontrol\NEWCRMDev\OverSLAJob\obj\Debug\OverSLAJob.exe
 E:\my Build\one2one\sourcecontrol\NEWCRMDev\OverSLAJob\obj\Debug\OverSLAJob.pdb
+E:\my Build\one2one\sourcecontrol\NEWCRMDev\OverSLAJob\bin\Debug\OverSLAJob.exe
+E:\my Build\one2one\sourcecontrol\NEWCRMDev\OverSLAJob\bin\Debug\OverSLAJob.pdb
+E:\my Build\one2one\sourcecontrol\NEWCRMDev\OverSLAJob\obj\Debug\OverSLAJob.csprojResolveAssemblyReference.cache

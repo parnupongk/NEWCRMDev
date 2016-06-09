@@ -64,7 +64,7 @@ namespace NEWCRM.Controllers
                 Console.WriteLine(ex.Message);
                 Response.StatusCode = 500;
                 Response.TrySkipIisCustomErrors = true; 
-                return Content(ex.InnerException.ToString(), "text/html");
+                return Content(ex.Message.ToString(), "text/html");
             }
 
         }

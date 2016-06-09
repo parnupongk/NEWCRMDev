@@ -82,6 +82,19 @@
                 </div>
             </div>
 
+            <div class="col-lg-4">
+                <div class="form-group">
+                    <label>Channel</label>
+                    <p class="form-control-static">@(string.IsNullOrWhiteSpace(Model.CaseDetails.casLevel3) ? "-" : Model.CaseDetails.casLevel3)</p>
+                </div>
+            </div>
+            <div class="col-lg-8">
+                <div class="form-group">
+                    <label>Channel Ref. </label>
+                    <p class="form-control-static">@(string.IsNullOrWhiteSpace(Model.CaseDetails.casLevel6) ? "-" : Model.CaseDetails.casLevel6)</p>
+                </div>
+            </div>
+
             @if (Model.CaseDetails.casIDLevel1 == 1)
             {
                 <div class="col-lg-4">
@@ -110,6 +123,12 @@
                 </div>
                 <div class="col-lg-4">
                     <div class="form-group">
+                        <label>วิธีการชำระเงิน</label>
+                        <p class="form-control-static">@(string.IsNullOrWhiteSpace(Model.CaseDetails.caspaymentType) ? "-" : Model.CaseDetails.caspaymentType)</p>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="form-group">
                         <label>มลูค่าการซื้อขาย </label>
                         <p class="form-control-static">@(string.IsNullOrWhiteSpace(Model.CaseDetails.casvalueRange) ? "-" : Model.CaseDetails.casvalueRange)</p>
                     </div>
@@ -118,6 +137,21 @@
                     <div class="form-group">
                         <label>ช่องทางการติดต่อ </label>
                         <p class="form-control-static">@(string.IsNullOrWhiteSpace(Model.CaseDetails.casconversationChannel) ? "-" : Model.CaseDetails.casconversationChannel)</p>
+                    </div>
+                </div>
+            }
+            else
+            {
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        <label>วันที่เกิดเหตุ</label>
+                        <p class="form-control-static">@Html.DisplayFor(m => Model.CaseDetails.caseventDate)</p>
+                    </div>
+                </div>
+                <div class="col-lg-8">
+                    <div class="form-group">
+                        <label>ข้อมูลผู้ถูกร้องเรียน</label>
+                        <p class="form-control-static">@(string.IsNullOrWhiteSpace(Model.CaseDetails.casVendorID) ? "-" : Model.CaseDetails.casVendorID)</p>
                     </div>
                 </div>
             }

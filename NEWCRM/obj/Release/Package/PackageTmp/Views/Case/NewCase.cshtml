@@ -34,6 +34,7 @@
     <script src="~/Content/js/libs/bootstrap-tagsinput/bootstrap-tagsinput.min.js"></script>
     <script src="~/Content/js/core/demo/DemoFormComponents.js"></script>
     <script src="~/Scripts/NewCase.js"></script>
+    <script src="~/Content/js/libs/dropzone/dropzone.js"></script>
     <script type="text/javascript">
 
         function resetValueGroup()
@@ -65,9 +66,29 @@
             $("#dv-callback").hide();
             $("#ctdiv_4").hide();
             $("#ctcaseparent").hide();
+            $("#divAttachFile").hide();
             resetGroup();
-            
 
+            Dropzone.autoDiscover = false;
+            $("#dropzone-avatar").dropzone({
+                url: "@Url.Action("uploadAttachFile", "Case")",
+                addRemoveLinks: false,
+            success: function (file, response) {
+                //window.location.reload();
+                if (file != "")
+                {
+                    $("#aAttachFile").attr("href", file);
+                    $("#imgUpload").hide();
+                }
+                
+
+                },
+            error: function (file, response) {
+                file.previewElement.classList.add("dz-error");
+            }
+        });
+
+            $('.field-date').datepicker({ autoclose: true, todayHighlight: true, format: "dd/mm/yyyy" });
             $("#casURLAccount").autocomplete({
                 source: function (request, response) {
                     $.ajax({
@@ -114,7 +135,7 @@
                 }
             });
 
-            
+
             $("input[name='cssID']").click(function () {
                 if ($(this).val() === '4') {
                     $("#dv-callback").slideDown(300);
@@ -126,13 +147,13 @@
             $("#btnsavenewcase").click(function ()
             {
                 $(this).attr("disabled", "disabled");
-                if ($("#frm-newcase").valid()) {                    
-                    $("#frm-newcase").submit();                    
+                if ($("#frm-newcase").valid()) {
+                    $("#frm-newcase").submit();
                 } else {
                     $("#casNote").focus();
                     $(this).removeAttr("disabled");
                 }
-            });          
+            });
         });
 
         function channel_toggle(obj, id) {
@@ -144,7 +165,7 @@
         }
 
         function beginSaveNewCase(args) {
-            // Animate           
+            // Animate
             $('#newcase-list').hide();
         }
 
@@ -160,7 +181,8 @@
             $("#ctdiv_statusreason").hide();
             $("#ctdiv_opt").hide();
             $("#dv-callback").hide();
-            openSuccessDialog('Save new case success');            
+            $("#divAttachFile").hide();
+            openSuccessDialog('Save new case success');
             getNewCaseList();
             $("#btnsavenewcase").removeAttr("disabled");
             resetGroup();
@@ -237,7 +259,7 @@
             var current_lv = current_divnode.split("_")[1];
             var next_lv = parseInt(current_lv) + 1;
 
-            
+
 
             if ($(ref).val() === "") {
                 // Show - Hide another div
@@ -247,57 +269,58 @@
                     $("#ctdiv_4").hide();
                     $("#ctdiv_5").empty().hide();
                 }
-                if (current_lv == 2) {
-                    //$("#ctdiv_3").empty().hide();
-                    $("#ctdiv_4").hide();
-                    $("#ctdiv_5").empty().hide();
-                }
-                if (current_lv == 3) {
-                    //$("#ctdiv_4").empty().hide();
-                    $("#ctdiv_5").empty().hide();
-                }
-                if (current_lv == 4) {
-                    $("#ctdiv_5").empty().hide();
-                }
                 $("#ctdiv_opt").hide();
-                $("#casSLA").val('');                
+                $("#casSLA").val('');
             } else {
                 if (current_lv == 1) {
                     $("#ctdiv_2").empty().hide();
-                    $("#ctdiv_3").empty().hide();
-                    $("#ctdiv_4").hide();
+                    $("#ctdiv_4").show();
                     $("#ctdiv_5").empty().hide();
-                    $("#ctdiv_3").hide();
-                    $("#ctdiv_opt").hide();
+                    //$("#ctdiv_3").hide();
                     $("#casSLA").val('');
+                    var url = '@Url.Action("GetSourceType", "Casetype")';
+                    $.post(url, function (data) {
+                        $("#divsourceType").html(data);
+                    });
+                    $("#ctdiv_3").show();
+                    $("#ctdiv_opt").show();
+                    //$("#casURLAccount").focus();
                     if( $(ref).val()=="1" )
                     {
+                        console.log($("#lblSourceType").html());
                         $("#CaseGroup1").show();
                         $("#CaseGroup2").show();
+                        $("#lblSourceTypeRef").html("รายละเอียดช่องทางซื้อขาย");
+                        $("#lblSourceType").html("ช่องทางการซื้อขาย");
+                        $("#lblRedDetail").html("หลักฐานประกอบ");
+                        $("#lblDetail").html("รายละเอียดร้องเรียน");
                     }
-                    else {
+                    else if ($(ref).val() == "2" || $(ref).val() == "3") {
                         resetValueGroup();
                         $("#CaseGroup1").hide();
                         $("#CaseGroup2").show();
+                            $("#lblSourceTypeRef").html("อ้างอิงระบุเจาะจงURLหรือID");
+                            $("#lblSourceType").html("ประเภทสื่อผิดกฎหมายที่อ้างอิง");
+                            $("#lblRedDetail").html("รายละเอียดเพิ่มเติม");
+                            $("#lblDetail").html("เนื้อหารายละเอียดการร้องเรียน");
+                            if($(ref).val() == "3"  )
+                            {
+                                $("#divAttachFile").show();
+                            }else
+                            {
+                                $("#divAttachFile").hide();
+                            }
+                    }else
+                    {
+                        resetValueGroup();
+                        $("#CaseGroup1").hide();
+                        $("#CaseGroup2").hide();
+                        $("#lblSourceTypeRef").html("อ้างอิงระบุเจาะจงURLหรือID");
+                        $("#lblSourceType").html("ประเภทสื่อผิดกฎหมายที่อ้างอิง");
                     }
                 }
-                if (current_lv == 2) {
-                    //$("#ctdiv_3").empty().hide();
-                    $("#ctdiv_4").hide();
-                    $("#ctdiv_5").empty().hide();
-                    $("#ctdiv_opt").hide();
-                }
-                if (current_lv == 3) {
-                    //$("#ctdiv_4").empty().hide();
-                    $("#ctdiv_5").empty().hide();
-                    $("#ctdiv_opt").hide();
-                }
-                if (current_lv == 4) {
-                    $("#ctdiv_5").empty().hide();
-                    $("#ctdiv_opt").hide();
-                }
 
-                // Set casLevel                
+                // Set casLevel
                 $("#casLevel" + current_lv).val($(ref).find("option:selected").text());
                 // Show Next Node
                 //if($(ref).find("option:selected").val() === '2') {
@@ -312,29 +335,19 @@
                     {
                         $("#ctdiv_" + next_lv).html(data);
                     });
-                    
-                    
+
                 } else {
 
-                    if (current_lv == 2) {
-                        //alert(id);
-                        var url = '@Url.Action("GetSourceType", "Casetype")';
-                        $.post(url, function (data) {
-                            $("#ctdiv_3").html(data);
-                        });
-                        $("#ctdiv_3").show();
-                        $("#ctdiv_opt").show();
-                        //$("#casURLAccount").focus();
-                    }
+
                     //$("#casURLAccount").focus();
-                    //$("#casNote").focus();                    
-                    $("#sla").text(sla);                  
+                    //$("#casNote").focus();
+                    $("#sla").text(sla);
                     $("#casSLA").val(sla);
                     $("#slaID").val(slaid);
-                    
+
                 }
             }
-            
+
             if (jQuery.trim(message).length > 0) {
                 openInfoDialog(message);
             } else {
@@ -343,7 +356,7 @@
         }
 
         function onSourceTypeChange(ref) {
-            $("#ctdiv_4").show();
+
             $("#casLevel3").val($(ref).find("option:selected").text());
 
         }
@@ -358,9 +371,9 @@
         }
 
         function successNewContact()
-        {                       
+        {
             window.location.reload();
-        }      
+        }
 
         function setTextDate(ref)
         {
@@ -425,7 +438,7 @@
         function EndCall() {
             var url = '@Url.Action("ClearSession", "Inbound")';
             $.post(url);
-        }       
+        }
     </script>
 
     @if (NEWCRM.Common.AppUtils.Session.Activity.ctaID.HasValue)
@@ -477,15 +490,6 @@
                                 Html.RenderAction("ContactInfo", "Contact");
                             }
                             </div>
-
- 
-                            
-
-
-
-
-
-
                             @if(NEWCRM.Common.AppUtils.Session.Activity.ctaID.HasValue)
                             {
                                 using (Ajax.BeginForm("NewCaseSave", "Case",
@@ -501,17 +505,22 @@
                                             }
                                         </div>
                                         <div id="ctdiv_2" class="form-group"></div>
-                                        <div id="ctdiv_3" class="form-group"></div>
+                                        <div id="ctdiv_3" class="form-group">
+                                            <label for="sourceType" id="lblSourceType" name="lblSourceType" class="col-sm-3 control-label">ช่องทางการซื้อขาย</label>
+                                            <div id="divsourceType" class="col-sm-9 margin-bottom-xl">
+                                                
+                                            </div>
+                                        </div>
                                         <div id="ctdiv_4" class="form-group" >
-                                            <label for="casenote" class="col-sm-3 control-label">รายละเอียดช่องทางซื้อขาย</label>
+                                            <label for="casenote" id="lblSourceTypeRef" class="col-sm-3 control-label">รายละเอียดช่องทางซื้อขาย</label>
                                             <div class="col-sm-8 margin-bottom-xl">
-                                                <input type="text" class="form-control" id="casURLAccount" name="casURLAccount" required />
+                                                <input type="text" class="form-control" id="casURLAccount" name="casURLAccount" />
                                             </div>
                                             <div id="ctdiv_7" class="col-sm-1 margin-bottom-xl">
-                                                <h><span class="label label-warning">Child Case</span></h>
+                                                <h><span class="label label-warning">Repeated Case</span></h>
                                                     <input type="hidden" class="form-control" id="casParentID" name="casParentID" value="" />
                                             </div>
-                                            <div id="ctcaseparent" class="col-sm-12 margin-bottom-xl">
+                                            <div id="ctcaseparent" class="col-sm-12 form-group margin-bottom-xl">
 
                                             </div>
                                         </div>
@@ -533,7 +542,7 @@
                                         <div class="form-group">
                                             <label for="casenote" class="col-sm-3 control-label">Add Note</label>
                                             <div class="col-sm-9 margin-bottom-xl">
-                                                <textarea id="casNote" name="casNote" class="form-control" rows="6" required data-rule-minlength="1"></textarea>
+                                                <textarea id="casNote" name="casNote" class="form-control" rows="6" data-rule-minlength="1"></textarea>
                                             </div>
                                         </div>
                                         
@@ -618,8 +627,35 @@
                                             </div>
                                         </div>*@
                                     </div>
-                                </div>                                
-                                }                        
+                                </div>
+                                                }
+
+                                                <div id="divAttachFile" class="form-group">
+                                                    <form action="@Url.Action("uploadAttachFile", "Case")" class="dropzone form-horizontal form-validate" id="dropzone-avatar" style="min-height: 0;">
+                                                        <div class="row" style="margin-top: 10px">
+                                                            <div class="col-lg-10">
+                                                                <label id="lblAttachFile" for="dropzone-avatar" name="lblAttachFile" class="col-sm-3 control-label">Attach File</label>
+                                                                <div class="col-sm-2">
+
+                                                                    <div class="dz-message" style="margin: 0">
+                                                                        <div class="pull-right">
+                                                                            @if (Session["case_attachfile_path"] != null && !string.IsNullOrEmpty(Session["case_attachfile_path"].ToString()))
+                                                                            {
+                                                                                <a id="aAttachFile" href="@Session["case_attachfile_path"].ToString()">Donwload</a>
+                                                                            }
+                                                                            else
+                                                                            {
+                                                                                <img id="imgUpload" class="img-circle border-white border-xl img-responsive auto-width" src="~/Images/upload.png" />
+                                                                            }
+                                                                        </div>
+                                                                    </div>
+
+                                                                </div>
+                                                            </div>
+                                                            </div>
+                                                    </form>
+                                                </div>
+
                                 <div class="row">
                                 <div class="col-lg-10">
                                     <div class="col-sm-3">&nbsp;</div>

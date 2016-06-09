@@ -44,7 +44,7 @@ namespace NEWCRM.Controllers
                            catName = dr["catName"].ToString(),
                            catParrentID = dr["catParrentID"].ToString(),
                            counts = Convert.ToInt32(dr["counts"].ToString() == "" ?"0": dr["counts"].ToString()),
-                           Percents = Convert.ToInt32(dr["Percents"].ToString()==""?"0": dr["Percents"].ToString()),
+                           Percents = Math.Round(Convert.ToDecimal(dr["Percents"].ToString() == "" ? "0" : dr["Percents"].ToString()), 2),
                            startDate = startdate,
                            endDate = enddate
                        }).ToList();
@@ -69,7 +69,7 @@ namespace NEWCRM.Controllers
                            catName = dr["catName"].ToString(),
                            catParrentID = dr["catParrentID"].ToString(),
                            counts = Convert.ToInt32(dr["counts"].ToString() == "" ? "0" : dr["counts"].ToString()),
-                           Percents = Convert.ToInt32(dr["Percents"].ToString() == "" ? "0" : dr["Percents"].ToString()),
+                           Percents = Math.Round(Convert.ToDecimal(dr["Percents"].ToString() == "" ? "0" : dr["Percents"].ToString()),2),
                            startDate = startdate,
                            endDate = enddate
                        }).ToList();
@@ -98,7 +98,7 @@ namespace NEWCRM.Controllers
                            catName = dr["catName"].ToString(),
                            catParrentID = dr["catParrentID"].ToString(),
                            counts = Convert.ToInt32(dr["counts"].ToString() == "" ? "0" : dr["counts"].ToString()),
-                           Percents = Convert.ToInt32(dr["Percents"].ToString() == "" ? "0" : dr["Percents"].ToString()),
+                           Percents = Math.Round(Convert.ToDecimal(dr["Percents"].ToString() == "" ? "0" : dr["Percents"].ToString()), 2),
                            startDate = startdate,
                            endDate = enddate
                        }).ToList();
@@ -113,7 +113,7 @@ namespace NEWCRM.Controllers
                 Response.Write("<tr>");
                 Response.Write("<td style=\"font-weight:bold;vertical-align:middle;\">" + dr["catName"].ToString() + "</td>");
                 Response.Write("<td>" + dr["counts"].ToString() + "</td>");
-                Response.Write("<td>" + dr["Percents"].ToString() + "</td>");
+                Response.Write("<td>" + Math.Round(Convert.ToDecimal(dr["Percents"].ToString() == "" ? "0" : dr["Percents"].ToString()), 2) + "</td>");
                 Response.Write("</tr>");
 
                 DataTable dtDetail = new CaseRepository().GetCaseSummaryReport(startDate.ToString("yyyy-MM-dd"), endDate.ToString("yyyy-MM-dd"), int.Parse(dr["catID"].ToString()));
@@ -123,7 +123,7 @@ namespace NEWCRM.Controllers
                     Response.Write("<tr>");
                     Response.Write("<td style=\"margin-left: 70px;\">" + row.ToString() +" " + drDetail["catName"].ToString() + "</td>");
                     Response.Write("<td>" + drDetail["counts"].ToString() + "</td>");
-                    Response.Write("<td>" + drDetail["Percents"].ToString() + "</td>");
+                    Response.Write("<td>" + Math.Round(Convert.ToDecimal(drDetail["Percents"].ToString() == "" ? "0" : drDetail["Percents"].ToString()), 2) + "</td>");
                     Response.Write("</tr>");
                     row++;
                 }

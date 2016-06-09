@@ -397,6 +397,9 @@
       <DependentUpon>NEWCRM.tt</DependentUpon>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
+    <Compile Include="Models\sp_CaseDetailById_Result.cs">
+      <DependentUpon>NEWCRM.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\sp_ContactAutoComplete_Result.cs">
       <DependentUpon>NEWCRM.tt</DependentUpon>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -430,6 +433,9 @@
     <Compile Include="Models\sp_getCasesOverSLA_Result.cs">
       <DependentUpon>NEWCRM.tt</DependentUpon>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Models\sp_GetCase_DetailById1_Result.cs">
+      <DependentUpon>NEWCRM.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\sp_GetCase_DetailById_Result.cs">
       <DependentUpon>NEWCRM.tt</DependentUpon>
@@ -509,6 +515,9 @@
       <DependentUpon>NEWCRM.tt</DependentUpon>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
+    <Compile Include="Models\sp_Ge_tCaseDetailById1_Result.cs">
+      <DependentUpon>NEWCRM.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\sp_Ge_tCaseDetailById_Result.cs">
       <DependentUpon>NEWCRM.tt</DependentUpon>
     </Compile>
@@ -516,6 +525,9 @@
       <DependentUpon>NEWCRM.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\sp_helpdiagramdefinition2_Result.cs">
+      <DependentUpon>NEWCRM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sp_helpdiagramdefinition3_Result.cs">
       <DependentUpon>NEWCRM.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\sp_helpdiagramdefinition_Result.cs">
@@ -526,6 +538,9 @@
       <DependentUpon>NEWCRM.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\sp_helpdiagrams2_Result.cs">
+      <DependentUpon>NEWCRM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sp_helpdiagrams3_Result.cs">
       <DependentUpon>NEWCRM.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\sp_helpdiagrams_Result.cs">

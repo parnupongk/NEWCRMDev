@@ -43,7 +43,21 @@
                 <option value="@item">@item</option>
             }
         </select>
+        <input id="deliveryTypeOther" type="text" class="form-control" name="deliveryTypeOther" placeholder="ระบุ" />
     </div>
+    <br />
+    <label class="col-sm-3 control-label">ประเภทการชำระเงิน</label>
+    <div class="col-sm-9 margin-bottom-xl bg-warning">
+        <select id="paymentType" name="paymentType" class="form-control">
+
+            @foreach (var item in Model.paymentType)
+            {
+                <option value="@item">@item</option>
+            }
+        </select>
+        <input id="paymentTypeOther" type="text" class="form-control" name="paymentTypeOther" placeholder="ระบุ" />
+    </div>
+
     <br />
     <label class="col-sm-3 control-label">มลูค่าการซื้อขาย </label>
     <div class="col-sm-9 margin-bottom-xl bg-warning">
@@ -65,5 +79,10 @@
                 <option value="@item">@item</option>
             }
         </select>
+    </div>
+    <br/>
+    <label class="col-sm-3 control-label">ข้อมูลผู้ถูกร้องเรียน</label>
+    <div class="col-sm-9 margin-bottom-xl bg-warning">
+        <textarea id="txtVendorID" name="txtVendorID" class="form-control" rows="2"></textarea>
     </div>
 </div>

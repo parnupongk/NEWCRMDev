@@ -513,3 +513,4 @@ C:\Users\pee_t\Desktop\Git ETDA\NEWCRMDev\NEWCRM\bin\zh-Hant\Microsoft.SqlServer
 C:\Users\pee_t\Desktop\Git ETDA\NEWCRMDev\NEWCRM\obj\Debug\NEWCRM.csprojResolveAssemblyReference.cache
 C:\Users\pee_t\Desktop\Git ETDA\NEWCRMDev\NEWCRM\obj\Debug\NEWCRM.dll
 C:\Users\pee_t\Desktop\Git ETDA\NEWCRMDev\NEWCRM\obj\Debug\NEWCRM.pdb
+E:\my Build\one2one\sourcecontrol\NEWCRMDev\NEWCRM\obj\Debug\NEWCRM.csprojResolveAssemblyReference.cache

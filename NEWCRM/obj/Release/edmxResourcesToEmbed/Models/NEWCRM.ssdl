@@ -271,6 +271,10 @@
     <Property Name="casreferenceDetail" Type="ntext" />
     <Property Name="casdetail" Type="ntext" />
     <Property Name="casstatusReason" Type="nvarchar" MaxLength="100" />
+    <Property Name="caspaymentType" Type="nvarchar" MaxLength="100" />
+    <Property Name="casVendorID" Type="nvarchar" MaxLength="500" />
+    <Property Name="caseventDate" Type="datetime" />
+    <Property Name="casAttachFile" Type="nvarchar" MaxLength="100" />
   </EntityType>
   <EntityType Name="CaseStatus">
     <Key>
@@ -667,16 +671,6 @@
     <Property Name="sdtModifiedOn" Type="datetime" Nullable="false" />
     <Property Name="sdtModifiedBy" Type="int" Nullable="false" />
   </EntityType>
-  <EntityType Name="sysdiagrams">
-    <Key>
-      <PropertyRef Name="diagram_id" />
-    </Key>
-    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
-    <Property Name="principal_id" Type="int" Nullable="false" />
-    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="version" Type="int" />
-    <Property Name="definition" Type="varbinary(max)" />
-  </EntityType>
   <EntityType Name="TaskScheduleLog">
     <Key>
       <PropertyRef Name="ID" />
@@ -987,6 +981,10 @@
     <Parameter Name="version" Type="int" Mode="In" />
     <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
   </Function>
+  <Function Name="sp_CaseDetailById" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="CASEID" Type="decimal" Mode="In" />
+    <Parameter Name="LANG" Type="nvarchar" Mode="In" />
+  </Function>
   <Function Name="SP_Contact_Detail_RP" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="STARTDATE" Type="varchar" Mode="In" />
     <Parameter Name="ENDDATE" Type="varchar" Mode="In" />
@@ -1005,6 +1003,10 @@
     <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
     <Parameter Name="owner_id" Type="int" Mode="In" />
   </Function>
+  <Function Name="sp_Ge_tCaseDetailById" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="CASEID" Type="decimal" Mode="In" />
+    <Parameter Name="LANG" Type="nvarchar" Mode="In" />
+  </Function>
   <Function Name="sp_Get_CaseDetailById" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="CASEID" Type="decimal" Mode="In" />
     <Parameter Name="LANG" Type="nvarchar" Mode="In" />
@@ -1016,8 +1018,15 @@
     <Parameter Name="USERID" Type="int" Mode="In" />
     <Parameter Name="CREATEDATE" Type="nvarchar" Mode="In" />
   </Function>
+  <Function Name="sp_get_CaseQuery" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="p_query" Type="nvarchar(max)" Mode="In" />
+  </Function>
   <Function Name="sp_GetAssetBySerialNo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="p_sn" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="sp_GetCase_DetailById" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="CASEID" Type="decimal" Mode="In" />
+    <Parameter Name="LANG" Type="nvarchar" Mode="In" />
   </Function>
   <Function Name="sp_GetCaseDetailById" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="CASEID" Type="decimal" Mode="In" />
@@ -1153,6 +1162,10 @@
     <Parameter Name="AGENTID" Type="bigint" Mode="In" />
   </Function>
   <Function Name="uspReportCaseLevel" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="casIDLevel1" Type="int" Mode="In" />
+    <Parameter Name="casIDLevel2" Type="int" Mode="In" />
+    <Parameter Name="casIDLevel3" Type="int" Mode="In" />
+    <Parameter Name="casIDLevel4" Type="int" Mode="In" />
     <Parameter Name="STARTDATE" Type="nvarchar" Mode="In" />
     <Parameter Name="ENDDATE" Type="nvarchar" Mode="In" />
   </Function>
@@ -1217,7 +1230,6 @@
     <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="SubDistrict" EntityType="Self.SubDistrict" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="SubDistrict_Locale" EntityType="Self.SubDistrict_Locale" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TaskScheduleLog" EntityType="Self.TaskScheduleLog" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Titles" EntityType="Self.Titles" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Titles_Locale" EntityType="Self.Titles_Locale" Schema="dbo" store:Type="Tables" />

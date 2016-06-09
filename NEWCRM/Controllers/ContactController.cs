@@ -556,7 +556,7 @@ namespace NEWCRM.Controllers
                         ctaDoNotPhone = true,
                         ctaDoNotFax = true,
                         ctaDoNotPostalMail = true,
-                        ctaDOB = (!string.IsNullOrEmpty(frm.ctaDOB)) ? Convert.ToDateTime(frm.ctaDOB) : (DateTime?)null,
+                        ctaDOB = (!string.IsNullOrEmpty(frm.ctaDOB)) ? DateTime.ParseExact(frm.ctaDOB, "dd/MM/yyyy", null) : (DateTime?)null,
                         gndID = frm.gndID,
                         ctaEmail = frm.ctaEmail,
                         ctaCareer = frm.ctaCareer,

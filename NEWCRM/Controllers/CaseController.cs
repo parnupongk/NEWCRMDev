@@ -62,6 +62,7 @@ namespace NEWCRM.Controllers
                         file.SaveAs(savefilepathe);
 
                         Session["case_attachfile_path"] = savefilepathe;
+                        Session["case_attachfile_type"] = fileExtension;
 
                         var newFile = new FileInfo(savefilepathe);
                         //While File is not accesable because of writing process
@@ -74,6 +75,33 @@ namespace NEWCRM.Controllers
                 {
                     throw new Exception(ex.Message);
                 }
+            }
+        }
+
+        private void AddFileByCasID(int casID,string fileName,string fileType)
+        {
+            CaseAttachFile data = new CaseAttachFile()
+            {
+                casID = casID,
+                cafFilename = fileName,
+                cafFileType = fileType,
+                cafCreatedOn = DateTime.Now,
+                cafCreatedBy = AppUtils.Session.User.usrID
+            };
+            if (new CaseAttachFilesRepository().AddByEntity(data) > 0)
+            {
+                new CaseLogsRepository().AddByEntity(new CaseLog
+                {
+                    actID = 0,
+                    casID = casID,
+                    cltID = EnumType.LogType.AttachFile,
+                    cslNote = string.Format("Add file: {0}", fileName),
+                    cslDesc = string.Empty,
+                    cslCreatedBy = AppUtils.Session.User.usrID,
+                    cslCreatedOn = DateTime.Now,
+                    cslModifiedOn = DateTime.Now,
+                    cslModifiedBy = AppUtils.Session.User.usrID
+                });
             }
         }
         #endregion
@@ -264,9 +292,16 @@ namespace NEWCRM.Controllers
                     {
                         string casIDName = string.Format("C-{0}", data.casID.ToString().PadLeft(8, '0'));
                         new CaseRepository().UpdatedCaseIDName(casIDName, data.casID);
+                        if (Session["case_attachfile_path"] != null)
+                        {
+                            AddFileByCasID(data.casID, Session["case_attachfile_path"].ToString(), Session["case_attachfile_type"].ToString());
+                            Session["case_attachfile_path"] = null;
+                            Session["case_attachfile_type"] = null;
+                        }
 
                     }
 
+                    Session["case_attachfile_path"] = null;
                     #endregion
 
                     #region Added CaseLogs
@@ -295,6 +330,8 @@ namespace NEWCRM.Controllers
 
             return Content(string.Empty);
         }
+
+        
 
         public ActionResult NewCaseList()
         {
@@ -547,19 +584,19 @@ namespace NEWCRM.Controllers
 
             if (role == 1 || role == 2)
             {
-                ViewBag.Favourite = true;
-                ViewBag.Edit = true;
-                ViewBag.AddNote = true;
-                ViewBag.Dispatch = true;
-                ViewBag.Assign = true;
-                ViewBag.Closed = true;
-                ViewBag.ChangeStatus = true;
-                ViewBag.Email = true;
+                
 
                 #region Admin or Supervisor 
                 if (!cas.assignTo.HasValue && !cas.casGroupID.HasValue)
                 {
-                    
+                    ViewBag.Favourite = true;
+                    ViewBag.Edit = true;
+                    ViewBag.AddNote = true;
+                    ViewBag.Dispatch = true;
+                    ViewBag.Assign = true;
+                    ViewBag.Closed = true;
+                    ViewBag.ChangeStatus = true;
+                    ViewBag.Email = true;
                 } else {
                     if (cas.casGroupID.HasValue)
                     {

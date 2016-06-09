@@ -68,5 +68,9 @@ namespace NEWCRM.Models
         public string casreferenceDetail { get; set; }
         public string casdetail { get; set; }
         public string casstatusReason { get; set; }
+        public string caspaymentType { get; set; }
+        public string casVendorID { get; set; }
+        public Nullable<System.DateTime> caseventDate { get; set; }
+        public string casAttachFile { get; set; }
     }
 }

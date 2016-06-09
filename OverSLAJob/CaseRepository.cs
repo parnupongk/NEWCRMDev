@@ -27,7 +27,7 @@ namespace OverSLAJob
             using (var db = GetDBContext())
             {
                 Cases cas = db.Cases.Single(c => c.casID == _casID);
-                cas.cssID = 4;  // Pending
+                cas.cssID = 2;  // Pending
                 db.SaveChanges();
             }
         }

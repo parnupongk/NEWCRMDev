@@ -279,7 +279,7 @@
           <Property Name="caspaymentType" Type="nvarchar" MaxLength="100" />
           <Property Name="casVendorID" Type="nvarchar" MaxLength="500" />
           <Property Name="caseventDate" Type="datetime" />
-          <Property Name="casAttachFile" Type="nvarchar" MaxLength="500" />
+          <Property Name="casAttachFile" Type="nvarchar" MaxLength="100" />
         </EntityType>
         <EntityType Name="CaseStatus">
           <Key>
@@ -978,7 +978,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
         <Function Name="sp_ActivityChannelSummary" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_CaseDetailById" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="CASEID" Type="decimal" Mode="In" />
+          <Parameter Name="LANG" Type="nvarchar" Mode="In" />
+        </Function>
         <Function Name="SP_Contact_Detail_RP" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="STARTDATE" Type="varchar" Mode="In" />
           <Parameter Name="ENDDATE" Type="varchar" Mode="In" />
@@ -986,6 +997,20 @@
         <Function Name="sp_ContactAutoComplete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="p_Search" Type="nvarchar" Mode="In" />
           <Parameter Name="p_Row" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_Ge_tCaseDetailById" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="CASEID" Type="decimal" Mode="In" />
+          <Parameter Name="LANG" Type="nvarchar" Mode="In" />
         </Function>
         <Function Name="sp_Get_CaseDetailById" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="CASEID" Type="decimal" Mode="In" />
@@ -1003,6 +1028,10 @@
         </Function>
         <Function Name="sp_GetAssetBySerialNo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="p_sn" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="sp_GetCase_DetailById" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="CASEID" Type="decimal" Mode="In" />
+          <Parameter Name="LANG" Type="nvarchar" Mode="In" />
         </Function>
         <Function Name="sp_GetCaseDetailById" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="CASEID" Type="decimal" Mode="In" />
@@ -1057,6 +1086,7 @@
         <Function Name="sp_GetContactViewLog" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="p_UsrID" Type="int" Mode="In" />
         </Function>
+        <Function Name="sp_GetGroupCaseOnlineAcc" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="sp_GetGroupUser" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="sp_GetInboundContact" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="p_Phone" Type="nvarchar" Mode="In" />
@@ -1097,6 +1127,20 @@
         <Function Name="sp_getUserProfileTimeline" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="p_UsrID" Type="int" Mode="In" />
         </Function>
+        <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="st_CategorySearch" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="CatId" Type="uniqueidentifier" Mode="In" />
           <Parameter Name="CatParentId" Type="uniqueidentifier" Mode="In" />
@@ -1689,6 +1733,49 @@
           <FunctionImport Name="sp_get_CaseQuery">
           <Parameter Name="p_query" Mode="In" Type="String" />
           </FunctionImport>
+          <FunctionImport Name="sp_GetCase_DetailById1" ReturnType="Collection(NEWCRMModel.sp_GetCase_DetailById1_Result)">
+            <Parameter Name="CASEID" Mode="In" Type="Decimal" />
+            <Parameter Name="LANG" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_alterdiagram3">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_creatediagram3">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_dropdiagram3">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_Ge_tCaseDetailById1" ReturnType="Collection(NEWCRMModel.sp_Ge_tCaseDetailById1_Result)">
+            <Parameter Name="CASEID" Mode="In" Type="Decimal" />
+            <Parameter Name="LANG" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_GetGroupCaseOnlineAcc2" ReturnType="Collection(String)" />
+          <FunctionImport Name="sp_helpdiagramdefinition3" ReturnType="Collection(NEWCRMModel.sp_helpdiagramdefinition3_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagrams3" ReturnType="Collection(NEWCRMModel.sp_helpdiagrams3_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_renamediagram3">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="new_diagramname" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_upgraddiagrams3" />
+          <FunctionImport Name="sp_CaseDetailById" ReturnType="Collection(NEWCRMModel.sp_CaseDetailById_Result)">
+            <Parameter Name="CASEID" Mode="In" Type="Decimal" />
+            <Parameter Name="LANG" Mode="In" Type="String" />
+          </FunctionImport>
         </EntityContainer>
         <EntityType Name="Activities">
           <Key>
@@ -1967,7 +2054,7 @@
           <Property Name="caspaymentType" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="casVendorID" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="caseventDate" Type="DateTime" Precision="3" />
-          <Property Name="casAttachFile" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="casAttachFile" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="CaseStatu">
           <Key>
@@ -3374,6 +3461,164 @@
           <Property Type="Int32" Name="OwnerID" Nullable="false" />
         </ComplexType>
         <ComplexType Name="sp_GetCase_DetailById_Result">
+          <Property Type="Int32" Name="CASID" Nullable="false" />
+          <Property Type="Int32" Name="CONTACTID" Nullable="false" />
+          <Property Type="String" Name="CONTACTCODE" Nullable="false" MaxLength="1" />
+          <Property Type="String" Name="CASEIDNO" Nullable="true" MaxLength="12" />
+          <Property Type="Int32" Name="ctaID" Nullable="true" />
+          <Property Type="String" Name="CTAFULLNAME" Nullable="true" MaxLength="400" />
+          <Property Type="Int32" Name="CTAEMO1" Nullable="true" />
+          <Property Type="Int32" Name="CTAEMO2" Nullable="true" />
+          <Property Type="Int32" Name="CTAEMO3" Nullable="true" />
+          <Property Type="String" Name="PHONES" Nullable="true" />
+          <Property Type="String" Name="CTAEMAIL" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="CTAFACEBOOK" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="CTATWITTER" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="ADDRESS" Nullable="true" MaxLength="2774" />
+          <Property Type="String" Name="CASSUMMARY" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="CASESTATUS" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="TALKTIME" Nullable="false" MaxLength="1" />
+          <Property Type="String" Name="CALLBACKTYPE" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="CALLBACKNUMBER" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="CREATEBY" Nullable="false" MaxLength="511" />
+          <Property Type="DateTime" Name="CREATEDATE" Nullable="false" Precision="23" />
+          <Property Type="String" Name="MODIFIEDBY" Nullable="false" MaxLength="511" />
+          <Property Type="DateTime" Name="MODIFIEDDATE" Nullable="false" Precision="23" />
+          <Property Type="DateTime" Name="CLOSEDATE" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="DUEDATE" Nullable="true" Precision="23" />
+          <Property Type="String" Name="REMARK" Nullable="true" MaxLength="Max" />
+          <Property Type="Boolean" Name="casFav" Nullable="false" />
+          <Property Type="Int32" Name="casOwnerID" Nullable="true" />
+          <Property Type="Int32" Name="casCreatedBy" Nullable="false" />
+          <Property Type="Int32" Name="assignTo" Nullable="true" />
+          <Property Type="Int32" Name="dispatchTo" Nullable="true" />
+          <Property Type="DateTime" Name="casDueDate" Nullable="true" Precision="23" />
+          <Property Type="String" Name="OWNERNAME" Nullable="false" MaxLength="511" />
+          <Property Type="String" Name="chnName" Nullable="true" MaxLength="100" />
+          <Property Type="Int32" Name="casIDLevel1" Nullable="true" />
+          <Property Type="String" Name="cascommerceType" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="casproductCategory" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="casserviceCategory" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="casdeliveryType" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="casvalueRange" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="casconversationChannel" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="casreferenceDetail" Nullable="true" MaxLength="Max" />
+          <Property Type="String" Name="casdetail" Nullable="true" MaxLength="Max" />
+          <Property Type="String" Name="caspaymentType" Nullable="true" MaxLength="100" />
+          <Property Type="DateTime" Name="caseventDate" Nullable="true" Precision="23" />
+          <Property Type="String" Name="casVendorID" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="casAttachFile" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="casLevel3" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="casLevel6" Nullable="true" MaxLength="255" />
+        </ComplexType>
+        <ComplexType Name="sp_GetCase_DetailById1_Result">
+          <Property Type="Int32" Name="CASID" Nullable="false" />
+          <Property Type="Int32" Name="CONTACTID" Nullable="false" />
+          <Property Type="String" Name="CONTACTCODE" Nullable="false" MaxLength="1" />
+          <Property Type="String" Name="CASEIDNO" Nullable="true" MaxLength="12" />
+          <Property Type="Int32" Name="ctaID" Nullable="true" />
+          <Property Type="String" Name="CTAFULLNAME" Nullable="true" MaxLength="400" />
+          <Property Type="Int32" Name="CTAEMO1" Nullable="true" />
+          <Property Type="Int32" Name="CTAEMO2" Nullable="true" />
+          <Property Type="Int32" Name="CTAEMO3" Nullable="true" />
+          <Property Type="String" Name="PHONES" Nullable="true" />
+          <Property Type="String" Name="CTAEMAIL" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="CTAFACEBOOK" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="CTATWITTER" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="ADDRESS" Nullable="true" MaxLength="2774" />
+          <Property Type="String" Name="CASSUMMARY" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="CASESTATUS" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="TALKTIME" Nullable="false" MaxLength="1" />
+          <Property Type="String" Name="CALLBACKTYPE" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="CALLBACKNUMBER" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="CREATEBY" Nullable="false" MaxLength="511" />
+          <Property Type="DateTime" Name="CREATEDATE" Nullable="false" Precision="23" />
+          <Property Type="String" Name="MODIFIEDBY" Nullable="false" MaxLength="511" />
+          <Property Type="DateTime" Name="MODIFIEDDATE" Nullable="false" Precision="23" />
+          <Property Type="DateTime" Name="CLOSEDATE" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="DUEDATE" Nullable="true" Precision="23" />
+          <Property Type="String" Name="REMARK" Nullable="true" MaxLength="Max" />
+          <Property Type="Boolean" Name="casFav" Nullable="false" />
+          <Property Type="Int32" Name="casOwnerID" Nullable="true" />
+          <Property Type="Int32" Name="casCreatedBy" Nullable="false" />
+          <Property Type="Int32" Name="assignTo" Nullable="true" />
+          <Property Type="Int32" Name="dispatchTo" Nullable="true" />
+          <Property Type="DateTime" Name="casDueDate" Nullable="true" Precision="23" />
+          <Property Type="String" Name="OWNERNAME" Nullable="false" MaxLength="511" />
+          <Property Type="String" Name="chnName" Nullable="true" MaxLength="100" />
+          <Property Type="Int32" Name="casIDLevel1" Nullable="true" />
+          <Property Type="String" Name="cascommerceType" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="casproductCategory" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="casserviceCategory" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="casdeliveryType" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="casvalueRange" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="casconversationChannel" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="casreferenceDetail" Nullable="true" MaxLength="Max" />
+          <Property Type="String" Name="casdetail" Nullable="true" MaxLength="Max" />
+          <Property Type="String" Name="caspaymentType" Nullable="true" MaxLength="100" />
+          <Property Type="DateTime" Name="caseventDate" Nullable="true" Precision="23" />
+          <Property Type="String" Name="casVendorID" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="casAttachFile" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="casLevel3" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="casLevel6" Nullable="true" MaxLength="255" />
+        </ComplexType>
+        <ComplexType Name="sp_Ge_tCaseDetailById1_Result">
+          <Property Type="Int32" Name="CASID" Nullable="false" />
+          <Property Type="Int32" Name="CONTACTID" Nullable="false" />
+          <Property Type="String" Name="CONTACTCODE" Nullable="false" MaxLength="1" />
+          <Property Type="String" Name="CASEIDNO" Nullable="true" MaxLength="12" />
+          <Property Type="Int32" Name="ctaID" Nullable="true" />
+          <Property Type="String" Name="CTAFULLNAME" Nullable="true" MaxLength="400" />
+          <Property Type="Int32" Name="CTAEMO1" Nullable="true" />
+          <Property Type="Int32" Name="CTAEMO2" Nullable="true" />
+          <Property Type="Int32" Name="CTAEMO3" Nullable="true" />
+          <Property Type="String" Name="PHONES" Nullable="true" />
+          <Property Type="String" Name="CTAEMAIL" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="CTAFACEBOOK" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="CTATWITTER" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="ADDRESS" Nullable="true" MaxLength="2774" />
+          <Property Type="String" Name="CASSUMMARY" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="CASESTATUS" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="TALKTIME" Nullable="false" MaxLength="1" />
+          <Property Type="String" Name="CALLBACKTYPE" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="CALLBACKNUMBER" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="CREATEBY" Nullable="false" MaxLength="511" />
+          <Property Type="DateTime" Name="CREATEDATE" Nullable="false" Precision="23" />
+          <Property Type="String" Name="MODIFIEDBY" Nullable="false" MaxLength="511" />
+          <Property Type="DateTime" Name="MODIFIEDDATE" Nullable="false" Precision="23" />
+          <Property Type="DateTime" Name="CLOSEDATE" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="DUEDATE" Nullable="true" Precision="23" />
+          <Property Type="String" Name="REMARK" Nullable="true" MaxLength="Max" />
+          <Property Type="Boolean" Name="casFav" Nullable="false" />
+          <Property Type="Int32" Name="casOwnerID" Nullable="true" />
+          <Property Type="Int32" Name="casCreatedBy" Nullable="false" />
+          <Property Type="Int32" Name="assignTo" Nullable="true" />
+          <Property Type="Int32" Name="dispatchTo" Nullable="true" />
+          <Property Type="DateTime" Name="casDueDate" Nullable="true" Precision="23" />
+          <Property Type="String" Name="OWNERNAME" Nullable="false" MaxLength="511" />
+          <Property Type="String" Name="chnName" Nullable="true" MaxLength="100" />
+          <Property Type="Int32" Name="casIDLevel1" Nullable="true" />
+          <Property Type="String" Name="cascommerceType" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="casproductCategory" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="casserviceCategory" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="casdeliveryType" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="casvalueRange" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="casconversationChannel" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="casreferenceDetail" Nullable="true" MaxLength="Max" />
+          <Property Type="String" Name="casdetail" Nullable="true" MaxLength="Max" />
+        </ComplexType>
+        <ComplexType Name="sp_helpdiagramdefinition3_Result">
+          <Property Type="Int32" Name="version" Nullable="true" />
+          <Property Type="Binary" Name="definition" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="sp_helpdiagrams3_Result">
+          <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
+          <Property Type="Int32" Name="OwnerID" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="sp_CaseDetailById_Result">
           <Property Type="Int32" Name="CASID" Nullable="false" />
           <Property Type="Int32" Name="CONTACTID" Nullable="false" />
           <Property Type="String" Name="CONTACTCODE" Nullable="false" MaxLength="1" />
@@ -4912,6 +5157,190 @@
             </ResultMapping>
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="sp_get_CaseQuery" FunctionName="CRMABPModel.Store.sp_get_CaseQuery" />
+          <FunctionImportMapping FunctionImportName="sp_GetCase_DetailById1" FunctionName="CRMABPModel.Store.sp_GetCase_DetailById">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="NEWCRMModel.sp_GetCase_DetailById1_Result">
+                <ScalarProperty Name="CASID" ColumnName="CASID" />
+                <ScalarProperty Name="CONTACTID" ColumnName="CONTACTID" />
+                <ScalarProperty Name="CONTACTCODE" ColumnName="CONTACTCODE" />
+                <ScalarProperty Name="CASEIDNO" ColumnName="CASEIDNO" />
+                <ScalarProperty Name="ctaID" ColumnName="ctaID" />
+                <ScalarProperty Name="CTAFULLNAME" ColumnName="CTAFULLNAME" />
+                <ScalarProperty Name="CTAEMO1" ColumnName="CTAEMO1" />
+                <ScalarProperty Name="CTAEMO2" ColumnName="CTAEMO2" />
+                <ScalarProperty Name="CTAEMO3" ColumnName="CTAEMO3" />
+                <ScalarProperty Name="PHONES" ColumnName="PHONES" />
+                <ScalarProperty Name="CTAEMAIL" ColumnName="CTAEMAIL" />
+                <ScalarProperty Name="CTAFACEBOOK" ColumnName="CTAFACEBOOK" />
+                <ScalarProperty Name="CTATWITTER" ColumnName="CTATWITTER" />
+                <ScalarProperty Name="ADDRESS" ColumnName="ADDRESS" />
+                <ScalarProperty Name="CASSUMMARY" ColumnName="CASSUMMARY" />
+                <ScalarProperty Name="CASESTATUS" ColumnName="CASESTATUS" />
+                <ScalarProperty Name="TALKTIME" ColumnName="TALKTIME" />
+                <ScalarProperty Name="CALLBACKTYPE" ColumnName="CALLBACKTYPE" />
+                <ScalarProperty Name="CALLBACKNUMBER" ColumnName="CALLBACKNUMBER" />
+                <ScalarProperty Name="CREATEBY" ColumnName="CREATEBY" />
+                <ScalarProperty Name="CREATEDATE" ColumnName="CREATEDATE" />
+                <ScalarProperty Name="MODIFIEDBY" ColumnName="MODIFIEDBY" />
+                <ScalarProperty Name="MODIFIEDDATE" ColumnName="MODIFIEDDATE" />
+                <ScalarProperty Name="CLOSEDATE" ColumnName="CLOSEDATE" />
+                <ScalarProperty Name="DUEDATE" ColumnName="DUEDATE" />
+                <ScalarProperty Name="REMARK" ColumnName="REMARK" />
+                <ScalarProperty Name="casFav" ColumnName="casFav" />
+                <ScalarProperty Name="casOwnerID" ColumnName="casOwnerID" />
+                <ScalarProperty Name="casCreatedBy" ColumnName="casCreatedBy" />
+                <ScalarProperty Name="assignTo" ColumnName="assignTo" />
+                <ScalarProperty Name="dispatchTo" ColumnName="dispatchTo" />
+                <ScalarProperty Name="casDueDate" ColumnName="casDueDate" />
+                <ScalarProperty Name="OWNERNAME" ColumnName="OWNERNAME" />
+                <ScalarProperty Name="chnName" ColumnName="chnName" />
+                <ScalarProperty Name="casIDLevel1" ColumnName="casIDLevel1" />
+                <ScalarProperty Name="cascommerceType" ColumnName="cascommerceType" />
+                <ScalarProperty Name="casproductCategory" ColumnName="casproductCategory" />
+                <ScalarProperty Name="casserviceCategory" ColumnName="casserviceCategory" />
+                <ScalarProperty Name="casdeliveryType" ColumnName="casdeliveryType" />
+                <ScalarProperty Name="casvalueRange" ColumnName="casvalueRange" />
+                <ScalarProperty Name="casconversationChannel" ColumnName="casconversationChannel" />
+                <ScalarProperty Name="casreferenceDetail" ColumnName="casreferenceDetail" />
+                <ScalarProperty Name="casdetail" ColumnName="casdetail" />
+                <ScalarProperty Name="caspaymentType" ColumnName="caspaymentType" />
+                <ScalarProperty Name="caseventDate" ColumnName="caseventDate" />
+                <ScalarProperty Name="casVendorID" ColumnName="casVendorID" />
+                <ScalarProperty Name="casAttachFile" ColumnName="casAttachFile" />
+                <ScalarProperty Name="casLevel3" ColumnName="casLevel3" />
+                <ScalarProperty Name="casLevel6" ColumnName="casLevel6" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_alterdiagram3" FunctionName="CRMABPModel.Store.sp_alterdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_creatediagram3" FunctionName="CRMABPModel.Store.sp_creatediagram" />
+          <FunctionImportMapping FunctionImportName="sp_dropdiagram3" FunctionName="CRMABPModel.Store.sp_dropdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_Ge_tCaseDetailById1" FunctionName="CRMABPModel.Store.sp_Ge_tCaseDetailById">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="NEWCRMModel.sp_Ge_tCaseDetailById1_Result">
+                <ScalarProperty Name="CASID" ColumnName="CASID" />
+                <ScalarProperty Name="CONTACTID" ColumnName="CONTACTID" />
+                <ScalarProperty Name="CONTACTCODE" ColumnName="CONTACTCODE" />
+                <ScalarProperty Name="CASEIDNO" ColumnName="CASEIDNO" />
+                <ScalarProperty Name="ctaID" ColumnName="ctaID" />
+                <ScalarProperty Name="CTAFULLNAME" ColumnName="CTAFULLNAME" />
+                <ScalarProperty Name="CTAEMO1" ColumnName="CTAEMO1" />
+                <ScalarProperty Name="CTAEMO2" ColumnName="CTAEMO2" />
+                <ScalarProperty Name="CTAEMO3" ColumnName="CTAEMO3" />
+                <ScalarProperty Name="PHONES" ColumnName="PHONES" />
+                <ScalarProperty Name="CTAEMAIL" ColumnName="CTAEMAIL" />
+                <ScalarProperty Name="CTAFACEBOOK" ColumnName="CTAFACEBOOK" />
+                <ScalarProperty Name="CTATWITTER" ColumnName="CTATWITTER" />
+                <ScalarProperty Name="ADDRESS" ColumnName="ADDRESS" />
+                <ScalarProperty Name="CASSUMMARY" ColumnName="CASSUMMARY" />
+                <ScalarProperty Name="CASESTATUS" ColumnName="CASESTATUS" />
+                <ScalarProperty Name="TALKTIME" ColumnName="TALKTIME" />
+                <ScalarProperty Name="CALLBACKTYPE" ColumnName="CALLBACKTYPE" />
+                <ScalarProperty Name="CALLBACKNUMBER" ColumnName="CALLBACKNUMBER" />
+                <ScalarProperty Name="CREATEBY" ColumnName="CREATEBY" />
+                <ScalarProperty Name="CREATEDATE" ColumnName="CREATEDATE" />
+                <ScalarProperty Name="MODIFIEDBY" ColumnName="MODIFIEDBY" />
+                <ScalarProperty Name="MODIFIEDDATE" ColumnName="MODIFIEDDATE" />
+                <ScalarProperty Name="CLOSEDATE" ColumnName="CLOSEDATE" />
+                <ScalarProperty Name="DUEDATE" ColumnName="DUEDATE" />
+                <ScalarProperty Name="REMARK" ColumnName="REMARK" />
+                <ScalarProperty Name="casFav" ColumnName="casFav" />
+                <ScalarProperty Name="casOwnerID" ColumnName="casOwnerID" />
+                <ScalarProperty Name="casCreatedBy" ColumnName="casCreatedBy" />
+                <ScalarProperty Name="assignTo" ColumnName="assignTo" />
+                <ScalarProperty Name="dispatchTo" ColumnName="dispatchTo" />
+                <ScalarProperty Name="casDueDate" ColumnName="casDueDate" />
+                <ScalarProperty Name="OWNERNAME" ColumnName="OWNERNAME" />
+                <ScalarProperty Name="chnName" ColumnName="chnName" />
+                <ScalarProperty Name="casIDLevel1" ColumnName="casIDLevel1" />
+                <ScalarProperty Name="cascommerceType" ColumnName="cascommerceType" />
+                <ScalarProperty Name="casproductCategory" ColumnName="casproductCategory" />
+                <ScalarProperty Name="casserviceCategory" ColumnName="casserviceCategory" />
+                <ScalarProperty Name="casdeliveryType" ColumnName="casdeliveryType" />
+                <ScalarProperty Name="casvalueRange" ColumnName="casvalueRange" />
+                <ScalarProperty Name="casconversationChannel" ColumnName="casconversationChannel" />
+                <ScalarProperty Name="casreferenceDetail" ColumnName="casreferenceDetail" />
+                <ScalarProperty Name="casdetail" ColumnName="casdetail" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_GetGroupCaseOnlineAcc2" FunctionName="CRMABPModel.Store.sp_GetGroupCaseOnlineAcc" />
+          <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition3" FunctionName="CRMABPModel.Store.sp_helpdiagramdefinition">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="NEWCRMModel.sp_helpdiagramdefinition3_Result">
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_helpdiagrams3" FunctionName="CRMABPModel.Store.sp_helpdiagrams">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="NEWCRMModel.sp_helpdiagrams3_Result">
+                <ScalarProperty Name="Database" ColumnName="Database" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Owner" ColumnName="Owner" />
+                <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_renamediagram3" FunctionName="CRMABPModel.Store.sp_renamediagram" />
+          <FunctionImportMapping FunctionImportName="sp_upgraddiagrams3" FunctionName="CRMABPModel.Store.sp_upgraddiagrams" />
+          <FunctionImportMapping FunctionImportName="sp_CaseDetailById" FunctionName="CRMABPModel.Store.sp_CaseDetailById">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="NEWCRMModel.sp_CaseDetailById_Result">
+                <ScalarProperty Name="CASID" ColumnName="CASID" />
+                <ScalarProperty Name="CONTACTID" ColumnName="CONTACTID" />
+                <ScalarProperty Name="CONTACTCODE" ColumnName="CONTACTCODE" />
+                <ScalarProperty Name="CASEIDNO" ColumnName="CASEIDNO" />
+                <ScalarProperty Name="ctaID" ColumnName="ctaID" />
+                <ScalarProperty Name="CTAFULLNAME" ColumnName="CTAFULLNAME" />
+                <ScalarProperty Name="CTAEMO1" ColumnName="CTAEMO1" />
+                <ScalarProperty Name="CTAEMO2" ColumnName="CTAEMO2" />
+                <ScalarProperty Name="CTAEMO3" ColumnName="CTAEMO3" />
+                <ScalarProperty Name="PHONES" ColumnName="PHONES" />
+                <ScalarProperty Name="CTAEMAIL" ColumnName="CTAEMAIL" />
+                <ScalarProperty Name="CTAFACEBOOK" ColumnName="CTAFACEBOOK" />
+                <ScalarProperty Name="CTATWITTER" ColumnName="CTATWITTER" />
+                <ScalarProperty Name="ADDRESS" ColumnName="ADDRESS" />
+                <ScalarProperty Name="CASSUMMARY" ColumnName="CASSUMMARY" />
+                <ScalarProperty Name="CASESTATUS" ColumnName="CASESTATUS" />
+                <ScalarProperty Name="TALKTIME" ColumnName="TALKTIME" />
+                <ScalarProperty Name="CALLBACKTYPE" ColumnName="CALLBACKTYPE" />
+                <ScalarProperty Name="CALLBACKNUMBER" ColumnName="CALLBACKNUMBER" />
+                <ScalarProperty Name="CREATEBY" ColumnName="CREATEBY" />
+                <ScalarProperty Name="CREATEDATE" ColumnName="CREATEDATE" />
+                <ScalarProperty Name="MODIFIEDBY" ColumnName="MODIFIEDBY" />
+                <ScalarProperty Name="MODIFIEDDATE" ColumnName="MODIFIEDDATE" />
+                <ScalarProperty Name="CLOSEDATE" ColumnName="CLOSEDATE" />
+                <ScalarProperty Name="DUEDATE" ColumnName="DUEDATE" />
+                <ScalarProperty Name="REMARK" ColumnName="REMARK" />
+                <ScalarProperty Name="casFav" ColumnName="casFav" />
+                <ScalarProperty Name="casOwnerID" ColumnName="casOwnerID" />
+                <ScalarProperty Name="casCreatedBy" ColumnName="casCreatedBy" />
+                <ScalarProperty Name="assignTo" ColumnName="assignTo" />
+                <ScalarProperty Name="dispatchTo" ColumnName="dispatchTo" />
+                <ScalarProperty Name="casDueDate" ColumnName="casDueDate" />
+                <ScalarProperty Name="OWNERNAME" ColumnName="OWNERNAME" />
+                <ScalarProperty Name="chnName" ColumnName="chnName" />
+                <ScalarProperty Name="casIDLevel1" ColumnName="casIDLevel1" />
+                <ScalarProperty Name="cascommerceType" ColumnName="cascommerceType" />
+                <ScalarProperty Name="casproductCategory" ColumnName="casproductCategory" />
+                <ScalarProperty Name="casserviceCategory" ColumnName="casserviceCategory" />
+                <ScalarProperty Name="casdeliveryType" ColumnName="casdeliveryType" />
+                <ScalarProperty Name="casvalueRange" ColumnName="casvalueRange" />
+                <ScalarProperty Name="casconversationChannel" ColumnName="casconversationChannel" />
+                <ScalarProperty Name="casreferenceDetail" ColumnName="casreferenceDetail" />
+                <ScalarProperty Name="casdetail" ColumnName="casdetail" />
+                <ScalarProperty Name="caspaymentType" ColumnName="caspaymentType" />
+                <ScalarProperty Name="caseventDate" ColumnName="caseventDate" />
+                <ScalarProperty Name="casVendorID" ColumnName="casVendorID" />
+                <ScalarProperty Name="casAttachFile" ColumnName="casAttachFile" />
+                <ScalarProperty Name="casLevel3" ColumnName="casLevel3" />
+                <ScalarProperty Name="casLevel6" ColumnName="casLevel6" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

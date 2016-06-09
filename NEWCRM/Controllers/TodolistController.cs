@@ -104,7 +104,7 @@ namespace NEWCRM.Controllers
                     m.Open = RepositoryBase.CaseStatus.Open;
                     m.Pending = RepositoryBase.CaseStatus.Pending;
                     m.GroupId = NEWCRM.Common.AppUtils.Session.User.grpID;                    
-                    //m.GroupUserId = NEWCRM.Common.AppUtils.Session.User.usrID;
+                    m.GroupUserId = NEWCRM.Common.AppUtils.Session.User.usrID;
                 }
             }
 
