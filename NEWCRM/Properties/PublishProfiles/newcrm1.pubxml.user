@@ -6,7 +6,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <TimeStampOfAssociatedLegacyPublishXmlFile />
-    <_PublishTargetUrl>C:\inetpub\wwwroot\newcrm</_PublishTargetUrl>
+    <_PublishTargetUrl>C:\inetpub\wwwroot\newcrm1</_PublishTargetUrl>
   </PropertyGroup>
   <ItemGroup>
     <File Include="bin/Antlr3.Runtime.dll">
@@ -337,7 +337,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/28/2013 08:12:40</publishTime>
     </File>
     <File Include="bin/NEWCRM.dll">
-      <publishTime>06/09/2016 16:35:50</publishTime>
+      <publishTime>06/09/2016 18:25:18</publishTime>
     </File>
     <File Include="bin/Newtonsoft.Json.dll">
       <publishTime>01/04/2016 10:07:00</publishTime>
@@ -379,7 +379,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>01/04/2016 10:07:02</publishTime>
     </File>
     <File Include="bin/Web.config">
-      <publishTime>06/09/2016 12:57:07</publishTime>
+      <publishTime>06/09/2016 17:46:32</publishTime>
     </File>
     <File Include="bin/Web.Debug.config">
       <publishTime>01/04/2016 10:06:48</publishTime>
@@ -4816,7 +4816,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/09/2016 09:38:39</publishTime>
     </File>
     <File Include="Views/Case/CaseInfo.cshtml">
-      <publishTime>06/09/2016 01:19:42</publishTime>
+      <publishTime>06/09/2016 17:57:49</publishTime>
     </File>
     <File Include="Views/Case/CaseParent.cshtml">
       <publishTime>06/04/2016 03:07:36</publishTime>
@@ -5008,7 +5008,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>01/04/2016 10:06:48</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>06/09/2016 12:57:07</publishTime>
+      <publishTime>06/09/2016 17:46:32</publishTime>
     </File>
   </ItemGroup>
 </Project>

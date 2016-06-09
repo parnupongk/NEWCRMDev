@@ -1247,7 +1247,7 @@ namespace NEWCRM.Controllers
             }
             else if (casIDLevel2 > 152 && casIDLevel2 < 162) mail =  ConfigurationManager.AppSettings["CASE_Email_ThaiCERT_To"];
             //else if (casIDLevel2 > 161 && casIDLevel2 < 174) return ConfigurationManager.AppSettings["CASE_Email_ETDA_To"];
-            else if (casIDLevel2 > 173) mail =  ConfigurationManager.AppSettings["CASE_Email_OTO _To"];
+            else if (casIDLevel2 > 173) mail =  ConfigurationManager.AppSettings["CASE_Email_OTO_To"];
 
             return mail;
             //}
@@ -1267,7 +1267,7 @@ namespace NEWCRM.Controllers
             }
             else if (casIDLevel2 > 152 && casIDLevel2 < 162) mail = ConfigurationManager.AppSettings["CASE_Email_ThaiCERT_CC"];
             //else if (casIDLevel2 > 161 && casIDLevel2 < 174) return ConfigurationManager.AppSettings["CASE_Email_ETDA_CC"];
-            else if (casIDLevel2 > 173) mail = ConfigurationManager.AppSettings["CASE_Email_OTO _CC"];
+            else if (casIDLevel2 > 173) mail = ConfigurationManager.AppSettings["CASE_Email_OTO_CC"];
 
             return mail;
         }

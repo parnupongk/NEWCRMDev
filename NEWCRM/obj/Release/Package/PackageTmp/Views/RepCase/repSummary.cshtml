@@ -3,16 +3,18 @@
     Layout = "";
 }
 
-<a href="@Url.Action("RepCaseSummaryExport", "RepCase")">
-    <button type="button" class="btn ink-reaction btn-flat" data-toggle="tooltip" data-placement="top" data-original-title="Add new case with no contact"><i class="fa fa-file-excel-o"></i> Export Excel</button>
-</a>
+<div class="col-lg2" style="padding: 0 30px 10px 30px;"><a href="@Url.Action("RepCaseSummaryExport", "RepCase")" class="btn ink-reaction btn-success"><i class="fa fa-file-excel-o"></i>&nbsp;Export To Excel</a></div>
+
+<!--a href="Url.Action("RepCaseSummaryExport", "RepCase")">
+    <button type="button" class="btn ink-reaction btn-flat" data-toggle="tooltip" data-placement="top" data-original-title="Add new case with no contact"><i class="fa fa-file-excel-o"></i> Export Excel</button-->
+</!--a>
 
             <table width="100%">
                 <thead>
                     <tr class="gradeX">
                         <th colspan="2" >
-                            <h3>ETDAA Call Center</h3>
-                            <h4>Case Statistic Report</h4>
+                            <h3>ETDA Call Center</h3>
+                            <h4>Summary Report</h4>
                             <p class="text">Report of  to @Model.list_repcasesum[0].startDate to @Model.list_repcasesum[0].endDate </p>
 
 

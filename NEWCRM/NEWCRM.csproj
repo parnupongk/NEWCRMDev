@@ -2093,6 +2093,7 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <None Include="Properties\PublishProfiles\newcrm.pubxml" />
+    <None Include="Properties\PublishProfiles\newcrm1.pubxml" />
     <None Include="Properties\PublishProfiles\newrcm.pubxml" />
     <None Include="Properties\PublishProfiles\parnupongk.pubxml" />
     <None Include="Properties\PublishProfiles\Publish.pubxml" />
