@@ -18,5 +18,23 @@
             <textarea id="txtDetail" name="txtDetail" class="form-control" rows="6"></textarea>
         </div>
         <br />
+        <label id="lblAttachFile" name="lblAttachFile" class="col-sm-3 control-label">Attach File</label>
+        <div class="col-lg-2">
+            <form action="@Url.Action("uploadAvatar", "Contact")" class="dropzone" id="dropzone-avatar" style="min-height: 0; padding: 5px;">
+                <div class="dz-message" style="margin: 0">
+                    <div class="pull-right">
+                        @if (!string.IsNullOrEmpty(@Model.item_profile.usrAvatar))
+                        {
+                            <img id="avatar" class="img-circle size-3" src="~/Images/users/@Model.item_profile.usrAvatar" alt="" />
+                        }
+                        else
+                        {
+                            <img class="img-circle border-white border-xl img-responsive auto-width" src="~/Images/contact_.png" />
+                        }
+                    </div>
+                </div>
+            </form>
+        </div>
+
     </div>
     </div>
