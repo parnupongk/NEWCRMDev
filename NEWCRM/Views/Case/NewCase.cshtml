@@ -34,7 +34,7 @@
     <script src="~/Content/js/libs/bootstrap-tagsinput/bootstrap-tagsinput.min.js"></script>
     <script src="~/Content/js/core/demo/DemoFormComponents.js"></script>
     <script src="~/Scripts/NewCase.js"></script>
-<script src="~/Content/js/libs/dropzone/dropzone.js"></script>
+    <script src="~/Content/js/libs/dropzone/dropzone.js"></script>
     <script type="text/javascript">
 
         function resetValueGroup()
@@ -66,14 +66,17 @@
             $("#dv-callback").hide();
             $("#ctdiv_4").hide();
             $("#ctcaseparent").hide();
+            $("#divAttachFile").hide();
             resetGroup();
             
             Dropzone.autoDiscover = false;
             $("#dropzone-avatar").dropzone({
-                url: "@Url.Action("uploadAvatar", "User")",
+                url: "@Url.Action("uploadAttachFile", "Case")",
                 addRemoveLinks: false,
             success: function (file, response) {
-                window.location.reload();
+                //window.location.reload();
+                $("#aAttachFile").attr("href",@Session["case_attachfile_path"])
+                
             },
             error: function (file, response) {
                 file.previewElement.classList.add("dz-error");
@@ -294,6 +297,13 @@
                             $("#lblSourceType").html("ประเภทสื่อผิดกฎหมายที่อ้างอิง");
                             $("#lblRedDetail").html("รายละเอียดเพิ่มเติม");
                             $("#lblDetail").html("เนื้อหารายละเอียดการร้องเรียน");
+                            if($(ref).val() == "3"  )
+                            {
+                                $("#divAttachFile").show();
+                            }else
+                            {
+                                $("#divAttachFile").hide();
+                            }
                     }else
                     {
                         resetValueGroup();
@@ -611,8 +621,29 @@
                                             </div>
                                         </div>*@
                                     </div>
-                                </div>                                
-                                }                        
+                                </div>
+                                                }
+
+                                                <div id="divAttachFile" class="form-group">
+                                                    <label id="lblAttachFile" name="lblAttachFile" class="col-sm-3 control-label">Attach File</label>
+                                                    <div class="col-lg-2">
+                                                        <form action="@Url.Action("uploadAttachFile", "Case")" class="dropzone" id="dropzone-avatar" style="min-height: 0; padding: 5px;">
+                                                            <div class="dz-message" style="margin: 0">
+                                                                <div class="pull-right">
+                                                                    @if (Session["case_attachfile_path"] != null && !string.IsNullOrEmpty(Session["case_attachfile_path"].ToString()))
+                                                                    {
+                                                                        <a  id="aAttachFile" href="@Session["case_attachfile_path"].ToString()">Donwload</a>
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        <img class="img-circle border-white border-xl img-responsive auto-width" src="~/Images/upload.png" />
+                                                                    }
+                                                                </div>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                </div>
+
                                 <div class="row">
                                 <div class="col-lg-10">
                                     <div class="col-sm-3">&nbsp;</div>

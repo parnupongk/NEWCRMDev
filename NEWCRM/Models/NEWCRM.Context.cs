@@ -85,7 +85,6 @@ namespace NEWCRM.Models
         public DbSet<User> Users { get; set; }
         public DbSet<DNIS> DNIS { get; set; }
         public DbSet<TaskScheduleLog> TaskScheduleLogs { get; set; }
-        public DbSet<sysdiagram1> sysdiagram1 { get; set; }
     
         public virtual ObjectResult<sp_ActivityChannelSummary_Result> sp_ActivityChannelSummary()
         {
@@ -1001,6 +1000,15 @@ namespace NEWCRM.Models
                 new ObjectParameter("LANG", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_GetCase_DetailById_Result>("sp_GetCase_DetailById", cASEIDParameter, lANGParameter);
+        }
+    
+        public virtual int sp_get_CaseQuery(string p_query)
+        {
+            var p_queryParameter = p_query != null ?
+                new ObjectParameter("p_query", p_query) :
+                new ObjectParameter("p_query", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_get_CaseQuery", p_queryParameter);
         }
     }
 }

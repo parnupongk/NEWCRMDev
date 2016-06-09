@@ -370,7 +370,6 @@ E:\my Build\one2one\sourcecontrol\NEWCRMDev\NEWCRM\bin\pt\Microsoft.SqlServer.Ty
 E:\my Build\one2one\sourcecontrol\NEWCRMDev\NEWCRM\bin\ru\Microsoft.SqlServer.Types.resources.dll
 E:\my Build\one2one\sourcecontrol\NEWCRMDev\NEWCRM\bin\zh-Hans\Microsoft.SqlServer.Types.resources.dll
 E:\my Build\one2one\sourcecontrol\NEWCRMDev\NEWCRM\bin\zh-Hant\Microsoft.SqlServer.Types.resources.dll
-E:\my Build\one2one\sourcecontrol\NEWCRMDev\NEWCRM\obj\Debug\NEWCRM.csprojResolveAssemblyReference.cache
 E:\my Build\one2one\sourcecontrol\NEWCRMDev\NEWCRM\obj\Debug\NEWCRM.dll
 E:\my Build\one2one\sourcecontrol\NEWCRMDev\NEWCRM\obj\Debug\NEWCRM.pdb
 C:\Users\pee_t\Desktop\Git ETDA\NEWCRMDev\NEWCRM\bin\Models\NEWCRM.Context.tt

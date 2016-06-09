@@ -552,9 +552,6 @@
       <DependentUpon>NEWCRM.tt</DependentUpon>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
-    <Compile Include="Models\sysdiagram1.cs">
-      <DependentUpon>NEWCRM.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\TaskScheduleLog.cs">
       <DependentUpon>NEWCRM.tt</DependentUpon>
     </Compile>
@@ -2063,6 +2060,7 @@
     <Content Include="Images\logo.png" />
     <Content Include="Images\Origin_Logo.png" />
     <Content Include="Images\Origin_Logo_Home.png" />
+    <Content Include="Images\upload.png" />
     <Content Include="Models\NEWCRM.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>NEWCRM.edmx</DependentUpon>

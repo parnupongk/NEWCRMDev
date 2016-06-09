@@ -42,6 +42,40 @@ namespace NEWCRM.Controllers
                 return null;
             }
         }
+
+        public void uploadAttachFile()
+        {
+            foreach (string s in Request.Files)
+            {
+                try
+                {
+                    var usrID = AppUtils.Session.User.usrID;
+                    var file = Request.Files[s];
+                    string fileName = file.FileName;
+                    string fileExtension = file.ContentType;
+                    if (!string.IsNullOrEmpty(fileName))
+                    {
+                        string savefilename = string.Format("{0}_{1}", usrID, fileName);
+                        string savefilepathe = Server.MapPath("~/Images/users/") + savefilename;
+
+                        // Upload File
+                        file.SaveAs(savefilepathe);
+
+                        Session["case_attachfile_path"] = savefilepathe;
+
+                        var newFile = new FileInfo(savefilepathe);
+                        //While File is not accesable because of writing process
+                        while (IsFileLocked(newFile)) { }
+
+                        Response.Write(savefilename);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception(ex.Message);
+                }
+            }
+        }
         #endregion
 
         #region Aeh
@@ -218,6 +252,7 @@ namespace NEWCRM.Controllers
                         casreferenceDetail = model.txtRefDetail,
                         casdetail = model.txtDetail,
                         casstatusReason = model.cssStatusReason,
+                        casAttachFile = Session["case_attachfile_path"] == null ? "" : Session["case_attachfile_path"].ToString()
                         //casGroupID = AppUtils.Session.User.grpID
                     };
 

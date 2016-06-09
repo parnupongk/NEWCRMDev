@@ -369,7 +369,6 @@
       <Parameter Name="CASEID" Mode="In" Type="Decimal" />
       <Parameter Name="LANG" Mode="In" Type="String" />
     </FunctionImport>
-    <EntitySet Name="sysdiagram1" EntityType="NEWCRMModel.sysdiagram1" />
     <FunctionImport Name="sp_alterdiagram2">
       <Parameter Name="diagramname" Mode="In" Type="String" />
       <Parameter Name="owner_id" Mode="In" Type="Int32" />
@@ -408,6 +407,9 @@
     <FunctionImport Name="sp_GetCase_DetailById" ReturnType="Collection(NEWCRMModel.sp_GetCase_DetailById_Result)">
       <Parameter Name="CASEID" Mode="In" Type="Decimal" />
       <Parameter Name="LANG" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_get_CaseQuery">
+      <Parameter Name="p_query" Mode="In" Type="String" />
     </FunctionImport>
   </EntityContainer>
   <EntityType Name="Activities">
@@ -687,7 +689,7 @@
     <Property Name="caspaymentType" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
     <Property Name="casVendorID" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
     <Property Name="caseventDate" Type="DateTime" Precision="3" />
-    <Property Name="casAttachFile" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="casAttachFile" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
   </EntityType>
   <EntityType Name="CaseStatu">
     <Key>
@@ -2037,16 +2039,6 @@
     <Property Type="String" Name="casreferenceDetail" Nullable="true" MaxLength="Max" />
     <Property Type="String" Name="casdetail" Nullable="true" MaxLength="Max" />
   </ComplexType>
-  <EntityType Name="sysdiagram1">
-    <Key>
-      <PropertyRef Name="diagram_id" />
-    </Key>
-    <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-    <Property Name="principal_id" Type="Int32" Nullable="false" />
-    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="version" Type="Int32" />
-    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
-  </EntityType>
   <ComplexType Name="sp_Ge_tCaseDetailById_Result">
     <Property Type="Int32" Name="CASID" Nullable="false" />
     <Property Type="Int32" Name="CONTACTID" Nullable="false" />
