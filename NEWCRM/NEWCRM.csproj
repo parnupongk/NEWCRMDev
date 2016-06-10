@@ -2214,6 +2214,7 @@
     <Content Include="Views\RepCase\rptCaseCyb.cshtml" />
     <Content Include="Views\RepCase\repSummary.cshtml" />
     <Content Include="Views\RepCase\repSummaryChild.cshtml" />
+    <Content Include="Views\RepCase\rptEndCall.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

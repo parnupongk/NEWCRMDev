@@ -337,7 +337,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/28/2013 08:12:40</publishTime>
     </File>
     <File Include="bin/NEWCRM.dll">
-      <publishTime>06/09/2016 18:25:18</publishTime>
+      <publishTime>06/09/2016 18:42:55</publishTime>
     </File>
     <File Include="bin/Newtonsoft.Json.dll">
       <publishTime>01/04/2016 10:07:00</publishTime>
@@ -4719,6 +4719,9 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="Images/logo.png">
       <publishTime>06/02/2016 15:30:37</publishTime>
     </File>
+    <File Include="Images/logo_in_excel.jpg">
+      <publishTime>06/09/2016 18:36:54</publishTime>
+    </File>
     <File Include="Images/Origin_Logo.png">
       <publishTime>06/02/2016 09:22:41</publishTime>
     </File>
@@ -4972,16 +4975,16 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/07/2016 18:47:54</publishTime>
     </File>
     <File Include="Views/RepCase/rptCaseCyb.cshtml">
-      <publishTime>06/09/2016 08:25:18</publishTime>
+      <publishTime>06/09/2016 18:36:54</publishTime>
     </File>
     <File Include="Views/RepCase/rptCaseOnl.cshtml">
-      <publishTime>06/09/2016 08:25:18</publishTime>
+      <publishTime>06/09/2016 18:36:54</publishTime>
     </File>
     <File Include="Views/RepCase/rptCaseRaw.cshtml">
-      <publishTime>06/09/2016 08:25:18</publishTime>
+      <publishTime>06/09/2016 18:36:54</publishTime>
     </File>
     <File Include="Views/RepCase/rptCaseRep.cshtml">
-      <publishTime>06/08/2016 23:12:10</publishTime>
+      <publishTime>06/09/2016 18:36:54</publishTime>
     </File>
     <File Include="Views/Shared/Error.cshtml">
       <publishTime>01/04/2016 10:06:48</publishTime>

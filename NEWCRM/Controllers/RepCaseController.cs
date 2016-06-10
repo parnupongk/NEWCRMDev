@@ -160,8 +160,87 @@ namespace NEWCRM.Controllers
             else if (Request.Form["reptype"].ToString() == "5") { return RedirectToAction("rptCaseRaw", new { startDate = startDate, endDate = endDate, caseIDLevel1 = 2, caseIDLevel2 = caseIDLevel2, caseIDLevel3 = caseIDLevel3, caseIDLevel4 = caseIDLevel4 }); }
             else if (Request.Form["reptype"].ToString() == "6") { return RedirectToAction("rptCaseCyb", new { startDate = startDate, endDate = endDate, caseIDLevel1 = 3, caseIDLevel2 = caseIDLevel2, caseIDLevel3 = caseIDLevel3, caseIDLevel4 = caseIDLevel4 }); }
             else if (Request.Form["reptype"].ToString() == "7") { return RedirectToAction("repSummary", new { startDate = Request.Form["startdate"], endDate = Request.Form["enddate"], catparentid = caseIDLevel1 }); }
+            else if (Request.Form["reptype"].ToString() == "8") { return RedirectToAction("rptEndCall", new { startDate = startDate, endDate = endDate }); }
             else { return RedirectToAction("getQuery", new { startDate = startDate, endDate = endDate, caseIDLevel1 = caseIDLevel1, caseIDLevel2 = caseIDLevel2, caseIDLevel3 = caseIDLevel3, caseIDLevel4 = caseIDLevel4 }); }
         }
+
+        public ActionResult rptEndCall(DateTime startDate, DateTime endDate)
+        {
+            DataTable dt = new CaseRepository().GetCaseReport_EndCALL(startDate.ToString("yyyy-MM-dd"), endDate.ToString("yyyy-MM-dd"));
+            ListRepCaseModel rptListCase = new ListRepCaseModel();
+            List<ENDCALL> call = new List<ENDCALL>();
+
+            call = (from DataRow dr in dt.Rows
+                    select new ENDCALL()
+                    {
+                        createDate = dr["createDate"].ToString(),
+                        total_answer = Convert.ToInt32(dr["total_answer"].ToString()),
+                        score_wrong = Convert.ToInt32(dr["score_wrong"].ToString()),
+                        not_answer = Convert.ToInt32(dr["not_answer"].ToString()),
+                        score_1 = Convert.ToInt32(dr["score_1"].ToString()),
+                        per_score_1 = Math.Round(Convert.ToDecimal(dr["per_score_1"].ToString() == "" ? "0" : dr["per_score_1"].ToString()), 2),
+                        score_2 = Convert.ToInt32(dr["score_2"].ToString()),
+                        per_score_2 = Math.Round(Convert.ToDecimal(dr["per_score_2"].ToString() == "" ? "0" : dr["per_score_2"].ToString()), 2),
+                        score_3 = Convert.ToInt32(dr["score_3"].ToString()),
+                        per_score_3 = Math.Round(Convert.ToDecimal(dr["per_score_3"].ToString() == "" ? "0" : dr["per_score_3"].ToString()), 2)
+                    }).ToList();
+
+            rptListCase.list_endcall = call;
+            ViewBag.startDate = startDate;
+            ViewBag.endDate = endDate;
+            return PartialView(rptListCase);
+        }
+        public void excelEndCall(DateTime startDate, DateTime endDate)
+        {
+            Response.AddHeader("Content-Type", "application/vnd.ms-excel");
+            Response.AddHeader("Content-Disposition", "attachment;filename=CallPerformanceReportByHour_" + DateTime.Now.ToString("yyyyMMdd") + ".xls");
+
+
+            Response.Write("<table cellpadding=\"5\" width=\"100%\" align=\"center\"><tr><td align=\"left\" style=\"font-size:20pt;font-weight:bold;vertical-align:middle;height:50px;\">ETDA Call Center</td><td align=\"right\"><img src=\"http://" + Request.ServerVariables["HTTP_HOST"].ToString() + "/Images/logo_in_excel.jpg\" /></td></tr><tr><td colspan=\"2\" align=\"left\" style=\"font-size:16pt;font-weight:bold;vertical-align:middle;height:40px;\">End Call Survey Report</td></tr><tr><td colspan=\"2\" align=\"left\" style=\"vertical-align:middle;height:30px;\">Report of " + startDate.ToString("dd MMM yyy") + " to " + endDate.ToString("dd MMM yyy") + " </td></tr><tr><td colspan=\"2\"><table border=\"1\" width=\"100%\" cellpadding=\"5\"><thead><tr style=\"background-color:#366092;color:#ffffff;font-weight:bold;text-align:center;\"><td rowspan=\"2\">Date</td><td rowspan=\"2\">Total Answer</td><td rowspan=\"2\">Wrong Answer</td><td rowspan=\"2\">Not Answer</td><td colspan=\"2\">พอใจมาก (1)</td><td colspan=\"2\">พอใจ (2)</td><td colspan=\"2\">ไม่พอใจ (3)</td></tr><tr style=\"background-color:#366092;color:#ffffff;font-weight:bold;text-align:center;\"><td>จำนวน</td><td>%</td><td>จำนวน</td><td>%</td><td>จำนวน</td><td>%</td></tr></thead><tbody>");
+
+
+            DataTable dt = new CaseRepository().GetCaseReport_EndCALL(startDate.ToString("yyyy-MM-dd"), endDate.ToString("yyyy-MM-dd"));
+            ListRepCaseModel rptListCase = new ListRepCaseModel();
+            List<ENDCALL> call = new List<ENDCALL>();
+
+            call = (from DataRow dr in dt.Rows
+                    select new ENDCALL()
+                    {
+                        createDate = dr["createDate"].ToString(),
+                        total_answer = Convert.ToInt32(dr["total_answer"].ToString()),
+                        score_wrong = Convert.ToInt32(dr["score_wrong"].ToString()),
+                        not_answer = Convert.ToInt32(dr["not_answer"].ToString()),
+                        score_1 = Convert.ToInt32(dr["score_1"].ToString()),
+                        per_score_1 = Math.Round(Convert.ToDecimal(dr["per_score_1"].ToString() == "" ? "0" : dr["per_score_1"].ToString()), 2),
+                        score_2 = Convert.ToInt32(dr["score_2"].ToString()),
+                        per_score_2 = Math.Round(Convert.ToDecimal(dr["per_score_2"].ToString() == "" ? "0" : dr["per_score_2"].ToString()), 2),
+                        score_3 = Convert.ToInt32(dr["score_3"].ToString()),
+                        per_score_3 = Math.Round(Convert.ToDecimal(dr["per_score_3"].ToString() == "" ? "0" : dr["per_score_3"].ToString()), 2)
+                    }).ToList();
+
+            int irows = 0;
+            foreach (var item in call)
+            {
+                irows++;
+                Response.Write("<tr>");
+                Response.Write("<td>" + item.createDate + "</td>");
+                Response.Write("<td>" + item.total_answer + "</td>");
+                Response.Write("<td>" + item.score_wrong + "</td>");
+                Response.Write("<td>" + item.not_answer + "</td>");
+                Response.Write("<td>" + item.score_1 + "</td>");
+                Response.Write("<td>" + item.per_score_1 + "</td>");
+                Response.Write("<td>" + item.score_2 + "</td>");
+                Response.Write("<td>" + item.per_score_2 + "</td>");
+                Response.Write("<td>" + item.score_3 + "</td>");
+                Response.Write("<td>" + item.per_score_3 + "</td>");
+                Response.Write("</tr>");
+            }
+
+            Response.Write("</tbody></table></td></tr></table>");
+            Response.End();
+        }
+
+
 
         public ActionResult getQuery(DateTime startDate, DateTime endDate, int caseIDLevel1, int caseIDLevel2, int caseIDLevel3, int caseIDLevel4)
         {

@@ -44,6 +44,23 @@ namespace NEWCRM.Models
             }
         }
 
+        public DataTable GetCaseReport_EndCALL(string startDate, string endDate)
+        {
+            try
+            {
+                DataSet ds = SqlHelper.ExecuteDataset(ConfigurationManager.ConnectionStrings["EndCallConnection"].ToString(), "SP_ENDCALL_SURVEY"
+                            , new SqlParameter[] {new SqlParameter("@startdate", startDate)
+                            ,new SqlParameter("@enddate", endDate)
+                            ,new SqlParameter("@HOTLINEID", ConfigurationManager.AppSettings["ENDCALL_SURVEY"])
+                            });
+                return ds.Tables[0];
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
         public DataTable GetCaseReport_CALLPERHOUR(string startDate, string endDate)
         {
             try
@@ -576,6 +593,19 @@ namespace NEWCRM.Models
         #endregion
     }
 
+    public class ENDCALL
+    {
+        public string createDate { get; set; }
+        public decimal total_answer { get; set; }
+        public decimal score_wrong { get; set; }
+        public decimal not_answer { get; set; }
+        public decimal score_1 { get; set; }
+        public decimal per_score_1 { get; set; }
+        public decimal score_2 { get; set; }
+        public decimal per_score_2 { get; set; }
+        public decimal score_3 { get; set; }
+        public decimal per_score_3 { get; set; }
+    }
     public class CALLPERHOUR
     {
         public string period { get; set; }
@@ -669,6 +699,7 @@ namespace NEWCRM.Models
         public List<RepCaseModel> list_repcase { get; set; }
         public List<RepCaseSummary> list_repcasesum { get; set; }
         public List<CALLPERHOUR> list_call { get; set; }
+        public List<ENDCALL> list_endcall { get; set; }
     }
 
     public class RepCaseSummary
