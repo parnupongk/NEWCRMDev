@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="445aa94da7e54b919d5730dee912938e" Name="Diagram1" ZoomLevel="71">
+      <Diagram DiagramId="445aa94da7e54b919d5730dee912938e" Name="Diagram1" ZoomLevel="62">
         <EntityTypeShape EntityType="NEWCRMModel.Activities" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="NEWCRMModel.ActivityStatus" Width="1.5" PointX="0.75" PointY="15.75" IsExpanded="true" />
         <EntityTypeShape EntityType="NEWCRMModel.ActivityStatus_Locale" Width="1.5" PointX="3" PointY="11.5" IsExpanded="true" />
@@ -81,6 +81,7 @@
         <AssociationConnector Association="NEWCRMModel.Titles_Titles_Locale_FK1" ManuallyRouted="false" />
         <EntityTypeShape EntityType="NEWCRMModel.DNIS" Width="1.5" PointX="3.6339290438377905" PointY="5.7804348495697768" />
         <EntityTypeShape EntityType="NEWCRMModel.TaskScheduleLog" Width="1.5" PointX="6.375" PointY="23.75" />
+        <EntityTypeShape EntityType="NEWCRMModel.sysdiagram" Width="1.5" PointX="21.375" PointY="21.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

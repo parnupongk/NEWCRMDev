@@ -85,6 +85,7 @@ namespace NEWCRM.Models
         public DbSet<User> Users { get; set; }
         public DbSet<DNIS> DNIS { get; set; }
         public DbSet<TaskScheduleLog> TaskScheduleLogs { get; set; }
+        public DbSet<sysdiagram> sysdiagrams { get; set; }
     
         public virtual ObjectResult<sp_ActivityChannelSummary_Result> sp_ActivityChannelSummary()
         {

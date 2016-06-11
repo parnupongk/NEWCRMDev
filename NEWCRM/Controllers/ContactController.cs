@@ -182,7 +182,8 @@ namespace NEWCRM.Controllers
             {
                 ctaId = Convert.ToInt32(AppUtils.Session.Activity.ctaID);
             }
-           
+
+            model.contact = rep.GetById(ctaId);
             model.ctaID = ctaId;
             model.list_phones = rep_phn.getByContact(ctaId);
             model.commondetail = rep.getContactCommonDetail(ctaId);
@@ -470,6 +471,11 @@ namespace NEWCRM.Controllers
 
                     ctlNote = string.Format("Updated gender [{0}] -> [{1}]", oldgnd, newgnd);
                     cta.gndID = Convert.ToInt32(data.datavalue);
+                }
+                if (data.datafield.Equals("ctaCareer"))
+                {
+                    ctlNote = string.Format("Updated email [{0}] -> [{1}]", cta.ctaCareer, data.datavalue);
+                    cta.ctaCareer = data.datavalue;
                 }
 
                 db.SaveChanges();

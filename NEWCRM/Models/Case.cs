@@ -72,5 +72,7 @@ namespace NEWCRM.Models
         public string casVendorID { get; set; }
         public Nullable<System.DateTime> caseventDate { get; set; }
         public string casAttachFile { get; set; }
+        public string casPoNo { get; set; }
+        public string casPrice { get; set; }
     }
 }

@@ -50,14 +50,17 @@
 
     $(document).ready(function () {
 
+
+
         $("#newPhone").hide();
         $("#newAddress").hide();
+        $("#ctaCareer").val('@Model.contact.ctaCareer');
 
         $("#newPhoneNo").on('blur', function () {
             $(this).val('');
             $("#newPhone").hide();
         }).keypress(function (e) {
-            if (e.which == 13) {                
+            if (e.which == 13) {
                 dosave_phn(this);
             }
         });
@@ -78,13 +81,13 @@
             $(this).val(prev_val);
             $(this).removeClass("nledt_f").addClass("nledt");
         }).keypress(function (e) {
-            if (e.which == 13) {                
+            if (e.which == 13) {
                 prev_val = $(this).val();
                 $(e.target).blur();
                 dosave(this);
             }
-        });        
-       
+        });
+
 
         $(".gnd").click(function () {
             //$("input[name='gndID']").removeAttr("checked");
@@ -104,13 +107,26 @@
 
     });
 
+
+    function do_contacttype(obj)
+    {
+        console.log($(obj).val());
+        var datafield = $(obj).attr("data-field");
+        var datatable = $(obj).attr("data-table");
+        var datavalue = $(obj).val();
+        var ctaID = '@Model.ctaID';
+        var data = { datafield: datafield, datatable: datatable, datavalue: datavalue, ctaID: ctaID };
+        var url = '@Url.Action("CommonDetailUpdate", "Contact")';
+        $.post(url, data);
+    }
+
     function listPhones() {
         var url = '@Url.Action("listPhones", "Contact")/@Model.ctaID';
         $("#listPhones").load(url);
     }
 
     function newPhone()
-    {        
+    {
         $("#newPhone").show();
         $("#newPhoneNo").focus();
     }
@@ -149,7 +165,7 @@
         $.post(url, data, function () {
             $(obj).next().fadeOut(200);
 
-            if (data.dataid == 'new') {                
+            if (data.dataid == 'new') {
                 $("#newPhoneNo").val('');
                 $("#newPhone").hide();
             }
@@ -171,7 +187,7 @@
     function dosave_adr(obj) {
 
         $(obj).next().fadeIn(200);
-        
+
         var datatable = $(obj).attr("data-table");
         var dataid = $(obj).attr("data-ID");
         var datavalue = jQuery.trim($(obj).val());
@@ -235,7 +251,22 @@
                     </span>
                 </div>
             </dd>
+            <!-- contact type -->
+            <dt style="padding-top: 0"><span class="fa fa-fw fa-meh-o fa-lg opacity-60"></span></dt>
+            <dd>
+                <span class="opacity-50">Contact Type</span><br />
+                <span class="text-medium" title="Click for changed">
+                    <select id="ctaCareer" name="ctaCareer" data-field="ctaCareer" data-table="Contacts" class="form-control" onchange="do_contacttype(this);" >
+                        <option value="บุคคลทั่วไป">บุคคลทั่วไป</option>
+                        <option value="เอกชน">เอกชน</option>
+                        <option value="หน่วยงานรัฐ">หน่วยงานรัฐ</option>
+                        <option value="อื่นๆ">อื่นๆ</option>
+                    </select>
+                    <i class="fa fa-save fa-fw"></i>
+                </span>
+            </dd>
 
+            <!-- end contact type-->
             <dt style="padding-top: 5px"><span class="fa fa-fw fa-home fa-lg opacity-60"></span></dt>
             <dd style="cursor: pointer">
                 <span class="opacity-50">Address <a href="javascript:;" class="btn btn-icon-toggle" onclick="newAddress()" data-toggle="tooltip" data-placement="top" data-original-title="Add new address"><i class="fa fa-plus fa-fw"></i></a></span>
@@ -301,6 +332,7 @@
 
 @if (@Model.commondetail.gndID.HasValue)
 {
-    <script>setGNDActive('@Model.commondetail.gndID')</script>                        
+    <script>setGNDActive('@Model.commondetail.gndID');
+    </script>                        
 }
 @*<script src="~/Content/js/core/source/AppVendor.js"></script>*@

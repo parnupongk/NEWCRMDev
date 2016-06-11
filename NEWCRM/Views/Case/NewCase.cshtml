@@ -69,6 +69,8 @@
             $("#divAttachFile").hide();
             resetGroup();
 
+            //$("#eventDate").mask("99/99/9999 99:99:99", { placeholder: "mm/dd/yyyy HH:MM:ss" });
+
             Dropzone.autoDiscover = false;
             $("#dropzone-avatar").dropzone({
                 url: "@Url.Action("uploadAttachFile", "Case")",
@@ -506,6 +508,7 @@
                                         </div>
                                         <div id="ctdiv_2" class="form-group"></div>
                                         <div id="ctdiv_3" class="form-group">
+
                                             <label for="sourceType" id="lblSourceType" name="lblSourceType" class="col-sm-3 control-label">ช่องทางการซื้อขาย</label>
                                             <div id="divsourceType" class="col-sm-9 margin-bottom-xl">
                                                 
@@ -523,6 +526,18 @@
                                             <div id="ctcaseparent" class="col-sm-12 form-group margin-bottom-xl">
 
                                             </div>
+                                            <label class="col-sm-3 control-label">วันที่เกิดเหตุ</label>
+                                            <div class="col-sm-9 margin-bottom-xl">
+                                                <!--div class="input-group-content"-->
+                                                <!--input type="text" id="eventDate" name="eventDate" class="form-control fv"-->
+                                                <input type="text" id="eventDate" name="eventDate" class="form-control" placeholder="dd/MM/yyyy HH:MM:ss" />
+                                                <!--div-->
+                                                <!--span class="input-group-addon"><i class="fa fa-calendar"></i></!--span-->
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+
                                         </div>
 
                                         <div id="CaseGroup1" class="form-group">

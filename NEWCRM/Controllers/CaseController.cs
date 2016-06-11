@@ -280,7 +280,9 @@ namespace NEWCRM.Controllers
                         casreferenceDetail = model.txtRefDetail,
                         casdetail = model.txtDetail,
                         casstatusReason = model.cssStatusReason,
-                        casAttachFile = Session["case_attachfile_path"] == null ? "" : Session["case_attachfile_path"].ToString()
+                        casAttachFile = Session["case_attachfile_path"] == null ? "" : Session["case_attachfile_path"].ToString(),
+                        casPoNo = model.casPoNo,
+                        casPrice = model.casPrice
                         //casGroupID = AppUtils.Session.User.grpID
                     };
 
@@ -769,7 +771,7 @@ namespace NEWCRM.Controllers
                         }
                         model.casSummary += string.Format(" > {0}", model.casLevel2);
                     }
-                    if (model.casIDLevel3.HasValue)
+                    /*if (model.casIDLevel3.HasValue)
                     {
                         model.casIDSummary = model.casIDLevel3;
                         if (string.IsNullOrEmpty(model.casLevel3))
@@ -796,6 +798,8 @@ namespace NEWCRM.Controllers
                         }
                         model.casSummary += string.Format(" > {0}", model.casLevel5);
                     }
+
+                */
 
                     //if (model.casSLA.HasValue && model.casSLA > 0)
                     //{

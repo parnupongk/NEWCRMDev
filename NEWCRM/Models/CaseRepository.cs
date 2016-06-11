@@ -613,6 +613,7 @@ namespace NEWCRM.Models
         public int transfer { get; set; }
         public int accepted_agent { get; set; }
         public int abandoned { get; set; }
+        public decimal per_abandoned { get; set; }
         public string avg_engage_time { get; set; }
         public string engage_time { get; set; }
     }
@@ -670,6 +671,8 @@ namespace NEWCRM.Models
         public string paymentTypeOther { get; set; }
         public string txtVendorID { get; set; }
         public DateTime? eventDate { get; set; }
+        public string casPoNo { get; set; }
+        public string casPrice { get; set; }
     }
 
     public class CaseViewModelLocalization
