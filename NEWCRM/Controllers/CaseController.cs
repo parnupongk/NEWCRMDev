@@ -280,7 +280,7 @@ namespace NEWCRM.Controllers
                         casreferenceDetail = model.txtRefDetail,
                         casdetail = model.txtDetail,
                         casstatusReason = model.cssStatusReason,
-                        casAttachFile = Session["case_attachfile_path"] == null ? "" : Session["case_attachfile_path"].ToString(),
+                        casAttachFile = Session["case_attachfile_type"] == null ? "" : Session["case_attachfile_path"].ToString()+"|"+Session["case_attachfile_type"].ToString(),
                         casPoNo = model.casPoNo,
                         casPrice = model.casPrice
                         //casGroupID = AppUtils.Session.User.grpID
@@ -1219,7 +1219,7 @@ namespace NEWCRM.Controllers
                 body += "Reference Detail :" + cas.casreferenceDetail + "</br>";
                 body += "Detail :" + cas.casdetail + "</br>";
                 body += "NOTE :" + cas.casNote + "</br></br>";
-                body += "รบกวนผู้เกี่ยวข้อง กรุณา Feedback ผลหรือสถานะการดำเนินการ ให้ Call Center ทราบภายใน 3 วัน นับจากวันที่ได้รับเรื่อง";
+                //body += "รบกวนผู้เกี่ยวข้อง กรุณา Feedback ผลหรือสถานะการดำเนินการ ให้ Call Center ทราบภายใน 3 วัน นับจากวันที่ได้รับเรื่อง";
             }
             else //if (cas.casIDLevel1 == 2 || cas.casIDLevel1 == 3) // ร้องเรียน / บริการ
             {
@@ -1228,7 +1228,7 @@ namespace NEWCRM.Controllers
                 body += "Reference Detail :" + cas.casreferenceDetail + "</br>";
                 body += "Detail :" + cas.casdetail + "</br>";
                 body += "NOTE :" + cas.casNote + "</br></br>";
-                body += "รบกวนผู้เกี่ยวข้อง กรุณา Feedback ผลหรือสถานะการดำเนินการ ให้ Call Center ทราบภายใน 1 วัน นับจากวันที่ได้รับเรื่อง";
+                //body += "รบกวนผู้เกี่ยวข้อง กรุณา Feedback ผลหรือสถานะการดำเนินการ ให้ Call Center ทราบภายใน 1 วัน นับจากวันที่ได้รับเรื่อง";
             }
 
             d.MailContents.MailBody = body;
@@ -1239,19 +1239,14 @@ namespace NEWCRM.Controllers
         private string getMailTo(int? casIDLevel2)
         {
             string mail = ConfigurationManager.AppSettings["CASE_Email_ETDA_To"];
-            if (casIDLevel2 > 140 && casIDLevel2 < 153)
-            {
-                if (casIDLevel2 == 141 || casIDLevel2 == 143 || casIDLevel2 == 144) mail = ConfigurationManager.AppSettings["CASE_Email_PACC_To"];
-                else if (casIDLevel2 == 142) mail = ConfigurationManager.AppSettings["CASE_Email_PACC_To"] + "," + ConfigurationManager.AppSettings["CASE_Email_TCSD_To"];
-                else if (casIDLevel2 == 145 || casIDLevel2 == 147 || casIDLevel2 == 149 || casIDLevel2 == 150) mail = ConfigurationManager.AppSettings["CASE_Email_TCSD_To"];
-                else if (casIDLevel2 == 145 || casIDLevel2 == 147 || casIDLevel2 == 149 || casIDLevel2 == 150) mail = ConfigurationManager.AppSettings["CASE_Email_TCSD_To"];
-                else if (casIDLevel2 == 146 || casIDLevel2 == 148 || casIDLevel2 == 149 || casIDLevel2 == 150) mail = ConfigurationManager.AppSettings["CASE_Email_TCSD_To"] + "," + ConfigurationManager.AppSettings["CASE_Email_FDA_To"];
-                else if (casIDLevel2 == 151) mail = ConfigurationManager.AppSettings["CASE_Email_FDA_To"];
-                //else mail = ConfigurationManager.AppSettings["CASE_Email_ETDA_To"];
-            }
-            else if (casIDLevel2 > 152 && casIDLevel2 < 162) mail =  ConfigurationManager.AppSettings["CASE_Email_ThaiCERT_To"];
-            //else if (casIDLevel2 > 161 && casIDLevel2 < 174) return ConfigurationManager.AppSettings["CASE_Email_ETDA_To"];
-            else if (casIDLevel2 > 173) mail =  ConfigurationManager.AppSettings["CASE_Email_OTO_To"];
+
+            if (ConfigurationManager.AppSettings["CASE_ID_PACC"].IndexOf(casIDLevel2.ToString()) > -1) mail = ConfigurationManager.AppSettings["CASE_Email_PACC_To"];
+            else if (ConfigurationManager.AppSettings["CASE_ID_PACC_TCSD"].IndexOf(casIDLevel2.ToString()) > -1) mail = ConfigurationManager.AppSettings["CASE_Email_PACC_To"] + "," + ConfigurationManager.AppSettings["CASE_Email_TCSD_To"];
+            else if (ConfigurationManager.AppSettings["CASE_ID_TCSD"].IndexOf(casIDLevel2.ToString()) > -1) mail = ConfigurationManager.AppSettings["CASE_Email_TCSD_To"];
+            else if (ConfigurationManager.AppSettings["CASE_ID_TCSD_FDA"].IndexOf(casIDLevel2.ToString()) > -1) mail = ConfigurationManager.AppSettings["CASE_Email_TCSD_To"] + "," + ConfigurationManager.AppSettings["CASE_Email_FDA_To"];
+            else if (ConfigurationManager.AppSettings["CASE_ID_FDA"].IndexOf(casIDLevel2.ToString()) > -1) mail = ConfigurationManager.AppSettings["CASE_Email_FDA_To"];
+            else if (ConfigurationManager.AppSettings["CASE_ID_THAICERT"].IndexOf(casIDLevel2.ToString()) > -1) mail = ConfigurationManager.AppSettings["CASE_Email_ThaiCERT_To"];
+            else if (ConfigurationManager.AppSettings["CASE_ID_OTO"].IndexOf(casIDLevel2.ToString()) > -1) mail = ConfigurationManager.AppSettings["CASE_Email_OTO_To"];
 
             return mail;
             //}
@@ -1259,19 +1254,17 @@ namespace NEWCRM.Controllers
         private string getMailCC(int? casIDLevel2)
         {
             string mail = ConfigurationManager.AppSettings["CASE_Email_ETDA_CC"];
-            if (casIDLevel2 > 140 && casIDLevel2 < 153)
-            {
-                if (casIDLevel2 == 141 || casIDLevel2 == 143 || casIDLevel2 == 144) mail = ConfigurationManager.AppSettings["CASE_Email_PACC_CC"];
-                else if (casIDLevel2 == 142) mail = ConfigurationManager.AppSettings["CASE_Email_PACC_CC"] + "," + ConfigurationManager.AppSettings["CASE_Email_TCSD_CC"];
-                else if (casIDLevel2 == 145 || casIDLevel2 == 147 || casIDLevel2 == 149 || casIDLevel2 == 150) mail = ConfigurationManager.AppSettings["CASE_Email_TCSD_CC"];
-                else if (casIDLevel2 == 145 || casIDLevel2 == 147 || casIDLevel2 == 149 || casIDLevel2 == 150) mail = ConfigurationManager.AppSettings["CASE_Email_TCSD_CC"];
-                else if (casIDLevel2 == 146 || casIDLevel2 == 148 || casIDLevel2 == 149 || casIDLevel2 == 150) mail = ConfigurationManager.AppSettings["CASE_Email_TCSD_CC"] + "," + ConfigurationManager.AppSettings["CASE_Email_FDA_CC"];
-                else if (casIDLevel2 == 151) mail = ConfigurationManager.AppSettings["CASE_Email_FDA_CC"];
-                //else mail = ConfigurationManager.AppSettings["CASE_Email_ETDA_CC"];
-            }
-            else if (casIDLevel2 > 152 && casIDLevel2 < 162) mail = ConfigurationManager.AppSettings["CASE_Email_ThaiCERT_CC"];
+
+            if (ConfigurationManager.AppSettings["CASE_ID_PACC"].IndexOf(casIDLevel2.ToString()) > -1) mail = ConfigurationManager.AppSettings["CASE_Email_PACC_CC"];
+            else if (ConfigurationManager.AppSettings["CASE_ID_PACC_TCSD"].IndexOf(casIDLevel2.ToString()) > -1) mail = ConfigurationManager.AppSettings["CASE_Email_PACC_CC"] + "," + ConfigurationManager.AppSettings["CASE_Email_TCSD_CC"];
+            else if (ConfigurationManager.AppSettings["CASE_ID_TCSD"].IndexOf(casIDLevel2.ToString()) > -1) mail = ConfigurationManager.AppSettings["CASE_Email_TCSD_CC"];
+            else if (ConfigurationManager.AppSettings["CASE_ID_TCSD_FDA"].IndexOf(casIDLevel2.ToString()) > -1) mail = ConfigurationManager.AppSettings["CASE_Email_TCSD_CC"] + "," + ConfigurationManager.AppSettings["CASE_Email_FDA_CC"];
+            else if (ConfigurationManager.AppSettings["CASE_ID_FDA"].IndexOf(casIDLevel2.ToString()) > -1) mail = ConfigurationManager.AppSettings["CASE_Email_FDA_CC"];
+            //else mail = ConfigurationManager.AppSettings["CASE_Email_ETDA_CC"];
+
+            else if (ConfigurationManager.AppSettings["CASE_ID_THAICERT"].IndexOf(casIDLevel2.ToString()) > -1) mail = ConfigurationManager.AppSettings["CASE_Email_ThaiCERT_CC"];
             //else if (casIDLevel2 > 161 && casIDLevel2 < 174) return ConfigurationManager.AppSettings["CASE_Email_ETDA_CC"];
-            else if (casIDLevel2 > 173) mail = ConfigurationManager.AppSettings["CASE_Email_OTO_CC"];
+            else if (ConfigurationManager.AppSettings["CASE_ID_OTO"].IndexOf(casIDLevel2.ToString()) > -1) mail = ConfigurationManager.AppSettings["CASE_Email_OTO_CC"];
 
             return mail;
         }

@@ -85,7 +85,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>04/21/2016 17:06:56</publishTime>
     </File>
     <File Include="bin/Models/Case.cs">
-      <publishTime>06/08/2016 16:23:23</publishTime>
+      <publishTime>06/11/2016 23:28:40</publishTime>
     </File>
     <File Include="bin/Models/CaseAttachFile.cs">
       <publishTime>04/21/2016 17:06:56</publishTime>
@@ -157,16 +157,16 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>04/21/2016 17:06:56</publishTime>
     </File>
     <File Include="bin/Models/NEWCRM.Context.cs">
-      <publishTime>06/09/2016 12:54:44</publishTime>
+      <publishTime>06/11/2016 23:29:38</publishTime>
     </File>
     <File Include="bin/Models/NEWCRM.cs">
-      <publishTime>06/09/2016 12:54:53</publishTime>
+      <publishTime>06/11/2016 23:29:46</publishTime>
     </File>
     <File Include="bin/Models/NEWCRM.Designer.cs">
-      <publishTime>06/09/2016 12:54:54</publishTime>
+      <publishTime>06/11/2016 23:29:46</publishTime>
     </File>
     <File Include="bin/Models/NEWCRM.edmx.diagram">
-      <publishTime>06/09/2016 09:57:39</publishTime>
+      <publishTime>06/11/2016 23:29:31</publishTime>
     </File>
     <File Include="bin/Models/Notification.cs">
       <publishTime>04/21/2016 17:06:56</publishTime>
@@ -337,7 +337,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/28/2013 08:12:40</publishTime>
     </File>
     <File Include="bin/NEWCRM.dll">
-      <publishTime>06/10/2016 11:28:44</publishTime>
+      <publishTime>06/15/2016 09:50:27</publishTime>
     </File>
     <File Include="bin/Newtonsoft.Json.dll">
       <publishTime>01/04/2016 10:07:00</publishTime>
@@ -379,7 +379,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>01/04/2016 10:07:02</publishTime>
     </File>
     <File Include="bin/Web.config">
-      <publishTime>06/10/2016 10:45:06</publishTime>
+      <publishTime>06/13/2016 13:46:40</publishTime>
     </File>
     <File Include="bin/Web.Debug.config">
       <publishTime>01/04/2016 10:06:48</publishTime>
@@ -4732,7 +4732,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/09/2016 08:56:42</publishTime>
     </File>
     <File Include="Models/NEWCRM.edmx.diagram">
-      <publishTime>06/09/2016 09:57:39</publishTime>
+      <publishTime>06/11/2016 23:29:31</publishTime>
     </File>
     <File Include="packages.config">
       <publishTime>01/04/2016 10:07:08</publishTime>
@@ -4813,13 +4813,13 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>05/17/2016 15:50:28</publishTime>
     </File>
     <File Include="Views/Case/CaseGroup1.cshtml">
-      <publishTime>06/08/2016 15:13:38</publishTime>
+      <publishTime>06/13/2016 13:30:51</publishTime>
     </File>
     <File Include="Views/Case/CaseGroup2.cshtml">
-      <publishTime>06/09/2016 09:38:39</publishTime>
+      <publishTime>06/11/2016 23:02:11</publishTime>
     </File>
     <File Include="Views/Case/CaseInfo.cshtml">
-      <publishTime>06/09/2016 17:57:49</publishTime>
+      <publishTime>06/13/2016 14:16:09</publishTime>
     </File>
     <File Include="Views/Case/CaseParent.cshtml">
       <publishTime>06/04/2016 03:07:36</publishTime>
@@ -4843,7 +4843,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>04/21/2016 18:08:58</publishTime>
     </File>
     <File Include="Views/Case/NewCase.cshtml">
-      <publishTime>06/09/2016 16:20:58</publishTime>
+      <publishTime>06/13/2016 13:44:23</publishTime>
     </File>
     <File Include="Views/Case/NewCaseList.cshtml">
       <publishTime>04/21/2016 18:08:58</publishTime>
@@ -4888,7 +4888,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>04/21/2016 18:08:58</publishTime>
     </File>
     <File Include="Views/Contact/CommonDetail.cshtml">
-      <publishTime>04/21/2016 18:08:58</publishTime>
+      <publishTime>06/10/2016 14:10:44</publishTime>
     </File>
     <File Include="Views/Contact/CommonDetail.cshtml.bak">
       <publishTime>04/21/2016 18:08:58</publishTime>
@@ -4960,40 +4960,43 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/05/2016 00:14:40</publishTime>
     </File>
     <File Include="Views/RepCase/Index.cshtml">
-      <publishTime>06/10/2016 09:32:53</publishTime>
+      <publishTime>06/13/2016 08:57:39</publishTime>
     </File>
     <File Include="Views/RepCase/repSummary.cshtml">
-      <publishTime>06/09/2016 17:09:39</publishTime>
+      <publishTime>06/14/2016 15:56:37</publishTime>
     </File>
     <File Include="Views/RepCase/repSummaryChild.cshtml">
       <publishTime>06/05/2016 03:26:23</publishTime>
     </File>
     <File Include="Views/RepCase/rptCallDay.cshtml">
-      <publishTime>06/07/2016 18:46:45</publishTime>
+      <publishTime>06/14/2016 18:23:39</publishTime>
     </File>
     <File Include="Views/RepCase/rptCallHour.cshtml">
-      <publishTime>06/07/2016 18:47:54</publishTime>
+      <publishTime>06/14/2016 17:36:17</publishTime>
     </File>
     <File Include="Views/RepCase/rptCaseCyb.cshtml">
       <publishTime>06/09/2016 18:36:54</publishTime>
     </File>
     <File Include="Views/RepCase/rptCaseOnl.cshtml">
-      <publishTime>06/09/2016 18:36:54</publishTime>
+      <publishTime>06/15/2016 09:18:04</publishTime>
     </File>
     <File Include="Views/RepCase/rptCaseRaw.cshtml">
       <publishTime>06/09/2016 18:36:54</publishTime>
     </File>
     <File Include="Views/RepCase/rptCaseRep.cshtml">
-      <publishTime>06/09/2016 18:36:54</publishTime>
+      <publishTime>06/15/2016 08:46:53</publishTime>
     </File>
     <File Include="Views/RepCase/rptEndCall.cshtml">
-      <publishTime>06/10/2016 10:31:48</publishTime>
+      <publishTime>06/15/2016 09:17:39</publishTime>
     </File>
     <File Include="Views/Shared/Error.cshtml">
       <publishTime>01/04/2016 10:06:48</publishTime>
     </File>
     <File Include="Views/Shared/_Layout.cshtml">
-      <publishTime>06/07/2016 18:18:06</publishTime>
+      <publishTime>06/13/2016 13:38:40</publishTime>
+    </File>
+    <File Include="Views/Shared/_Report.cshtml">
+      <publishTime>06/13/2016 08:56:31</publishTime>
     </File>
     <File Include="Views/Todolist/CaseList.cshtml">
       <publishTime>05/06/2016 11:50:28</publishTime>
@@ -5014,7 +5017,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>01/04/2016 10:06:48</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>06/10/2016 10:45:06</publishTime>
+      <publishTime>06/13/2016 13:46:40</publishTime>
     </File>
   </ItemGroup>
 </Project>

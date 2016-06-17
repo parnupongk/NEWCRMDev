@@ -8,7 +8,6 @@ using System.Data;
 
 namespace NEWCRM.Controllers
 {
-    [LoginExpireAttribute]
     public class RepCaseController : Controller
     {
         //
@@ -154,7 +153,7 @@ namespace NEWCRM.Controllers
             int caseIDLevel4 = 0;
 
             if (Request.Form["reptype"].ToString() == "1") { return RedirectToAction("rptCallHour", new{startDate = startDate,endDate = endDate });}
-            else if (Request.Form["reptype"].ToString() == "2") { return RedirectToAction("rptCallDay", new { startDate = startDate });}
+            else if (Request.Form["reptype"].ToString() == "2") { return RedirectToAction("rptCallDay", new { startDate = startDate, endDate = endDate });}
             else if (Request.Form["reptype"].ToString() == "3") { return RedirectToAction("rptCaseRep", new { startDate = startDate, endDate = endDate, caseIDLevel1 = caseIDLevel1, caseIDLevel2 = caseIDLevel2, caseIDLevel3 = caseIDLevel3, caseIDLevel4 = caseIDLevel4 }); }
             else if (Request.Form["reptype"].ToString() == "4") { return RedirectToAction("rptCaseOnl", new { startDate = startDate, endDate = endDate, caseIDLevel1 = 1, caseIDLevel2 = caseIDLevel2, caseIDLevel3 = caseIDLevel3, caseIDLevel4 = caseIDLevel4 }); }
             else if (Request.Form["reptype"].ToString() == "5") { return RedirectToAction("rptCaseRaw", new { startDate = startDate, endDate = endDate, caseIDLevel1 = 2, caseIDLevel2 = caseIDLevel2, caseIDLevel3 = caseIDLevel3, caseIDLevel4 = caseIDLevel4 }); }
@@ -186,6 +185,12 @@ namespace NEWCRM.Controllers
                     }).ToList();
 
             rptListCase.list_endcall = call;
+
+            decimal totalAnswer = rptListCase.list_endcall.Sum(x => x.total_answer);
+            ViewBag.per_score_1 = Math.Round(((rptListCase.list_endcall.Sum(x => x.score_1) * 100) / totalAnswer),2);
+            ViewBag.per_score_2 = Math.Round(((rptListCase.list_endcall.Sum(x => x.score_2) * 100) / totalAnswer),2);
+            ViewBag.per_score_3 = Math.Round(((rptListCase.list_endcall.Sum(x => x.score_3) * 100) / totalAnswer),2);
+
             ViewBag.startDate = startDate;
             ViewBag.endDate = endDate;
             return PartialView(rptListCase);
@@ -235,18 +240,18 @@ namespace NEWCRM.Controllers
                 Response.Write("</tr>");
             }
 
-
+            decimal totalAnswer = rptListCase.list_endcall.Sum(x => x.total_answer);
             Response.Write("<tr style=\"background-color:#366092;color:#ffffff;font-weight:bold;text-align:center;\">");
             Response.Write("<td>รวม</td>");
             Response.Write("<td>" + rptListCase.list_endcall.Sum(x => x.total_answer) + "</td>");
             Response.Write("<td>" + rptListCase.list_endcall.Sum(x => x.score_wrong) + "</td>");
             Response.Write("<td>" + rptListCase.list_endcall.Sum(x => x.not_answer) + "</td>");
             Response.Write("<td>" + rptListCase.list_endcall.Sum(x => x.score_1) + "</td>");
-            Response.Write("<td>" + rptListCase.list_endcall.Sum(x => x.per_score_1) + "</td>");
+            Response.Write("<td>" + Math.Round(((rptListCase.list_endcall.Sum(x => x.score_1) * 100) / totalAnswer), 2) + "</td>");
             Response.Write("<td>" + rptListCase.list_endcall.Sum(x => x.score_2) + "</td>");
-            Response.Write("<td>" + rptListCase.list_endcall.Sum(x => x.per_score_2) + "</td>");
+            Response.Write("<td>" + Math.Round(((rptListCase.list_endcall.Sum(x => x.score_2) * 100) / totalAnswer), 2) + "</td>");
             Response.Write("<td>" + rptListCase.list_endcall.Sum(x => x.score_3) + "</td>");
-            Response.Write("<td>" + rptListCase.list_endcall.Sum(x => x.per_score_3) + "</td>");
+            Response.Write("<td>" + Math.Round(((rptListCase.list_endcall.Sum(x => x.score_3) * 100) / totalAnswer), 2) + "</td>");
             Response.Write("</tr>");
 
             Response.Write("</tbody></table></td></tr></table>");
@@ -294,12 +299,22 @@ namespace NEWCRM.Controllers
                    transfer = Convert.ToInt32(dr["transfer"].ToString()),
                    accepted_agent = Convert.ToInt32(dr["accepted_agent"].ToString()),
                    abandoned = Convert.ToInt32(dr["abandoned"].ToString()),
-                   per_abandoned = Math.Round(Convert.ToDecimal((Convert.ToInt32(dr["abandoned"].ToString()) * 100 / (Convert.ToInt32(dr["accepted_agent"].ToString()) + Convert.ToInt32(dr["abandoned"].ToString()))  )),2),
-                   avg_engage_time = dr["avg_engage_time"].ToString(),
-                   engage_time = dr["engage_time"].ToString()
+                   avg_engage_time = TimeSpan.Parse( dr["avg_engage_time"].ToString()),
+                   engage_time = TimeSpan.Parse( dr["engage_time"].ToString()),
+                   per_abandoned = dr["accepted_agent"].ToString() == "0" && dr["abandoned"].ToString() == "0" ? Math.Round(decimal.Parse("0"), 2) : Math.Round((decimal.Parse(dr["abandoned"].ToString()) * 100) /
+                   (decimal.Parse(dr["abandoned"].ToString()) + decimal.Parse(dr["accepted_agent"].ToString())), 2)
                }).ToList();
 
+            
+
             rptListCase.list_call = call;
+            ViewBag.SumTotal = Math.Round(decimal.Parse((rptListCase.list_call.Sum(x => x.abandoned) * 100).ToString()) / 
+                (rptListCase.list_call.Sum(x => x.accepted_agent) + rptListCase.list_call.Sum(x => x.abandoned)) ,2);
+
+            double sec = Math.Round(rptListCase.list_call.Aggregate(new TimeSpan(0), (p, v) => p.Add(v.engage_time)).TotalSeconds / rptListCase.list_call.Sum(x => x.accepted_agent), 0);
+
+            ViewBag.avg_engage_time = TimeSpan.FromSeconds(sec) ;
+
             ViewBag.startDate = startDate;
             ViewBag.endDate = endDate;
             return PartialView(rptListCase);
@@ -326,94 +341,153 @@ namespace NEWCRM.Controllers
                         transfer = Convert.ToInt32(dr["transfer"].ToString()),
                         accepted_agent = Convert.ToInt32(dr["accepted_agent"].ToString()),
                         abandoned = Convert.ToInt32(dr["abandoned"].ToString()),
-                        avg_engage_time = dr["avg_engage_time"].ToString(),
-                        engage_time = dr["engage_time"].ToString(),
-                        per_abandoned = Math.Round(Convert.ToDecimal((Convert.ToInt32(dr["abandoned"].ToString()) * 100 / (Convert.ToInt32(dr["accepted_agent"].ToString()) + Convert.ToInt32(dr["abandoned"].ToString())))), 2)
+                        avg_engage_time = TimeSpan.Parse( dr["avg_engage_time"].ToString()),
+                        engage_time = TimeSpan.Parse(dr["engage_time"].ToString()),
+                        per_abandoned = dr["accepted_agent"].ToString() =="0" && dr["abandoned"].ToString()=="0" ? Math.Round(decimal.Parse("0"), 2) :   Math.Round((decimal.Parse(dr["abandoned"].ToString()) * 100) /
+                   (decimal.Parse(dr["abandoned"].ToString()) + decimal.Parse(dr["accepted_agent"].ToString())), 2)
                     }).ToList();
+            rptListCase.list_call = call;
             int irows = 0;
             foreach (var item in call)
             {
                 irows++;
                 Response.Write("<tr>");
-                Response.Write("<td>'" + item.period.ToString() + "</td>");
+                Response.Write("<td>&#8203;" + item.period + "</td>");
                 Response.Write("<td>" + item.entered + "</td>");
                 Response.Write("<td>" + item.transfer + "</td>");
                 Response.Write("<td>" + item.accepted_agent + "</td>");
                 Response.Write("<td>" + item.abandoned + "</td>");
                 Response.Write("<td>" + item.per_abandoned + "</td>");
-                Response.Write("<td>" + item.engage_time + "</td>");
                 Response.Write("<td>" + item.avg_engage_time + "</td>");
+                Response.Write("<td>" + item.engage_time + "</td>");
                 Response.Write("</tr>");
             }
+
+
+            //TimeSpan engage_time = new TimeSpan()
+            var totalTime = rptListCase
+                            .list_call
+                            .Aggregate(new TimeSpan(0), (p, v) => p.Add(v.engage_time));
+            var avg_totalTime = rptListCase
+                            .list_call
+                            .Aggregate(new TimeSpan(0), (p, v) => p.Add(v.avg_engage_time));
+
+            double sec = Math.Round(rptListCase.list_call.Aggregate(new TimeSpan(0), (p, v) => p.Add(v.engage_time)).TotalSeconds / rptListCase.list_call.Sum(x => x.accepted_agent), 0);
+
+            Response.Write("<tr style=\"background-color:#366092;color:#ffffff;font-weight:bold;text-align:center;\">");
+            Response.Write("<td>Sum</td>");
+            Response.Write("<td>" + rptListCase.list_call.Sum(x => x.entered) + "</td>");
+            Response.Write("<td>" + rptListCase.list_call.Sum(x => x.transfer) + "</td>");
+            Response.Write("<td>" + rptListCase.list_call.Sum(x => x.accepted_agent) + "</td>");
+            Response.Write("<td>" + rptListCase.list_call.Sum(x => x.abandoned) + "</td>");
+            Response.Write("<td>" + Math.Round(decimal.Parse((rptListCase.list_call.Sum(x => x.abandoned) * 100).ToString()) /
+                (rptListCase.list_call.Sum(x => x.accepted_agent) + rptListCase.list_call.Sum(x => x.abandoned)), 2) + "</td>");
+            Response.Write("<td>" + TimeSpan.FromSeconds(sec) + "</td>");
+            Response.Write("<td>" + totalTime + "</td>");
+            Response.Write("</tr>");
 
             Response.Write("</tbody></table></td></tr></table>");
             Response.End();
         }
 
-        public ActionResult rptCallDay(DateTime startDate)
+        public ActionResult rptCallDay(DateTime startDate, DateTime endDate)
         {
 
             //DateTime startDate = DateTime.ParseExact(Request.Form["startdate"], "dd/MM/yyyy", null);
-            DataTable dt = new CaseRepository().GetCaseReport_CALLPERDAY(startDate.Month.ToString("00"), startDate.Year.ToString());
+            DataTable dt = new CaseRepository().GetCaseReport_CALLPERDAY(startDate.ToString("yyyy-MM-dd"), endDate.ToString("yyyy-MM-dd"));
             ListRepCaseModel rptListCase = new ListRepCaseModel();
             List<CALLPERHOUR> call = new List<CALLPERHOUR>();
             Session["rowCount"] = dt.Rows.Count;
             call = (from DataRow dr in dt.Rows
                     select new CALLPERHOUR()
                     {
-                        period = dr["period"].ToString(),
+                        period = DateTime.ParseExact(dr["period"].ToString(), "yyyy-MM-dd", null).ToString("dd-MMM-yyyy"),
                         entered = Convert.ToInt32(dr["entered"].ToString()),
                         transfer = Convert.ToInt32(dr["transfer"].ToString()),
                         accepted_agent = Convert.ToInt32(dr["accepted_agent"].ToString()),
                         abandoned = Convert.ToInt32(dr["abandoned"].ToString()),
-                        avg_engage_time = dr["avg_engage_time"].ToString(),
-                        engage_time = dr["engage_time"].ToString()
+                        avg_engage_time = TimeSpan.Parse( dr["avg_engage_time"].ToString()),
+                        engage_time = TimeSpan.Parse(dr["engage_time"].ToString()),
+                        per_abandoned = dr["accepted_agent"].ToString() == "0" && dr["abandoned"].ToString() == "0" ? Math.Round(decimal.Parse("0"), 2) : Math.Round((decimal.Parse(dr["abandoned"].ToString()) * 100) /
+                   (decimal.Parse(dr["abandoned"].ToString()) + decimal.Parse(dr["accepted_agent"].ToString())), 2)
                     }).ToList();
 
             rptListCase.list_call = call;
+
+            ViewBag.SumTotal = Math.Round(decimal.Parse((rptListCase.list_call.Sum(x => x.abandoned) * 100).ToString()) /
+                (rptListCase.list_call.Sum(x => x.accepted_agent) + rptListCase.list_call.Sum(x => x.abandoned)), 2);
+
+            double sec = Math.Round(rptListCase.list_call.Aggregate(new TimeSpan(0), (p, v) => p.Add(v.engage_time)).TotalSeconds / rptListCase.list_call.Sum(x => x.accepted_agent), 0);
+
+            ViewBag.avg_engage_time = TimeSpan.FromSeconds(sec);
+
             ViewBag.startDate = startDate;
+            ViewBag.endDate = endDate;
             return PartialView(rptListCase);
         }
-        public void excelCallDay(DateTime startDate)
+        public void excelCallDay(DateTime startDate, DateTime endDate)
         {
             Response.AddHeader("Content-Type", "application/vnd.ms-excel");
             Response.AddHeader("Content-Disposition", "attachment;filename=CallPerformanceReportByDay_" + DateTime.Now.ToString("yyyyMMdd") + ".xls");
     
             //Response.Write("</tbody></table></td></tr></table>");
 
-            DataTable dt = new CaseRepository().GetCaseReport_CALLPERDAY(startDate.Month.ToString("00"), startDate.Year.ToString());
+            DataTable dt = new CaseRepository().GetCaseReport_CALLPERDAY(startDate.ToString("yyyy-MM-dd"), endDate.ToString("yyyy-MM-dd"));
+            ListRepCaseModel rptListCase = new ListRepCaseModel();
             List<CALLPERHOUR> call = new List<CALLPERHOUR>();
 
             call = (from DataRow dr in dt.Rows
                     select new CALLPERHOUR()
                     {
-                        period = dr["period"].ToString(),
+                        period = DateTime.ParseExact( dr["period"].ToString(),"yyyy-MM-dd",null).ToString("dd-MMM-yyyy"),
                         entered = Convert.ToInt32(dr["entered"].ToString()),
                         transfer = Convert.ToInt32(dr["transfer"].ToString()),
                         accepted_agent = Convert.ToInt32(dr["accepted_agent"].ToString()),
                         abandoned = Convert.ToInt32(dr["abandoned"].ToString()),
-                        avg_engage_time = dr["avg_engage_time"].ToString(),
-                        engage_time = dr["engage_time"].ToString()
+                        avg_engage_time = TimeSpan.Parse( dr["avg_engage_time"].ToString()),
+                        engage_time = TimeSpan.Parse( dr["engage_time"].ToString()),
+                        per_abandoned = dr["accepted_agent"].ToString() == "0" && dr["abandoned"].ToString() == "0" ? Math.Round(decimal.Parse("0"),2) : Math.Round((decimal.Parse(dr["abandoned"].ToString()) * 100) /
+                   (decimal.Parse(dr["abandoned"].ToString()) + decimal.Parse(dr["accepted_agent"].ToString())), 2)
                     }).ToList();
 
-            Response.Write("<table cellpadding=\"5\" width=\"100%\" align=\"center\"><tr><td align=\"left\" style=\"font-size:20pt;font-weight:bold;vertical-align:middle;height:50px;\">ETDA Call Center</td><td align=\"right\"><img src='http://parnupongk.azurewebsites.net/images/logo.png' /></td></tr><tr><td colspan=\"2\" align=\"left\" style=\"font-size:16pt;font-weight:bold;vertical-align:middle;height:40px;\">Call Performance Report By Day</td></tr><tr><td colspan=\"2\" align=\"left\" style=\"vertical-align:middle;height:30px;\">Report of " + startDate.Month.ToString("00") + " " + startDate.Year.ToString() + "</td></tr><tr><td colspan=\"2\"><table border=\"1\" width=\"100%\" cellpadding=\"5\"><thead><tr><th style=\"background-color:#366092;color:#ffffff;font-weight:bold;\">Date</th><th style=\"background-color:#366092;color:#ffffff;font-weight:bold;\">Incoming Call</th><th style=\"background-color:#366092;color:#ffffff;font-weight:bold;\">Transfer to Agent</th><th style=\"background-color:#366092;color:#ffffff;font-weight:bold;\">Answer Call</th><th style=\"background-color:#366092;color:#ffffff;font-weight:bold;\">Abandoned</th><th style=\"background-color:#366092;color:#ffffff;font-weight:bold;\">% Abandoned</th><th style=\"background-color:#366092;color:#ffffff;font-weight:bold;\">Average talk time</th><th style=\"background-color:#366092;color:#ffffff;font-weight:bold;\">Total talk time</th></tr></thead><tbody>");
+            Response.Write("<table cellpadding=\"5\" width=\"100%\" align=\"center\"><tr><td align=\"left\" style=\"font-size:20pt;font-weight:bold;vertical-align:middle;height:50px;\">ETDA Call Center</td><td align=\"right\"><img src='http://parnupongk.azurewebsites.net/images/logo.png' /></td></tr><tr><td colspan=\"2\" align=\"left\" style=\"font-size:16pt;font-weight:bold;vertical-align:middle;height:40px;\">Call Performance Report By Day</td></tr><tr><td colspan=\"2\" align=\"left\" style=\"vertical-align:middle;height:30px;\">Report of " + startDate.ToString("dd MMM yyy") + " to " + endDate.ToString("dd MMM yyy") + " </td></tr><tr><td colspan=\"2\"><table border=\"1\" width=\"100%\" cellpadding=\"5\"><thead><tr><th style=\"background-color:#366092;color:#ffffff;font-weight:bold;\">Date</th><th style=\"background-color:#366092;color:#ffffff;font-weight:bold;\">Incoming Call</th><th style=\"background-color:#366092;color:#ffffff;font-weight:bold;\">Transfer to Agent</th><th style=\"background-color:#366092;color:#ffffff;font-weight:bold;\">Answer Call</th><th style=\"background-color:#366092;color:#ffffff;font-weight:bold;\">Abandoned</th><th style=\"background-color:#366092;color:#ffffff;font-weight:bold;\">% Abandoned</th><th style=\"background-color:#366092;color:#ffffff;font-weight:bold;\">Average talk time (hh:mm:ss)</th><th style=\"background-color:#366092;color:#ffffff;font-weight:bold;\">Total talk time (hh:mm:ss)</th></tr></thead><tbody>");
+
+            rptListCase.list_call = call;
 
             int irows = 0;
             foreach (var item in call)
             {
                 irows++;
                 Response.Write("<tr>");
-                Response.Write("<td>" + irows + "</td>");
                 Response.Write("<td>" + item.period + "</td>");
                 Response.Write("<td>" + item.entered + "</td>");
                 Response.Write("<td>" + item.transfer + "</td>");
                 Response.Write("<td>" + item.accepted_agent + "</td>");
                 Response.Write("<td>" + item.abandoned + "</td>");
+                Response.Write("<td>" + item.per_abandoned + "</td>");
                 Response.Write("<td>" + item.avg_engage_time + "</td>");
                 Response.Write("<td>" + item.engage_time + "</td>");
                 Response.Write("</tr>");
             }
 
+            var totalTime = rptListCase
+                .list_call
+                .Aggregate(new TimeSpan(0), (p, v) => p.Add(v.engage_time));
+            var avg_totalTime = rptListCase.list_call.Aggregate(new TimeSpan(0), (p, v) => p.Add(v.avg_engage_time));
+
+            double sec = Math.Round(rptListCase.list_call.Aggregate(new TimeSpan(0), (p, v) => p.Add(v.engage_time)).TotalSeconds / rptListCase.list_call.Sum(x => x.accepted_agent), 0);
+
+            Response.Write("<tr style=\"background-color:#366092;color:#ffffff;font-weight:bold;text-align:center;\">");
+            Response.Write("<td>Sum</td>");
+            Response.Write("<td>" + rptListCase.list_call.Sum(x => x.entered) + "</td>");
+            Response.Write("<td>" + rptListCase.list_call.Sum(x => x.transfer) + "</td>");
+            Response.Write("<td>" + rptListCase.list_call.Sum(x => x.accepted_agent) + "</td>");
+            Response.Write("<td>" + rptListCase.list_call.Sum(x => x.abandoned) + "</td>");
+            Response.Write("<td>" + Math.Round(decimal.Parse((rptListCase.list_call.Sum(x => x.abandoned) * 100).ToString()) /
+                (rptListCase.list_call.Sum(x => x.accepted_agent) + rptListCase.list_call.Sum(x => x.abandoned)), 2) + "</td>");
+            Response.Write("<td>" + TimeSpan.FromSeconds(sec) + "</td>");
+            Response.Write("<td>" + totalTime + "</td>");
+            Response.Write("</tr>");
 
             Response.Write("</tbody></table></td></tr></table>");
             Response.End();
@@ -436,7 +510,8 @@ namespace NEWCRM.Controllers
                            casdetail = dr["casdetail"].ToString(),
                            cssName = dr["cssName"].ToString(),
                            casOwnerByName = dr["casOwnerByName"].ToString(),
-                           ctaNumber = dr["phnNumber"].ToString()
+                           ctaNumber = dr["phnNumber"].ToString(),
+                           casNote = dr["casNote"].ToString()
                        }).ToList();
             rptListCase.list_repcase = rptCase;
             ViewBag.startDate = startDate;
@@ -468,7 +543,8 @@ namespace NEWCRM.Controllers
                            casdetail = dr["casdetail"].ToString(),
                            cssName = dr["cssName"].ToString(),
                            casOwnerByName = dr["casOwnerByName"].ToString(),
-                           ctaNumber = dr["phnNumber"].ToString()
+                           ctaNumber = dr["phnNumber"].ToString(),
+                           casNote = dr["casNote"].ToString()
                        }).ToList();
 
             Response.Write("<table cellpadding=\"5\" width=\"100%\" align=\"center\"><tr><td align=\"left\" style=\"font-size:20pt;font-weight:bold;vertical-align:middle;height:50px;\">ETDA Call Center</td><td align=\"right\"><img src='http://parnupongk.azurewebsites.net/images/logo.png' /></td></tr><tr><td colspan=\"2\" align=\"left\" style=\"font-size:16pt;font-weight:bold;vertical-align:middle;height:40px;\">Case Detail Report</td></tr><tr><td colspan=\"2\" align=\"left\" style=\"vertical-align:middle;height:30px;\">Report of " + startDate.ToString("dd MMM yyy") + " to " + endDate.ToString("dd MMM yyy") + " </td></tr><tr><td colspan=\"2\"><table border=\"1\" width=\"100%\" cellpadding=\"5\"><thead><tr><th style=\"background-color:#366092;color:#ffffff;font-weight:bold;\">No.</th><th style=\"background-color:#366092;color:#ffffff;font-weight:bold;\">CaseID</th><th style=\"background-color:#366092;color:#ffffff;font-weight:bold;\">CreatedDate</th><th style=\"background-color:#366092;color:#ffffff;font-weight:bold;\">Channel</th><th style=\"background-color:#366092;color:#ffffff;font-weight:bold;\">ContactName</th><th style=\"background-color:#366092;color:#ffffff;font-weight:bold;\">CaseType</th><th style=\"background-color:#366092;color:#ffffff;font-weight:bold;\">PhoneNumber</th><th style=\"background-color:#366092;color:#ffffff;font-weight:bold;\">Detail</th><th style=\"background-color:#366092;color:#ffffff;font-weight:bold;\">Status</th><th style=\"background-color:#366092;color:#ffffff;font-weight:bold;\">CreatedBy</th></tr></thead><tbody>");
@@ -484,7 +560,7 @@ namespace NEWCRM.Controllers
                 Response.Write("<td style=\"text-align:left;vertical-align:top;\">" + item.ctaFullName + "</td>");
                 Response.Write("<td style=\"text-align:left;vertical-align:top;\">" + item.casSummary + "</td>");
                 Response.Write("<td style=\"text-align:left;vertical-align:top;\">&#8203;" + item.ctaNumber + "</td>");
-                Response.Write("<td style=\"text-align:left;vertical-align:top;\">" + item.casdetail + "</td>");
+                Response.Write("<td style=\"text-align:left;vertical-align:top;\">" + item.casNote + "</td>");
                 Response.Write("<td style=\"text-align:left;vertical-align:top;\">" + item.cssName + "</td>");
                 Response.Write("<td style=\"text-align:center;vertical-align:top;\">" + item.casOwnerByName + "</td>");
                 Response.Write("</tr>");
@@ -522,7 +598,8 @@ namespace NEWCRM.Controllers
                            ctaNumber = dr["phnNumber"].ToString(),
                            caseventDate = dr["caseventDate"].ToString(),
                            caspaymentType = dr["caspaymentType"].ToString(),
-                           casvendorID = dr["casVendorID"].ToString()
+                           casvendorID = dr["casVendorID"].ToString(),
+                           casNote  = dr["casNote"].ToString()
                        }).ToList();
 
 
@@ -568,7 +645,8 @@ namespace NEWCRM.Controllers
                            ctaNumber = dr["phnNumber"].ToString(),
                            caseventDate = dr["caseventDate"].ToString(),
                            caspaymentType = dr["caspaymentType"].ToString(),
-                           casvendorID = dr["casVendorID"].ToString()
+                           casvendorID = dr["casVendorID"].ToString(),
+                           casNote = dr["casNote"].ToString()
                        }).ToList();
 
             Response.Write("<table cellpadding=\"5\" width=\"100%\" align=\"center\"><tr><td align=\"left\" style=\"font-size:20pt;font-weight:bold;vertical-align:middle;height:50px;\">ETDA Call Center</td><td align=\"right\"><img src='http://parnupongk.azurewebsites.net/images/logo.png' /></td></tr><tr><td colspan=\"2\" align=\"left\" style=\"font-size:16pt;font-weight:bold;vertical-align:middle;height:40px;\">CASE DETAIL REPORT (ร้องเรียนซื้อ ขายออนไลน์)</td></tr><tr><td colspan=\"2\" align=\"left\" style=\"vertical-align:middle;height:30px;\">Report of " + startDate.ToString("dd MMM yyy") + " to " + endDate.ToString("dd MMM yyy") + " </td></tr><tr><td colspan=\"2\"><table border=\"1\" width=\"100%\" cellpadding=\"5\"><thead><tr><th style=\"background-color:#366092;color:#ffffff;font-weight:bold;\">No.</th><th style=\"background-color:#366092;color:#ffffff;font-weight:bold;\">Case ID</th><th style=\"background-color:#366092;color:#ffffff;font-weight:bold;\">Created Date</th><th style=\"background-color:#366092;color:#ffffff;font-weight:bold;\">Channel</th><th style=\"background-color:#366092;color:#ffffff;font-weight:bold;\">Contact Name</th><th style=\"background-color:#366092;color:#ffffff;font-weight:bold;\">Transaction Date</th><th style=\"background-color:#366092;color:#ffffff;font-weight:bold;\">Phone Number</th><th style=\"background-color:#366092;color:#ffffff;font-weight:bold;\">Main Case Type</th><th style=\"background-color:#366092;color:#ffffff;font-weight:bold;\">Sub Case Type</th><th style=\"background-color:#366092;color:#ffffff;font-weight:bold;\">Commerce Type</th><th style=\"background-color:#366092;color:#ffffff;font-weight:bold;\">Commerce Channel</th><th style=\"background-color:#366092;color:#ffffff;font-weight:bold;\">Product Category</th><th style=\"background-color:#366092;color:#ffffff;font-weight:bold;\">Service Category</th><th style=\"background-color:#366092;color:#ffffff;font-weight:bold;\">Delivery Type</th><th style=\"background-color:#366092;color:#ffffff;font-weight:bold;\">Payment Type</th><th style=\"background-color:#366092;color:#ffffff;font-weight:bold;\">Value Range</th><th style=\"background-color:#366092;color:#ffffff;font-weight:bold;\">Conversation Channel</th><th style=\"background-color:#366092;color:#ffffff;font-weight:bold;\">Vendor ID</th><th style=\"background-color:#366092;color:#ffffff;font-weight:bold;\">Detail</th><th style=\"background-color:#366092;color:#ffffff;font-weight:bold;\">Reference</th><th style=\"background-color:#366092;color:#ffffff;font-weight:bold;\">Status</th></tr></thead><tbody>");
@@ -718,7 +796,7 @@ namespace NEWCRM.Controllers
                            ctaEmail = dr["ctaEmail"].ToString(),
                            ctaNumber = dr["phnNumber"].ToString(),
                            caseventDate = dr["caseventDate"].ToString(),
-                           casAttachFile = dr["casAttachFile"].ToString(),
+                           casAttachFile = dr["casAttachFile"] != null && dr["casAttachFile"].ToString().Split('|').Length > 1 ? dr["casAttachFile"].ToString().Split('|')[1] : "" ,
                            ctaCareer = dr["ctaCareer"].ToString()
                        }).ToList();
 
@@ -759,7 +837,7 @@ namespace NEWCRM.Controllers
                            ctaEmail = dr["ctaEmail"].ToString(),
                            ctaNumber = dr["phnNumber"].ToString(),
                            caseventDate = dr["caseventDate"].ToString(),
-                           casAttachFile = dr["casAttachFile"].ToString(),
+                           casAttachFile = dr["casAttachFile"] !=null && dr["casAttachFile"].ToString().Split('|').Length > 1 ? dr["casAttachFile"].ToString().Split('|')[1] : "",
                            ctaCareer = dr["ctaCareer"].ToString()
                        }).ToList(); 
 
@@ -782,7 +860,7 @@ namespace NEWCRM.Controllers
                 Response.Write("<td>" + item.casLevel3 + "</td>");
                 Response.Write("<td>" + item.casLevel6 + "</td>");
                 Response.Write("<td>" + item.casreferenceDetail + "</td>");
-                Response.Write("<td>" + item.casAttachFile + "</td>");
+                Response.Write("<td>" +  item.casAttachFile + "</td>");
                 Response.Write("<td>" + item.casdetail + "</td>");
                 Response.Write("</tr>");
             }

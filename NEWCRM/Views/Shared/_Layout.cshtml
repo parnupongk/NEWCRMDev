@@ -2,14 +2,13 @@
 
 <html lang="en">
 <head>
-    <title>ONE TO ONE CONTACTS : EDTA</title>
+    <title>ONE TO ONE CONTACTS : CRM ORIGIN</title>
     <!-- BEGIN META -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="keywords" content="crm,contact management,contact center,call center,aspect,genesys,thailand">
     <meta name="description" content="Contact Management">
     <!-- END META -->
-
     <!-- BEGIN STYLESHEETS -->
     <link href='http://fonts.googleapis.com/css?family=Roboto:300italic,400italic,300,400,500,700,900' rel='stylesheet' type='text/css' />
     <link type="text/css" rel="stylesheet" href="~/Content/theme-oto/bootstrap.css?1422792965" />
@@ -35,44 +34,53 @@
     <link href="~/Content/js/libs/noty/demo/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
     <link href="~/Content/js/libs/jquery.msgbox/javascript/msgbox/jquery.msgbox.css" rel="stylesheet" />
     <link href="~/Content/js/libs/jquery.sumoselect/sumoselect.css" rel="stylesheet" />
+    
+    
+    <script type="text/javascript" src="~/scripts/jquery-1.9.1.min.js"></script>
+    <script src="http://code.jquery.com/ui/1.10.2/jquery-ui.js"></script>
+
+    <script type="text/javascript" src="~/scripts/moment.min.js"></script>
+    <script type="text/javascript" src="~/scripts/bootstrap.min.js"></script>
+
+    <!-- include your less or built css files  -->
+    <!--
+    bootstrap-datetimepicker-build.less will pull in "../bootstrap/variables.less" and "bootstrap-datetimepicker.less";
+    or
+    <link rel="stylesheet" href="/Content/bootstrap-datetimepicker.css" />
+    -->
+
+    
     <!-- END STYLESHEETS -->
     <style>
-        div#loading
-        {
+        div#loading {
             display: none;
         }
 
-        .emo32
-        {
+        .emo32 {
             width: 32px;
             height: 32px;
         }
 
-        .ntf_scroll
-        {
+        .ntf_scroll {
             height: 490px;
             overflow: auto;
             overflow-x: hidden;
         }
 
-            .ntf_scroll::-webkit-scrollbar
-            {
+            .ntf_scroll::-webkit-scrollbar {
                 width: 0.6em;
                 height: 2em;
             }
 
-            .ntf_scroll::-webkit-scrollbar-button
-            {
+            .ntf_scroll::-webkit-scrollbar-button {
                 display: none;
             }
 
-            .ntf_scroll::-webkit-scrollbar-track-piece
-            {
+            .ntf_scroll::-webkit-scrollbar-track-piece {
                 background: rgba(0, 0, 0, 0.25);
             }
 
-            .ntf_scroll::-webkit-scrollbar-thumb
-            {
+            .ntf_scroll::-webkit-scrollbar-thumb {
                 background: rgba(0, 0, 0, 0.5);
             }
     </style>
@@ -92,16 +100,16 @@
                         <div class="brand-holder">
                             <a href="@Url.Action("Index", "Dashboard")">
                                 <span class="text-lg text-bold text-primary">
-                                    <img src="~/crmedta/Images/logo.png" />
+                                    <img src="~/Images/logo.png" />
                                 </span>
                             </a>
                         </div>
                     </li>
-                  @*<li>
-                        <a class="btn btn-icon-toggle menubar-toggle" data-toggle="menubar" href="javascript:void(0);">
-                            <i class="fa fa-bars"></i>
-                        </a>
-                    </li>*@
+                    @*<li>
+                            <a class="btn btn-icon-toggle menubar-toggle" data-toggle="menubar" href="javascript:void(0);">
+                                <i class="fa fa-bars"></i>
+                            </a>
+                        </li>*@
                 </ul>
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
@@ -110,8 +118,8 @@
                     <li>
                         <!-- Search form -->
                         @using (Ajax.BeginForm("SearchByNo", new { Controller = "Case" },
-                                new AjaxOptions { HttpMethod = "post", OnSuccess = "successSearchByNo" },
-                                new { id = "frm-searchcaseno", @class = "navbar-search", autocomplete = "off" }))
+                    new AjaxOptions { HttpMethod = "post", OnSuccess = "successSearchByNo" },
+                    new { id = "frm-searchcaseno", @class = "navbar-search", autocomplete = "off" }))
                         {
                             <div class="form-group">
                                 <input type="text" class="form-control" id="headerSearch" name="headerSearch" placeholder="Enter your Case No.">
@@ -134,14 +142,15 @@
                     <li class="dropdown">
                         <a href="javascript:void(0);" class="dropdown-toggle ink-reaction" data-toggle="dropdown">
                             @if (!string.IsNullOrEmpty(NEWCRM.Common.AppUtils.Session.User.usrAvatar))
-                            { 
+                            {
                                 <img src="~/Images/users/@NEWCRM.Common.AppUtils.Session.User.usrAvatar" />
                             }
                             else
                             {
                                 <img src="~/Images/contact_.png" />
                             }
-                            <span class="profile-info">@NEWCRM.Common.AppUtils.Session.User.usrFirstName @NEWCRM.Common.AppUtils.Session.User.usrLastName
+                            <span class="profile-info">
+                                @NEWCRM.Common.AppUtils.Session.User.usrFirstName @NEWCRM.Common.AppUtils.Session.User.usrLastName
                                 <small>@NEWCRM.Common.AppUtils.Session.User.usrDepartment</small>
                             </span>
                         </a>
@@ -158,16 +167,16 @@
                 </ul>
                 <!--end .header-nav-profile -->
                 @*<ul class="header-nav header-nav-options">
-                     <li class="dropdown hidden-xs">                  
-					    <a href="javascript:void(0);" class="btn btn-icon-toggle btn-default" data-toggle="dropdown">
-						    <i class="md md-public"></i>
-					    </a>
-					    <ul class="dropdown-menu animation-expand">
-						    <li><a href="@Url.Action("ChangeCurrentCulture")/1"><img src="~/Images/icon-th.png" /> Thai</a></li>
-						    <li><a href="@Url.Action("ChangeCurrentCulture")/0"><img src="~/Images/icon-en.png" /> English</a></li>							    
-					    </ul>					  
-                    </li>
-                </ul>*@
+                         <li class="dropdown hidden-xs">
+                            <a href="javascript:void(0);" class="btn btn-icon-toggle btn-default" data-toggle="dropdown">
+                                <i class="md md-public"></i>
+                            </a>
+                            <ul class="dropdown-menu animation-expand">
+                                <li><a href="@Url.Action("ChangeCurrentCulture")/1"><img src="~/Images/icon-th.png" /> Thai</a></li>
+                                <li><a href="@Url.Action("ChangeCurrentCulture")/0"><img src="~/Images/icon-en.png" /> English</a></li>
+                            </ul>
+                        </li>
+                    </ul>*@
                 <!--end .header-nav-toggle -->
             </div>
             <!--end #header-navbar-collapse -->
@@ -184,7 +193,6 @@
         </div>
         <!--end #content-->
         <!-- END CONTENT -->
-
         <!-- BEGIN MENUBAR-->
         <div id="menubar" class="menubar-inverse ">
             <div class="menubar-scroll-panel">
@@ -217,7 +225,6 @@
                     </li>
                     <!--end /menu-li -->
                     <!-- END CASE QUERY -->
-
                     <!-- BEGIN CUSTOMER PROFILE -->
                     <li class="gui-single">
                         <!--<a class="gui-folder" href="../../html/mail/reply.html!" >-->
@@ -240,20 +247,14 @@
                             <div class="gui-icon"><i class="md md-phone"></i></div>
                             <span class="title">Make Call</span>
                         </a>
-                    </li>                  
-                     <li>
+                    </li>
+                    <li>
                         <a id="menu_screenpop" href="@Url.Action("Index", "Inbound")??g8=1&phone=021111111&conid=1&dnis=10899">
                             <div class="gui-icon"><i class="md md-phone"></i></div>
                             <span class="title">Test Screenpop</span>
                         </a>
-                    </li>      
-                    <li>
-                        <a id="menu_report" href="@Url.Action("Index", "RepCase")">
-                            <div class="gui-icon"><i class="md md-insert-chart"></i></div>
-                            <span class="title">Report</span>
-                        </a>
-                    </li>   
-                    <!--end /menu-li -->                                       
+                    </li>
+                    <!--end /menu-li -->
                 </ul>
                 <!--end .main-menu -->
                 <!-- END MAIN MENU -->
@@ -276,10 +277,10 @@
 
     @if (HttpContext.Current.Request.RequestContext.RouteData.Values["controller"].ToString().Equals("Dashboard") || HttpContext.Current.Request.RequestContext.RouteData.Values["action"].ToString().Equals("CaseDetail"))
     {
-        <script src="~/Content/js/libs/jquery/jquery-1.9.1.min.js"></script>      
+        <script src="~/Content/js/libs/jquery/jquery-1.9.1.min.js"></script>
     }
     else
-    { 
+    {
         <script src="~/Content/js/libs/jquery/jquery-1.11.2.min.js"></script>
     }
 
@@ -359,7 +360,7 @@
             });
 
             getNotificationTotal();
-            
+
         });
 
         function getNotificationTotal() {

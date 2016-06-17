@@ -454,6 +454,7 @@
       <Parameter Name="CASEID" Mode="In" Type="Decimal" />
       <Parameter Name="LANG" Mode="In" Type="String" />
     </FunctionImport>
+    <EntitySet Name="sysdiagrams" EntityType="NEWCRMModel.sysdiagram" />
   </EntityContainer>
   <EntityType Name="Activities">
     <Key>
@@ -733,6 +734,8 @@
     <Property Name="casVendorID" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
     <Property Name="caseventDate" Type="DateTime" Precision="3" />
     <Property Name="casAttachFile" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="casPoNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="casPrice" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
   </EntityType>
   <EntityType Name="CaseStatu">
     <Key>
@@ -2347,4 +2350,14 @@
     <Property Type="String" Name="casLevel3" Nullable="true" MaxLength="255" />
     <Property Type="String" Name="casLevel6" Nullable="true" MaxLength="255" />
   </ComplexType>
+  <EntityType Name="sysdiagram">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
 </Schema>

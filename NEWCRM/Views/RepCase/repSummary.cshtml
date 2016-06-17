@@ -49,4 +49,11 @@
 
                     }
                 </tbody>
+
+                <tr style="background-color:#2B5D95;color:#ffffff;">
+                    <th>Sum </th>
+                    <th>@Model.list_repcasesum.Sum(x => x.counts)</th>
+                    <th>@Model.list_repcasesum.Sum(x => x.Percents)</th>
+                </tr>
+
             </table>

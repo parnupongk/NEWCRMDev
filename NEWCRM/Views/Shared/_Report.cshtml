@@ -1,0 +1,128 @@
+﻿<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <title>ONE TO ONE CONTACTS : EDTA</title>
+    <!-- BEGIN META -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="keywords" content="crm,contact management,contact center,call center,aspect,genesys,thailand">
+    <meta name="description" content="Contact Management">
+    <!-- END META -->
+    <!-- BEGIN STYLESHEETS -->
+    <link href='http://fonts.googleapis.com/css?family=Roboto:300italic,400italic,300,400,500,700,900' rel='stylesheet' type='text/css' />
+    <link type="text/css" rel="stylesheet" href="~/Content/theme-oto/bootstrap.css?1422792965" />
+    <link type="text/css" rel="stylesheet" href="~/Content/theme-oto/materialadmin.css?1425466319" />
+    <link type="text/css" rel="stylesheet" href="~/Content/theme-oto/font-awesome.min.css?1422529194" />
+    <link type="text/css" rel="stylesheet" href="~/Content/theme-oto/material-design-iconic-font.min.css?1421434286" />
+    <link type="text/css" rel="stylesheet" href="~/Content/theme-oto/libs/rickshaw/rickshaw.css?1422792967" />
+    <link type="text/css" rel="stylesheet" href="~/Content/theme-oto/libs/morris/morris.core.css?1420463396" />
+    <link type="text/css" rel="stylesheet" href="~/Content/theme-oto/libs/summernote/summernote.css?1425218701" />
+    <link type="text/css" rel="stylesheet" href="~/Content/theme-oto/libs/toastr/toastr.css?1425466569" />
+    <link type="text/css" rel="stylesheet" href="~/Content/theme-oto/libs/bootstrap-datepicker/datepicker3.css?1424887858" />
+    <link type="text/css" rel="stylesheet" href="~/Content/theme-oto/libs/jquery-ui/jquery-ui-theme.css" />
+    <link type="text/css" rel="stylesheet" href="~/Content/theme-oto/libs/DataTables/jquery.dataTables.css?1423553989" />
+    <link type="text/css" rel="stylesheet" href="~/Content/theme-oto/libs/DataTables/extensions/dataTables.colVis.css?1423553990" />
+    <link type="text/css" rel="stylesheet" href="~/Content/theme-oto/libs/DataTables/extensions/dataTables.tableTools.css?1423553990" />
+    <link type="text/css" rel="stylesheet" href="~/Content/theme-oto/libs/dropzone/dropzone-theme.css?1424887864" />
+    <link href="~/Content/theme-oto/libs/select2/select2.css?1424887856" rel="stylesheet" />
+    <link type="text/css" rel="stylesheet" href="~/Content/theme-oto/libs/multi-select/multi-select.css?1424887857" />
+    <link type="text/css" rel="stylesheet" href="~/Content/theme-oto/oto.css" />
+    <link href="~/Content/js/libs/nprogress/nprogress.css" rel="stylesheet" />
+    <link href="~/Content/js/libs/bootstrap-dialog/src/css/bootstrap-dialog.css" rel="stylesheet" />
+    <link href="~/Content/js/libs/noty/demo/animate.css" rel="stylesheet" />
+    <link href="~/Content/js/libs/noty/demo/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="~/Content/js/libs/jquery.msgbox/javascript/msgbox/jquery.msgbox.css" rel="stylesheet" />
+    <link href="~/Content/js/libs/jquery.sumoselect/sumoselect.css" rel="stylesheet" />
+    <!-- END STYLESHEETS -->
+    <style>
+        div#loading {
+            display: none;
+        }
+
+        .emo32 {
+            width: 32px;
+            height: 32px;
+        }
+
+        .ntf_scroll {
+            height: 490px;
+            overflow: auto;
+            overflow-x: hidden;
+        }
+
+            .ntf_scroll::-webkit-scrollbar {
+                width: 0.6em;
+                height: 2em;
+            }
+
+            .ntf_scroll::-webkit-scrollbar-button {
+                display: none;
+            }
+
+            .ntf_scroll::-webkit-scrollbar-track-piece {
+                background: rgba(0, 0, 0, 0.25);
+            }
+
+            .ntf_scroll::-webkit-scrollbar-thumb {
+                background: rgba(0, 0, 0, 0.5);
+            }
+    </style>
+
+    @RenderSection("style", required: false)
+
+</head>
+
+<body>
+
+    <div id="content" style="padding:0px;margin:0px;">
+        <section>
+            @RenderBody()
+        </section>
+    </div>
+
+
+    <!-- BEGIN JAVASCRIPT -->
+    <script src="~/Content/js/libs/jquery/jquery-1.11.2.min.js"></script>
+    <script src="~/Content/js/libs/jquery/jquery-migrate-1.2.1.min.js"></script>
+    <script src="~/Content/js/libs/jquery-ui/jquery-ui.min.js"></script>
+    <script src="~/Content/js/libs/spin.js/spin.min.js"></script>
+    <script src="~/Content/js/libs/autosize/jquery.autosize.min.js"></script>
+    <script src="~/Content/js/libs/inputmask/jquery.inputmask.bundle.min.js"></script>
+    <script src="~/Content/js/libs/moment/moment.min.js"></script>
+    <script src="~/Content/js/libs/bootstrap-datepicker/bootstrap-datepicker.js"></script>
+    <script src="~/Content/js/libs/bootstrap-multiselect/bootstrap-multiselect.js"></script>
+    <script src="~/Content/js/libs/bootstrap-rating/bootstrap-rating-input.min.js"></script>
+    <script src="~/Content/js/libs/DataTables/jquery.dataTables.js"></script>
+    <script src="~/Content/js/libs/DataTables/extensions/TableTools/js/dataTables.tableTools.min.js"></script>
+    <script src="~/Content/js/libs/nanoscroller/jquery.nanoscroller.min.js"></script>
+    <script src="~/Content/js/libs/microtemplating/microtemplating.min.js"></script>
+    <script src="~/Content/js/libs/summernote/summernote.min.js"></script>
+    <script src="~/Content/js/libs/toastr/toastr.js"></script>
+    <script src="~/Content/js/libs/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/Content/js/libs/jquery-validation/dist/additional-methods.min.js"></script>
+    <script src="~/Content/js/core/source/App.js"></script>
+    <script src="~/Content/js/core/source/AppNavigation.js"></script>
+    <script src="~/Content/js/core/source/AppOffcanvas.js"></script>
+    <script src="~/Content/js/core/source/AppCard.js"></script>
+    <script src="~/Content/js/core/source/AppForm.js"></script>
+    <script src="~/Content/js/core/source/AppNavSearch.js"></script>
+    <script src="~/Content/js/core/source/AppVendor.js"></script>
+    <script src="~/Content/js/core/demo/Demo.js"></script>
+    <script src="~/Content/js/core/demo/DemoPageContacts.js"></script>
+    <script src="~/Content/js/core/demo/DemoFormComponents.js"></script>
+    <script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
+    <!--script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js"></!--script-->
+    <script src="~/Content/js/libs/bootstrap-typeahead/jquery.mockjax.js"></script>
+    <script src="~/Content/js/libs/bootstrap-typeahead/bootstrap-typeahead.js"></script>
+
+    <script src="~/Content/js/libs/multi-select/jquery.multi-select.js"></script>
+    <script src="~/Content/js/libs/datediff/datediff.js"></script>
+    <script src="~/Content/js/libs/noty/js/noty/packaged/jquery.noty.packaged.min.js"></script>
+
+    <!-- END JAVASCRIPT -->
+
+    @RenderSection("scripts", required: false)
+
+</body>
+</html>

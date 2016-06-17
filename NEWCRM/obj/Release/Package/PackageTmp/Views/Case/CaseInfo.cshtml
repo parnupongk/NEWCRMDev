@@ -1,4 +1,5 @@
 ﻿@model NEWCRM.Models.CaseModels
+
 @{
     var cssFav = "none";
     if ((Model.CaseDetails.casOwnerID == NEWCRM.Common.AppUtils.Session.User.usrID) && Model.CaseDetails.casFav)
@@ -144,7 +145,7 @@
                 <div class="col-lg-4">
                     <div class="form-group">
                         <label>วันที่เกิดเหตุ</label>
-                        <p class="form-control-static">@Html.DisplayFor(m => Model.CaseDetails.caseventDate)</p>
+                        <p class="form-control-static">@Html.DisplayFor(m => m.CaseDetails.caseventDate)</p>
                     </div>
                 </div>
                 <div class="col-lg-8">

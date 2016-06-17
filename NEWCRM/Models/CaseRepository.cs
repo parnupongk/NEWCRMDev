@@ -30,12 +30,13 @@ namespace NEWCRM.Models
             }
         }
 
-        public DataTable GetCaseReport_CALLPERDAY(string mount, string year)
+        public DataTable GetCaseReport_CALLPERDAY(string startDate, string endDate)
         {
             try
             {
                 DataSet ds = SqlHelper.ExecuteDataset(ConfigurationManager.ConnectionStrings["IVRConnection"].ToString(), "SP_CALLPERDAY_ETDA"
-                            , new SqlParameter[] { new SqlParameter("@smount", mount), new SqlParameter("@syear", year) });
+                            , new SqlParameter[] {new SqlParameter("@startdate", startDate)
+                            ,new SqlParameter("@enddate", endDate)});
                 return ds.Tables[0];
             }
             catch (Exception ex)
@@ -614,8 +615,8 @@ namespace NEWCRM.Models
         public int accepted_agent { get; set; }
         public int abandoned { get; set; }
         public decimal per_abandoned { get; set; }
-        public string avg_engage_time { get; set; }
-        public string engage_time { get; set; }
+        public TimeSpan avg_engage_time { get; set; }
+        public TimeSpan engage_time { get; set; }
     }
 
     public class NewCaseModel

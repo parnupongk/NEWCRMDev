@@ -30,6 +30,10 @@
 }
 
 @section Scripts {
+
+<script type="text/javascript" src="~/scripts/bootstrap-datetimepicker.js"></script>
+<link rel="stylesheet" href="~/Content/bootstrap-datetimepicker.css" />
+
     <script src="~/Content/js/libs/inputmask/jquery.inputmask.bundle.min.js"></script>
     <script src="~/Content/js/libs/bootstrap-tagsinput/bootstrap-tagsinput.min.js"></script>
     <script src="~/Content/js/core/demo/DemoFormComponents.js"></script>
@@ -68,7 +72,7 @@
             $("#ctcaseparent").hide();
             $("#divAttachFile").hide();
             resetGroup();
-
+            $('#datetimepicker1').datetimepicker();  //.datepicker({ autoclose: true, todayHighlight: true, format: "dd/mm/yyyy" });
             //$("#eventDate").mask("99/99/9999 99:99:99", { placeholder: "mm/dd/yyyy HH:MM:ss" });
 
             Dropzone.autoDiscover = false;
@@ -90,7 +94,7 @@
             }
         });
 
-            $('.field-date').datepicker({ autoclose: true, todayHighlight: true, format: "dd/mm/yyyy" });
+            
             $("#casURLAccount").autocomplete({
                 source: function (request, response) {
                     $.ajax({
@@ -112,7 +116,7 @@
                 },
                 select: function (event, i) {
                     event.preventDefault();
-                    console.log(i.item.value);
+                    //console.log(i.item.value);
                     $("#casParentID").val(i.item.value);
                     $("#casURLAccount").val(i.item.label);
                     $("#ctdiv_7").show();
@@ -289,7 +293,6 @@
                     //$("#casURLAccount").focus();
                     if( $(ref).val()=="1" )
                     {
-                        console.log($("#lblSourceType").html());
                         $("#CaseGroup1").show();
                         $("#CaseGroup2").show();
                         $("#lblSourceTypeRef").html("รายละเอียดช่องทางซื้อขาย");
@@ -526,15 +529,22 @@
                                             <div id="ctcaseparent" class="col-sm-12 form-group margin-bottom-xl">
 
                                             </div>
-                                            <label class="col-sm-3 control-label">วันที่เกิดเหตุ</label>
-                                            <div class="col-sm-9 margin-bottom-xl">
-                                                <!--div class="input-group-content"-->
-                                                <!--input type="text" id="eventDate" name="eventDate" class="form-control fv"-->
-                                                <input type="text" id="eventDate" name="eventDate" class="form-control" placeholder="dd/MM/yyyy HH:MM:ss" />
-                                                <!--div-->
-                                                <!--span class="input-group-addon"><i class="fa fa-calendar"></i></!--span-->
+                                            <div class="col-sm-12 form-group margin-bottom-xl">
+                                                <label class="col-sm-3 control-label">วันที่เกิดเหตุ</label>
+                                                <div class="col-sm-9 margin-bottom-xl">
+                                                    <div class='input-group date' id='datetimepicker1'>
+
+                                                        <input type="text" id="eventDate" name="eventDate" class="form-control fv" placeholder="dd/MM/yyyy HH:MM:ss" />
+                                                        <span class="input-group-addon">
+                                                            <span class="glyphicon glyphicon-calendar"></span>
+                                                        </span>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
+
+                                   
+                                     
 
                                         <div class="form-group">
 
