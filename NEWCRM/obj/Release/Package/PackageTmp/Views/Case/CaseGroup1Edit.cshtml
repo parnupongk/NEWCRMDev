@@ -1,0 +1,146 @@
+﻿
+<div class="col-sm-12 form-group margin-bottom-xl">
+    <label for="casPoNo" id="lblSourceTypeRef" class="col-sm-3 control-label">หมายเลขสั่งซื้อ</label>
+    <div class="col-sm-9 margin-bottom-xl">
+        <input type="text" class="form-control" id="casPoNo" name="casPoNo" value="@Model.cases.casPoNo" />
+    </div>
+    <br />
+    <label for="casPrice" id="lblSourceTypeRef" class="col-sm-3 control-label">มูลค่า (จำนวนเงิน)</label>
+    <div class="col-sm-9 margin-bottom-xl">
+        <input type="text" class="form-control" id="casPrice" name="casPrice" value="@Model.cases.casPrice" />
+    </div>
+    <br />
+    <label class="col-sm-3 control-label">ประเภทการซื้อขาย</label>
+    <div class="col-sm-9 margin-bottom-xl bg-warning">
+        <select id="commerceType" name="commerceType" class="form-control">
+
+            @foreach (var item in Model.commerceType)
+            {
+                
+                Console.WriteLine(item);
+                
+                var selected = string.Empty;
+                if (Model.cases.cascommerceType != null && Model.cases.cascommerceType == item)
+                {
+                    selected = "selected";
+                }
+
+                <option @selected value="@item">@item</option>
+            }
+        </select>
+
+    </div>
+    <br />
+    <label class="col-sm-3 control-label">ประเภทสินค้า </label>
+    <div class="col-sm-9 margin-bottom-xl bg-warning">
+        <select id="productCategory" name="productCategory" class="form-control">
+
+            @foreach (var item in Model.productCategory)
+            {
+                var selected = string.Empty;
+                if (Model.cases.casproductCategory != null && Model.cases.casproductCategory == item)
+                {
+                    selected = "selected";
+                }
+                <option @selected value="@item">@item</option>
+            }
+            
+        </select>
+
+    </div>
+    <br />
+    <label class="col-sm-3 control-label">ประเภทบริการ</label>
+    <div class="col-sm-9 margin-bottom-xl bg-warning">
+        <select id="serviceCategory" name="serviceCategory" class="form-control">
+
+            @foreach (var item in Model.serviceCategory)
+            {
+                var selected = string.Empty;
+                if (Model.cases.casserviceCategory != null && Model.cases.casserviceCategory == item)
+                {
+                    selected = "selected";
+                }
+                <option @selected value="@item">@item</option>
+            }
+        </select>
+
+    </div>
+    <br />
+    <label class="col-sm-3 control-label">วิธีการส่งสินค้า </label>
+    <div class="col-sm-9 margin-bottom-xl bg-warning">
+        <select id="deliveryType" name="deliveryType" class="form-control">
+
+
+            @foreach (var item in Model.deliveryType)
+            {
+                var selected = string.Empty;
+                if (ViewBag.deliveryType_1 != null && ViewBag.deliveryType_1 == item)
+                {
+                    selected = "selected";
+                }
+                <option @selected value="@item">@item</option>
+            }
+        </select>
+        <input id="deliveryTypeOther" type="text" class="form-control" name="deliveryTypeOther" placeholder="ระบุ" value="@ViewBag.deliveryType_2" />
+
+    </div>
+    <br />
+    <label class="col-sm-3 control-label">ประเภทการชำระเงิน</label>
+    <div class="col-sm-9 margin-bottom-xl bg-warning">
+        <select id="paymentType" name="paymentType" class="form-control">
+
+            @foreach (var item in Model.paymentType)
+            {
+                var selected = string.Empty;
+                if (ViewBag.paymentType_1 != null && ViewBag.paymentType_1 == item)
+                {
+                    selected = "selected";
+                }
+                <option @selected value="@item">@item</option>
+            }
+        </select>
+        <input id="paymentTypeOther" type="text" class="form-control" name="paymentTypeOther" placeholder="ระบุ" value="@ViewBag.paymentType_2" />
+
+    </div>
+
+    <br />
+    <label class="col-sm-3 control-label">มูลค่าการซื้อขาย </label>
+    <div class="col-sm-9 margin-bottom-xl bg-warning">
+        <select id="valueRange" name="valueRange" class="form-control">
+
+            @foreach (var item in Model.valueRange)
+            {
+                var selected = string.Empty;
+                if (Model.cases.casvalueRange != null && Model.cases.casvalueRange == item)
+                {
+                    selected = "selected";
+                }
+                <option @selected value="@item">@item</option>
+            }
+        </select>
+
+    </div>
+    <br />
+    <label class="col-sm-3 control-label">ช่องทางการติดต่อ</label>
+    <div class="col-sm-9 margin-bottom-xl bg-warning">
+        <select id="conversationChannel" name="conversationChannel" class="form-control">
+
+            @foreach (var item in Model.conversationChannel)
+            {
+                var selected = string.Empty;
+                if (Model.cases.casconversationChannel != null && Model.cases.casconversationChannel == item)
+                {
+                    selected = "selected";
+                }
+                <option @selected value="@item">@item</option>
+            }
+        </select>
+
+    </div>
+    <br/>
+    <label class="col-sm-3 control-label">ข้อมูลผู้ถูกร้องเรียน</label>
+    <div class="col-sm-9 margin-bottom-xl bg-warning">
+        <textarea id="txtVendorID" name="txtVendorID" class="form-control" rows="2" >@Model.cases.casVendorID</textarea>
+    </div>
+</div>
+

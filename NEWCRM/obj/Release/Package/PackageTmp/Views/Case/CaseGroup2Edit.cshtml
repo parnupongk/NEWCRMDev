@@ -1,0 +1,31 @@
+﻿
+<div class="col-sm-12 form-group margin-bottom-xl">
+    <div class="form-group">
+        @if (Model.cases.casIDLevel1 == 1)
+        {
+        <label id="lblRedDetail" name="lblRedDetail" class="col-sm-3 control-label">หลักฐานประกอบ</label>
+        }
+        else
+        {
+            <label id="lblRedDetail" name="lblRedDetail" class="col-sm-3 control-label">รายละเอียดเพิ่มเติม</label>
+        }
+        <div class="col-sm-9 margin-bottom-xl bg-warning">
+            <textarea id="txtRefDetail" name="txtRefDetail" class="form-control" rows="6" >@Model.cases.casreferenceDetail</textarea>
+        </div>
+        <br />
+@if (Model.cases.casIDLevel1 == 1)
+{
+        <label id="lblDetail" name="lblDetail" class="col-sm-3 control-label">รายละเอียดร้องเรียน </label>
+}
+else
+{
+    <label id="lblDetail" name="lblDetail" class="col-sm-3 control-label">เนื้อหารายละเอียดการร้องเรียน</label>
+}
+        <div class="col-sm-9 margin-bottom-xl bg-warning">
+            <textarea id="txtDetail" name="txtDetail" class="form-control" rows="6">@Model.cases.casdetail</textarea>
+        </div>
+        <br />
+
+
+    </div>
+    </div>
