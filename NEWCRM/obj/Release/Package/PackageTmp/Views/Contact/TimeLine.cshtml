@@ -15,9 +15,9 @@
 <ul class="timeline collapse-lg timeline-hairline">
     @foreach (var item in @Model.list_timeline)
     {
-        string avatar = "/Images/contact_.png";
+        string avatar = "/CRMETDA//Images/contact_.png";
         if (!string.IsNullOrEmpty(item.usrAvatar)) {
-            avatar = "/Images/users/" + item.usrAvatar;
+            avatar = "/CRMETDA//Images/users/" + item.usrAvatar;
         }
         
         if (item.LogType.Equals("Contact"))

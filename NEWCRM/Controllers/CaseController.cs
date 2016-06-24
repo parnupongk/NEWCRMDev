@@ -56,12 +56,15 @@ namespace NEWCRM.Controllers
                     if (!string.IsNullOrEmpty(fileName))
                     {
                         string savefilename = string.Format("{0}_{1}", usrID, fileName);
-                        string savefilepathe = Server.MapPath("~/Images/users/") + savefilename;
+                        string savefilepathe = Server.MapPath(ConfigurationManager.AppSettings["PATHUPLOADFILE"]) + savefilename;
 
                         // Upload File
                         file.SaveAs(savefilepathe);
 
-                        Session["case_attachfile_path"] = savefilepathe;
+                        //int radCasID = 
+                        AddFileByCasID(99999999, savefilename, fileExtension);
+
+                        Session["case_attachfile_path"] = savefilename;
                         Session["case_attachfile_type"] = fileExtension;
 
                         var newFile = new FileInfo(savefilepathe);
@@ -112,7 +115,8 @@ namespace NEWCRM.Controllers
             var model = new CaseViewModelLocalization();
             var rep_priority = new PriorityRepository();
             var rep_chn = new ChannelsRepository();
-
+            Session["case_attachfile_path"] = null;
+            Session["case_attachfile_type"] = null;
             try
             {
                 if (AppUtils.Session.Activity == null)
@@ -128,7 +132,7 @@ namespace NEWCRM.Controllers
                 //{
                 //    AppUtils.Session.Activity.ctaID = null;
                 //}
-
+                AppUtils.Session.Activity.chnID = AppUtils.Channels.Inbound;
                 model.list_priority = rep_priority.getAll();
                 model.list_channels = rep_chn.getAll();
                 model.list_status = new CaseRepository().GetStatus(string.Empty);
@@ -140,6 +144,7 @@ namespace NEWCRM.Controllers
                 model.valueRange = ConfigurationManager.AppSettings["CASE_Value_Range"].ToString().Split('|').ToList();
                 model.conversationChannel = ConfigurationManager.AppSettings["CASE_Conversation_Channel"].ToString().Split('|').ToList();
                 model.list_status_reason = ConfigurationManager.AppSettings["CASE_Status_Reason"].ToString().Split('|').ToList();
+
             }
             catch (Exception err)
             {
@@ -154,6 +159,7 @@ namespace NEWCRM.Controllers
             var act = new Activities()
             {
                 chnID = AppUtils.Channels.Inbound,
+                //chnID = AppUtils.Session.Activity.chnID,
                 atsID = 0,
                 actChannelData = string.Empty,
                 actCreatedOn = DateTime.Now,
@@ -274,7 +280,7 @@ namespace NEWCRM.Controllers
                         casdeliveryType = model.deliveryType + "/" + model.deliveryTypeOther,
                         caspaymentType = model.paymentType + "/" + model.paymentTypeOther,
                         casVendorID = model.txtVendorID,
-                        caseventDate = model.eventDate,
+                        caseventDate =  model.chkIsNoEventDate ? new DateTime(1753,11,11) : model.eventDate, // datetime=1753/11/11 คือ ผู้ร้องไม่ทราบวันที่เกิดเหตุ
                         casvalueRange = model.valueRange,
                         casconversationChannel = model.conversationChannel,
                         casreferenceDetail = model.txtRefDetail,
@@ -296,7 +302,9 @@ namespace NEWCRM.Controllers
                         new CaseRepository().UpdatedCaseIDName(casIDName, data.casID);
                         if (Session["case_attachfile_path"] != null)
                         {
-                            AddFileByCasID(data.casID, Session["case_attachfile_path"].ToString(), Session["case_attachfile_type"].ToString());
+                            new CaseAttachFilesRepository().UpdateAttachByCasId(data.casID);
+
+                            //AddFileByCasID(data.casID, Session["case_attachfile_path"].ToString(), Session["case_attachfile_type"].ToString());
                             Session["case_attachfile_path"] = null;
                             Session["case_attachfile_type"] = null;
                         }
@@ -571,7 +579,7 @@ namespace NEWCRM.Controllers
             d.CaseDetails = new CaseRepository().GetCaseDetailById(id, "");
             var cas = new CaseRepository().GetByID(id);
             var role = AppUtils.Session.User.grpID;
-
+            ViewBag.envenDate = RepCaseController.ConvertEventDate(cas.caseventDate.ToString());
             // Case Function
             ViewBag.Favourite = false;
             ViewBag.Edit = false;
@@ -703,7 +711,7 @@ namespace NEWCRM.Controllers
             }
 
             if (cas.casParentID != null) ViewBag.Email = false;
-                    
+            if(role == 2) ViewBag.Edit = true; // all edit
             return PartialView(d);
         }
 
@@ -746,7 +754,44 @@ namespace NEWCRM.Controllers
         public ActionResult CaseDetailEdit(int id)
         {
             var c = new CaseRepository().GetByID(id);
-            return View(c);
+
+            var model = new CaseViewModelLocalization();
+
+            ViewBag.eventDate = c.caseventDate.ToString();
+            if (c.caseventDate.ToString() != "")
+            {
+                if (Convert.ToDateTime(c.caseventDate.ToString()).ToString("dd/MM/yyyy") == "11/11/1753")
+                {
+                    ViewBag.isNoEventDate = "true";
+                    ViewBag.eventDate = "";
+                }
+                else ViewBag.isNoEventDate = "false";
+            }
+            else
+            {
+                ViewBag.isNoEventDate = "false";
+            }
+            ViewBag.eventDate = RepCaseController.ConvertEventDate(c.caseventDate.ToString());
+ 
+            model.cases = c;
+            model.list_status = new CaseRepository().GetStatus(string.Empty);
+            model.commerceType = ConfigurationManager.AppSettings["CASE_Commerce_Type"].ToString().Split('|').ToList();
+            model.productCategory = ConfigurationManager.AppSettings["CASE_Product_Category"].ToString().Split('|').ToList();
+            model.serviceCategory = ConfigurationManager.AppSettings["CASE_Service_Category"].ToString().Split('|').ToList();
+            model.deliveryType = ConfigurationManager.AppSettings["CASE_Delivery_Type"].ToString().Split('|').ToList();
+            model.paymentType = ConfigurationManager.AppSettings["CASE_Payment_Type"].ToString().Split('|').ToList();
+            model.valueRange = ConfigurationManager.AppSettings["CASE_Value_Range"].ToString().Split('|').ToList();
+            model.conversationChannel = ConfigurationManager.AppSettings["CASE_Conversation_Channel"].ToString().Split('|').ToList();
+            model.list_status_reason = ConfigurationManager.AppSettings["CASE_Status_Reason"].ToString().Split('|').ToList();
+            model.sourceType = ConfigurationManager.AppSettings["CASE_SOURCE_TYPE"].ToString().Split('|').ToList();
+
+            ViewBag.deliveryType_1 = model.cases.casdeliveryType.Split('/').Length > 1 ? model.cases.casdeliveryType.Split('/')[0] : "" ;
+            ViewBag.deliveryType_2 = model.cases.casdeliveryType.Split('/').Length > 1 ? model.cases.casdeliveryType.Split('/')[1] : "";
+
+            ViewBag.paymentType_1 = model.cases.caspaymentType.Split('/').Length > 1 ? model.cases.caspaymentType.Split('/')[0] : "";
+            ViewBag.paymentType_2 = model.cases.caspaymentType.Split('/').Length > 1 ? model.cases.caspaymentType.Split('/')[1] : "";
+
+            return View(model);
         }
 
         public JsonResult CaseDetailEditSave(NewCaseModel model)
@@ -759,54 +804,45 @@ namespace NEWCRM.Controllers
                 var _now = DateTime.Now;
                 //if (c.casSLA == 0)  // Can changed casetype if old case not have SLA
                 //{
-                    model.casIDSummary = null;
-                    model.casSummary = string.Format("{0}", model.casLevel1);
+                    //model.casIDSummary = string.Format("{0}", model.casIDLevel1);
+                model.casSummary = string.Format("{0}", c.casLevel1);
 
-                    if (model.casIDLevel2.HasValue)
+                if (model.casIDLevel2.HasValue)
+                {
+                    model.casIDSummary = model.casIDLevel2;
+                    if (string.IsNullOrEmpty(model.casLevel2))
                     {
-                        model.casIDSummary = model.casIDLevel2;
-                        if (string.IsNullOrEmpty(model.casLevel2))
-                        {
-                            model.casLevel2 = c.casLevel2;
-                        }
-                        model.casSummary += string.Format(" > {0}", model.casLevel2);
+                        model.casLevel2 = c.casLevel2;
                     }
-                    /*if (model.casIDLevel3.HasValue)
-                    {
-                        model.casIDSummary = model.casIDLevel3;
-                        if (string.IsNullOrEmpty(model.casLevel3))
-                        {
-                            model.casLevel3 = c.casLevel3;
-                        }
-                        model.casSummary += string.Format(" > {0}", model.casLevel3);
-                    }
-                    if (model.casIDLevel4.HasValue)
-                    {
-                        model.casIDSummary = model.casIDLevel4;
-                        if (string.IsNullOrEmpty(model.casLevel4))
-                        {
-                            model.casLevel4 = c.casLevel4;
-                        }
-                        model.casSummary += string.Format(" > {0}", model.casLevel4);
-                    }
-                    if (model.casIDLevel5.HasValue)
-                    {
-                        model.casIDSummary = model.casIDLevel5;
-                        if (string.IsNullOrEmpty(model.casLevel5))
-                        {
-                            model.casLevel5 = c.casLevel5;
-                        }
-                        model.casSummary += string.Format(" > {0}", model.casLevel5);
-                    }
+                    model.casSummary += string.Format(" > {0}", model.casLevel2);
+                }
 
-                */
+                c.casLevel3 = model.casLevel3;
+                c.casLevel6 = model.casURLAccount;
+                        c.casIDSummary = Convert.ToInt32(model.casIDSummary);
+                        c.casSummary = model.casSummary;
+                        c.casNote = model.casNote;
+                        c.casModifiedOn = _now;
+                        c.casModifiedBy = AppUtils.Session.User.usrID;
+                        c.cascommerceType = model.commerceType;
+                        c.casproductCategory = model.productCategory;
+                        c.casserviceCategory = model.serviceCategory;
+                        c.casdeliveryType = model.deliveryType + "/" + model.deliveryTypeOther;
+                        c.caspaymentType = model.paymentType + "/" + model.paymentTypeOther;
+                        c.casVendorID = model.txtVendorID;
+                        c.caseventDate =  model.eventDate;
+                        c.casvalueRange = model.valueRange;
+                        c.casconversationChannel = model.conversationChannel;
+                        c.casreferenceDetail = model.txtRefDetail;
+                        c.casdetail = model.txtDetail;
+                        c.casstatusReason = model.cssStatusReason;
+                        c.casAttachFile = Session["case_attachfile_type"] == null ? "" : Session["case_attachfile_path"].ToString() + "|" + Session["case_attachfile_type"].ToString();
+                        c.casPoNo = model.casPoNo;
+                c.casPrice = model.casPrice;
 
-                    //if (model.casSLA.HasValue && model.casSLA > 0)
-                    //{
-                    //    model.casDueDate = _now.AddMinutes((double)model.casSLA);
-                    //}
+                   
 
-                    new CaseLogsRepository().AddByEntity(new CaseLog
+                new CaseLogsRepository().AddByEntity(new CaseLog
                     {
                         actID = 0,
                         casID = Convert.ToInt32(model.casID),
@@ -818,38 +854,6 @@ namespace NEWCRM.Controllers
                         cslModifiedOn = _now,
                         cslModifiedBy = AppUtils.Session.User.usrID
                     });
-                //}
-                //else
-                //{
-                //    // set prev data
-                //    model.casIDLevel1 = c.casIDLevel1;
-                //    model.casIDLevel2 = c.casIDLevel2;
-                //    model.casIDLevel3 = c.casIDLevel3;
-                //    model.casIDLevel4 = c.casIDLevel4;
-                //    model.casIDLevel5 = c.casIDLevel5;
-                //    model.casLevel1 = c.casLevel1;
-                //    model.casLevel2 = c.casLevel2;
-                //    model.casLevel3 = c.casLevel3;
-                //    model.casLevel4 = c.casLevel4;
-                //    model.casLevel5 = c.casLevel5;
-                //    model.casIDSummary = c.casIDSummary;
-                //    model.casSummary = c.casSummary;
-                //    model.casSLA = c.casSLA;
-                //    model.casDueDate = c.casDueDate;
-
-                //    new CaseLogsRepository().AddByEntity(new CaseLog
-                //    {
-                //        actID = 0,
-                //        casID = Convert.ToInt32(model.casID),
-                //        cltID = EnumType.LogType.EditCase,
-                //        cslNote = "แก้ไข Note",
-                //        cslDesc = string.Empty,
-                //        cslCreatedOn = _now,
-                //        cslCreatedBy = AppUtils.Session.User.usrID,
-                //        cslModifiedOn = _now,
-                //        cslModifiedBy = AppUtils.Session.User.usrID
-                //    });
-                //}
 
                 model.casModifiedOn = _now;
                 model.casModifiedBy = AppUtils.Session.User.usrID;
@@ -857,49 +861,7 @@ namespace NEWCRM.Controllers
                 new CaseRepository().DetailUpdate(model);
 
                 strSuccess = "Success";
-                //model.casIDSummary = null;
-                //model.casSummary = string.Format("{0}", model.casLevel1);
-
-                //if (model.casIDLevel2.HasValue)
-                //{
-                //    model.casIDSummary = model.casIDLevel2;
-                //    if (string.IsNullOrEmpty(model.casLevel2))
-                //    {
-                //        model.casLevel2 = c.casLevel2;
-                //    }
-                //    model.casSummary += string.Format(" > {0}", model.casLevel2);
-                //}
-
-                //if (model.casSLA.HasValue && model.casSLA > 0)
-                //{
-                //    model.casDueDate = _now.AddMinutes((double)model.casSLA);
-                //}                                       
-                //}
-                //else 
-                //{
-                //    // set prev data
-                //    model.casIDLevel1 = c.casIDLevel1;
-                //    model.casIDLevel2 = c.casIDLevel2;
-                //    model.casLevel1 = c.casLevel1;
-                //    model.casLevel2 = c.casLevel2;
-                //    model.casIDSummary = c.casIDSummary;
-                //    model.casSummary = c.casSummary;
-                //    model.casSLA = c.casSLA;
-                //    model.casDueDate = c.casDueDate;
-
-                //    new CaseLogsRepository().AddByEntity(new CaseLogs
-                //    {
-                //        actID = 0,
-                //        casID = Convert.ToInt32(model.casID),
-                //        cltID = EnumType.LogType.EditCase,
-                //        cslNote = "แก้ไข Note",
-                //        cslDesc = string.Empty,
-                //        cslCreatedOn = _now,
-                //        cslCreatedBy = AppUtils.Session.User.usrID,
-                //        cslModifiedOn = _now,
-                //        cslModifiedBy = AppUtils.Session.User.usrID
-                //    });
-                //}               
+                       
             }
             catch (Exception ex)
             {
@@ -937,7 +899,7 @@ namespace NEWCRM.Controllers
                         if (!string.IsNullOrEmpty(fileName))
                         {
                             string newfilename = string.Format("{0}_{1}", cas.casIDName, fileName);
-                            string savefilepath = Server.MapPath("~/Uploadfiles/") + newfilename;                          
+                            string savefilepath = Server.MapPath(ConfigurationManager.AppSettings["PATHUPLOADFILE"]) + newfilename;                          
                             // Upload File
                             file.SaveAs(savefilepath);
                             var newFile = new FileInfo(savefilepath);
@@ -1004,7 +966,7 @@ namespace NEWCRM.Controllers
             var data = new CaseAttachFilesRepository().GetByID(id);
             if (data != null) 
             {                
-                string filepath = Server.MapPath("~/Uploadfiles/") + data.cafFilename;
+                string filepath = Server.MapPath(ConfigurationManager.AppSettings["PATHUPLOADFILE"]) + data.cafFilename;
                 // remove file
                 if (System.IO.File.Exists(filepath))
                 {
@@ -1224,7 +1186,7 @@ namespace NEWCRM.Controllers
             else //if (cas.casIDLevel1 == 2 || cas.casIDLevel1 == 3) // ร้องเรียน / บริการ
             {
                 body += "Vendor ID : " + cas.casVendorID + "<br/>";
-                body += "Event Type : " + cas.caseventDate + "<br/>";
+                body += "Event Type : " + RepCaseController.ConvertEventDate( cas.caseventDate.ToString()) + "<br/>";
                 body += "Reference Detail :" + cas.casreferenceDetail + "</br>";
                 body += "Detail :" + cas.casdetail + "</br>";
                 body += "NOTE :" + cas.casNote + "</br></br>";
@@ -1236,7 +1198,7 @@ namespace NEWCRM.Controllers
             return View("SendEmail", d);
         }
 
-        private string getMailTo(int? casIDLevel2)
+        public static string getMailTo(int? casIDLevel2)
         {
             string mail = ConfigurationManager.AppSettings["CASE_Email_ETDA_To"];
 
@@ -1310,12 +1272,12 @@ namespace NEWCRM.Controllers
             {                            
                 using (var mail = new MailMessage())
                 {
-                    mail.From = new MailAddress(AppUtils.AppConfig.SMTPMAILFROM, "CRM ORIGIN");
+                    mail.From = new MailAddress(AppUtils.AppConfig.SMTPMAILFROM, ConfigurationManager.AppSettings["EMAILSUBJECT"]);
                     mail.To.Add(m.MailTo.Trim().Replace(";", ","));
 
-                    //if (!string.IsNullOrWhiteSpace(m.MailCc))
+                    if (!string.IsNullOrWhiteSpace(m.MailCc))
                         mail.CC.Add(m.MailCc.Trim().Replace(";", ","));
-                    //if (!string.IsNullOrWhiteSpace(m.MailBcc))
+                    if (!string.IsNullOrWhiteSpace(m.MailBcc))
                         mail.Bcc.Add(m.MailBcc.Trim().Replace(";", ","));
                     //set the content
                     mail.Subject = m.MailSubject;
@@ -1334,7 +1296,7 @@ namespace NEWCRM.Controllers
 
                             if (attachFile != null)
                             {
-                                string path_file = Server.MapPath("~/Uploadfiles/") + attachFile.cafFilename;
+                                string path_file = Server.MapPath(ConfigurationManager.AppSettings["PATHUPLOADFILE"]) + attachFile.cafFilename;
                                 Attachment attachment = new Attachment(path_file, MediaTypeNames.Application.Octet);
                                 ContentDisposition disposition = attachment.ContentDisposition;
                                 disposition.CreationDate = System.IO.File.GetCreationTime(path_file);

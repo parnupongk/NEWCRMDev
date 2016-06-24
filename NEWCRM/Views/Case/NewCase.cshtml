@@ -63,6 +63,28 @@
             resetValueGroup();
         }
 
+        function removeFile(id)
+        {
+            if (confirm("Please confirm to delete this file")) {
+                var url = "@Url.Action("removeFile","Case")/" + id;
+                $.post(url, function () {
+                    //window.location.reload();
+                    listFiles();
+                });
+            }
+        }
+        function listFiles() {
+            var url = '@Url.Action("listFiles", "Case")/99999999';
+            $.post(url, function (data) {
+                if (data !== '') {
+                    $("#listFiles").show();
+                    $("#listFiles").html(data);
+                } else {
+                    $("#listFiles").hide();
+                }
+            });
+        }
+
         $(document).ready(function () {
             $("#ctdiv_7").hide();
             $("#casIDLevel1").focus();
@@ -70,31 +92,25 @@
             $("#dv-callback").hide();
             $("#ctdiv_4").hide();
             $("#ctcaseparent").hide();
-            $("#divAttachFile").hide();
+            $("#listFiles").hide();
             resetGroup();
-            $('#datetimepicker1').datetimepicker();  //.datepicker({ autoclose: true, todayHighlight: true, format: "dd/mm/yyyy" });
-            //$("#eventDate").mask("99/99/9999 99:99:99", { placeholder: "mm/dd/yyyy HH:MM:ss" });
+            $('#datetimepicker1').datetimepicker();  
 
             Dropzone.autoDiscover = false;
-            $("#dropzone-avatar").dropzone({
+            $("#dropzone-case").dropzone({
                 url: "@Url.Action("uploadAttachFile", "Case")",
                 addRemoveLinks: false,
             success: function (file, response) {
                 //window.location.reload();
-                if (file != "")
-                {
-                    $("#aAttachFile").attr("href", file);
-                    $("#imgUpload").hide();
-                }
-                
-
+                //$('#dropzone-case').remove();
+                listFiles();
                 },
             error: function (file, response) {
                 file.previewElement.classList.add("dz-error");
             }
         });
 
-            
+
             $("#casURLAccount").autocomplete({
                 source: function (request, response) {
                     $.ajax({
@@ -187,7 +203,8 @@
             $("#ctdiv_statusreason").hide();
             $("#ctdiv_opt").hide();
             $("#dv-callback").hide();
-            $("#divAttachFile").hide();
+            $("#listFiles").empty();
+            //$("#divAttachFile").hide();
             openSuccessDialog('Save new case success');
             getNewCaseList();
             $("#btnsavenewcase").removeAttr("disabled");
@@ -308,13 +325,13 @@
                             $("#lblSourceType").html("ประเภทสื่อผิดกฎหมายที่อ้างอิง");
                             $("#lblRedDetail").html("รายละเอียดเพิ่มเติม");
                             $("#lblDetail").html("เนื้อหารายละเอียดการร้องเรียน");
-                            if($(ref).val() == "3"  )
-                            {
-                                $("#divAttachFile").show();
-                            }else
-                            {
-                                $("#divAttachFile").hide();
-                            }
+                            //if($(ref).val() == "3"  )
+                            //{
+                                //$("#divAttachFile").show();
+                            //}else
+                            //{
+                                //$("#divAttachFile").hide();
+                            //}
                     }else
                     {
                         resetValueGroup();
@@ -539,6 +556,8 @@
                                                             <span class="glyphicon glyphicon-calendar"></span>
                                                         </span>
                                                     </div>
+                                                    <input id="chkIsNoEventDate" type="checkbox" value="true" name="chkIsNoEventDate" />ผู้ร้องไม่ทราบวันที่เกิดเหตุ
+                                                    <input type="hidden" value="false" name="chkIsNoEventDate" />
                                                 </div>
                                             </div>
                                         </div>
@@ -655,8 +674,20 @@
                                 </div>
                                                 }
 
+                                                <div id="divAttachFile" class="form-group card card-underline">
+                                                    <form action="@Url.Action("uploadAttachFile", "Case")" class="dropzone" id="dropzone-case" style="min-height: 0; padding: 5px;">
+                                                        <div class="dz-message">
+                                                            <span class="text-xl text-default-light"><i class="md md-attach-file"></i>&nbsp;Drop files here or click to upload.</span>
+                                                        </div>
+                                                        <input type="hidden" name="casID" value="99999999" />
+                                                    </form>
+                                                </div>
+                                                <div id="listFiles" class="card" style="height: 180px"></div>
+
+
+                                                <!--
                                                 <div id="divAttachFile" class="form-group">
-                                                    <form action="@Url.Action("uploadAttachFile", "Case")" class="dropzone form-horizontal form-validate" id="dropzone-avatar" style="min-height: 0;">
+                                                    <form action="Url.Action("uploadAttachFile", "Case")" class="dropzone form-horizontal form-validate" id="dropzone-avatar" style="min-height: 0;">
                                                         <div class="row" style="margin-top: 10px">
                                                             <div class="col-lg-10">
                                                                 <label id="lblAttachFile" for="dropzone-avatar" name="lblAttachFile" class="col-sm-3 control-label">Attach File</label>
@@ -664,9 +695,9 @@
 
                                                                     <div class="dz-message" style="margin: 0">
                                                                         <div class="pull-right">
-                                                                            @if (Session["case_attachfile_path"] != null && !string.IsNullOrEmpty(Session["case_attachfile_path"].ToString()))
+                                                                            if (Session["case_attachfile_path"] != null && !string.IsNullOrEmpty(Session["case_attachfile_path"].ToString()))
                                                                             {
-                                                                                <a id="aAttachFile" href="@Session["case_attachfile_path"].ToString()">Donwload</a>
+                                                                                <a id="aAttachFile" href="Session["case_attachfile_path"].ToString()">Donwload</a>
                                                                             }
                                                                             else
                                                                             {
@@ -679,7 +710,7 @@
                                                             </div>
                                                             </div>
                                                     </form>
-                                                </div>
+                                                </div> -->
 
                                 <div class="row">
                                 <div class="col-lg-10">

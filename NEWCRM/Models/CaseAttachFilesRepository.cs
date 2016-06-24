@@ -2,11 +2,27 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-
+using System.Configuration;
+using System.Data;
+using System.Data.SqlClient;
+using Microsoft.ApplicationBlocks.Data;
 namespace NEWCRM.Models
 {
     public class CaseAttachFilesRepository : RepositoryBase
     {
+
+        public int UpdateAttachByCasId(int _id)
+        {
+            try
+            {
+                return SqlHelper.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["DefaultConnection"].ToString(), "sp_updateCasAttachFiles", new SqlParameter[] {new SqlParameter("@casID",_id) });
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
         public int AddByEntity(CaseAttachFile data)
         {
             using (var db = GetDBContext())

@@ -67,9 +67,14 @@
                         <li><small><i class="fa fa-user fa-fw" style="font-size: 1.2em"></i>&nbsp;My Works</small></li>
                         <li class="tdlmenu active"><a href="#" onclick="changemenu(this); LoadCaseList('MyWork','ib');" style="padding-left: 20px"><i class="fa fa-arrow-circle-down fa-fw"></i>&nbsp;Inbound <small class="pull-right text-bold opacity-75">@Model.list_total[0].myworkinbound</small></a></li>
                         <li class="tdlmenu"><a href="#" onclick="changemenu(this); LoadCaseList('MyWork','ob')" style="padding-left: 20px"><i class="fa fa-arrow-circle-up fa-fw"></i>&nbsp;Outbound <small class="pull-right text-bold opacity-75">@Model.list_total[0].myworkoutbound</small></a></li>
+
+                        <li class="tdlmenu"><a href="#" onclick="changemenu(this); LoadCaseList('MyWork','em')" style="padding-left: 20px"><i class="fa fa-arrow-circle-up fa-fw"></i>&nbsp;Email <small class="pull-right text-bold opacity-75">@Model.list_total[0].myworkemail</small></a></li>
+
                         <li><small><i class="fa fa-users fa-fw" style="font-size: 1.2em"></i>&nbsp;My Groups</small></li>
                         <li class="tdlmenu"><a href="#" onclick="changemenu(this); LoadCaseList('MyGroup','ib');" style="padding-left: 20px"><i class="fa fa-arrow-circle-down fa-fw"></i>&nbsp;Inbound <small class="pull-right text-bold opacity-75">@Model.list_total[0].mygroupinbound</small></a></li>
                         <li class="tdlmenu"><a href="#" onclick="changemenu(this); LoadCaseList('MyGroup','ob');" style="padding-left: 20px"><i class="fa fa-arrow-circle-up fa-fw"></i>&nbsp;Outbound <small class="pull-right text-bold opacity-75">@Model.list_total[0].mygroupoutbound</small></a></li>
+
+                        <li class="tdlmenu"><a href="#" onclick="changemenu(this); LoadCaseList('MyGroup','em');" style="padding-left: 20px"><i class="fa fa-arrow-circle-up fa-fw"></i>&nbsp;Email <small class="pull-right text-bold opacity-75">@Model.list_total[0].mygroupemail</small></a></li>
                         @*<li><small style="margin-top: 0; margin-bottom: 0; padding-left: 20px;">CC-Agent</small></li>
                         <li class="tdlmenu"><a href="#" onclick="changemenu(this); LoadCaseList('MyGroup','ib', 3);" style="padding-left: 50px">Inbound <small class="pull-right text-bold opacity-75">@Model.list_total[0].mygroupinboundagent</small></a></li>
                         <li class="tdlmenu"><a href="#" onclick="changemenu(this); LoadCaseList('MyGroup','ob', 3);" style="padding-left: 50px">Outbound <small class="pull-right text-bold opacity-75">@Model.list_total[0].mygroupoutboundagent</small></a></li>*@

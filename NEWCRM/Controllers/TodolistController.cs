@@ -116,6 +116,6 @@ namespace NEWCRM.Controllers
 
     public class TodolistViewModel
     {
-        public List<sp_getTotalTodolistByChannel_Result> list_total { get; set; }
+        public List<todoListClass> list_total { get; set; }
     }
 }

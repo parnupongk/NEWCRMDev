@@ -1,62 +1,157 @@
-﻿@model NEWCRM.Models.Case
+﻿@model NEWCRM.Models.CaseViewModelLocalization
 
 @{
     ViewBag.Title = "DetailEdit";
     Layout = null;
+
 }
 
-<div id="ctdiv_1" class="form-group">
-    @if (Model.casIDLevel1.HasValue)
-    {
-        Html.RenderAction("getCaseTypeNodeSelection", "Casetype", new { id = 0, selectedID = Model.casIDLevel1 });
+
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+
+        $('#datetimepicker1').datetimepicker();
+    });
+
+    function onSourceTypeChange(ref) {
+
+        $("#casLevel3").val($(ref).find("option:selected").text());
+
     }
+
+
+
+</script>
+
+<div id="ctdiv_1" class="form-group" >
+    <label for="sourceType"  class="col-sm-3 control-label">ประเภทเรื่องหลัก</label>
+    <label for="sourceType" id="sourceType" name="sourceType" class="col-sm-6 control-label">@Model.cases.casLevel1</label>
+    <!--
+    if (Model.cases.casIDLevel1.HasValue)
+    {
+        Html.RenderAction("getCaseTypeNodeSelection", "Casetype", new { id = 0, selectedID = Model.cases.casIDLevel1 });
+    }
+        -->
 </div>
 
 <div id="ctdiv_2" class="form-group">
-    @if (Model.casIDLevel2.HasValue)
+
+    @if (Model.cases.casIDLevel2.HasValue)
     {
-        Html.RenderAction("getCaseTypeNodeSelection", "Casetype", new { id = @Model.casIDLevel1, selectedID = Model.casIDLevel2 });
+        Html.RenderAction("getCaseTypeNodeSelection", "Casetype", new { id = @Model.cases.casIDLevel1, selectedID = Model.cases.casIDLevel2 });
     }
+
 </div>
 
 <div id="ctdiv_3" class="form-group">
-    @if (Model.casIDLevel3.HasValue)
-    {
-        Html.RenderAction("getCaseTypeNodeSelection", "Casetype", new { id = @Model.casIDLevel2, selectedID = Model.casIDLevel3 });
-    }
+@if (Model.cases.casIDLevel1 == 1)
+{
+    <label for="sourceType" id="lblSourceType" name="lblSourceType" class="col-sm-3 control-label">ช่องทางการซื้อขาย</label>
+}
+else
+{
+    <label for="sourceType" id="lblSourceType" name="lblSourceType" class="col-sm-3 control-label">ประเภทสื่อผิดกฎหมายที่อ้างอิง</label>
+}
+    <div id="divsourceType" class="col-sm-9 margin-bottom-xl">
+        <select id="casIDLevel3" name="casIDLevel3" class="form-control" onchange="onSourceTypeChange(this)">
+            <option></option>
+            @foreach (var item in Model.sourceType)
+            {
+                var selected = string.Empty;
+                if( Model.cases.casLevel3 != null && Model.cases.casLevel3 == item )
+                {
+                    selected = "selected";
+                }
+                <option @selected value="@item">@item</option>
+            }
+        </select>
+        <input type="hidden" id="casLevel3" name="casLevel3" value="@Model.cases.casLevel3" />
+    </div>
 </div>
+
 <div id="ctdiv_4" class="form-group">
-    @if (Model.casIDLevel4.HasValue)
+    @if (Model.cases.casIDLevel1 == 1)
     {
-        Html.RenderAction("getCaseTypeNodeSelection", "Casetype", new { id = @Model.casIDLevel3, selectedID = Model.casIDLevel4 });
+        <label for="casenote" id="lblSourceTypeRef" class="col-sm-3 control-label">รายละเอียดช่องทางซื้อขาย</label>
+    }
+    else
+    {
+       <label for="casenote" id="lblSourceTypeRef" class="col-sm-3 control-label">อ้างอิงระบุเจาะจงURLหรือID</label>
+    }
+    <div class="col-sm-8 margin-bottom-xl">
+        <input type="text" class="form-control" id="casURLAccount" name="casURLAccount" value="@Model.cases.casLevel6" />
+    </div>
+    
+    <div class="col-sm-12 form-group margin-bottom-xl">
+        <label class="col-sm-3 control-label">วันที่เกิดเหตุ</label>
+        <div class="col-sm-7 margin-bottom-xl">
+            <div class='input-group date' id='datetimepicker1'>
+
+                <input type="text" id="eventDate" name="eventDate" class="form-control fv" value="@ViewBag.eventDate " placeholder="dd/MM/yyyy HH:MM:ss" />
+                <span class="input-group-addon">
+                    <span class="glyphicon glyphicon-calendar"></span>
+                </span>
+            </div>
+        </div>
+        <div class="col-sm-2 margin-bottom-xl">
+            @if (ViewBag.isNoEventDate == "true")
+            {
+                <input type="checkbox" id="chkIsNoEventDate" checked="checked" name="chkIsNoEventDate"  />
+                <label >ผู้ร้องไม่ทราบวันที่เกิดเหตุ</label>
+            }
+            else
+            {
+                <input type="checkbox" id="chkIsNoEventDate" name="chkIsNoEventDate"   /><label>ผู้ร้องไม่ทราบวันที่เกิดเหตุ</label>
+            }
+        </div>
+    </div>
+</div>
+
+<div id="CaseGroup1" class="form-group">
+    @{
+
+        if (Model.cases.casIDLevel1 == 1)
+        {
+            Html.RenderPartial("CaseGroup1Edit");
+        }
+    }
+
+</div>
+
+
+<div id="CaseGroup2" class="form-group">
+    @{
+        if (Model.cases.casIDLevel1 == 1 || Model.cases.casIDLevel1 == 2 || Model.cases.casIDLevel1 == 3)
+        {
+            Html.RenderPartial("CaseGroup2Edit");
+        }
     }
 </div>
-<div id="ctdiv_5" class="form-group">
-    @if (Model.casIDLevel5.HasValue)
-    {
-        Html.RenderAction("getCaseTypeNodeSelection", "Casetype", new { id = @Model.casIDLevel4, selectedID = Model.casIDLevel5 });
-    }
-</div>
+
+
+
 <div class="form-group">
     <label for="casenote" class="col-sm-3 control-label">Add Note</label>
     <div class="col-sm-9 margin-bottom-xl">
-        <textarea id="casNote" name="casNote" class="form-control" rows="6" required data-rule-minlength="1">@Model.casNote</textarea>
+        <textarea id="casNote" name="casNote" class="form-control" rows="6" required data-rule-minlength="1">@Model.cases.casNote</textarea>
     </div>
 </div>
-<div id="ctdiv_opt" class="form-group" style="display: @(Model.casSLA > 0 ? "block": "none")">
+<div id="ctdiv_opt" class="form-group" style="display: @(Model.cases.casSLA > 0 ? "block": "none")">
     <label class="col-sm-3 control-label">Case SLA</label>
     <div class="col-sm-9">
         <p class="text-l">
-            <h4><i class="fa fa-clock-o fa-fw"></i>&nbsp;<span id="sla">@Model.casSLA</span>&nbsp;Minutes</h4>
-            <input type="hidden" name="casSLA" id="casSLA" value="@Model.casSLA" />
+            <h4><i class="fa fa-clock-o fa-fw"></i>&nbsp;<span id="sla">@Model.cases.casSLA</span>&nbsp;Minutes</h4>
+            <input type="hidden" name="casSLA" id="casSLA" value="@Model.cases.casSLA" />
             <input type="hidden" name="slaID" id="slaID" />
         </p>
     </div>
 </div>
-<input type="hidden" name="casID" value="@Model.casID" />
+<input type="hidden" name="casID" value="@Model.cases.casID" />
 <script type="text/javascript">
 
-    function nextctnode(ref) {
+    @*function nextctnode(ref) {
         var message = $(ref).find(':selected').attr('data-dialogue');
         var sla = $(ref).find(':selected').attr('data-sla');
         var slaid = $(ref).find(':selected').attr('data-slaid');
@@ -72,19 +167,13 @@
                 $("#ctdiv_2").empty().hide();
                 $("#ctdiv_3").empty().hide();
                 $("#ctdiv_4").empty().hide();
-                $("#ctdiv_5").empty().hide();
             }
             if (current_lv == 2) {
                 $("#ctdiv_3").empty().hide();
                 $("#ctdiv_4").empty().hide();
-                $("#ctdiv_5").empty().hide();
             }
             if (current_lv == 3) {
                 $("#ctdiv_4").empty().hide();
-                $("#ctdiv_5").empty().hide();
-            }
-            if (current_lv == 4) {
-                $("#ctdiv_5").empty().hide();
             }
             $("#ctdiv_opt").hide();
             $("#casSLA").val('');
@@ -93,23 +182,16 @@
                 $("#ctdiv_2").empty().hide();
                 $("#ctdiv_3").empty().hide();
                 $("#ctdiv_4").empty().hide();
-                $("#ctdiv_5").empty().hide();
                 $("#ctdiv_opt").hide();
                 $("#casSLA").val('');
             }
             if (current_lv == 2) {
                 $("#ctdiv_3").empty().hide();
                 $("#ctdiv_4").empty().hide();
-                $("#ctdiv_5").empty().hide();
                 $("#ctdiv_opt").hide();
             }
             if (current_lv == 3) {
                 $("#ctdiv_4").empty().hide();
-                $("#ctdiv_5").empty().hide();
-                $("#ctdiv_opt").hide();
-            }
-            if (current_lv == 4) {
-                $("#ctdiv_5").empty().hide();
                 $("#ctdiv_opt").hide();
             }
 
@@ -141,7 +223,7 @@
             } else {
                 toastr.clear();
             }
-        }
+        }*@
 
         function successNewContact() {
             var url = '@Url.Action("CommonDetail", "Contact")';
@@ -168,13 +250,13 @@
             $("#ctdiv_4").addClass("has-error");
             $("#casIDLevel4").prop("disabled", "disabled");
         }
-        if ($("#casIDLevel5").length) {
+        /*if ($("#casIDLevel5").length) {
             $("#ctdiv_5").addClass("has-error");
             $("#casIDLevel5").prop("disabled", "disabled");
-        }
+        }*/
     }
 </script>
-@if (Model.casSLA > 0)
+@if (Model.cases.casSLA > 0)
 { 
     <script>//disableCT()</script>
 }

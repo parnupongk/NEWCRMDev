@@ -29,11 +29,17 @@
                         <td rowspan="2">Total Answer</td>
                         <td rowspan="2">Wrong Answer</td>
                         <td rowspan="2">Not Answer</td>
-                        <td colspan="2">พอใจมาก (1)</td>
-                        <td colspan="2">พอใจ (2)</td>
-                        <td colspan="2">ไม่พอใจ (3)</td>
+                        <td colspan="2">พอใจน้อยที่สุด (1)</td>
+                        <td colspan="2">พอใจน้อย (2)</td>
+                        <td colspan="2">พอใจปานกลาง (3)</td>
+                        <td colspan="2">พอใจมาก (4)</td>
+                        <td colspan="2">พอใจมากที่สุด (5)</td>
                     </tr>
                     <tr style="background-color:#366092;color:#ffffff;font-weight:bold;text-align:center;">
+                        <td>จำนวน</td>
+                        <td>%</td>
+                        <td>จำนวน</td>
+                        <td>%</td>
                         <td>จำนวน</td>
                         <td>%</td>
                         <td>จำนวน</td>
@@ -56,6 +62,10 @@
                             <th>@item.per_score_2</th>
                             <td>@item.score_3</td>
                             <td>@item.per_score_3</td>
+                            <td>@item.score_4</td>
+                            <th>@item.per_score_4</th>
+                            <td>@item.score_5</td>
+                            <td>@item.per_score_5</td>
                         </tr>
                     }
                 </tbody>
@@ -71,6 +81,10 @@
                     <th>@ViewBag.per_score_2</th>
                     <th>@Model.list_endcall.Sum(x => x.score_3)</th>
                     <th>@ViewBag.per_score_3</th>
+                    <th>@Model.list_endcall.Sum(x => x.score_4)</th>
+                    <th>@ViewBag.per_score_4</th>
+                    <th>@Model.list_endcall.Sum(x => x.score_5)</th>
+                    <th>@ViewBag.per_score_5</th>
                 </tr>
 
             </table>

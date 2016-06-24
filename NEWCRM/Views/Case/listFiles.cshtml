@@ -1,6 +1,5 @@
-﻿@model IEnumerable<NEWCRM.Models.CaseAttachFiles>
-@if (Model.Count() > 0)
-{
+﻿@model IEnumerable<NEWCRM.Models.CaseAttachFile>
+
     <div class="card-body no-padding">
         <ul class="list divider-full-bleed">
             @foreach (var item in Model)
@@ -42,4 +41,3 @@
             }
         </ul>
     </div>
-}

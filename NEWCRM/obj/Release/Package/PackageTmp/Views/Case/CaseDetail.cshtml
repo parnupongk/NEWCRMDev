@@ -27,23 +27,30 @@
     <script src="~/Content/js/core/demo/DemoFormEditors.js"></script>  
     <script src="~/Content/js/libs/dropzone/dropzone.js"></script>
 
+<script type="text/javascript" src="~/scripts/moment.min.js"></script>
+<script type="text/javascript" src="~/scripts/bootstrap-datetimepicker.js"></script>
+<link rel="stylesheet" href="~/Content/bootstrap-datetimepicker.css" />
+
+
     <script type="text/javascript">
         $(document).ready(function () {
             CaseInfo();
-            //listFiles();
+            listFiles();
 
-            @*Dropzone.autoDiscover = false;
+            $('#datetimepicker1').datetimepicker();
+
+            Dropzone.autoDiscover = false;
             $("#dropzone-case").dropzone({
                 url: "@Url.Action("uploadFiles", "Case")",
                 addRemoveLinks: false,
                 success: function (file, response) {
                     window.location.reload();
-                    //listFiles();
+                    listFiles();
                 },
                 error: function (file, response) {
                     file.previewElement.classList.add("dz-error");
                 }
-            });*@
+            });
         });
 
         function DetailTimeline() {
@@ -104,7 +111,7 @@
                     <h2>Please Wating...</h2>
                 </div>
             </div>            
-            @*<div id="caseattachfile" class="card card-underline">
+            <div id="caseattachfile" class="card card-underline">
                 <form action="@Url.Action("uploadFiles", "Case")" class="dropzone" id="dropzone-case" style="min-height: 0; padding: 5px;">
                     <div class="dz-message">
                         <span class="text-xl text-default-light"><i class="md md-attach-file"></i>&nbsp;Drop files here or click to upload.</span>
@@ -112,7 +119,7 @@
                     <input type="hidden" name="casID" value="@Model.CaseDetails.CASID" />
                 </form>
             </div>
-            <div id="listFiles" class="card scroll" style="height: 188px"></div>*@
+            <div id="listFiles" class="card scroll" style="height: 188px"></div>
         </div>
         <div class="col-lg-4">
             <div class="card card-underline style-default-dark">

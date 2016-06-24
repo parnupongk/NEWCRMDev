@@ -2316,6 +2316,8 @@
     <Content Include="Views\RepCase\repSummaryChild.cshtml" />
     <Content Include="Views\RepCase\rptEndCall.cshtml" />
     <Content Include="Views\Shared\_Report.cshtml" />
+    <Content Include="Views\Case\CaseGroup1Edit.cshtml" />
+    <Content Include="Views\Case\CaseGroup2Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

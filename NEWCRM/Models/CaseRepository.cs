@@ -226,23 +226,39 @@ namespace NEWCRM.Models
             using (var db = GetDBContext())
             {
                 var cas = db.Cases.Single(c => c.casID == _nc.casID);
-                cas.casIDLevel1 = _nc.casIDLevel1;
+                //cas.casIDLevel1 = _nc.casIDLevel1;
                 cas.casIDLevel2 = _nc.casIDLevel2;
-                cas.casIDLevel3 = _nc.casIDLevel3;
+                //cas.casIDLevel3 = _nc.casIDLevel3;
                 cas.casIDLevel4 = _nc.casIDLevel4;
                 cas.casIDLevel5 = _nc.casIDLevel5;
-                cas.casLevel1 = _nc.casLevel1;
+                //cas.casLevel1 = _nc.casLevel1;
                 cas.casLevel2 = _nc.casLevel2;
-                cas.casLevel3 = _nc.casLevel3;
                 cas.casLevel4 = _nc.casLevel4;
                 cas.casLevel5 = _nc.casLevel5;                
                 cas.casIDSummary = Convert.ToInt32(_nc.casIDSummary);
                 cas.casSummary = _nc.casSummary;
-                cas.casNote = _nc.casNote;
+                //cas.casNote = _nc.casNote;
                 cas.casModifiedOn = Convert.ToDateTime(_nc.casModifiedOn);
                 cas.casModifiedBy = Convert.ToInt32(_nc.casModifiedBy);
-                //cas.casSLA = _nc.casSLA;
-                //cas.casDueDate = _nc.casDueDate;
+
+                cas.casLevel3 = _nc.casLevel3;
+                cas.casLevel6 = _nc.casURLAccount;
+                cas.casNote = _nc.casNote;
+                cas.cascommerceType = _nc.commerceType;
+                cas.casproductCategory = _nc.productCategory;
+                cas.casserviceCategory = _nc.serviceCategory;
+                cas.casdeliveryType = _nc.deliveryType + "/" + _nc.deliveryTypeOther;
+                cas.caspaymentType = _nc.paymentType + "/" + _nc.paymentTypeOther;
+                cas.casVendorID = _nc.txtVendorID;
+                cas.caseventDate =  _nc.chkIsNoEventDate ? new DateTime(1111,11,11) : _nc.eventDate;
+                cas.casvalueRange = _nc.valueRange;
+                cas.casconversationChannel = _nc.conversationChannel;
+                cas.casreferenceDetail = _nc.txtRefDetail;
+                cas.casdetail = _nc.txtDetail;
+                cas.casstatusReason = _nc.cssStatusReason;
+                //cas.casAttachFile = Session["case_attachfile_type"] == null ? "" : Session["case_attachfile_path"].ToString() + "|" + Session//["case_attachfile_type"].ToString();
+                cas.casPoNo = _nc.casPoNo;
+                cas.casPrice = _nc.casPrice;
 
                 return db.SaveChanges();
             }        
@@ -606,6 +622,10 @@ namespace NEWCRM.Models
         public decimal per_score_2 { get; set; }
         public decimal score_3 { get; set; }
         public decimal per_score_3 { get; set; }
+        public decimal score_4 { get; set; }
+        public decimal per_score_4 { get; set; }
+        public decimal score_5 { get; set; }
+        public decimal per_score_5 { get; set; }
     }
     public class CALLPERHOUR
     {
@@ -674,6 +694,7 @@ namespace NEWCRM.Models
         public DateTime? eventDate { get; set; }
         public string casPoNo { get; set; }
         public string casPrice { get; set; }
+        public bool chkIsNoEventDate { get; set; }
     }
 
     public class CaseViewModelLocalization
@@ -686,6 +707,8 @@ namespace NEWCRM.Models
         public List<sp_getCaseQuery_Result> list_query { get; set; }
         public List<sp_GetCaseDetailTimeline_Result> list_timeline { get; set; }
         public List<string> list_status_reason { get; set; }
+        public Case cases { get; set; }
+        public List<string> sourceType { get; set; }
 
         // group case 1
         public List<string> commerceType { get; set; }
